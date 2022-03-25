@@ -23,7 +23,7 @@ public:
         
         int idx = index+1;
         int curr_val = sumRange(index,index);//- sumRange(0, index-1); 
-        cout<<"curr_val"<<curr_val<<endl;
+        //cout<<"curr_val"<<curr_val<<endl;
         int diff = val- curr_val;
         
         while(idx< bit.size()){
@@ -40,8 +40,6 @@ public:
         
         if(left ==1)
             return query(right);
-        else if(left == right)
-            return query(right)- query(left-1);
         else
             return query(right) - query(left-1);
 
