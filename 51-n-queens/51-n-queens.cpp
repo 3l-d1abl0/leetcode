@@ -19,48 +19,28 @@ public:
     
     
     
-    bool safe(vector<string> &board, int row, int col){
+    bool safe(vector<string> &board, int row, int col, vector<bool> &rowCheck, vector<bool> &bottomleft, vector<bool> &upperLeft){
     
-        int N = board.size();
-        if(row == N || col == N)
-            return false;
+    int N = board.size();
 
-        int r,c;
+    if(rowCheck[row]==true)
+        return false;
 
+    if(bottomleft[row+col]==true)
+        return false;
 
-        //1.check Left
-        c= col-1;
-        while(c>=0){
-            if(board[row][c]=='Q')
-                return false;
+    if(upperLeft[row+ (N-col)]== true)
+        return false;
 
-            c--;
-        }
-
-        //2. check left-diagonal top
-        r=row-1, c=col-1;
-        while(r>=0 && c>=0){
-            if(board[r][c] == 'Q')  return false;
-            r--; c--;
-        }
-
-        //3. check left diagonal bottom
-        r=row+1, c= col-1;
-        while(r<N && c>=0){
-
-            if(board[r][c] =='Q')   return false;
-            r++; c--;
-        }
-
-        //printBoard(board);
-        return true;
+    //printBoard(board);
+    return true;
 
     }
     
     
     
     
-    void NQueens(vector<string> &board, int col, vector<vector<string>> &ans){
+    void NQueens(vector<string> &board, int col, vector<vector<string>> &ans, vector<bool> &rowCheck, vector<bool> &bottomleft, vector<bool> &upperLeft){
 
         int N = board.size();
 
@@ -73,11 +53,15 @@ public:
 
             for(int row=0; row<N; row++ ){
 
-                if(safe(board, row, col)){
+                if(safe(board, row, col, rowCheck, bottomleft, upperLeft)){
 
                     board[row][col]='Q';
-                    NQueens(board, col+1, ans);
+                    rowCheck[row] = true; bottomleft[row+col] = true; upperLeft[row+ (N-col)]=true;
+                    
+                    NQueens(board, col+1, ans, rowCheck, bottomleft, upperLeft);
+                    
                     board[row][col]='.';
+                    rowCheck[row] = false; bottomleft[row+col] = false; upperLeft[row+ (N-col)]=false;
 
                 }
 
@@ -96,12 +80,16 @@ public:
     vector<vector<string>> solveNQueens(int N) {
      
         
+        vector<bool> rowCheck(N, false);
+        vector<bool> bottomleft(N, false);
+        vector<bool> upperLeft(N, false);
+        
         vector<vector<string>> ans;
         
         vector<string> board(N, string(N,'.'));
 
         //printBoard(board);
-        NQueens(board, 0, ans);
+        NQueens(board, 0, ans, rowCheck, bottomleft, upperLeft);
         
         
         return ans;
