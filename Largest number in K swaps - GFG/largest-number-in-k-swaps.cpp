@@ -27,8 +27,8 @@ class Solution
             }
         }
 
-        if (charMax != number[idx])
-            k--;
+        if (charMax == number[idx])
+            k++;
 
         for (int i = N - 1; i >= idx; i--)
         {
@@ -43,7 +43,7 @@ class Solution
                     // cout << "Maxx" << maxString << endl;
                 }
 
-                calcMaxNumAfterSwap(idx + 1, number, k , maxString, N);
+                calcMaxNumAfterSwap(idx + 1, number, k - 1, maxString, N);
                 swap(number[idx], number[i]);
             }
         }
