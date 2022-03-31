@@ -4,25 +4,22 @@ public:
      
             int N = nums.size();
         
+            vector<int> dp(N, 0);
         
-            int prev2 =0;
-            int prev1 = nums[0];
-            
+        
+            dp[0]= nums[0];
             for(int i=1; i<N; i++){
                     
                 int include = nums[i];
                     
                 if(i>1)
-                    include +=prev2;
+                    include +=dp[i-2];
                 
-                int exclude = prev1;
+                int exclude = dp[i-1];
                 
-                int current = max(include, exclude);
-                
-                prev2 = prev1;
-                prev1 = current;
+                dp[i]= max(include, exclude);
             }
         
-        return prev1;
+        return dp[N-1];
     }
 };
