@@ -1,15 +1,33 @@
 class Solution {
 public:
+    
+    void dprint(vector<int> dp){
+        
+        for(int ele: dp){
+            cout<<ele<<" ";
+        }cout<<endl;
+    }
+    
     int coinChange(vector<int>& coins, int amount) {
         
-        vector<vector<int>> dp(coins.size()+1, vector<int>(amount+1, -1));
+        vector<int> dp(amount+1, 1e8);
+
         
-        int minCoins =   solve(coins.size(), coins, amount, dp);
         
-        if(minCoins == INT_MAX-1)
-            return -1;
-        else
-            return minCoins;
+        dp[0]=0;
+        for(int row=0; row<coins.size(); row++){
+            
+            for(int j=1; j<=amount; j++){
+                
+                
+                if(j >= coins[row])
+                    dp[j] = min(dp[j], 1+dp[j-coins[row]]);
+            }
+        //    dprint(dp);
+        }
+        
+        
+        return (dp[amount]==1e8?-1: dp[amount]);
         
     }
     
