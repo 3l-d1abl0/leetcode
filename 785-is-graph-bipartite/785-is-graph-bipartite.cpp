@@ -10,13 +10,40 @@ public:
         for(int i=0; i<N; i++){
             
             if(color[i]==-1)
-                if(isBipartiteBFS(i, color, adj)==false)
+                //if(isBipartiteBFS(i, color, adj)==false)
+                color[i]=0;
+                if(isBipartiteDFS(i, color, adj)==false)
                     return false;
             
         }
         
         
         return true;
+    }
+    
+    
+    bool isBipartiteDFS(int src, vector<int> &color, vector<vector<int>>& adj){
+        
+        for(int ele: adj[src]){
+            
+            if(color[ele]!=-1){
+                if(color[ele]==color[src])
+                    return false;
+            }else{
+                
+                color[ele] = 1- color[src];
+                
+                if(isBipartiteDFS(ele, color, adj)==false)
+                    return false;
+                
+            }
+            
+        }
+        
+        
+        return true;
+        
+        
     }
     
     bool isBipartiteBFS(int src, vector<int> &color, vector<vector<int>>& adj){
