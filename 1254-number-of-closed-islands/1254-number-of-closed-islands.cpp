@@ -1,61 +1,39 @@
 class Solution {
 public:
     int closedIsland(vector<vector<int>>& grid) {
-        
-        int N= grid.size();
-        int M = grid[0].size();
-        
-        for(int i=0; i<N; i++){
-            
-            for(int j=0; j<M; j++){
-                
-                
-                if((i==0 || j==0 || i==N-1 || j==M-1) && (grid[i][j]==0) ){
-                   dfs(i, j, grid); 
+        int res = 0;
+        for (int i = 0; i < grid.size(); i++){
+            for (int j = 0; j < grid[0].size(); j++){
+                if (grid[i][j] == 0){
+                    res += dfs(grid, i, j) ? 1 : 0;
                 }
-                
             }
-            
-        }//for
-        
-        int ctr =0;
-        
-        for(int i=0; i<N; i++){
-            
-            
-            for(int j=0; j<M; j++){
-                    
-                if(grid[i][j]==0){
-                    
-                    dfs(i, j, grid);
-                    
-                    ctr++;
-                }
-                
-                
-            }
-            
         }
-        
-        return ctr;
-        
-    }//closed
-    
-    void dfs(int i, int j, vector<vector<int>> &grid){
-        
-        if(i<0 || j<0 || i>= grid.size() || j>= grid[0].size() || grid[i][j]!=0){
-            return ;
-        }
-        
-        
-        grid[i][j]=2;
-        
-        dfs(i-1, j, grid); 
-        dfs(i, j+1, grid); 
-        dfs(i+1, j, grid); 
-        dfs(i, j-1, grid); 
-        
-        
+        return res;
     }
-    
+    bool dfs(vector<vector<int>>& g, int i, int j){
+        if (i < 0 || j < 0 || i >= g.size() || j >= g[0].size() ){
+            return false;
+        }
+        
+        
+        if(g[i][j]==2){
+            return true;
+        }
+        
+        if (g[i][j] == 1){
+            return true;
+        }
+        g[i][j] = 2;
+        /* IMPORTANT NOTE: 
+        WHY I CANNOT USE `return dfs(g, i+1, j) && dfs(g, i, j+1) && dfs(g, i-1, j) && dfs(g, i, j-1);`???
+        BECAUSE IF ANY OF THE FIRST DFS() RETURNS FALSE, FOLLOWING ONES WILL NOT EXECUTE!!! THEN WE DON'T
+        HAVE THE CHANCE TO MARK THOSE 0s TO 1s!!!
+        */
+        bool d1 = dfs(g, i+1, j);
+        bool d2 = dfs(g, i, j+1);
+        bool d3 = dfs(g, i-1, j);
+        bool d4 = dfs(g, i, j-1);
+        return d1 && d2 && d3 && d4;
+    }
 };
