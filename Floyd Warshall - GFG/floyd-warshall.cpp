@@ -19,7 +19,7 @@ class Solution {
 
 			for(int j=0; j<N; j++){
 
-				if(i==k || j==k || distance[i][k] == -1 || distance[k][j] == -1)	continue;
+				if(distance[i][k] == -1 || distance[k][j] == -1)	continue;
                 
                 
                 
