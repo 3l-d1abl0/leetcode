@@ -3,38 +3,33 @@ public:
     
     int bfs(int src, vector<vector<pair<int,int>>> &adj, int n){
         
-        queue<tuple<int, int>> q;
+        queue<int> q;
         
         vector<int> dist(n+1, 1e7);
         
         dist[src] = 0;
-        q.push({src, 0});
+        q.push(src);
         
         while(!q.empty()){
             
-            auto[node, time] = q.front(); q.pop();
+            int node = q.front(); q.pop();
             
             for(auto adjNode: adj[node]){
                 int vtx = adjNode.first, t = adjNode.second;
                 
-                if(dist[vtx] > time+t){
-                    dist[vtx] = time+t;
-                    q.push({vtx, dist[vtx]});
+                if(dist[vtx] > dist[node]+t){
+                    dist[vtx] = dist[node]+t;
+                    q.push(vtx);
                 }
             }
             
         }
         
-        for(int ele: dist){
-            cout<<ele<<" ";
-        }
         
         int maxx = *max_element(dist.begin()+1, dist.end()); 
-        if (maxx == 1e7){
-            return -1;
-        }else{
-            return maxx;
-        }
+        
+        return maxx == 1e7 ? -1 : maxx;
+        
     }
     
     int dijkstra(int src, vector<vector<pair<int,int>>> &adj, int n){
