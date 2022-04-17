@@ -1,6 +1,42 @@
 class Solution {
 public:
     
+    int bfs(int src, vector<vector<pair<int,int>>> &adj, int n){
+        
+        queue<tuple<int, int>> q;
+        
+        vector<int> dist(n+1, 1e7);
+        
+        dist[src] = 0;
+        q.push({src, 0});
+        
+        while(!q.empty()){
+            
+            auto[node, time] = q.front(); q.pop();
+            
+            for(auto adjNode: adj[node]){
+                int vtx = adjNode.first, t = adjNode.second;
+                
+                if(dist[vtx] > time+t){
+                    dist[vtx] = time+t;
+                    q.push({vtx, dist[vtx]});
+                }
+            }
+            
+        }
+        
+        for(int ele: dist){
+            cout<<ele<<" ";
+        }
+        
+        int maxx = *max_element(dist.begin()+1, dist.end()); 
+        if (maxx == 1e7){
+            return -1;
+        }else{
+            return maxx;
+        }
+    }
+    
     int dijkstra(int src, vector<vector<pair<int,int>>> &adj, int n){
         
         
@@ -57,8 +93,10 @@ public:
             
         
         
-        return dijkstra(k, adj, n);
+        //return dijkstra(k, adj, n);
         
+        
+        return bfs(k, adj, n);
         
         
         
