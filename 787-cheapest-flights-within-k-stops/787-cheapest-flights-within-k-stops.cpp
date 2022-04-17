@@ -21,14 +21,18 @@ public:
             int currDist = ele[0], currHops = ele[1], node = ele[2];
            
            // cout<<"c:"<<currDist<<" h:"<<currHops<<" v:"<<node<<endl;
+            //if destination is reached, the current distance/price is the best
             if(node==dst) return currDist;
             
+            //if current hops exceeds k, no need to proceed
             if(currHops==k+1) continue;
             
             for(auto row: adj[node]){
                 
-                if(currDist + row.second < dist[row.first] || currHops+1 <hops[row.first]){
-                    //cout<<node<<"->"<<row.first<<endl;    
+                
+                //1. if we can reach the adj node with less price/distance than already calculated
+                //2. if we can reach the adj node with lesser hops than already calculated
+                if(currDist + row.second < dist[row.first] || currHops+1 <hops[row.first]){ 
                     dist[row.first] = currDist +row.second;
                     hops[row.first] = currHops+1;
                     
