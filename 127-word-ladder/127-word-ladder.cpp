@@ -1,67 +1,57 @@
+static int speedUp=[](){
+    std::ios::sync_with_stdio(false);
+    cin.tie(nullptr);
+    cout.tie(nullptr);
+    return 0;
+}();
+
 class Solution {
 public:
-    
-    bool isAdj(string a, string b){
-        
-        int len = a.size();
-        int diff=0;
-        for(int i=0; i<len; i++){
-            
-            if(a[i]!=b[i])  diff++;
-            
+    int ladderLength(string beginWord, string endWord, vector<string>& wordList) {  
+        unordered_set<string> myset;
+        bool isPresent = false; //Checks if endWord is present in Dict
+        //Insert all words from Dict in myset
+        for(auto word: wordList)
+        {
+            if(endWord.compare(word)==0)
+                isPresent = true;
+            myset.insert(word);    //Insert word in Dict
         }
+        if(isPresent==false)    //endWord is not present in Dict
+            return 0;
         
-        if(diff==1) return true;
+        queue<string> q;
+        q.push(beginWord);
+        int depth = 0;
         
-        
-        return false;
-        
-        
-    }
-    
-    int ladderLength(string beginWord, string endWord, vector<string>& wordList) {
-        
-        queue<tuple<string, int>> q;
-        
-        unordered_set<string> sset(wordList.begin(), wordList.end());
-        
-        q.push({beginWord, 1});
-        
-        //Remove the begin word if there in list
-        if (sset.find(beginWord) != sset.end()) {
-            sset.erase(beginWord);
-        }
-        
-        vector<string> temp;
-        while(!q.empty()){
-            
-            auto[word, hop] = q.front(); q.pop();
-            //cout<<":: "<<word<<" "<<hop<<endl;
-            
-               for(auto it = sset.begin(); it != sset.end(); it++){
-                    
-                    if(isAdj(word, *it)){
-                       
-                        if(endWord.compare(*it) ==0)
-                            return hop+1;
-                        
-                        
-                        q.push({*it, hop+1});
-                        
-                        temp.push_back(*it);
-                        
+        while(!q.empty())
+        {
+            depth+=1;
+            int lsize = q.size();   //No of elements at a level
+            while(lsize--)
+            {
+                string curr = q.front();
+                q.pop();
+                //check for all possible 1 depth words
+                for(int i=0;i<curr.length();++i)  //For each index
+                {
+                    string temp = curr;
+                    for(char c='a';c<='z';++c)  //Try all possible chars
+                    {
+                        temp[i] = c;
+                        if(curr.compare(temp)==0)
+                            continue;   //Skip the same word
+                        if(temp.compare(endWord)==0)
+                            return depth+1; //endWord found
+                        if(myset.find(temp)!=myset.end())
+                        {
+                            q.push(temp);
+                            myset.erase(temp);
+                        }
                     }
                 }
-            
-                for(auto str: temp){
-                    sset.erase(str);
-                }
-                temp.clear();
-            
-            
-        }//whilke
-        
+            }
+        }
         return 0;
-        
     }
 };
