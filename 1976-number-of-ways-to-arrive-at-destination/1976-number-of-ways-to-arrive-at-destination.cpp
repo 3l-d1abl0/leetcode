@@ -4,14 +4,14 @@ public:
         
         priority_queue<tuple<long long,int>, vector<tuple<long long,int>>, greater<tuple<long long,int>>> pq;
         
-        vector<vector<tuple<int, long long>>> adj(N);
+        vector<vector<tuple<int, int>>> adj(N);
         for(auto row: roads){
             adj[row[0]].push_back({row[1], row[2]});
             adj[row[1]].push_back({row[0], row[2]});
         }
         
         const long long MOD = 1e9+7;
-        vector<long long> ways(N,0);
+        vector<int> ways(N,0);
         vector<long long> dist(N, 1e18);
         
         ways[0] =1;
