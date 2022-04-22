@@ -14,7 +14,7 @@ public:
            if(target>= nums[st] && target<nums[mid])
                return rotatedBS(nums, target, st, mid-1);
             else
-                return rotatedBS(nums, target, st+1, ed);
+                return rotatedBS(nums, target, mid+1, ed);
             
             
         }else{
