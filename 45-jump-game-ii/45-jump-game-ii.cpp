@@ -20,7 +20,9 @@ public:
         
         //return f1(nums);
         
-        return bfs(nums);
+        //return bfs(nums);
+        
+        return bfs2(nums);
         
     }
     
@@ -82,6 +84,30 @@ public:
         }//while
         
         return steps;
+    }
+    
+    int bfs2(vector<int>& nums) {
+	
+        int N = size(nums), i = 0;
+        int maxReachableNode = 0;
+        int lastNodeinLevel = 0;
+        int jumps = 0;
+        
+        
+	    while(lastNodeinLevel < N - 1) {
+        
+            maxReachableNode = max(maxReachableNode, i + nums[i]); 
+
+            if(i == lastNodeinLevel) {
+
+                lastNodeinLevel = maxReachableNode;
+                jumps++;
+            }
+
+            i++;
+	    }
+        
+	    return jumps;
     }
     
 };
