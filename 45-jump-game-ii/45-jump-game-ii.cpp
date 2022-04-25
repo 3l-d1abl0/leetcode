@@ -22,7 +22,9 @@ public:
         
         //return bfs(nums);
         
-        return bfs2(nums);
+        //return bfs2(nums);
+        
+        return minJump(nums);
         
     }
     
@@ -108,6 +110,32 @@ public:
 	    }
         
 	    return jumps;
+    }
+    
+    int minJump(vector<int> &A){
+        
+        int n = A.size();
+        
+        if (n <= 1)
+            return 0;
+        
+        int currMaxReach = A[0];
+        int stepsCount = A[0];
+        int jump = 0;
+        
+        for (int start = 1; start < n - 1; start = start + 1){
+            
+            currMaxReach = max(currMaxReach, start + A[start]);
+            stepsCount = stepsCount - 1;
+            
+            if (stepsCount == 0){
+                
+                jump = jump + 1;
+                stepsCount = currMaxReach - start;
+            }
+        }//for
+        
+        return jump + 1;
     }
     
 };
