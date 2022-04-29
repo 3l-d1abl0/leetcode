@@ -10,7 +10,7 @@ public:
             while(buy < days - 1 && prices[buy + 1] < prices[buy])
                 buy++; // find the valley of prices               
             
-            sell = buy+1;
+            sell = buy+1;   //can be sell= buy since buy and selling on same day is allowed 
             
             while(sell < days - 1 && prices[sell + 1] > prices[sell])
                 sell++; // find the peak of prices
