@@ -16,9 +16,7 @@ public:
                 maj2= ele; c2=1;
             }else {
                 c1--;
-                if(c1==0) maj1= INT_MIN;
                 c2--;
-                if(c2==0) maj2 = INT_MIN;
             }
         }
         
