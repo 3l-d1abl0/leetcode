@@ -1,28 +1,47 @@
 class Solution {
 public:
-    int maxProfit(vector<int>& prices) {
+    void printDP(vector<vector<int>> &stocks){
+
+        for(auto row: stocks){
+            for(int ele: row){
+                cout<<ele<<" ";
+            }
+            cout<<endl;
+        }
+    }
+    
+    int maxProfit(vector<int>& stocks) {
         
         
-        int profit = 0, buy = 0, sell = 0, days = prices.size();
+        int N = stocks.size();
         
-        while(buy < days && sell < days)
-        {
-            while(buy < days - 1 && prices[buy + 1] < prices[buy])
-                buy++; // find the valley of prices               
+        vector<vector<int>> dp(N+1, vector<int> (2,0));
+        
+        //dp[N] = 0;
+        
+        for(int i=N-1; i>=0; i--){
             
-            sell = buy+1;   //can be sell= buy since buy and selling on same day is allowed 
             
-            while(sell < days - 1 && prices[sell + 1] > prices[sell])
-                sell++; // find the peak of prices
-            
-            if(sell<days)//i.e if bot buy ans sell are valid index. ifnore if only Buy
-                profit += prices[sell] - prices[buy];
+            for(int buy=0; buy<=1; buy++){
                 
-            buy = sell + 1;
+                
+                int profit =0;
+                
+                if(buy){
+                    
+                    profit = max(-stocks[i]+ dp[i+1][0], 0+ dp[i+1][1]);
+                    
+                }else{
+                    profit = max(stocks[i]+ dp[i+1][1], 0 + dp[i+1][0]);
+                }
+                
+                
+                dp[i][buy] = profit;
+            }
+            
         }
         
-        return profit;
+        //printDP(dp);
+        return dp[0][1];
     }
-        
-    
 };
