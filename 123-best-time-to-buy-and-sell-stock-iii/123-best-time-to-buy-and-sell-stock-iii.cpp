@@ -14,13 +14,13 @@ public:
         for(int i=N-1; i>=0; i--){
             
             
-            for(int buy=0; buy<=1; buy++){
+            for(int buy=1; buy>=0; buy--){
                 
                 for(int tx=1; tx<=2; tx++){
                     
                     int profit =0;
 
-                    if(buy==1){
+                    if(buy){
 
                         profit = max(-stocks[i]+ dp[i+1][0][tx], 0+ dp[i+1][1][tx]);
 
