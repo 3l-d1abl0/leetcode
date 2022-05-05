@@ -17,7 +17,8 @@ public:
                 sum = ele;
             }
         }
-        return subS <= m;
+        return true;
+        //return subS <= m;
         
     }
     
