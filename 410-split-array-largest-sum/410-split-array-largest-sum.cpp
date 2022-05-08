@@ -34,7 +34,7 @@ public:
             int mid = l+(r-l)/2;
             //predicate : mid <= max sum of a subset
             //int minMaxSum = ;
-            if(func(nums, m, mid)<=m){//it can be divided into m subarrays with max subarray sum mid , also there is a chance that it might det divided into m subarrays wth max subarray sum less than mid
+            if(func(nums, m, mid)<=m){//it can be divided into m subarrays with max subarray sum mid , also there is a chance that it might det divided into m subarrays wth max subarray sum less than mir
                 r=mid;  //try to go more left
                // cout<<"mid :: "<<mid<<endl;
             }else{
