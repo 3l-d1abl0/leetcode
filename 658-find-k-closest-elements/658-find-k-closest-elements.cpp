@@ -71,9 +71,9 @@ public:
         
     }
     
-    int binarySearch2Pointer(vector<int>& arr, int x) {
-        
-        int N = arr.size();
+    
+    int lowerBound(vector<int> &arr, int x){
+                int N = arr.size();
         
         int l=-1, r=N;
         
@@ -90,20 +90,11 @@ public:
         
         
         return r;
-        
     }
     
-    vector<int> findClosestElements(vector<int>& arr, int k, int x) {
+    vector<int> binarySearch2Pointer(vector<int>& arr, int k, int x) {
         
-        
-        //1. Simple sorting
-        //return justSort(arr, k, x);
-        
-        //2. 2 Pointer
-        //return twoPointer(arr, x);
-        
-        //3. Bianry Search
-        int R = binarySearch2Pointer(arr, x);
+        int R = lowerBound(arr, x);
         int L = R-1;
         int N = arr.size();
         
@@ -117,6 +108,20 @@ public:
         }
         cout<<L<<" "<<R<<endl;
         return vector<int> (arr.begin()+L+1, arr.begin()+R);
+    }
+    
+    vector<int> findClosestElements(vector<int>& arr, int k, int x) {
+        
+        
+        //1. Simple sorting
+        //return justSort(arr, k, x);
+        
+        //2. 2 Pointer
+        //return twoPointer(arr, x);
+        
+        //3. Bianry Search
+        return binarySearch2Pointer(arr, k, x);
+        
         
     }
 };
