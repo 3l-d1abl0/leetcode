@@ -54,13 +54,9 @@ public:
         
     }
     
-    vector<int> findClosestElements(vector<int>& arr, int k, int x) {
-        
-        
-        //1. Simple sorting
-        //return justSort(arr, k, x);
-        
-        //2. 2 Pointer
+    
+    vector<int> twoPointer(vector<int>& arr, int k, int x) {
+     
         int l = 0, r= arr.size()-1;
         
         while(r-l>=k){
@@ -72,31 +68,55 @@ public:
         }
         
         return vector<int> (arr.begin()+l, arr.begin()+r+1);
+        
+    }
+    
+    int binarySearch2Pointer(vector<int>& arr, int x) {
+        
+        int N = arr.size();
+        
+        int l=-1, r=N;
+        
+        while(r-l>1){
+            
+            int mid = l +(r-l)/2;
+            
+            if(arr[mid]>=x)
+                r=mid;
+            else
+                l =mid;
+            
+        }
+        
+        
+        return r;
+        
+    }
+    
+    vector<int> findClosestElements(vector<int>& arr, int k, int x) {
+        
+        
+        //1. Simple sorting
+        //return justSort(arr, k, x);
+        
+        //2. 2 Pointer
+        //return twoPointer(arr, x);
+        
         //3. Bianry Search
+        int R = binarySearch2Pointer(arr, x);
+        int L = R-1;
+        int N = arr.size();
         
-        /*int N=arr.size();
-        if(x<arr[0]){
-            return vector<int> (arr.begin(), arr.begin()+k);
-        }else if(x> arr[N-1]){
-            return vector<int> (arr.begin()+(N-k), arr.end());
+        while(k--){
             
-        }else{
-            //find x
+            if(R>=N ||( L>=0 && abs(arr[L]-x) <= (arr[R]-x)))
+                L--;
+            else
+                R++;
             
-            long long int l = arr[0]-1;
-            long long int r = arr[N-1]+1;
-            
-            
-            while(r-l>1){
-                
-                if()
-                
-            }
-            
+        }
+        cout<<L<<" "<<R<<endl;
+        return vector<int> (arr.begin()+L+1, arr.begin()+R);
         
-        }*/
- 
-        
-        return vector<int> {};
     }
 };
