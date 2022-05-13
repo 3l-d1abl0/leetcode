@@ -22,8 +22,8 @@ public:
         return false;
     }
     
-    vector<int> findClosestElements(vector<int>& arr, int k, int x) {
-        
+    
+    vector<int> justSort(vector<int> &arr, int k, int x){
         
         vector<node> vec;
         
@@ -51,5 +51,52 @@ public:
         sort(ans.begin(), ans.end());
         
         return ans;
+        
+    }
+    
+    vector<int> findClosestElements(vector<int>& arr, int k, int x) {
+        
+        
+        //1. Simple sorting
+        //return justSort(arr, k, x);
+        
+        //2. 2 Pointer
+        int l = 0, r= arr.size()-1;
+        
+        while(r-l>=k){
+            
+            if(abs(arr[l]-x) <= abs(arr[r]-x) )
+                r--;
+            else
+                l++;
+        }
+        
+        return vector<int> (arr.begin()+l, arr.begin()+r+1);
+        //3. Bianry Search
+        
+        /*int N=arr.size();
+        if(x<arr[0]){
+            return vector<int> (arr.begin(), arr.begin()+k);
+        }else if(x> arr[N-1]){
+            return vector<int> (arr.begin()+(N-k), arr.end());
+            
+        }else{
+            //find x
+            
+            long long int l = arr[0]-1;
+            long long int r = arr[N-1]+1;
+            
+            
+            while(r-l>1){
+                
+                if()
+                
+            }
+            
+        
+        }*/
+ 
+        
+        return vector<int> {};
     }
 };
