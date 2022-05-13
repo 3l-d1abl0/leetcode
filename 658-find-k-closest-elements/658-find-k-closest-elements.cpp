@@ -110,6 +110,34 @@ public:
         return vector<int> (arr.begin()+L+1, arr.begin()+R);
     }
     
+    
+    vector<int> binarySearch(vector<int> arr, int k, int x){
+        
+        int n = arr.size();
+        int l = 0, r = n-k;
+        
+        while(l<r){
+         
+            int mid = l+(r-l)/2;
+            
+            if(arr[mid]== arr[mid+k]){
+                
+                if(x>arr[mid+k]){
+                    l=mid+1;
+                }else{
+                    r=mid;
+                }
+                
+            }else if(abs(arr[mid]-x) < abs(arr[mid+k]-x)){
+                r=mid;
+            }else{
+                l=mid+1;
+            }
+        }
+        
+        
+        return vector<int> (arr.begin() + l, arr.begin()+l+k);
+    }
     vector<int> findClosestElements(vector<int>& arr, int k, int x) {
         
         
@@ -119,9 +147,11 @@ public:
         //2. 2 Pointer
         //return twoPointer(arr, x);
         
-        //3. Bianry Search
+        //3. Binary Search+2 Pointer
         return binarySearch2Pointer(arr, k, x);
         
+        //4. Just Binary Search
+        return binarySearch(arr, k, x);
         
     }
 };
