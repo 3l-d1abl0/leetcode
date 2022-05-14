@@ -22,8 +22,7 @@ public:
 
             int l = -1, r = arr[arr.size() - 1] - arr[0] + 1;
 
-            while (r - l > 1)
-            {
+            while (r - l > 1){
 
                 int mid = l + (r - l) / 2;
 
