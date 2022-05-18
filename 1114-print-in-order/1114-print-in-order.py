@@ -14,7 +14,7 @@ class Foo:
             self.cv.wait()
         
         printFirst()            
-        self.ctr +=1
+        self.ctr =2
         self.cv.notify(2)
         self.cv.release()
         
@@ -28,7 +28,7 @@ class Foo:
             self.cv.wait()
         
         printSecond()
-        self.ctr +=1
+        self.ctr = 3
         self.cv.notify(1)
         self.cv.release()
         
@@ -42,7 +42,7 @@ class Foo:
             self.cv.wait()
         
         printThird()
-        self.ctr +=1
+        #self.ctr +=1
         self.cv.notify()
         self.cv.release()
         
