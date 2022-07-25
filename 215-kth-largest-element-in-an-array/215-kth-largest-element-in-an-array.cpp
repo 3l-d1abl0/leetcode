@@ -1,59 +1,41 @@
 class Solution {
-    private:
-    
-    int partition(vector<int> &arr, int st, int ed){
-
-
-        int partIdx = st;
-
-        int l = st, r = ed;
-
-        while(l<r){
-
-            while(l<=ed && arr[l]<=arr[partIdx]) l++;
-
-            while(r>=st && arr[r]>arr[partIdx]) r--;
-
-            if(l<r)
-                swap(arr[l],arr[r]);
-        }
-
-
-        swap(arr[partIdx], arr[r]);
-
-
-        return r;
-
-    }
-
-    int kthLargest(vector<int> &arr, int k, int st, int ed){
-
-        int n = arr.size()-1;
-        int kth = n-(k-1);
-        while(st<=ed){
-
-            int idx = partition(arr, st, ed);
-
-            if(idx ==kth){
-                return arr[idx];
-            }else if(idx <kth ){
-                return kthLargest(arr, k, idx+1, ed);
-            }else{
-                return kthLargest(arr, k, st, idx-1);
-            }
-
-        }
-        
-        
-        return -1;
-    }
-    
 public:
+    
+    //Using Max Heap
+    void printQ(priority_queue<int, vector<int>, greater<int> > pq){
+        
+        while(!pq.empty()){
+            
+            cout<<pq.top()<<" "; pq.pop();
+        }
+        
+        cout<<endl;
+    }
+    
     int findKthLargest(vector<int>& nums, int k) {
         
+        priority_queue<int, vector<int>, greater<int> > pq;
         
-        int n = nums.size();
-        return kthLargest(nums, k, 0, n-1);
+        for(vector<int>::iterator it = nums.begin(); it != nums.end(); it++){
+            
+            if(pq.size() < k){
+                pq.push(*it);
+            }else{
+                
+                if(*it > pq.top()){
+                    
+                    pq.pop();
+                    pq.push(*it);
+                    
+                    
+                   // printQ(pq);
+                }
+            }
+            
+        }//for
+        
+        
+        return pq.top();
         
     }
 };
