@@ -33,7 +33,7 @@ public:
             int ctr = sz;
             for(int i=0; i<sz ; i++){
                 Node *curr = q.front(); q.pop(); ctr--;
-                curr->next = ctr==0? NULL : q.front();
+                curr->next = i==sz-1? NULL : q.front();
                 
                 if(curr->left)
                     q.push(curr->left);
