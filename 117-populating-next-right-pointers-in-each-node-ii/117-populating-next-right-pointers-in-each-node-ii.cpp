@@ -30,9 +30,10 @@ public:
             
             
             int sz = q.size();
-            int ctr = sz;
+            
             for(int i=0; i<sz ; i++){
-                Node *curr = q.front(); q.pop(); ctr--;
+                Node *curr = q.front(); q.pop();
+                //If the current level has ended
                 curr->next = i==sz-1? NULL : q.front();
                 
                 if(curr->left)
