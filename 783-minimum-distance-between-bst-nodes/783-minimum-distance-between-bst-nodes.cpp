@@ -17,9 +17,9 @@ public:
         if(root==NULL)
             return;
         
-        if(root->left){
+        //if(root->left){
             minDiff(root->left, prev, diff);
-        }
+        //}
         
         if(prev != root->val)//avoid if there was no left subtree
         diff =  min(diff, abs(root->val-prev));
@@ -27,9 +27,9 @@ public:
         
         prev = root->val;
         
-        if(root->right){
+        //if(root->right){
             minDiff(root->right, prev, diff);
-        }
+        //}
         
 
         
