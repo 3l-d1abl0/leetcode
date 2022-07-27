@@ -11,28 +11,27 @@
 class Solution {
 public:
     
+    TreeNode *rec(TreeNode *root, TreeNode *p, TreeNode *q){
+        
+        if(root== NULL) return NULL;
+        
+        int curr = root->val;
+        
+        if(curr < p->val && curr < q->val)
+            return rec(root->right, p, q);
+        
+        if(curr >p->val && curr > q->val)
+            return rec(root->left, p, q);
+        
+        
+        return root;
+        
+        
+    }
     
     TreeNode* lowestCommonAncestor(TreeNode* root, TreeNode* p, TreeNode* q){
         
-        if(root==NULL)
-            return NULL;
-        
-        
-        if(root==p || root==q)
-            return root;
-        
-        
-        TreeNode *lf = lowestCommonAncestor(root->left, p, q);
-        
-        TreeNode *rt = lowestCommonAncestor(root->right, p, q);
-        
-        if(lf!= NULL && rt!= NULL)
-            return root;
-        
-        if(lf)
-            return lf;
-        else
-            return rt;
-        
+        //recursion
+        return rec(root, p, q);
     }
 };
