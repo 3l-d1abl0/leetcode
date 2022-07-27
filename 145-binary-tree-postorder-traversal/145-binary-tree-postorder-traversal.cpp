@@ -26,19 +26,18 @@ public:
     stack<TreeNode*> st;
     TreeNode *curr = root;
     TreeNode *prev = NULL;
-    while (curr != NULL || !st.empty())
-    {
-        if (curr != NULL)
-        {
+    while (curr != NULL || !st.empty()){
+        
+        while(curr != NULL){
+            
             st.push(curr);
             curr = curr->left;
         }
-        else
-        {
+        
             curr = st.top();
             if (curr->right == NULL || curr->right == prev)
             {
-                //cout << curr->val << " ";
+                cout << curr->val << " ";
                 res.push_back(curr->val);
                 st.pop();
                 prev = curr;
@@ -46,7 +45,7 @@ public:
             }
             else
                 curr = curr->right;
-        }
+        
     }
 
     
