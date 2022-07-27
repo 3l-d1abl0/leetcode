@@ -37,7 +37,7 @@ public:
             curr = st.top();
             if (curr->right == NULL || curr->right == prev)
             {
-                cout << curr->val << " ";
+                //cout << curr->val << " ";
                 res.push_back(curr->val);
                 st.pop();
                 prev = curr;
