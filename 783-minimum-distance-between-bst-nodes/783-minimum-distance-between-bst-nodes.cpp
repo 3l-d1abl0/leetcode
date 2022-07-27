@@ -21,7 +21,7 @@ public:
             minDiff(root->left, prev, diff);
         //}
         
-        if(prev != root->val)//avoid if there was no left subtree
+        if(prev != -1)//avoid if there was no left subtree for 1st node
         diff =  min(diff, abs(root->val-prev));
         
         
@@ -37,7 +37,7 @@ public:
     
     int minDiffInBST(TreeNode* root) {
         
-        int prev = root->val;
+        int prev = -1;
         int diff = INT_MAX;
         
         minDiff(root, prev, diff);
