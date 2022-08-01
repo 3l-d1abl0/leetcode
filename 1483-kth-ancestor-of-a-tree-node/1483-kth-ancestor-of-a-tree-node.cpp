@@ -1,78 +1,105 @@
-class TreeAncestor {
-//we create a dp array to store (2^i)th ancestor at index i of a node u
-    int up[100000][20];
-    
-	//pre-computation to store (2^i)th ancestor of node at up[node][i]
-	// Time : O(n logn)
-    void dfs(vector<int> g[],int node,int par)
-    {        
-		//(2^0) = 1st ancestor of a node is its parent itself
-        up[node][0] = par;
-        
-		/*
-		for remaining we store (2 ^ i-1)th ancestor of (2^i-1)th ancestor of node 
-		to calculate (2^i)th ancestor of the node
-		*/
-        for(int i=1;i<20;i++)
-        {
-            if(up[node][i-1] != -1)
-                up[node][i] = up[ up[node][i-1] ][i-1];
-        }
-        
-		//now we traverse to remaining childs and do the same
-        for(auto &child : g[node])
-        {
-                dfs(g,child,node);
-        }
-    }
-    
-	//function to get kth ancestor in O(logn) time
-    int getK(int node,int k)
-    {
-	//0th ancestor of a node is that node itself
-        if(k == 0)
-            return node;
-	//1st ancestor is its parent
-        if(k == 1)
-            return up[node][0];
-			
-		//now we try to find the position of MSB in k
-        int last = -1;
-        for(int i=0;i<20;i++)
-        {
-            int bit = (k>>i)&1;
-            if(bit)
-                last = i;
-        }
-        
-		//if there is no bit set or there doesn't exist (2^last)the ancestor we return -1
-        if(last == -1 or up[node][last] == -1)
-            return -1;
-        
-		//else we recur for the (2^last)th ancestor and unset this bit from k
-        return getK(up[node][last],k ^ (1<<last));
-    }
-    
+/*
+ * @lc app=leetcode id=1483 lang=cpp
+ *
+ * [1483] Kth Ancestor of a Tree Node
+ */
+
+// @lc code=start
+class TreeAncestor
+{
 public:
-    TreeAncestor(int n, vector<int>& parent) {
-		//initializing the up array
-        memset(up,-1,sizeof up);
+    vector<vector<int>> up;
+    vector<int> depth;
+    int LOG;
+    
+    vector<vector<int>> createGraph(int n, vector<int> &parent){
         
-		//constructing tree from parent array
-        vector<int> g[n];
-        for(int i=0;i<size(parent);i++)
-        {
-            if(i != 0)
-                g[parent[i]].push_back(i);
+        //vector<int> g[n];
+        vector<vector<int>> g(n);
+        
+        for(int ele=0; ele< parent.size(); ele++){
+            
+            if(parent[ele]!=-1){
+                g[parent[ele]].push_back(ele);
+            }
         }
         
-		//pre-computation
-        dfs(g,0,-1);
+        return g;
     }
     
-    int getKthAncestor(int node, int k) {
-		//call the function, get the result
-        int val = getK(node,k);
-        return val;
+    void precompute(vector<vector<int>> &graph, int node, int parent){
+        
+
+        up[node][0] = parent;
+
+        for (int i = 1; i < LOG; i++){
+
+            if (up[node][i - 1] != -1)
+                up[node][i] = up[up[node][i - 1]][i - 1];
+            else
+                up[node][i] = -1;
+        }
+        
+        
+        for(int child: graph[node]){
+            precompute(graph, child, node);    
+        }
+        
+    }
+    
+    TreeAncestor(int n, vector<int> &parent){
+        
+        vector<vector<int>> graph = createGraph(n, parent);
+        
+        LOG = ceil(log2(n));
+
+        up = vector<vector<int>>(n, vector<int>(LOG));
+        
+        
+        //pre-computation
+        precompute(graph, 0, -1);
+        
+        /*
+        for(auto row: up){
+            for(auto ele: row){
+                cout<<ele<<" ";
+            }
+            
+            cout<<endl;
+        }*/
+
+    }
+
+    int getKthAncestor(int node, int k){
+        
+        //if(k==1) return up[node][0];
+
+        //cout<<"K::"<<k<<endl;;
+        int j;
+        for(j = LOG - 1; j >= 0; j--) {
+            
+            if(k >= (1 << j)) {
+                //cout<<node<<" "<<j<<"--"<<k<<endl;
+                node = up[node][j];
+                if(node ==-1)   return node;
+                k -= 1 << j;
+                //cout<<node<<" "<<j<<" "<<k<<endl;
+                //cout<<k<<" "<<(1<<j)<<endl;
+            }
+        }//for
+        
+        //cout<<"k ="<<k<<" j="<<j<<endl<<endl;
+        //if(j==-1) return j;else 
+        if(k==0)
+            return node;
+        else
+            return j;
     }
 };
+
+/**
+ * Your TreeAncestor object will be instantiated and called as such:
+ * TreeAncestor* obj = new TreeAncestor(n, parent);
+ * int param_1 = obj->getKthAncestor(node,k);
+ */
+// @lc code=end
