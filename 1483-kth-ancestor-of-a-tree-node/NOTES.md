@@ -1,6 +1,1 @@
-["TreeAncestor","getKthAncestor","getKthAncestor","getKthAncestor"]
-[[7,[-1,0,0,1,1,2,2]],[3,1],[5,2],[6,3]]
-["TreeAncestor","getKthAncestor","getKthAncestor","getKthAncestor","getKthAncestor","getKthAncestor"]
-[[5,[-1,0,0,0,3]],[1,5],[3,2],[0,1],[3,1],[3,5]]
-["TreeAncestor","getKthAncestor"]
-[[2,[-1,0]],[1,2]]
+​
