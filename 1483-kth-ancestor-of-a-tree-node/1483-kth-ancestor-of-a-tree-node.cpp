@@ -51,7 +51,7 @@ public:
         
         vector<vector<int>> graph = createGraph(n, parent);
         
-        LOG = ceil(log2(n));
+        LOG = abs(log2(n))+1;
 
         up = vector<vector<int>>(n, vector<int>(LOG));
         
@@ -74,9 +74,9 @@ public:
         
         //if(k==1) return up[node][0];
 
-        //cout<<"K::"<<k<<endl;;
+       //cout<<"K::"<<ceil(log2(k))+1<<endl;;
         int j;
-        for(j = LOG - 1; j >= 0; j--) {
+        for(j = ceil(log2(k))+1; j >= 0; j--) {
             
             if(k >= (1 << j)) {
                 //cout<<node<<" "<<j<<"--"<<k<<endl;
