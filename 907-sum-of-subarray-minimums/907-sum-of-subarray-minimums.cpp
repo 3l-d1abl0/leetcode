@@ -5,12 +5,12 @@ public:
     
     int sumSubarrayMins(vector<int>& arr) {
         
-        vector<long int> left;
-        vector<long int> right;
+        vector<long int> left(arr.size());
+        vector<long int> right(arr.size());
         
         for(int i=0; i<arr.size(); i++){
-            left.push_back(i+1);
-            right.push_back(arr.size()-i);
+            left[i] =(i+1);
+            right[i]= arr.size()-i;
         }
         
         stack<int> stLeft;
@@ -23,10 +23,8 @@ public:
                 stLeft.pop();
             }
             
-            if(stLeft.empty())
-                left[i] = i+1;
-            else
-                left[i] = i-stLeft.top();
+            if(stLeft.empty()) left[i] = i+1;
+            else left[i] = i-stLeft.top();
             
             stLeft.push(i);
             
@@ -44,8 +42,6 @@ public:
         for(int i=0; i<arr.size(); i++){
             sum = (sum + (left[i]* arr[i]* right[i])%MOD)%MOD;
         }
-        
-        
         
         return sum;
     }
