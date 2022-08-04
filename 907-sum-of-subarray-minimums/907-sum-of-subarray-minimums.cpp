@@ -13,29 +13,20 @@ public:
             right[i]= arr.size()-i;
         }
         
-        stack<int> stLeft;
-        stack<int> stRight;
+        stack<int> st;
         
         
         for(int i=0; i<arr.size(); i++){
             
-            while(!stLeft.empty() && arr[stLeft.top()] >arr[i]){
-                stLeft.pop();
+            while(!st.empty() && arr[st.top()] >arr[i]){
+                right[st.top()] = i - st.top();
+                st.pop();
             }
             
-            if(stLeft.empty()) left[i] = i+1;
-            else left[i] = i-stLeft.top();
+            if(st.empty()) left[i] = i+1;
+            else left[i] = i-st.top();
             
-            stLeft.push(i);
-            
-            //Right           
-            while(!stRight.empty() && arr[stRight.top()] > arr[i]){
-                right[stRight.top()] = i - stRight.top();
-                stRight.pop();
-            }
-            
-            stRight.push(i);
-            
+            st.push(i);
         }
         
         int sum = 0;
