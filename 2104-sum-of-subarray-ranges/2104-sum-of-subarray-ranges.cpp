@@ -11,6 +11,7 @@ public:
         stack<int> st;
         
         for(int i=0; i<nums.size(); i++){
+            
             while(!st.empty() && nums[st.top()] > nums[i]){
                 ans[st.top()].rmin = i- st.top();
                 st.pop();
@@ -18,8 +19,6 @@ public:
 
             if(!st.empty())
                 ans[i].lmin = i - st.top();
-                //ans[i].lmin = i+1;
-           // else
                 
             st.push(i);
         }
@@ -32,6 +31,7 @@ public:
         stack<int> st;
         
         for(int i=0; i<nums.size(); i++){
+            
             while(!st.empty() && nums[st.top()] < nums[i]){
                 ans[st.top()].rmax = i- st.top();
                 st.pop();
@@ -39,8 +39,6 @@ public:
 
             if(!st.empty())
                 ans[i].lmax = i - st.top();
-                //ans[i].lmin = i+1;
-           // else
                 
             st.push(i);
         }
@@ -48,7 +46,6 @@ public:
     
     long long subArrayRanges(vector<int>& nums) {
         
-        //vector<Arr> ans(nums.size());
         Arr ans[nums.size()];
         
         for(int i=0; i<nums.size(); i++){
