@@ -26,11 +26,14 @@ public:
        int mid;
        while (low <= high) {
             mid = (low + high) / 2;
-            if (A[mid] - (1 + mid) < k)  //A[m]-(m+1)   --> This gives umber of missing number before m'th index
+            int missing = A[mid] - (mid+1);
+            if (missing < k)  //A[m]-(m+1)   --> This gives umber of missing number before m'th index
                 low = mid + 1;
             else
                 high = mid-1;
+           //cout<<high<<" ";
         }
+         //cout<<low<<"+"<<k<<endl;
         return low + k;
     }
 };
