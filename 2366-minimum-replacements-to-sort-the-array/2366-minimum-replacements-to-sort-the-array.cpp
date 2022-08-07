@@ -8,10 +8,10 @@ public:
         long long total =0;
         for(int i=N-2; i>=0; i--){
             
-            if(nums[i]<prev){
+            /*if(nums[i]<prev){
                 prev = nums[i];
                 continue;
-            }
+            }*/
             
             int num = nums[i];
             
