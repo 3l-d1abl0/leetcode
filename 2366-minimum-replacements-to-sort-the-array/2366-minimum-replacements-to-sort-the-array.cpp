@@ -1,16 +1,27 @@
 class Solution {
 public:
     long long minimumReplacement(vector<int>& nums) {
-        int n=nums.size();
-	long long ans=0, prev=nums[n-1];
-	for(int i=n-2;i>=0;i--){
-		int noOfTime=nums[i]/prev;   
-		if(nums[i]%prev!=0) noOfTime++;
-		if((nums[i])%prev!=0){
-			prev=nums[i]/noOfTime;
-		}   
-		ans+=noOfTime-1;
-	}
-	return ans;
+        
+        int N = nums.size();
+        
+        int prev = nums[N-1];
+        long long total =0;
+        for(int i=N-2; i>=0; i--){
+            
+            if(nums[i]<prev){
+                prev = nums[i];
+                continue;
+            }
+            
+            int num = nums[i];
+            
+            int splits = ceil(1.0*num/prev);
+            total += splits-1;
+            
+            prev = num/splits;
+            
+        }
+        
+        return total;
     }
 };
