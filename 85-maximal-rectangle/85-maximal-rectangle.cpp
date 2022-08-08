@@ -32,13 +32,9 @@ public:
                 
             }
             
-            //vector<int> vv({2, 0, 2, 1, 1});
+            //calculate for individual cumulative Row
             maxx = max(maxx, findLargestInHistogram(row, defaultLeft, defaultRight));
             
-            
-            /*for(int i=0; i<C; i++){
-                cout<<row[i]<<" ";
-            }cout<<endl;*/
         }//for
         
         
@@ -59,32 +55,25 @@ public:
         for(int i=0; i<N; i++){
             
             while(!st.empty() && row[st.top()] > row[i]){
-             
-                //cout<<row[st.top()]<<">"<<row[i]<<" =>"<<st.top()<<endl;
                 right[st.top()] = i-st.top();
                 st.pop();
             }
             
             if(!st.empty()){
                 left[i] = i-st.top();
-                cout<<i<<" "<<st.top()<<endl;
             }
             
             st.push(i);
             
             
-            //cout<<row[i]<<" ";
-        }//cout<<endl;
+            
+        }
         
         
         int maxx = INT_MIN;
         for(int i=0; i<N; i++){
-            
             maxx = max(maxx, row[i]*(right[i]+left[i]-1));
-            //cout<<left[i]<<" "<<row[i]<<" "<<right[i]<<" ="<<row[i]*(right[i]+left[i]-1)<<endl;
         }
-        
-        //cout<<endl<<"maxx = "<<maxx<<endl;
         
         return maxx;
         
