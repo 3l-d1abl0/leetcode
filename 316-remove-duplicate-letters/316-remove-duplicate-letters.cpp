@@ -16,13 +16,11 @@ public:
             
             if(processed[s[i]-'a']) continue;
 
-            while(!st.empty() && st.top()> s[i]){
-                if(lastIndex[st.top()-'a'] > i){    //if the stack top  exists later in the string
+            while(!st.empty() && st.top()> s[i] && lastIndex[st.top()-'a'] > i){
+                    //if the stack top  exists later in the string
                     //process it later
                     processed[st.top()-'a'] = false;
-                    st.pop();          
-                }else
-                    break;
+                    st.pop();
             }
             
                 processed[s[i]-'a'] = true;
