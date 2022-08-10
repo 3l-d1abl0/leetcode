@@ -61,22 +61,22 @@ public:
         
         int N = nums.size();
         stack<int> st;
-        int firstMax = INT_MIN;
+        int secondMax = INT_MIN;
         
         for(int i=N-1; i>=0; i--){
             
             //top is firstMax //if current ele is > firstMax
             while(!st.empty() && nums[i]> st.top()){
                 
-                firstMax = st.top();
+                secondMax = st.top();
                 st.pop();
             }
             
             //fix ele as firstmax
-            if(nums[i] > firstMax)
+            if(nums[i] > secondMax)
                 st.push(nums[i]);
             
-            if(nums[i]<firstMax)
+            if(nums[i]<secondMax)
                 return true;
         }
         
@@ -92,6 +92,9 @@ public:
         return method3(nums);
     }    
 };
+
+
+
 
 
 /*
