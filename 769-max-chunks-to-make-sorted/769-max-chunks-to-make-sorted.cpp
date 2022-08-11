@@ -27,10 +27,8 @@ public:
         
     }
     
-    int maxChunksToSorted(vector<int>& nums) {
-        
-        return method2(nums);
-        
+    int method1(vector<int> &nums){
+                
         int maxx = INT_MIN;
         int chunk =0;
         
@@ -43,5 +41,11 @@ public:
         }
         
         return chunk;
+    }
+    
+    int maxChunksToSorted(vector<int>& nums) {
+        
+        return method1(nums);
+        //return method2(nums);
     }
 };
