@@ -36,9 +36,32 @@ public:
         return ans;
     }
     
+    vector<int>method2(vector<int> &nums){
+        
+        
+        int pre =1;
+        int suff = 1;
+        int N = nums.size();
+        vector<int> ans(nums.size(), 1);
+        for(int i=0; i<N; i++){
+            
+            ans[i] *=pre;
+            pre *= nums[i];
+            
+            
+            ans[N-i-1] *= suff;
+            suff *= nums[N-i-1];
+        }
+        
+        
+        return ans;
+
+    }
     
     vector<int> productExceptSelf(vector<int>& nums) {
         
-        return method1(nums);
+        //return method1(nums);
+        
+        return method2(nums);
     }
 };
