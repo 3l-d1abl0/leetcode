@@ -3,45 +3,23 @@ public:
     int trap(vector<int>& h) {
         
         int N = h.size();
-        vector<int> lmax(N, -1);
-        vector<int> rmax(N, -1);
         
-        int lm = -1e6;
-        int rm = -1e6;
-        for(int i=0; i<N; i++){
-            
-            lm = max(lm, h[i]);
-            
-            if(lm == h[i])
-                lmax[i] = -1;
-            else
-                lmax[i] = lm;
-            
-            //find rignt max
-            rm = max(rm, h[N-i-1]);
-            if(rm == h[N-i-1])
-                rmax[N-i-1] = -1;
-            else
-                rmax[N-i-1] = rm;
-            
-        }//for
+        vector<int> l(N);
+        vector<int> r(N);
         
+        l[0] = h[0];
+        r[N-1] = h[N-1];
         
-        /*for(int i=0; i<N; i++){
-            cout<<lmax[i]<<" ";
-        }cout<<endl;
+        for(int i=1; i<N; i++){
+            
+            l[i] = max(l[i-1], h[i]);    
+            r[N-i-1] = max(r[N-i], h[N-i-1]);
+        }
         
-        for(int i=0; i<N; i++){
-            cout<<rmax[i]<<" ";
-        }cout<<endl;*/
         
         int cnt =0;
-        for(int i=0; i<N; i++){
-            
-            if(lmax[i]==-1 || rmax[i]==-1) continue;
-            
-            cnt +=(min(lmax[i], rmax[i]) - h[i]);
-        }
+        for(int i=0; i<N; i++)
+            cnt+= min(l[i], r[i]) - h[i];
         
         return cnt;
     }
