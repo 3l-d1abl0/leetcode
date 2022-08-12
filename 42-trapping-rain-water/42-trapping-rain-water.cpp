@@ -55,6 +55,45 @@ public:
         
         //return method1(h);
         
-        return method2(h);
+        //return method2(h);
+        
+        return method3(h);
     }
+                       
+    int method3(vector<int> &h){
+        
+        int N = h.size();
+        
+        int lmax = -1, rmax = -1;
+        int left = 0, right = N-1;
+        
+        int water = 0;
+        
+        while(left<=right){
+            
+            if(h[left] < h[right]){
+                
+                if(h[left] > lmax){
+                    lmax = h[left];
+                }else{
+                    water += lmax - h[left];
+                    left++;
+                }
+                
+            }else{
+                
+                if(h[right] > rmax){
+                    rmax = h[right];
+                }else{
+                    water += rmax- h[right];
+                    right--;
+                }
+                
+            }
+            
+        }//while
+        
+        return water;
+    }
+                       
 };
