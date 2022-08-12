@@ -24,32 +24,69 @@ public:
         return cnt;
     }
     
-    int method2(vector<int> &arr){
-        
-        int lf =0, rt=arr.size()-1;
-        int left_max = -1; int rt_max = -1;
-        int water =0;
-        while(lf<=rt){
+    int method2(vector<int> &h){
 
-            if(arr[lf]<arr[rt]){
-                    if(arr[lf]>left_max)
-                        left_max = arr[lf];
-                    else
-                        water += left_max -arr[lf];
-                        lf++;
+        int N = h.size();
+
+        int lmax = -1, rmax = -1;
+        int left = 0, right = N-1;
+
+        int water = 0;
+
+        while(left<=right){
+
+            if(h[left] < h[right]){
+
+                if(h[left] > lmax){
+                    lmax = h[left];
+                }else{
+                    water += lmax - h[left];
+                    left++;
+                }
+
             }else{
 
-                if(arr[rt]>rt_max)
-                    rt_max = arr[rt];
-                else
-                    water += rt_max - arr[rt];
-                    rt--;
+                if(h[right] > rmax){
+                    rmax = h[right];
+                }else{
+                    water += rmax- h[right];
+                    right--;
+                }
+
             }
 
-        }
+        }//while
 
         return water;
     }
+    
+    
+    int method3(vector<int> &h){
+        
+        int water =0;
+        int N = h.size();
+        
+        stack<int> st;
+        for(int i=0; i<N; i++){
+            
+            while(!st.empty() && h[i] > h[st.top()]){
+                
+                int top = st.top(); st.pop();
+                
+                if(st.empty()) break;
+                
+                int height = min(h[st.top()], h[i]) - h[top];
+                
+                water += height * (i-st.top()-1);
+            }
+            
+            st.push(i);
+            
+        }
+        
+        return water;
+    }
+    
     
     int trap(vector<int>& h) {
         
@@ -60,40 +97,6 @@ public:
         return method3(h);
     }
                        
-    int method3(vector<int> &h){
-        
-        int N = h.size();
-        
-        int lmax = -1, rmax = -1;
-        int left = 0, right = N-1;
-        
-        int water = 0;
-        
-        while(left<=right){
-            
-            if(h[left] < h[right]){
-                
-                if(h[left] > lmax){
-                    lmax = h[left];
-                }else{
-                    water += lmax - h[left];
-                    left++;
-                }
-                
-            }else{
-                
-                if(h[right] > rmax){
-                    rmax = h[right];
-                }else{
-                    water += rmax- h[right];
-                    right--;
-                }
-                
-            }
-            
-        }//while
-        
-        return water;
-    }
+
                        
 };
