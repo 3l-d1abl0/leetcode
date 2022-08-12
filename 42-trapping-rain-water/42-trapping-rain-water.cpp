@@ -1,7 +1,7 @@
 class Solution {
 public:
-    int trap(vector<int>& h) {
-        
+    
+    int method1(vector<int> &h){
         int N = h.size();
         
         vector<int> l(N);
@@ -22,5 +22,39 @@ public:
             cnt+= min(l[i], r[i]) - h[i];
         
         return cnt;
+    }
+    
+    int method2(vector<int> &arr){
+        
+        int lf =0, rt=arr.size()-1;
+        int left_max = -1; int rt_max = -1;
+        int water =0;
+        while(lf<=rt){
+
+            if(arr[lf]<arr[rt]){
+                    if(arr[lf]>left_max)
+                        left_max = arr[lf];
+                    else
+                        water += left_max -arr[lf];
+                        lf++;
+            }else{
+
+                if(arr[rt]>rt_max)
+                    rt_max = arr[rt];
+                else
+                    water += rt_max - arr[rt];
+                    rt--;
+            }
+
+        }
+
+        return water;
+    }
+    
+    int trap(vector<int>& h) {
+        
+        //return method1(h);
+        
+        return method2(h);
     }
 };
