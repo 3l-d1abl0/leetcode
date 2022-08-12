@@ -1,9 +1,9 @@
 class Solution {
 public:
-    vector<int> productExceptSelf(vector<int>& nums) {
+    
+    vector<int> method1(vector<int> & nums){
         
-        
-        int N = nums.size();
+                int N = nums.size();
         
         vector<int> l(N);
         vector<int> r(N);
@@ -34,5 +34,11 @@ public:
         
         
         return ans;
+    }
+    
+    
+    vector<int> productExceptSelf(vector<int>& nums) {
+        
+        return method1(nums);
     }
 };
