@@ -3,7 +3,7 @@ public:
     
     vector<int> method1(vector<int> & nums){
         
-                int N = nums.size();
+        int N = nums.size();
         
         vector<int> l(N);
         vector<int> r(N);
@@ -60,8 +60,10 @@ public:
     
     vector<int> productExceptSelf(vector<int>& nums) {
         
+        //TC: O(2N) SC: O(2N)
         //return method1(nums);
         
+        //TC: O(N) SC: O(1)
         return method2(nums);
     }
 };
