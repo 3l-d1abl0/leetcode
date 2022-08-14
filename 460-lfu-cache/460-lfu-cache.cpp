@@ -1,118 +1,68 @@
-struct Node {
-    int key, value, cnt;
-    Node *next; 
-    Node *prev;
-    Node(int _key, int _value) {
-        key = _key;
-        value = _value; 
-        cnt = 1; 
-    }
-}; 
-struct List {
-    int size; 
-    Node *head; 
-    Node *tail; 
-    List() {
-        head = new Node(0, 0); 
-        tail = new Node(0,0); 
-        head->next = tail;
-        tail->prev = head; 
-        size = 0;
-    }
-    
-    void addFront(Node *node) {
-        Node* temp = head->next;
-        node->next = temp;
-        node->prev = head;
-        head->next = node;
-        temp->prev = node;
-        size++; 
-    }
-    
-    void removeNode(Node* delnode) {
-        Node* delprev = delnode->prev;
-        Node* delnext = delnode->next;
-        delprev->next = delnext;
-        delnext->prev = delprev;
-        size--; 
-    }
-    
-    
-    
-};
 class LFUCache {
-    map<int, Node*> keyNode; 
-    map<int, List*> freqListMap; 
-    int maxSizeCache;
-    int minFreq; 
-    int curSize; 
 public:
-    LFUCache(int capacity) {
-        maxSizeCache = capacity; 
-        minFreq = 0;
-        curSize = 0; 
+  
+    unordered_map <int,list<pair<int,int>>> lst_map;                    //will store frequency as key and list of all <key,value> with that frequency
+    unordered_map <int,list<pair<int,int>>::iterator> key_map;          //will store key and it's respective address
+    unordered_map <int,int> frequency_map;                              //will store key and it's frequency
+    int cap=0,size=0,min_frequency=0;
+    
+    LFUCache(int capacity)
+    {
+        cap=capacity;
     }
-    void updateFreqListMap(Node *node) {
-        keyNode.erase(node->key); 
-        freqListMap[node->cnt]->removeNode(node); 
-        if(node->cnt == minFreq && freqListMap[node->cnt]->size == 0) {
-            minFreq++; 
+    
+    int get(int key) 
+    {
+      
+        auto found= key_map.find(key);
+        if(found==key_map.end())
+            return -1;
+        else
+        {   auto temp = found->second->second;
+            put(key,temp);
+            return temp;
+            
         }
+    };
+    
+    void put(int key, int value) 
+    {
         
-        List* nextHigherFreqList = new List();
-        if(freqListMap.find(node->cnt + 1) != freqListMap.end()) {
-            nextHigherFreqList = freqListMap[node->cnt + 1];
-        } 
-        node->cnt += 1; 
-        nextHigherFreqList->addFront(node); 
-        freqListMap[node->cnt] = nextHigherFreqList; 
-        keyNode[node->key] = node;
+        auto found = key_map.find(key);
+        if(found== key_map.end()) 
+        {   if(cap!=0)
+            {  
+            if(size>=cap)
+            {                                                    //removing page
+               auto temp = lst_map[min_frequency].back();        //making copy of popped element
+               lst_map[min_frequency].pop_back();                //popping it out
+               key_map.erase(temp.first);                        //popping from key_map
+               frequency_map.erase(temp.first);                  //popping from frequency_map;
+                                                                 // done removing
+            }
+            else
+                size++;
+            lst_map[1].emplace_front(make_pair(key,value));      // adding node in list
+            min_frequency=1;
+            key_map[key]= lst_map[1].begin();                    // adding new key iterator pair in key map
+            frequency_map[key]=1;
+            
+        }
+        }
+        else
+        {
+            auto frequency = frequency_map[key];
+            lst_map[frequency].erase(found->second);             //removed from old list
+            if(lst_map[frequency].size()==0)                     //in case list becomes empty it might change min_frequency
+            {
+                if(min_frequency ==frequency)
+                    min_frequency++;
+            }
+            lst_map[++frequency].emplace_front(key,value);       //added in new list
+            key_map[key]=lst_map[frequency].begin();             //updated in keymap
+            frequency_map[key]=frequency; 
+            
+        }
     }
     
-    int get(int key) {
-        if(keyNode.find(key) != keyNode.end()) {
-            Node* node = keyNode[key]; 
-            int val = node->value; 
-            updateFreqListMap(node); 
-            return val; 
-        }
-        return -1; 
-    }
-    
-    void put(int key, int value) {
-        if (maxSizeCache == 0) {
-            return;
-        }
-        if(keyNode.find(key) != keyNode.end()) {
-            Node* node = keyNode[key]; 
-            node->value = value; 
-            updateFreqListMap(node); 
-        }
-        else {
-            if(curSize == maxSizeCache) {
-                List* list = freqListMap[minFreq]; 
-                keyNode.erase(list->tail->prev->key); 
-                freqListMap[minFreq]->removeNode(list->tail->prev);
-                curSize--; 
-            }
-            curSize++; 
-            // new value has to be added who is not there previously 
-            minFreq = 1; 
-            List* listFreq = new List(); 
-            if(freqListMap.find(minFreq) != freqListMap.end()) {
-                listFreq = freqListMap[minFreq]; 
-            }
-            Node* node = new Node(key, value); 
-            listFreq->addFront(node);
-            keyNode[key] = node; 
-            freqListMap[minFreq] = listFreq; 
-        }
-    }
 };
-
-/**
- * Your LFUCache object will be instantiated and called as such:
- * LFUCache* obj = new LFUCache(capacity);
- * int param_1 = obj->get(key);
- * obj->put(key,value);
- */
