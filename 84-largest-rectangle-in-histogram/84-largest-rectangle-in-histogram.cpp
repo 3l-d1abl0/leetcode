@@ -30,14 +30,14 @@ public:
             
         }
         
-        /*
-        for(int i=0; i<heights.size(); i++){
+        
+        /*for(int i=0; i<heights.size(); i++){
             cout<<left[i]<<" ";
         }cout<<endl;
         for(int i=0; i<heights.size(); i++){
             cout<<right[i]<<" ";
-        }cout<<endl;
-        */
+        }cout<<endl;*/
+        
         int maxx =-1;
         for(int i=0; i<heights.size(); i++){
             //cout<<heights[i]<<" "<<right[i]<<" "<<left[i]<<endl;
