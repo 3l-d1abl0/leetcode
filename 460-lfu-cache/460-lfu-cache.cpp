@@ -1,68 +1,89 @@
 class LFUCache {
 public:
-  
-    unordered_map <int,list<pair<int,int>>> lst_map;                    //will store frequency as key and list of all <key,value> with that frequency
-    unordered_map <int,list<pair<int,int>>::iterator> key_map;          //will store key and it's respective address
-    unordered_map <int,int> frequency_map;                              //will store key and it's frequency
-    int cap=0,size=0,min_frequency=0;
+    int mxSize;
+    int min_freq;
     
-    LFUCache(int capacity)
-    {
-        cap=capacity;
-    }
-    
-    int get(int key) 
-    {
-      
-        auto found= key_map.find(key);
-        if(found==key_map.end())
-            return -1;
-        else
-        {   auto temp = found->second->second;
-            put(key,temp);
-            return temp;
-            
-        }
+    struct Node{
+        int key, value, fr;
     };
     
-    void put(int key, int value) 
-    {
-        
-        auto found = key_map.find(key);
-        if(found== key_map.end()) 
-        {   if(cap!=0)
-            {  
-            if(size>=cap)
-            {                                                    //removing page
-               auto temp = lst_map[min_frequency].back();        //making copy of popped element
-               lst_map[min_frequency].pop_back();                //popping it out
-               key_map.erase(temp.first);                        //popping from key_map
-               frequency_map.erase(temp.first);                  //popping from frequency_map;
-                                                                 // done removing
-            }
-            else
-                size++;
-            lst_map[1].emplace_front(make_pair(key,value));      // adding node in list
-            min_frequency=1;
-            key_map[key]= lst_map[1].begin();                    // adding new key iterator pair in key map
-            frequency_map[key]=1;
-            
-        }
-        }
-        else
-        {
-            auto frequency = frequency_map[key];
-            lst_map[frequency].erase(found->second);             //removed from old list
-            if(lst_map[frequency].size()==0)                     //in case list becomes empty it might change min_frequency
-            {
-                if(min_frequency ==frequency)
-                    min_frequency++;
-            }
-            lst_map[++frequency].emplace_front(key,value);       //added in new list
-            key_map[key]=lst_map[frequency].begin();             //updated in keymap
-            frequency_map[key]=frequency; 
-            
-        }
+    unordered_map<int, list<Node> > fq_list;
+    map<int, list<Node>::iterator > keyExists;
+    
+    LFUCache(int capacity) {
+        mxSize = capacity;
+        min_freq =0;
     }
     
+    void update(list<Node>::iterator it){
+    
+        int k = (*it).key;
+        int v = (*it).value;
+        int f = (*it).fr;
+        
+        if(fq_list[f].size() == 1 && f == min_freq){
+            min_freq++;
+        }
+        
+        //erase from current list
+        fq_list[f].erase(it);
+        
+        //place in front in the list above(fq+1)
+        fq_list[f+1].push_front(Node{k, v, f+1});
+       keyExists[k] = fq_list[f+1].begin();
+        
+    }
+    
+    int get(int key) {
+        
+        if(mxSize ==0 || keyExists.find(key) == keyExists.end())
+            return -1;
+        
+        int val = (*keyExists[key]).value;
+        
+        //remove from current list and place in the list above one freq
+        update(keyExists[key]);
+        
+        return val;
+        
+    }
+    
+    void put(int key, int value) {
+        
+        if(mxSize ==0) return;
+        
+        if(keyExists.find(key) == keyExists.end()){   // add new
+            
+            if(mxSize == keyExists.size()){
+                //remove last from min freq
+                int old_key = fq_list[min_freq].back().key;
+                fq_list[min_freq].pop_back();
+                keyExists.erase(old_key);
+                
+            }
+            
+            
+            fq_list[0].push_front(Node{key, value, 0});
+            keyExists[key] = fq_list[0].begin();
+            
+            min_freq =0;
+            
+            
+        }else{ //update
+            (*keyExists[key]).value = value;
+        
+            //remove from current list and place in the list above one freq
+            update(keyExists[key]);
+            
+        }
+        
+        
+    }
 };
+
+/**
+ * Your LFUCache object will be instantiated and called as such:
+ * LFUCache* obj = new LFUCache(capacity);
+ * int param_1 = obj->get(key);
+ * obj->put(key,value);
+ */
