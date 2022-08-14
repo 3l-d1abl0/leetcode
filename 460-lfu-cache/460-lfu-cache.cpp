@@ -1,90 +1,112 @@
-class LFUCache {
-public:
-    int mxSize;
-    int min_freq;
-    
-    struct Node{
-        int key, value, fr;
-    };
-    
-    unordered_map<int, list<Node> > fq_list;
-    map<int, list<Node>::iterator > keyExists;
-    
-    LFUCache(int capacity) {
-        mxSize = capacity;
-        min_freq =0;
+struct Node {
+    int key, value, cnt;
+    Node *next; 
+    Node *prev;
+    Node(int _key, int _value) {
+        key = _key;
+        value = _value; 
+        cnt = 1; 
+    }
+}; 
+struct List {
+    int size; 
+    Node *head; 
+    Node *tail; 
+    List() {
+        head = new Node(0, 0); 
+        tail = new Node(0,0); 
+        head->next = tail;
+        tail->prev = head; 
+        size = 0;
     }
     
-    void update(list<Node>::iterator it){
+    void addFront(Node *node) {
+        Node* temp = head->next;
+        node->next = temp;
+        node->prev = head;
+        head->next = node;
+        temp->prev = node;
+        size++; 
+    }
     
-        int k = (*it).key;
-        int v = (*it).value;
-        int f = (*it).fr;
-        
-        if(fq_list[f].size() == 1 && f == min_freq){
-            min_freq++;
-            //cout<<"min freq = "<<min_freq<<endl;
+    void removeNode(Node* delnode) {
+        Node* delprev = delnode->prev;
+        Node* delnext = delnode->next;
+        delprev->next = delnext;
+        delnext->prev = delprev;
+        size--; 
+    }
+    
+    
+    
+};
+class LFUCache {
+    map<int, Node*> keyNode; 
+    map<int, List*> freqListMap; 
+    int maxSizeCache;
+    int minFreq; 
+    int curSize; 
+public:
+    LFUCache(int capacity) {
+        maxSizeCache = capacity; 
+        minFreq = 0;
+        curSize = 0; 
+    }
+    void updateFreqListMap(Node *node) {
+        keyNode.erase(node->key); 
+        freqListMap[node->cnt]->removeNode(node); 
+        if(node->cnt == minFreq && freqListMap[node->cnt]->size == 0) {
+            minFreq++; 
         }
         
-        //erase from current list
-        fq_list[f].erase(it);
-        
-        //place in front in the list above(fq+1)
-        fq_list[f+1].push_front(Node{k, v, f+1});
-       keyExists[k] = fq_list[f+1].begin();
-        
+        List* nextHigherFreqList = new List();
+        if(freqListMap.find(node->cnt + 1) != freqListMap.end()) {
+            nextHigherFreqList = freqListMap[node->cnt + 1];
+        } 
+        node->cnt += 1; 
+        nextHigherFreqList->addFront(node); 
+        freqListMap[node->cnt] = nextHigherFreqList; 
+        keyNode[node->key] = node;
     }
     
     int get(int key) {
-        
-        if(mxSize ==0 || keyExists.find(key) == keyExists.end())
-            return -1;
-        
-        
-        //cout<<"getting .. "<<(*keyExists[key]).key<<" "<<(*keyExists[key]).value<<" "<<(*keyExists[key]).fr<<endl;
-        int val = (*keyExists[key]).value;
-        
-        //remove from current list and place in the list above one freq
-        update(keyExists[key]);
-        
-        return val;
-        
+        if(keyNode.find(key) != keyNode.end()) {
+            Node* node = keyNode[key]; 
+            int val = node->value; 
+            updateFreqListMap(node); 
+            return val; 
+        }
+        return -1; 
     }
     
     void put(int key, int value) {
-        
-        if(mxSize ==0) return;
-        //cout<<"put = "<<key<<" sz="<<keyExists.size()<<" mx="<<mxSize<<endl;
-        
-        if(keyExists.find(key) == keyExists.end()){   // add new
-            //cout<<"no exists"<<endl;
-            
-            if(mxSize == keyExists.size()){
-                //remove last from min freq
-                int old_key = fq_list[min_freq].back().key;
-                //cout<<"removing.. "<<old_key<<endl;
-                fq_list[min_freq].pop_back();
-                keyExists.erase(old_key);
-                
-            }
-            
-            
-            fq_list[0].push_front(Node{key, value, 0});
-            keyExists[key] = fq_list[0].begin();
-            
-            min_freq =0;
-            
-            
-        }else{ //update
-            //cout<<"exists"<<endl;
-            (*keyExists[key]).value = value;
-        
-            //remove from current list and place in the list above one freq
-            update(keyExists[key]);
-            
+        if (maxSizeCache == 0) {
+            return;
         }
-        
-        
+        if(keyNode.find(key) != keyNode.end()) {
+            Node* node = keyNode[key]; 
+            node->value = value; 
+            updateFreqListMap(node); 
+        }
+        else {
+            if(curSize == maxSizeCache) {
+                List* list = freqListMap[minFreq]; 
+                keyNode.erase(list->tail->prev->key); 
+                freqListMap[minFreq]->removeNode(list->tail->prev);
+                curSize--; 
+            }
+            curSize++; 
+            // new value has to be added who is not there previously 
+            minFreq = 1; 
+            List* listFreq = new List(); 
+            if(freqListMap.find(minFreq) != freqListMap.end()) {
+                listFreq = freqListMap[minFreq]; 
+            }
+            Node* node = new Node(key, value); 
+            listFreq->addFront(node);
+            keyNode[key] = node; 
+            freqListMap[minFreq] = listFreq; 
+        }
     }
 };
 
