@@ -1,9 +1,10 @@
 class Solution {
 public:
-    string longestCommonPrefix(vector<string>& strs) {
+    
+    
+    string method1(vector<string>& strs){
         
-        
-       //trake string at 0 as possible prefix
+        //trake string at 0 as possible prefix
         int j=0;
         int i=1;
         for(; j<strs[0].size(); j++){
@@ -28,5 +29,18 @@ public:
             return strs[0];
         else
             return strs[0].substr(0,j+1);
+        
+    }
+    
+    string longestCommonPrefix(vector<string>& strs) {
+        
+        if(strs.size() ==0)
+            return "";
+        
+        //take strin1 as prefix, iterate over others
+        return method1(strs);   //N* size of smallest str
+        
+        
+        
     }
 };
