@@ -69,6 +69,39 @@ public:
     }
     
     
+    string method3(vector<string> &s){
+        
+        int minlen = INT_MAX;
+        for(string str: s)
+            minlen = str.size()<minlen? str.size(): minlen;
+        
+        int l=0, h= minlen;
+        
+        while(l<=h){
+                
+            int mid = l+(h-l)/2;
+            
+            if(checkCommonPrefix(s, mid)){
+                l = mid+1;
+            }else{
+                h = mid-1;
+            }
+        }
+        
+        cout<<l<<" "<<h<<endl;
+        return s[0].substr(0, h<=0?-h:h-1);
+    }
+    
+    bool checkCommonPrefix(vector<string> &strs, int mid){
+        
+        for(int i=1; i<strs.size(); i++){
+            if(strs[0].substr(0, mid-1).compare(strs[i].substr(0,mid-1)) !=0)
+                return false;
+        }
+        
+        return true;
+    }
+    
     string longestCommonPrefix(vector<string>& strs) {
         
         if(strs.size() ==0)
@@ -77,10 +110,13 @@ public:
         //take strin1 as prefix, iterate over others
         //return method1(strs);   //N* size of smallest str
         
-        
+        //Divide and Conqure // O(all char )
         return method2(strs, 0, strs.size()-1);
         
         
+        
+        ///Binary Search
+        //return method3(strs);
         
     }
 };
