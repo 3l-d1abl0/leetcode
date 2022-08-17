@@ -22,10 +22,21 @@ public:
         return ans;
     }
     
+    
+    void rev(string::iterator begin, string::iterator end){
+        
+        end--;
+        while(begin <end){
+            swap((*begin), (*end));
+            begin++;
+            end--;
+        }
+        
+    }
     string method2(string s){
         
         
-        reverse(s.begin(), s.end());
+        rev(s.begin(), s.end());
         
         int i=0, ptr =0, N = s.size();
         int wordEnd =0;
@@ -43,7 +54,7 @@ public:
                 i++;
             }
             
-            reverse(s.begin()+wordStart, s.begin()+wordEnd+1);
+            rev(s.begin()+wordStart, s.begin()+wordEnd+1);
             
             s[ptr]=' ';
             ptr++;
