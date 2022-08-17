@@ -1,6 +1,8 @@
 class Solution {
 public:
-    string reverseWords(string s) {
+    
+    string method1(string s){
+        
         vector<string> words;
         stringstream ss(s);
         string tmp;
@@ -16,6 +18,45 @@ public:
             if (i != words.size() - 1) ans += " ";
             ans += words[i];
         }
+        
         return ans;
+    }
+    
+    string method2(string s){
+        
+        
+        reverse(s.begin(), s.end());
+        
+        int i=0, ptr =0, N = s.size();
+        int wordEnd =0;
+        while(i<N){
+            
+            while(i<N && s[i]==' '){
+                i++;
+            }
+            
+            int wordStart = ptr;
+            while(i<N && s[i]!=' '){
+                s[ptr] = s[i];
+                wordEnd = ptr;
+                ptr++;
+                i++;
+            }
+            
+            reverse(s.begin()+wordStart, s.begin()+wordEnd+1);
+            
+            s[ptr]=' ';
+            ptr++;
+        }
+        
+        
+        s.resize(wordEnd+1);
+        return s;
+    }
+    string reverseWords(string s) {
+        
+        //return method1(s);
+        
+        return method2(s);
     }
 };
