@@ -2,6 +2,8 @@ class Solution {
 public:
     int strStr(string str, string pat) {
         
+        
+        //1.Rabin Karp
         int strlen = str.size();
         int patlen = pat.size();
 
