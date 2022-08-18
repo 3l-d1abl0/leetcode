@@ -57,11 +57,82 @@ public:
         
     }
     
+    void buildLPS(string &str, vector<int> &LPS){
+
+        LPS[0] =0;
+        int len =0, idx=1;
+
+
+        while(idx<str.size()){
+
+            if(str[idx]==str[len]){
+                LPS[idx] = len+1;
+                len++;
+                idx++;
+            }else{
+
+                if(len==0){
+                    LPS[idx] = 0;
+                    idx++;
+                }else{
+                    len = LPS[len-1];
+                }
+            }
+
+        }//while
+
+    }
+
+    
+    int searchPatternKMP(string &str, string &pat){
+        
+        int strlen = str.size();
+        int patlen = pat.size();
+
+        vector<int> LPS(patlen);
+
+        buildLPS(pat, LPS);
+
+        //LPS Array ready, lets match
+        int sidx =0, pidx =0;
+        vector<int> pos;
+
+        while(sidx<strlen){
+
+            if(str[sidx]==pat[pidx]){
+
+                sidx++;
+                pidx++;
+
+                if(pidx==patlen){
+                    //cout<<"at "<<sidx-patlen<<" "<<str.substr(sidx-patlen, patlen)<<endl;
+                    return sidx-patlen;
+                    
+                }
+            }else{
+
+                if(pidx==0)
+                    sidx++;
+                else
+                    pidx = LPS[pidx-1];
+
+            }
+
+        }//while
+
+
+        return -1;
+        
+    }
+    
     int strStr(string str, string pat) {
         
         
         //1.Rabin Karp
-        return searchPatternRabinKarp(str, pat);
+        //return searchPatternRabinKarp(str, pat);
+        
+        //2.KMP
+        return searchPatternKMP(str, pat);
         
         
     }
