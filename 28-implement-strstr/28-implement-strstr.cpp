@@ -1,9 +1,9 @@
 class Solution {
 public:
-    int strStr(string str, string pat) {
+    
+    
+    int searchPatternRabinKarp(string &str, string &pat){
         
-        
-        //1.Rabin Karp
         int strlen = str.size();
         int patlen = pat.size();
 
@@ -54,6 +54,15 @@ public:
 
 
         return -1;
+        
+    }
+    
+    int strStr(string str, string pat) {
+        
+        
+        //1.Rabin Karp
+        return searchPatternRabinKarp(str, pat);
+        
         
     }
 };
