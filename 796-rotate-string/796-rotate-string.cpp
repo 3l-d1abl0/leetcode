@@ -80,10 +80,10 @@ public:
         string temp = str1 + str1;
         
         //1.STL function
-        return method1(temp, str2);
+        //return method1(temp, str2);
         
         //2.KMP
-        //return method2(temp, str2);
+        return method2(temp, str2);
         
     }
 };
