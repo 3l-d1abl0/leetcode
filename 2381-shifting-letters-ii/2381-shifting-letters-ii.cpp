@@ -1,103 +1,51 @@
 class Solution {
 public:
+    int N;
+    //vector<int> BIT(50001,0);
+    vector<int> BIT = vector<int>(50001);
     
-    int *constructBITree(int n){
+    void update(int idx, int val){
         
-        int *BITree = new int[n+1];
-        for (int i=1; i<=n; i++)
-            BITree[i] = 0;
-
-        return BITree;
+        for(idx=idx+1; idx<N; idx+= idx & (-idx))
+            BIT[idx]+=val;
     }
     
-    void updateBIT(int BITree[], int n, int index, int val){
+    void updateRange(int l, int r, int val){
         
+        update(l, val);
+        update(r+1, -val);
         
-        index = index + 1;
-
-        
-        while (index <= n)
-        {
-            
-            BITree[index] += val;
-
-            
-            index += index & (-index);
-        }
     }
     
-    
-    void updateRange(int BITTree1[], int N, int val, int l, int r)
-    {
-
-        updateBIT(BITTree1,N,l,val);
-        updateBIT(BITTree1,N,r+1,-val);
-    }
-    
-    
-    int getSum(int BITree[], int index)
-    {
-        int sum = 0; // Initialize result
-
-        // index in BITree[] is 1 more than the index in arr[]
-        index = index + 1;
-
-        // Traverse ancestors of BITree[index]
-        while (index>0)
-        {
-            // Add current element of BITree to sum
-            sum += BITree[index];
-
-            // Move index to parent node in getSum View
-            index -= index & (-index);
-        }
-        return sum;
+    int sum(int idx){
+        
+        int ans =0;
+        for(idx=idx+1; idx>0; idx -= idx & (-idx))
+            ans +=BIT[idx];
+        
+        return ans;
     }
     
     string shiftingLetters(string s, vector<vector<int>>& shifts) {
         
+        N = s.size()+1;
         
-        int N = s.size();
-
-        int *BITTree1;
-
-        
-        BITTree1 = constructBITree(N);
+        //reset the BIT
+        //memset(&BIT[0], 0, sizeof(BIT[0]) * N);
         
         
-        //loop
-        for(auto row: shifts){
-                
-            if(row[2]==0){ //backward
-                
-                updateRange(BITTree1, N, -1, row[0],row[1]);
-                
-            }else{ //forward
-                updateRange(BITTree1, N, 1, row[0],row[1]);
-            }
+        for(auto &row: shifts){
+            
+            if(row[2]!=1) row[2]=-1;
+            updateRange(row[0], row[1], row[2]);
         }
         
         
-        string str="";
-        for(int i=0; i<N; i++){
-            
-            int num = s[i]-'a';
-            //cout<<num<<"->";
-            if(i==0){
-                
-                
-                num = num+getSum(BITTree1, i);
-            }else{
-                //cout<<(char)(s[i]+getSum(BITTree1, i))%26;
-                num = num +getSum(BITTree1, i);//<<" ";//- getSum(BITTree1, i-1)<<" ";
-            }
-            
-            if(num <0) num+=26;
-            
-            str+=(char)('a' + ((num%26)+26)%26);
-            //cout<<(num+26)%26<<" "<<endl;
-        }//cout<<endl;
+        for(int i=0; i<s.size(); i++){
+            //cout<<sum(i)<<" ";
+            s[i] = 'a'+ (s[i]-'a'+ (sum(i)%26) + 26) % 26;
+        }
         
-        return str;
+        return s;
     }
 };
