@@ -1,6 +1,28 @@
 class Solution {
 public:
+    
+    int method2(vector<int> &nums){
+        
+        long long int sum=0;
+        unordered_set<int> st;
+        for(int ele: nums){
+            st.insert(ele);
+            sum+=ele;
+        }
+        
+        long long int usum =0;
+        for(int ele: st){
+            usum +=ele;
+        }
+        
+        
+        return (sum - 3*(sum-usum)/2);
+        
+        
+    }
     int singleNumber(vector<int>& nums) {
+        
+        return method2(nums);
         
         int ans=0;
         //31 bit
