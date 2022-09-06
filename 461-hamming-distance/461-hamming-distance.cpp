@@ -4,7 +4,7 @@ public:
         
         
         int xy = x^y;
-        return __builtin_popcount(xy);
+        //return __builtin_popcount(xy);
         int ctr=0;
         while(xy>0){
             
