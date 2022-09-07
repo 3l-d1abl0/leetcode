@@ -29,7 +29,33 @@ public:
         
     }
     
+    
+    void rec(ListNode** head, ListNode* curr, ListNode* prev ){
+        
+        
+        if(curr->next==NULL){
+            curr->next = prev;
+            *head = curr;
+            return;
+        }
+        
+        ListNode* next = curr->next;
+        curr->next = prev;
+        
+        rec(head, next, curr);
+    }
+    
+    ListNode* recursive(ListNode *head){
+        if(head==NULL)
+            return NULL;
+        rec(&head, head, NULL);
+        
+        return head;
+    }
+    
     ListNode* reverseList(ListNode* head) {
-        return iterative(head);
+        
+        //return iterative(head);
+        return recursive(head);
     }
 };
