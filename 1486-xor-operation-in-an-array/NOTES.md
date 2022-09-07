@@ -1,0 +1,1 @@
+https://leetcode.com/problems/xor-operation-in-an-array/discuss/939190/O(1)-time-C%2B%2B-easy-to-understand
