@@ -43,11 +43,11 @@ public:
         
         len -=k;
         
-        if(curr==NULL){ //N%k!=0
-            head->next = NULL;
-        }else{
+        //if(curr==NULL){ //N%k!=0
+            //head->next = NULL;
+        //}else{
             head->next = rev(curr, k, len);
-        }
+        //}
         
         return prev;
     }
