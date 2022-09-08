@@ -11,19 +11,18 @@
 class Solution {
 public:
     int getLen(ListNode *l1){
-        if(l1==NULL) return 0;
-        
-        return 1+getLen(l1->next);
+        int len =0;
+        for(; l1!=NULL; l1=l1->next) len++;
+        return len;
     }
+    
     
     ListNode *rev(ListNode *head, int k, int len){
         
         if(head == NULL)
             return NULL;
         
-        
-        if(len<k)
-            return head;
+        if(len<k)   return head;
         
         int ctr=0;
         ListNode *prev = NULL;
@@ -43,11 +42,7 @@ public:
         
         len -=k;
         
-        //if(curr==NULL){ //N%k!=0
-            //head->next = NULL;
-        //}else{
-            head->next = rev(curr, k, len);
-        //}
+        head->next = rev(curr, k, len);
         
         return prev;
     }
