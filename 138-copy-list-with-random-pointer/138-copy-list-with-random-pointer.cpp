@@ -46,9 +46,58 @@ public:
         
     }
     
+    Node* method2(Node *l1){
+        
+        if(l1 == NULL)
+            return l1;
+        
+        Node *head = l1;
+        Node *nxt;
+        //copy next
+        while(head != NULL){
+            
+            nxt = head->next;
+            head->next = new Node(head->val);
+            head->next->next = nxt;
+            
+            head = nxt;
+        }
+        
+        //copy random
+        head = l1;
+        while(head!= NULL){
+            head->next->random = (head->random==NULL)?NULL:head->random->next;
+            head = head->next->next;
+        }
+        
+        //detangle
+        head = l1;
+        Node *new_head = head->next;
+        
+        /*while(head!=NULL){
+           cout<<head->val<<" ";
+            head = head->next;
+        }cout<<endl;*/
+        
+        while(head!=NULL){
+            
+            Node *temp = head->next;
+            head->next= temp->next;
+            temp->next = (temp->next==NULL)?NULL:temp->next->next;
+            
+            head = head->next;
+            temp = temp->next;
+        }
+        
+        return new_head;
+    }
+    
     Node* copyRandomList(Node* head) {
         
         //using Maps
-        return method1(head);
+        //return method1(head);
+        
+        //use constant space;
+        return method2(head);
     }
 };
