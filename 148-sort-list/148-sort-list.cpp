@@ -11,7 +11,8 @@
 class Solution {
 public:
     
-        ListNode* merge(ListNode* l1, ListNode* l2){
+    /*
+    ListNode* merge(ListNode* l1, ListNode* l2){
         ListNode* result = new ListNode();
         ListNode* temp = result;
         while(l1 && l2){
@@ -32,7 +33,47 @@ public:
         result = temp->next;
         delete(temp);
         return result;
+    }*/
+    
+        ListNode *merge(ListNode *l1, ListNode *l2){
+        
+        /*if(l1 == NULL)  return l2;
+        if(l2 == NULL)  return l1;*/
+        
+        ListNode *head = new ListNode();
+        ListNode *temp = head;
+        
+        while(l1 != NULL && l2 != NULL){
+            
+            if(l1->val > l2->val){
+                
+                temp->next = l2;
+                l2 = l2->next;
+                
+            }else{
+                temp->next = l1;
+                l1 = l1->next;
+            }
+            
+            temp = temp->next;
+        }
+        
+        if(l2==NULL){
+            temp->next = l1;
+        }
+        
+        if(l1==NULL){
+            temp->next = l2;
+        }
+        
+        temp = head->next;
+        
+        delete(head);
+        
+        return temp;
     }
+    
+    
     ListNode* sortList(ListNode* head) {
         if(head == nullptr || head->next == nullptr)
             return head;
