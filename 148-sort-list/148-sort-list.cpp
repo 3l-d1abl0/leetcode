@@ -37,8 +37,8 @@ public:
     
         ListNode *merge(ListNode *l1, ListNode *l2){
         
-        /*if(l1 == NULL)  return l2;
-        if(l2 == NULL)  return l1;*/
+        if(l1 == NULL)  return l2;
+        if(l2 == NULL)  return l1;
         
         ListNode *head = new ListNode();
         ListNode *temp = head;
