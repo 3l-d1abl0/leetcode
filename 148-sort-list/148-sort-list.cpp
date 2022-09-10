@@ -33,7 +33,6 @@ public:
         }
         
         if(l2==NULL) temp->next = l1;
-        
         if(l1==NULL) temp->next = l2;
         
         temp = head->next;
@@ -42,12 +41,12 @@ public:
         return temp;
     }
     
-       ListNode* sortList(ListNode* head) {
+    
+    ListNode* sortList(ListNode* head) {
         
         if(head == NULL || head->next==NULL)
             return head;
-        
-        //cout<<"Merging .."<<head->val<<"\n";
+           
         ListNode *prev = head;
         ListNode *slow = head;
         ListNode *fast = head;
@@ -64,33 +63,10 @@ public:
         ListNode *l1 = sortList(head);
         ListNode *l2 = sortList(slow);
         
-        
-        //cout<<"Merging .."<<l1->val<<" "<<l2->val<<"\n";
         return merge(l1, l2);
         
         
     }
     
-    
-//     ListNode* sortList(ListNode* head) {
-//         if(head == nullptr || head->next == nullptr)
-//             return head;
-//         ListNode* slow=head;
-//         ListNode* fast=head;
-//         ListNode* prev=slow;
-//         ListNode* list1;
-//         ListNode* list2;
-        
-//         while(fast && fast->next){
-//             prev=slow;
-//             slow = slow->next;
-//             fast = fast->next->next;
-//         }
-//         prev->next = nullptr;
-//         list1 = sortList(head);
-//         list2 = sortList(slow);
-        
-//         return merge(list1,list2);   
-//     }
     
 };
