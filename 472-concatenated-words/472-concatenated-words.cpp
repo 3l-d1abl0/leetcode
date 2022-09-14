@@ -109,13 +109,82 @@ public:
         return ans;
     }
     
+    
+    vector<string> method4(vector<string> &words){
+        Trie trie;
+        for(string& word: words)
+            trie.insert(word);
+        
+        vector<string> res;
+        for(string& word: words){
+            if(trie.search(word, 0, 0))
+                res.push_back(word);
+        }
+        return res;
+    }
+    
+    ////////
+    struct Node {
+    Node* links[26];
+    bool end = false;
+    
+    bool containsKey(char ch){
+        return links[ch-'a'] != NULL;
+    }
+    void put(char ch, Node* node){
+        links[ch-'a'] = node;
+    }
+    Node* get(char ch){
+        return links[ch-'a'];
+    }
+};
+
+class Trie {
+public:
+    Node* root;
+    
+    Trie(){
+        root = new Node();
+    }
+    void insert(string& word){
+        Node* node = root;
+        for(char& ch: word){
+            if(!node->containsKey(ch))
+                node->put(ch, new Node());
+            node = node->get(ch);
+        }
+        node->end = true;
+    }
+    bool search(string& word, int idx, int countWords){
+        if(idx == word.size())
+            return countWords >= 2;
+        
+        Node* node = root;
+        for(int i=idx; i<word.size(); i++){
+            char ch = word[i];
+            if(!node->containsKey(ch))
+                return false;
+            
+            node = node->get(ch);
+            if(node->end)
+                if(search(word, i+1, countWords+1))
+                    return true;
+        }
+        return false;
+    }
+};
+    ///////
+    
     vector<string> findAllConcatenatedWordsInADict(vector<string>& words) {
         
         //return method1(words);  //TLE
         
-        return method2(words);
+        //return method2(words);  //OK
         
         //return method3(words);//TLE
+        
+        
+        return method4(words);
     }
         
 };
