@@ -69,11 +69,53 @@ public:
         
     }
     
+    
+    bool solve(vector<int> &dp, int idx, string &str, vector<string> &words){
+        
+        if(idx == str.size())
+            return true;
+        
+        if(dp[idx]!=-1)
+            return dp[idx];
+        
+        
+        for(int i=0; i<words.size(); i++){
+            
+            int len = words[i].size();
+            if(words[i].compare(str.substr(idx, len))==0 && len!= str.size()){
+                if(solve(dp, idx+len, str, words)){
+                    
+                    dp[idx]=1;
+                    return true;
+                }
+            }
+        }//for
+        
+        dp[idx] = false;
+        return false;
+        
+    }
+    vector<string> method3(vector<string>& words) {
+        
+        vector<int> dp(31, -1);
+        vector<string> ans;
+        for(string w: words){
+            
+            if(solve(dp, 0, w, words))
+                ans.push_back(w);
+            fill(dp.begin(), dp.end(), -1);
+        }
+        
+        return ans;
+    }
+    
     vector<string> findAllConcatenatedWordsInADict(vector<string>& words) {
         
-        //return method1(words);
+        //return method1(words);  //TLE
         
         return method2(words);
+        
+        //return method3(words);//TLE
     }
         
 };
