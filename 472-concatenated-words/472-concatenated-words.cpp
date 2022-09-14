@@ -51,6 +51,8 @@ public:
                 
                 for(int ed = st+1 ; ed <= w.size() ; ed++) {
                     
+                    if(ed-st >= w.size())
+                        continue;
                     
                     if(ed-st < w.size() && dp[st] == 1 && dict.find(w.substr(st, ed-st)) != dict.end()) {
                         dp[ed] = 1;
