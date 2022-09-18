@@ -95,13 +95,48 @@ public:
         return maxx;
     }
     
+    int method3(vector<int> &nums){
+        //30-0
+        int ans =0;
+        int prefixMask =0;
+        for(int i=30; i>=0; i--){
+            
+            prefixMask |= (1<<i);
+            
+            set<int> prefixes;
+            
+            for(int ele: nums){
+                prefixes.insert(ele & prefixMask);
+            }
+            
+
+            int nextMax = ans |(1<<i);
+
+            for(int pre: prefixes){
+                if(prefixes.find(pre^nextMax) != prefixes.end()){
+                    ans = nextMax;
+                    //cout<<ans<<"->"<<(pre^nextMax)<<endl;
+                    break;
+                }
+            }//for
+
+            
+        }//for
+        
+        return ans;
+        
+        
+    }
+    
     int findMaximumXOR(vector<int>& nums) {
         
         //Brute Force
         //return method1(nums);
         
         //Trie
+        //return method2(nums);
         
-        return method2(nums);
+        //O(32N)
+        return method3(nums);
     }
 };
