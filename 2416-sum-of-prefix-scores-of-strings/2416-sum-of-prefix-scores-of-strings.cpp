@@ -37,11 +37,13 @@ public:
     
     
     struct Trie{
-        char ch;
+        
         int prefix;
         Trie* children[26] = {NULL};
         
+        Trie() : prefix(0){}
     };
+    
     
     Trie *root = new Trie();
     
@@ -122,8 +124,8 @@ public:
         
         //return method1(words);    
         
-        //return method2(words);
+        return method2(words);
         
-        return method3(words);
+        //return method3(words);
     }
 };
