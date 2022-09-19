@@ -18,7 +18,8 @@ class Solution {
         
         for(int i=30; i>=0; i--){
             
-            int bit = (num & (1<<i))>0?1:0;
+            //int bit = (num & (1<<i))>0?1:0;
+            int bit = (num >> i) & 1;
             
             if(node->child[bit]== NULL)
                 node->child[bit] = new Trie();
@@ -35,7 +36,8 @@ class Solution {
         
         for(int i=30; i>=0; i--){
             
-            int bit = (num & (1<<i))>0?1:0;
+            //int bit = (num & (1<<i))>0?1:0;
+            int bit = (num >> i) & 1;
             
                 if(node->child[!bit]!=NULL){
                     node = node->child[!bit];
