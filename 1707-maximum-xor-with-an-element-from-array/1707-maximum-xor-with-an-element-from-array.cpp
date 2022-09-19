@@ -37,7 +37,6 @@ class Solution {
             
             int bit = (num & (1<<i))>0?1:0;
             
-            
                 if(node->child[!bit]!=NULL){
                     node = node->child[!bit];
                     ans |= (1<<i);
