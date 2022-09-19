@@ -1,80 +1,92 @@
 class Solution {
+    
+    struct Trie{
+        
+        Trie *child[2] = {NULL};
+        
+        /*Trie(){
+            this->child[0] = NULL;
+            this->child[1] = NULL;
+        }*/
+    };
+    
+    Trie *root;
+    
+    void insert(int num){
+        
+        Trie *node = root;
+        
+        for(int i=30; i>=0; i--){
+            
+            int bit = (num & (1<<i))>0?1:0;
+            
+            if(node->child[bit]== NULL)
+                node->child[bit] = new Trie();
+                
+            node = node->child[bit];
+        }
+    }
+    
+    
+    int find(int num){
+        
+        Trie *node = root;
+        int ans =0;
+        
+        for(int i=30; i>=0; i--){
+            
+            int bit = (num & (1<<i))>0?1:0;
+            
+            
+                if(node->child[!bit]!=NULL){
+                    node = node->child[!bit];
+                    ans |= (1<<i);
+                }else
+                    node = node->child[bit];
+            
+        }//for
+        
+        
+        return ans;
+    }
+    
+    
 public:
-    struct Node {
-    Node *links[2]; 
- 
-    bool containsKey(int ind) {
-        return (links[ind] != NULL); 
-    }
-    Node* get(int ind) {
-        return links[ind]; 
-    }
-    void put(int ind, Node* node) {
-        links[ind] = node; 
-    }
-}; 
-class Trie {
-    private: Node* root; 
-public:
-    Trie() {
-        root = new Node(); 
-    }
-    
-    public: 
-    void insert(int num) {
-        Node* node = root;
-        // cout << num << endl; 
-        for(int i = 31;i>=0;i--) {
-            int bit = (num >> i) & 1; 
-            if(!node->containsKey(bit)) {
-                node->put(bit, new Node()); 
-            }
-            node = node->get(bit); 
-        }
-    }
-    public:
-    int findMax(int num) {
-        Node* node = root; 
-        int maxNum = 0; 
-        for(int i = 31;i>=0;i--) {
-            int bit = (num >> i) & 1; 
-            if(node->containsKey(!bit)) {
-                maxNum = maxNum | (1<<i); 
-                node = node->get(!bit); 
-            }
-            else {
-                node = node->get(bit); 
-            }
-        }
-        return maxNum; 
-    }
-};
-    
-    
-    vector<int> maximizeXor(vector<int>& arr, vector<vector<int>>& queries) {
+    vector<int> maximizeXor(vector<int>& nums, vector<vector<int>>& queries) {
         
-        vector<int> ans(queries.size(), 0); 
-    vector<pair<int, pair<int,int>>> offlineQueries; 
-    sort(arr.begin(), arr.end()); 
-    int index = 0;
-    for(auto &it: queries) {
-        offlineQueries.push_back({it[1],{it[0], index++}}); 
-    }
-    sort(offlineQueries.begin(), offlineQueries.end()); 
-    int i = 0; 
-    int n = arr.size(); 
-    Trie trie; 
-    
-    for(auto &it : offlineQueries) {
-        while(i < n && arr[i] <= it.first) {
-            trie.insert(arr[i]); 
-            i++; 
-        }
-        if(i!=0) ans[it.second.second] = trie.findMax(it.second.first); 
-        else ans[it.second.second] = -1; 
-    }
-    return ans; 
+        int N= nums.size();
+        //1. sort the numbers
+        sort(nums.begin(), nums.end());
+        
+        vector<pair<int, pair<int, int> >> Q;
+        vector<int> ans(queries.size());
+        
+        int idx =0;
+        for(auto ele: queries)
+            Q.push_back({ele[1], {ele[0], idx++} });
         
         
+        //2. Sort the queries
+        sort(Q.begin(), Q.end());
+        
+        root = new Trie();
+        
+        int i=0;
+        for(auto ele: Q){
+            
+            while(nums[i]<=ele.first && i<N){
+                insert(nums[i]);
+                i++;
+            }
+            
+            if(i==0)
+                ans[ele.second.second] = -1;        
+            else
+                ans[ele.second.second] = find(ele.second.first);
+            
+        }
+        
+        
+        return ans;
     }
 };
