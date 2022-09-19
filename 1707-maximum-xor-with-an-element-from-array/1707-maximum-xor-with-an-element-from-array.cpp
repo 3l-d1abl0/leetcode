@@ -2,12 +2,12 @@ class Solution {
     
     struct Trie{
         
-        Trie *child[2] = {NULL};
+        Trie *child[2];
         
-        /*Trie(){
+        Trie(){
             this->child[0] = NULL;
             this->child[1] = NULL;
-        }*/
+        }
     };
     
     Trie *root;
