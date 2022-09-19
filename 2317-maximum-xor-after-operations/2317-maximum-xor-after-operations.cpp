@@ -1,6 +1,6 @@
 class Solution {
 public:
-    int maximumXOR(vector<int>& nums) {
+    int method1(vector<int>& nums){
         
         int ans =0;
         for(int ele: nums){
@@ -8,5 +8,12 @@ public:
         }
         
         return ans;
+        
+    }
+    
+    int maximumXOR(vector<int>& nums) {
+        
+        
+        return method1(nums);
     }
 };
