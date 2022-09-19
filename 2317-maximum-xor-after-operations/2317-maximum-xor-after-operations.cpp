@@ -15,7 +15,7 @@ public:
     int method2(vector<int> &nums){
         
         int ans =0;
-        for(int i=30; i>=0; i--){
+        for(int i=31; i>=0; i--){
             
             for(int ele: nums){
                 if(ele&(1<<i)){
