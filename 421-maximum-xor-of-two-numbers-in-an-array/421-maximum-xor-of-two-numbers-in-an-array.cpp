@@ -103,7 +103,7 @@ public:
             
             prefixMask |= (1<<i);
             
-            set<int> prefixes;
+            unordered_set<int> prefixes;
             
             for(int ele: nums){
                 prefixes.insert(ele & prefixMask);
