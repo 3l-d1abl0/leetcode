@@ -66,7 +66,7 @@ public:
     vector<int> smallestSubarrays(vector<int>& nums) {
         
         
-        return method1(nums);
-        //return method2(nums);
+        //return method1(nums);
+        return method2(nums);
     }
 };
