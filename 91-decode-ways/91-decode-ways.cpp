@@ -5,7 +5,7 @@ public:
         
         if(idx==N) return 1;
         
-        if(s[idx]=='0') return 0;
+        if(s[idx]=='0') return dp[idx] = 0;
         
         if(dp[idx]!=-1) return dp[idx];
         int val = s[idx] -'0';
