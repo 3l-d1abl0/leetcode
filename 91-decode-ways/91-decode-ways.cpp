@@ -30,7 +30,7 @@ public:
         
     }
     
-    int memoization(string s){
+    int memoization(string &s){
         
         int N = s.size();
         int idx =0;
@@ -41,12 +41,46 @@ public:
         
     }
     
+    
+    int dynamicP(string &s){
+        
+        
+        int N = s.size();
+        if(N==0) return 0;
+        if(s[0] == '0') return 0;
+            
+        vector<int> dp(N+1, 0);
+        
+        //base
+        dp[0] =1;
+        
+        dp[1] = (s[0] -'0')!=0?1:0;
+        
+        for(int i=2; i<=N; i++){
+            
+            int one = s[i-1] -'0';
+            
+            if(one>=1 && one<=9)
+                dp[i] +=dp[i-1];
+            
+            int two = (s[i-2]-'0')*10 + one;
+            
+            if(two >=10 && two <=26)
+                dp[i] +=dp[i-2];
+            
+        }
+        
+        
+        return dp[N];
+        
+    }
+    
     int numDecodings(string s) {
         
-        return memoization(s);
+        //return memoization(s);
         
         
-        //return dynamicP(s);
+        return dynamicP(s);
         
     }
 };
