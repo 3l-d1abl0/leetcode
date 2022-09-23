@@ -30,14 +30,23 @@ public:
         
     }
     
-    int numDecodings(string s) {
+    int memoization(string s){
         
         int N = s.size();
         int idx =0;
         
-        vector<int> dp(N, -1);
+        vector<int> memo(N, -1);
         
-        return decode(idx, s, N, dp);
+        return decode(idx, s, N, memo);
+        
+    }
+    
+    int numDecodings(string s) {
+        
+        return memoization(s);
+        
+        
+        //return dynamicP(s);
         
     }
 };
