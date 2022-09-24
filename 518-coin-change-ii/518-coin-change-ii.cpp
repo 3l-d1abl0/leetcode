@@ -82,10 +82,33 @@ public:
     }
     
     
+    int bottomUpOpti(int sum, vector<int> &arr){
+
+        int N = arr.size();
+        vector<int> dp(sum+1, 0);
+
+        for(int i=0; i<=N; i++)
+            dp[0] = 1;
+
+
+        for(int i=0; i<N; i++){
+               for(int j=arr[i]; j<=sum; j++){
+
+                    dp[j] = dp[j] + dp[j-arr[i]];
+
+            }
+
+        }
+
+        return dp[sum];
+    }
+    
     
     
     
     int change(int amount, vector<int>& coins) {
+        
+        //Number of Ways
         
         //recursion
         //return coinsWays(coins.size()-1, amount, coins);
@@ -94,7 +117,11 @@ public:
         // vector< vector<int>> memo(coins.size(), vector<int> (amount+1, -1));
         // return topDown(coins.size()-1, amount, coins, memo);
     
-        //dp
-        return bottomUp(amount, coins);
+        //dp - SD
+        //return bottomUp(amount, coins);
+        
+        //dp - 2D
+        return bottomUpOpti(amount, coins);
+        
     }
 };
