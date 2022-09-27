@@ -50,11 +50,37 @@ public:
         
     }
     
+    
+    int bottomUp1D(int target, vector<int> &nums){
+        
+        vector<long long int> dp(target+1, 0);
+        
+        //for(int i=0; i<=nums.size(); i++)
+           dp[0] =1;
+        
+        //for(int i=1; i<=target; i++)
+            //dp[0][i] =1;
+        
+            for(int j=1; j<=target; j++){
+                for(int i=1;i<=nums.size(); i++){        
+                    
+                if(nums[i-1]<=j)
+                    dp[j] = ((dp[j]%INT_MAX)+ (dp[j-nums[i-1]]%INT_MAX)) %INT_MAX;
+
+                
+            }
+        }//for
+        
+        return dp[target];
+        
+    }
+    
 
     
     int combinationSum4(vector<int>& nums, int target) {
         
-        return bottomUp(target, nums);
+        //return bottomUp(target, nums);
+        return bottomUp1D(target, nums);
         
         //vector<vector<int>> memo(nums.size(), vector<int>(target+1, -1) );
         
