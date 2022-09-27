@@ -46,14 +46,6 @@ public:
         }//for
         
         
-        /*for(auto row: dp){
-            for(int ele: row)
-                cout<<ele<<" ";
-            
-            cout<<endl;
-        }*/
-        
-        
         return dp[nums.size()][target];
         
     }
@@ -64,9 +56,9 @@ public:
         
         return bottomUp(target, nums);
         
-        vector<vector<int>> memo(nums.size(), vector<int>(target+1, -1) );
+        //vector<vector<int>> memo(nums.size(), vector<int>(target+1, -1) );
         
-        return rec(nums.size()-1, target, nums, memo);
+        //return rec(nums.size()-1, target, nums, memo);
         
         
         
