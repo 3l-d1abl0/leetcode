@@ -1,6 +1,8 @@
 class Solution {
 public:
     
+    long long int MOD = 9223372036854775807;
+    
     int rec(int i, int target, vector<int> &arr, vector<vector<int>> &memo){
         
         if(target==0)
@@ -24,39 +26,23 @@ public:
     
     int bottomUp(int target, vector<int> &nums){
         
-        vector<vector<int>> dp(nums.size()+1, vector<int> (target+1, 0));
+        vector<vector<long long int>> dp(target+1, vector<long long int> (nums.size()+1, 0));
         
-        for(int i=0; i<=nums.size(); i++)
-           dp[i][0] =1;
+	if (nums.size() == 0) return 0;
+	
+    for (int i = 0; i <= nums.size(); i++)
+		dp[0][i] = 1;
         
-        //for(int i=1; i<=target; i++)
-            //dp[0][i] =1;
-        
-        
-            
-            for(int j=1; j<=target; j++){
-                
-                for(int i=nums.size()-1;i>=0; i--){
-                    
-                if(nums[i]<=j)
-                    dp[i][j] = ((i-1)>=0?dp[i-1][j]:dp[0][j]) + dp[0][j-nums[i]];
-                else{
-                    dp[i][j] = ((i-1)>=0?dp[i-1][j]:dp[0][j]);
-                }
-                
-            }
-        }//for
+	for (int i = 1; i <= target; i++) {
+		for (int j = 1; j <= nums.size(); j++) { // using each coin
+			dp[i][j] = dp[i][j - 1];
+			if (i >= nums[j - 1])
+				dp[i][j] = ((dp[i][j]%INT_MAX) + (dp[i - nums[j - 1]][nums.size()]%INT_MAX))%INT_MAX;
+		}
+	}
         
         
-        for(auto row: dp){
-            for(int ele: row)
-                cout<<ele<<" ";
-            
-            cout<<endl;
-        }
-        
-        
-        return dp[nums.size()][target];
+        return dp[target][nums.size()];
         
     }
     
@@ -64,7 +50,7 @@ public:
     
     int combinationSum4(vector<int>& nums, int target) {
         
-        //return bottomUp(target, nums);
+        return bottomUp(target, nums);
         
         vector<vector<int>> memo(nums.size(), vector<int>(target+1, -1) );
         
