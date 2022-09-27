@@ -22,28 +22,28 @@ public:
         return memo[i][target] = inc+exc;
     }
     
+    
+    
     int bottomUp(int target, vector<int> &nums){
         
         vector<vector<long long int>> dp(nums.size()+1, vector<long long int> (target+1, 0));
         
+        //can always make 0
         for(int i=0; i<=nums.size(); i++)
            dp[i][0] =1;
-        
-        //for(int i=1; i<=target; i++)
-            //dp[0][i] =1;
         
         
             for(int j=1; j<=target; j++){
                 for(int i=1;i<=nums.size(); i++){
                     
-                if(nums[i-1]<=j)
-                    dp[i][j] = ( (dp[i-1][j]%INT_MAX) + (dp[nums.size()][j-nums[i-1]]%INT_MAX) )%INT_MAX;
-                else{
-                    dp[i][j] = dp[i-1][j];
-                }
+                    if(nums[i-1]<=j)
+                        dp[i][j] = ( (dp[i-1][j]%INT_MAX) + (dp[nums.size()][j-nums[i-1]]%INT_MAX) )%INT_MAX;
+                    else{
+                        dp[i][j] = dp[i-1][j];
+                    }
                 
-            }
-        }//for
+            }//i
+        }//j
         
         
         return dp[nums.size()][target];
@@ -55,21 +55,16 @@ public:
         
         vector<long long int> dp(target+1, 0);
         
-        //for(int i=0; i<=nums.size(); i++)
-           dp[0] =1;
-        
-        //for(int i=1; i<=target; i++)
-            //dp[0][i] =1;
-        
-            for(int j=1; j<=target; j++){
-                for(int i=1;i<=nums.size(); i++){        
-                    
-                if(nums[i-1]<=j)
+         dp[0] =1;
+                
+         for(int j=1; j<=target; j++){
+            for(int i=1;i<=nums.size(); i++){        
+
+               if(nums[i-1]<=j)
                     dp[j] = ((dp[j]%INT_MAX)+ (dp[j-nums[i-1]]%INT_MAX)) %INT_MAX;
 
-                
-            }
-        }//for
+            }//i
+        }//j
         
         return dp[target];
         
