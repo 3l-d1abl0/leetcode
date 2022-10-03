@@ -22,6 +22,6 @@ public:
         
         
         //if(N1%2!=0 && N2%2!=0)
-            return (xor1^xor2);
+        return (xor1^xor2);
     }
 };
