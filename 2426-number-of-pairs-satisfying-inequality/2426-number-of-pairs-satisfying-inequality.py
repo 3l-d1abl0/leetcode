@@ -10,9 +10,9 @@ class Solution:
         ans = 0
         #for idx in range(0, N):
         for n1, n2 in zip(nums1, nums2):
-            
-            ans += sl.bisect_right(n1-n2+diff)
-            sl.add(n1-n2)
+            d = n1-n2
+            ans += sl.bisect_right(d+diff)
+            sl.add(d)
             
             
         return ans
