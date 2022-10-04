@@ -8,10 +8,11 @@ class Solution:
         
         sl = SortedList()
         ans = 0
-        for idx in range(0, N):
+        #for idx in range(0, N):
+        for n1, n2 in zip(nums1, nums2):
             
-            ans += sl.bisect_right(nums1[idx]-nums2[idx]+diff)
-            sl.add(nums1[idx]-nums2[idx])
+            ans += sl.bisect_right(n1-n2+diff)
+            sl.add(n1-n2)
             
             
         return ans
