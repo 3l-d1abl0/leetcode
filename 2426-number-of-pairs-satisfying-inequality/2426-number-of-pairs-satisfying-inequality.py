@@ -4,17 +4,18 @@ from sortedcontainers import SortedList
 class Solution:
     def numberOfPairs(self, nums1: List[int], nums2: List[int], diff: int) -> int:
         
-        '''N = len(nums1)
+        N = len(nums1)
         
         sl = SortedList()
         ans = 0
         for idx in range(0, N):
             
-            ans += bisect_right(sl, nums1[idx]-nums2[idx]+diff)
+            ans += sl.bisect_right(nums1[idx]-nums2[idx]+diff)
             sl.add(nums1[idx]-nums2[idx])
             
             
-        return ans'''
+        return ans
+        '''
     
         deltas = SortedList()
         pairs = 0
@@ -22,5 +23,5 @@ class Solution:
             delta = num1 - num2
             pairs += deltas.bisect_right(delta + diff)
             deltas.add(delta)
-        return pairs
+        return pairs'''
             
