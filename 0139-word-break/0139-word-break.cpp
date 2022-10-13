@@ -92,7 +92,7 @@ public:
         //return method1(s, wordDict);    //27ms  - O(n^2) * O(nlogn)
         vector<int> dp(s.size()+1,-1);
         dp[s.size()] = 1;
-        return method2(0, s, wordDict, dp);     //8ms
+        return method2(0, s, wordDict, dp);     //8ms - memoization
     }
     
 };
