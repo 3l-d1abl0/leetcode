@@ -69,13 +69,28 @@ public:
         return dp[idx];
     }
     
+    bool wordBreakRecur(string & s, set < string > & word_set, int start) {
+          if (start == s.length()) {
+            return true;
+          }
+          for (int end = start + 1; end <= s.length(); end++) {
+            if (word_set.find(s.substr(start, end - start)) != word_set.end() and wordBreakRecur(s, word_set, end)) {
+              return true;
+            }
+          }
+          return false;
+    }
+    
     bool wordBreak(string s, vector < string > & wordDict) {
-
-        //return method0(s, wordDict);    //34ms
-        //return method1(s, wordDict);    //27ms
+        
+        //set < string > word_set(wordDict.begin(), wordDict.end());
+        //return wordBreakRecur(s, word_set, 0);
+        
+        //return method0(s, wordDict);    //34ms - O(n^2) * O(nlongn)
+        return method1(s, wordDict);    //27ms
         vector<int> dp(s.size()+1,-1);
         dp[s.size()] = 1;
-        return method2(0, s, wordDict, dp);
+        return method2(0, s, wordDict, dp);     //8ms
     }
     
 };
