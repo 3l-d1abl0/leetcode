@@ -72,7 +72,7 @@ public:
     bool wordBreak(string s, vector < string > & wordDict) {
 
         //return method0(s, wordDict);    //34ms
-        return method1(s, wordDict);
+        //return method1(s, wordDict);    //27ms
         vector<int> dp(s.size()+1,-1);
         dp[s.size()] = 1;
         return method2(0, s, wordDict, dp);
