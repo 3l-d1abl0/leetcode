@@ -1,22 +1,16 @@
 class Solution {
 public:
-    bool method1(string s, vector<string> &wordDict){
-        
-      unordered_set < string > word_set(wordDict.begin(), wordDict.end());
-      vector < bool > dp(s.length() + 1);
-      dp[0] = true;
 
-      for (int i = 1; i <= s.length(); i++) {
-        for (int j = 0; j < i; j++) {
-          if (dp[j] and word_set.find(s.substr(j, i - j)) != word_set.end()) {
-            dp[i] = true;
-            break;
+    bool wordBreakRecur(string & s, set < string > & word_set, int start) {
+          if (start == s.length()) {
+            return true;
           }
-        }
-      }
-      
-        return dp[s.length()];
-        
+          for (int end = start + 1; end <= s.length(); end++) {
+            if (word_set.find(s.substr(start, end - start)) != word_set.end() and wordBreakRecur(s, word_set, end)) {
+              return true;
+            }
+          }
+          return false;
     }
     
     bool method0(string s, vector<string> &wordDict){
@@ -42,6 +36,24 @@ public:
         
     }
     
+    bool method1(string s, vector<string> &wordDict){
+        
+      unordered_set < string > word_set(wordDict.begin(), wordDict.end());
+      vector < bool > dp(s.length() + 1);
+      dp[0] = true;
+
+      for (int i = 1; i <= s.length(); i++) {
+        for (int j = 0; j < i; j++) {
+          if (dp[j] and word_set.find(s.substr(j, i - j)) != word_set.end()) {
+            dp[i] = true;
+            break;
+          }
+        }
+      }
+      
+        return dp[s.length()];
+        
+    }
     
     int method2(int idx, string s, vector<string> &wd, vector<int> &dp){
         
@@ -69,25 +81,15 @@ public:
         return dp[idx];
     }
     
-    bool wordBreakRecur(string & s, set < string > & word_set, int start) {
-          if (start == s.length()) {
-            return true;
-          }
-          for (int end = start + 1; end <= s.length(); end++) {
-            if (word_set.find(s.substr(start, end - start)) != word_set.end() and wordBreakRecur(s, word_set, end)) {
-              return true;
-            }
-          }
-          return false;
-    }
+
     
     bool wordBreak(string s, vector < string > & wordDict) {
         
         //set < string > word_set(wordDict.begin(), wordDict.end());
         //return wordBreakRecur(s, word_set, 0);
         
-        //return method0(s, wordDict);    //34ms - O(n^2) * O(nlongn)
-        return method1(s, wordDict);    //27ms
+        //return method0(s, wordDict);    //34ms - O(n^2) * O(nlogn)
+        //return method1(s, wordDict);    //27ms  - O(n^2) * O(nlogn)
         vector<int> dp(s.size()+1,-1);
         dp[s.size()] = 1;
         return method2(0, s, wordDict, dp);     //8ms
