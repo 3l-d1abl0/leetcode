@@ -7,6 +7,7 @@ public:
             if(str.size()!=0){
                 //ans.push_back(str);
                 st.insert(str);
+                return;
             }
         }
         
@@ -26,10 +27,11 @@ public:
     vector<string> method1(vector<string>& words){
         
         unordered_set<string> st;
+        
         for(string ele: words)
             solve(st, 0, ele, "", words);
         
-        vector<string> ans(st.begin(), st.end());
+        vector<string> ans (st.begin(), st.end());
         return ans;
         
     }
@@ -54,7 +56,7 @@ public:
                     if(ed-st >= w.size())
                         continue;
                     
-                    if(ed-st < w.size() && dp[st] == 1 && dict.find(w.substr(st, ed-st)) != dict.end()) {
+                    if(dp[st] == 1 && dict.find(w.substr(st, ed-st)) != dict.end()) {
                         dp[ed] = 1;
                         //break;
                     }
@@ -95,6 +97,7 @@ public:
         return false;
         
     }
+    
     vector<string> method3(vector<string>& words) {
         
         vector<int> dp(31, -1);
@@ -179,12 +182,12 @@ public:
         
         //return method1(words);  //TLE
         
-        //return method2(words);  //OK
+        return method2(words);  //OK
         
         //return method3(words);//TLE
         
         //Trie
-        return method4(words); //OK
+        //return method4(words); //OK
     }
         
 };
