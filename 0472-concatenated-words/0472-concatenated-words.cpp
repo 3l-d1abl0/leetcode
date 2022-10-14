@@ -182,12 +182,12 @@ public:
         
         //return method1(words);  //TLE
         
-        return method2(words);  //OK
+        //return method2(words);  //OK
         
         //return method3(words);//TLE
         
         //Trie
-        //return method4(words); //OK
+        return method4(words); //OK
     }
         
 };
