@@ -152,9 +152,10 @@ public:
     }
     
     long long numberOfPairs(vector<int>& nums1, vector<int>& nums2, int diff) {
-        
+        //Fenwick Tree
         //return method1(nums1, nums2, diff);
         
+        //Segment Tree
         return method2(nums1, nums2, diff);
         
     }
