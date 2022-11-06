@@ -28,14 +28,20 @@ public:
     
     vector<int> twoPointer(vector<int> &nums, int target){
         
+        vector<pair<int, int>> arr;
+        
+        for(int i=0; i<nums.size(); i++)
+            arr.push_back({nums[i], i});
+        
+        sort(arr.begin(), arr.end());
         int l=0, r= nums.size()-1;
         
         while(l<r){
             
-            if(nums[l]+nums[r] == target)
-                return vector<int> {l, r};
+            if(arr[l].first+arr[r].first == target)
+                return vector<int> {arr[l].second, arr[r].second};
             
-            if(nums[l]+nums[r] > target)
+            if(arr[l].first+arr[r].first > target)
                 r--;
             else
                 l++;
@@ -49,10 +55,10 @@ public:
     vector<int> twoSum(vector<int>& nums, int target) {
         
         //1.hash
-        return hashApproach(nums, target);
+        //return hashApproach(nums, target);
         
         //2. Two Pointer
-        //return twoPointer(nums, target);
+        return twoPointer(nums, target);
 
     }
 };
