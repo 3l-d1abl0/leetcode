@@ -66,7 +66,7 @@ public:
             if(ds.findParent(row[0]) == ds.findParent(row[1])){
                 ext++;
             }else{
-                ds.unionBySize(row[0], row[1]);
+                ds.unionByRank(row[0], row[1]);
             }
             
         }
