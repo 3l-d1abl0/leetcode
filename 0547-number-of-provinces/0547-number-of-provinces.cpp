@@ -48,10 +48,40 @@ public:
             }
     };
     
+    
+    void dfs(int idx, vector<bool> &visited, vector<vector<int>> &isConnected){
+        
+        visited[idx] = true;
+        
+        for(int j=0; j<isConnected[idx].size(); j++){
+            if(isConnected[idx][j] ==1 && !visited[j]){
+                dfs(j, visited, isConnected);
+            }
+        }
+    }
+    
+    int method2(vector<vector<int>> &isConnected, int N){
+        
+        
+        vector<bool> visited(N, false);
+        int ctr=0;
+        for(int i=0; i<N; i++){
+            if(visited[i]==false){
+                dfs(i, visited, isConnected);
+                ctr++;
+            }
+        }
+        
+        return ctr;
+    }
+    
     int findCircleNum(vector<vector<int>>& isConnected) {
         
         
         int N = isConnected.size();
+        
+        //DFS
+        return method2(isConnected, N);
         
         UnionFind uf(N);
         
