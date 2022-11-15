@@ -7,56 +7,160 @@ using namespace std;
 
 // } Driver Code Ends
 // User function Template for C++
+
 static int speedUp=[](){
     std::ios::sync_with_stdio(false);
     cin.tie(nullptr);
     cout.tie(nullptr);
     return 0;
 }();
+
+class DSU{
+    
+    private:
+        int noc;
+        vector<int> parent;
+        vector<int> size;
+    
+    public:
+    
+        DSU(int N){
+                
+            noc = N;
+            for(int i=0; i<N; i++){
+                parent.push_back(i);
+                size.push_back(1);
+            }
+        }
+    
+    
+        int findParent(int node){
+                
+            if(parent[node]==node)  return node;
+            else
+                return parent[node] = findParent(parent[node]);
+        }
+    
+        int getSize(int node){
+            
+            //int pu = findParent(node);
+            
+            return size[node];
+        } 
+    
+        void unionn(int u, int v){
+            
+            int pu = findParent(u);
+            int pv = findParent(v);
+            
+            
+            if(pu != pv){
+                
+                
+                if(size[pu]>size[pv]){
+                    parent[pv]=pu;
+                    size[pu]+=size[pv];
+                }else{
+                    parent[pu] =pv;
+                    size[pv] += size[pu];
+                }
+            }
+            
+        }//union
+        
+};
+
+
 class Solution {
   public:
-  
-        const int DIR[5] = {0, 1, 0, -1, 0};
-    int m, n;
-    unordered_map<int, int> componentSize;
-  
     int MaxConnection(vector<vector<int>>& grid) {
         // code here
         
-        m = grid.size(); n = grid[0].size();
-        int ans = 0, nextColor = 2;
-        for (int r = 0; r < m; ++r) {
-            for (int c = 0; c < n; ++c) {
-                if (grid[r][c] != 1) continue; // Only paint when it's an island cell
-                paint(grid, r, c, nextColor++);
-                ans = max(ans, componentSize[nextColor - 1]);
+        int N = grid.size();
+        
+        DSU ds(N*N);
+        
+        int dx[] ={-1, 0, 1, 0};
+        int dy[] ={0, 1, 0, -1};
+        
+        int max_sz = -1;
+        //make the components
+        for(int x=0; x<N; x++){
+            
+            for(int y=0; y<N; y++){
+                
+                if(grid[x][y]==0)   continue;
+                
+                int d1Node = N*x+y;
+                //cout<<"1d :: "<<d1Node<<endl;
+                for(int i=0; i<4; i++){
+                    
+                    int newX = x+dx[i];
+                    int newY = y+dy[i];
+                    if(newX>=0 && newX<N && newY>=0 && newY <N && grid[newX][newY]==1){
+                            
+                            
+                            int d1Adj = N*newX+newY;
+                            ds.unionn(d1Node, d1Adj);
+                            //cout<<d1Node<<" -> "<<d1Adj<<endl;
+                    }
+                }//for
+                
+                //get the max size of comp
+                max_sz = max(max_sz, ds.getSize(ds.findParent(d1Node)) );
+                //cout<<max_sz<<" -- "<<endl;
+                
             }
-        }
-        for (int r = 0; r < m; ++r) {
-            for (int c = 0; c < n; ++c) {
-                if (grid[r][c] != 0) continue; // Skip non-empty cell
-                unordered_set<int> neighborColors;
-                for (int i = 0; i < 4; ++i) {
-                    int nr = r + DIR[i], nc = c + DIR[i+1];
-                    if (nr < 0 || nr == m || nc < 0 || nc == n || grid[nr][nc] == 0) continue;
-                    neighborColors.insert(grid[nr][nc]);
-                }
-                int sizeFormed = 1;
-                for (int color : neighborColors) sizeFormed += componentSize[color];
-                ans = max(ans, sizeFormed);
+        }//for x
+        
+        
+        //check each 0 if turned 1
+        for(int x=0; x<N; x++){
+            
+            for(int y=0; y<N; y++){
+                
+                if(grid[x][y]==1)   continue;
+                
+                int d1Node = N*x+y;
+                //cout<<"1d :: "<<d1Node<<endl;
+                
+                //vector<bool> parent(N*N, false);
+                unordered_set<int> parents;
+                int sz =1;
+                
+                for(int i=0; i<4; i++){
+                    
+                    int newX = x+dx[i];
+                    int newY = y+dy[i];
+                    if(newX>=0 && newX<N && newY>=0 && newY <N && grid[newX][newY]==1){
+                            
+                            
+                            int d1Adj = N*newX+newY;
+                            int p = ds.findParent(d1Adj);
+                            if(parents.find(p)==parents.end()){
+                                sz += ds.getSize(p);
+                                parents.insert(p);
+                            }
+                            
+                    }
+                }//for i
+                
+                
+                
+                
+                //get the max size of comp
+                max_sz = max(max_sz, sz);
+                //cout<<max_sz<<" -- "<<endl;
+                
             }
-        }
-        return ans;
-    }
-    
-        void paint(vector<vector<int>>& grid, int r, int c, int color) {
-        if (r < 0 || r == m || c < 0 || c == n || grid[r][c] != 1) return;
-        grid[r][c] = color;
-        componentSize[color] += 1;
-        for (int i = 0; i < 4; ++i) paint(grid, r + DIR[i], c + DIR[i+1], color);
+        }//for x
+        
+        
+        return max_sz;
+        
+        
     }
 };
-
 
 //{ Driver Code Starts.
 int main() {
