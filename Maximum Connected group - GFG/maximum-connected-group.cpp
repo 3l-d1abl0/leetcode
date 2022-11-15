@@ -107,7 +107,7 @@ class Solution {
                 }//for
                 
                 //get the max size of comp
-                //max_sz = max(max_sz, ds.getSize(ds.findParent(d1Node)) );
+                max_sz = max(max_sz, ds.getSize(ds.findParent(d1Node)) );
                 //cout<<max_sz<<" -- "<<endl;
                 
             }
