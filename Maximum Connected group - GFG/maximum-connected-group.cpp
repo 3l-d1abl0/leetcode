@@ -83,7 +83,7 @@ class Solution {
         int dx[] ={-1, 0, 1, 0};
         int dy[] ={0, 1, 0, -1};
         
-        int max_sz = -1;
+        int max_sz = 1;
         //make the components
         for(int x=0; x<N; x++){
             
@@ -107,7 +107,7 @@ class Solution {
                 }//for
                 
                 //get the max size of comp
-                max_sz = max(max_sz, ds.getSize(ds.findParent(d1Node)) );
+                //max_sz = max(max_sz, ds.getSize(ds.findParent(d1Node)) );
                 //cout<<max_sz<<" -- "<<endl;
                 
             }
