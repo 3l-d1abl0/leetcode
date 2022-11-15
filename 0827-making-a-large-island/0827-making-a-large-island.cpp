@@ -1,9 +1,9 @@
-static int speedUp=[](){
+/*static int speedUp=[](){
     std::ios::sync_with_stdio(false);
     cin.tie(nullptr);
     cout.tie(nullptr);
     return 0;
-}();
+}();*/
 class Solution {
 public:
     const int DIR[5] = {0, 1, 0, -1, 0};
