@@ -4,60 +4,72 @@ static int speedUp=[](){
     cout.tie(nullptr);
     return 0;
 }();
-class DSU{
-    
-    private:
-        int noc;
-        vector<int> parent;
-        vector<int> size;
-    
-    public:
-    
-        DSU(int N){
-                
-            noc = N;
-            for(int i=0; i<N; i++){
-                parent.push_back(i);
-                size.push_back(1);
+
+class DisjointSet {
+	int _size;
+    vector<int> rank, parent, size;
+public:
+    DisjointSet(int n) {
+        rank.resize(n+1, 0);
+        parent.resize(n+1);
+        size.resize(n+1);
+        for(int i = 0;i<=n;i++) {
+            parent[i] = i;
+            size[i] = 1;
+        }
+
+        _size = n;
+    }
+
+    int findParent(int node) {
+        if(node == parent[node])
+            return node;
+        return parent[node] = findParent(parent[node]);
+    }
+
+    void unionByRank(int u, int v) {
+        int pu = findParent(u);
+        int pv = findParent(v);
+
+        if(pu != pv){
+
+            if(rank[pu] < rank[pv]) {
+                parent[pu] = pv;
+            }
+            else if(rank[pv] < rank[pu]) {
+                parent[pv] = pu;
+            }
+            else {
+                parent[pv] = pu;
+                rank[pu]++;
             }
         }
-    
-    
-        int findParent(int node){
-                
-            if(parent[node]==node)  return node;
-            else
-                return parent[node] = findParent(parent[node]);
-        }
-    
-        int getSize(int node){
-            
-            int pu = findParent(node);
-            
-            return size[pu];
-        } 
-    
-        void unionn(int u, int v){
-            
-            int pu = findParent(u);
-            int pv = findParent(v);
-            
-            
-            if(pu != pv){
-                
-                
-                if(size[pu]>size[pv]){
-                    parent[pv]=pu;
-                    size[pu]+=size[pv];
-                }else{
-                    parent[pu] =pv;
-                    size[pv] += size[pu];
-                }
+    }
+
+    void unionBySize(int u, int v) {
+        int pu = findParent(u);
+        int pv = findParent(v);
+
+        if(pu != pv){
+
+            if(size[pv] >= size[pu]) {
+                parent[pu] = pv;
+                size[pv] += size[pu];
+            }else{
+                parent[pv] = pu;
+                size[pu] += size[pv];
             }
-            
-        }//union
+
+        }
+    }
+    
+    int getSize(int p){
         
+        p = findParent(p);
+        return size[p];
+    }
 };
+
 
 class Solution {
 public:
@@ -65,12 +77,13 @@ public:
         
         int N = grid.size();
         
-        DSU ds(N*N);
+        DisjointSet ds(N*N);
         
         int dx[] ={-1, 0, 1, 0};
         int dy[] ={0, 1, 0, -1};
         
         int max_sz = -1;
+        
         //make the components
         for(int x=0; x<N; x++){
             
@@ -78,26 +91,24 @@ public:
                 
                 if(grid[x][y]==0)   continue;
                 
-                int d1Node = N*x+y;
-                //cout<<"1d :: "<<d1Node<<endl;
+                int node_idx = (N*x)+y;
+                
                 for(int i=0; i<4; i++){
                     
-                    int newX = x+dx[i];
-                    int newY = y+dy[i];
+                    int newX = x+dx[i], newY = y+dy[i];
                     if(newX>=0 && newX<N && newY>=0 && newY <N && grid[newX][newY]==1){
                             
                             
-                            int d1Adj = N*newX+newY;
-                            ds.unionn(d1Node, d1Adj);
-                            //cout<<d1Node<<" -> "<<d1Adj<<endl;
+                            int neighour_node_id = N*newX+newY;
+                            ds.unionBySize(node_idx, neighour_node_id);
+                            
                     }
-                }//for
+                }//for i
                 
                 //get the max size of comp
-                max_sz = max(max_sz, ds.getSize(d1Node));
-                //cout<<max_sz<<" -- "<<endl;
+                max_sz = max(max_sz, ds.getSize(node_idx));
                 
-            }
+            }//for y
         }//for x
         
         
@@ -108,11 +119,11 @@ public:
                 
                 if(grid[x][y]==1)   continue;
                 
-                int d1Node = N*x+y;
+                //int node_idx = (N*x)+y;
                 //cout<<"1d :: "<<d1Node<<endl;
                 
                 //vector<bool> parent(N*N, false);
-                set<int> parents;
+                unordered_set<int> parents;
                 
                 for(int i=0; i<4; i++){
                     
@@ -121,8 +132,8 @@ public:
                     if(newX>=0 && newX<N && newY>=0 && newY <N && grid[newX][newY]==1){
                             
                             
-                            int d1Adj = N*newX+newY;
-                            int p = ds.findParent(d1Adj);
+                            int neighour_node_id = N*newX+newY;
+                            int p = ds.findParent(neighour_node_id);
                             parents.insert(p);
                             
                     }
@@ -136,7 +147,6 @@ public:
                 
                 //get the max size of comp
                 max_sz = max(max_sz, sz);
-                //cout<<max_sz<<" -- "<<endl;
                 
             }
         }//for x
