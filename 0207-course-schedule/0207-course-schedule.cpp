@@ -1,7 +1,53 @@
 class Solution {
 public:
     bool canFinish(int N, vector<vector<int>>& prerequisites) {    
-        return dfs(N, prerequisites);
+        //return dfs(N, prerequisites);
+        return bfs(N, prerequisites); //kahns Topo
+    }
+    
+    
+    bool bfs(int V, vector<vector<int>>& prerequisites){
+        
+        vector<int> indegree(V, 0);
+        vector<vector<int>>adj(V);
+	
+        for(int i=0; i<prerequisites.size(); i++){
+
+            adj[prerequisites[i][0]].push_back(prerequisites[i][1]);
+
+        }
+        
+		for (int i = 0; i < V; i++) {
+			for (auto it : adj[i]) {
+				indegree[it]++;
+			}
+		}
+
+		queue<int> q;
+		for (int i = 0; i < V; i++) {
+			if (indegree[i] == 0) {
+				q.push(i);
+			}
+		}
+
+		int cnt = 0;
+		// o(v + e)
+		while (!q.empty()) {
+			int node = q.front();
+			q.pop();
+			cnt++;
+			// node is in your topo sort
+			// so please remove it from the indegree
+
+			for (auto it : adj[node]) {
+				indegree[it]--;
+				if (indegree[it] == 0) q.push(it);
+			}
+		}
+
+		if (cnt == V) return true;
+		return false;
+	
     }
     
     bool dfs(int N, vector<vector<int>> &prerequisites){
