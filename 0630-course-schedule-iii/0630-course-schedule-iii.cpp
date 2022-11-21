@@ -1,84 +1,46 @@
 class Solution {
 public:
     
-    bool static comp(vector<int> &a, vector<int> &b){
-        return a[1]<b[1];
-    }
-    
-    int rec(int idx, int start, vector<vector<int>> &courses, vector<vector<int>> &memo){
-        
-        
-        if(idx>=courses.size()){
-            return 0;
+        struct compare{
+        bool operator()(const vector<int>&i,const vector<int>&j){
+            return i[1] < j[1];
         }
-        
-        if(memo[idx][start] !=-1)
-            return memo[idx][start];
-        
-        int ans =0;
-        //1. Include
-        if(start+courses[idx][0]<=courses[idx][1]){
-            ans = 1+rec(idx+1, start+courses[idx][0], courses, memo);
-        }
-        
-        //2.Exclude
-        ans = max(ans, rec(idx+1, start, courses, memo));
-        
-        
-        return memo[idx][start] = ans;
-    }
+    };
+ 
     
-    
-    int method1(vector<vector<int>>& courses){
-        
-                int N= courses.size();
-        
-        sort(courses.begin(), courses.end(), comp);
-        /*for(auto row: courses){
-            cout<<row[0]<<" "<<row[1]<<endl;
-        }*/
-        
-        vector<vector<int>> memo(N, vector<int> (courses[N-1][1], -1));
-        
-        int idx=0, start=0;
-        return rec(idx, start, courses, memo);
-        
-    }
-    
-    
-    int method2(vector<vector<int>>& courses){
-        
-        int N = courses.size();
-        
-        sort(courses.begin(), courses.end(), comp);
-        
-        priority_queue<int> pq;
-        
-        int totalDuration =0;
-        for(auto row: courses){
-            
-            if(totalDuration+row[0]<=row[1]){
-                pq.push(row[0]);
-                totalDuration += row[0];
-            }else{
-                
-                if(!pq.empty() && pq.top() > row[0]){
-                    totalDuration -=pq.top(); pq.pop();
-                    pq.push(row[0]);
-                    totalDuration += row[0];
-                }
-                
-            }
-        }//for
-        
-        return pq.size();
-    }
     
     int scheduleCourse(vector<vector<int>>& courses) {
-        
-        
-        //return method1(courses);
-        
-        return method2(courses);    
+        // sort the given courses on the basis of last day to finish
+        sort(courses.begin(),courses.end(),compare());
+ 
+        int total_duration = 0;
+ 
+        // to store the courses duration
+        // courses that are taken
+        priority_queue<int> q;
+ 
+        for(int i=0;i<courses.size();i++)
+        {
+            int current_duration = courses[i][0];
+            int finish_time = courses[i][1];
+ 
+            // increment total duration
+ 
+            total_duration = total_duration + current_duration;
+ 
+            q.push(current_duration);
+ 
+            if(total_duration>finish_time){
+                // we want to skip this course 
+                // or try to skip that course(which is already taken) which has maximum duration
+ 
+                total_duration-=q.top();
+                q.pop();
+            }
+        }
+ 
+        // size of the priority queue denotes the courses taken
+ 
+        return q.size();
     }
 };
