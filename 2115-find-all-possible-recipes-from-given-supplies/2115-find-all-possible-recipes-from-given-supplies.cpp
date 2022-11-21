@@ -1,6 +1,7 @@
 class Solution {
 public:
     
+    //https://leetcode.com/problems/find-all-possible-recipes-from-given-supplies/discuss/1646622/C%2B%2B-oror-topological-sort-oror-Kahn's-Algo`
     vector<string> findAllRecipes(vector<string>& rec, vector<vector<string>>& ing, vector<string>& sup) {
         unordered_map<string,vector<string>> graph;
         int n = rec.size();
