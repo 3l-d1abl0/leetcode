@@ -1,44 +1,60 @@
 class Solution {
 public:
-    
-    //https://leetcode.com/problems/find-all-possible-recipes-from-given-supplies/discuss/1646622/C%2B%2B-oror-topological-sort-oror-Kahn's-Algo`
-    vector<string> findAllRecipes(vector<string>& rec, vector<vector<string>>& ing, vector<string>& sup) {
-        unordered_map<string,vector<string>> graph;
-        int n = rec.size();
-        unordered_set<string> s;
-        for(auto x : sup) s.insert(x);            //store all the supplies in unordered set
-		
-        unordered_map<string,int> indegree;   //to store the indegree of all recipes
-        for(auto x : rec)indegree[x] = 0;                      //initially take the indegree of all recipes to be 0
-    
-        for(int i = 0; i < n; i++){
-            for(int j = 0; j < (int)ing[i].size(); j++){
-                if(s.find(ing[i][j]) == s.end()){     
-                    graph[ing[i][j]].push_back(rec[i]);    //if the ingredient required to make a recipe is not in supplies then  
-                    indegree[rec[i]]++;                     //we need to make a directed edge from that ingredient to recipe
-                }
+    vector<string> findAllRecipes(vector<string>& recipes, vector<vector<string>>& ingredients, vector<string>& supplies) {
+        
+        int N = recipes.size();
+        
+        unordered_map<string, int> indegree;
+        unordered_map<string, vector<string> > adj;
+        
+        unordered_set<string> ress;
+        for(string res: recipes){
+            ress.insert(res);
+        }
+        
+        for(int i=0; i<N;i ++){
+            
+            for(string ingr: ingredients[i]){
+                
+                
+                adj[ingr].push_back(recipes[i]);
+                indegree[recipes[i]]++;
             }
         }
         
-        //KAHN'S ALGORITHM
-        queue<string> q;
-        for(auto x : indegree){
-            if(x.second == 0){
-                q.push(x.first);
-            }
+        
+        queue<string>q;
+        //all ingredient in the supies has indegree 0
+        for(string sup: supplies){
+            q.push(sup);
         }
-       vector<string> ans;
+        
+        vector<string> ans;
+        //process the indegree 0
         while(!q.empty()){
-            string tmp = q.front();
-            q.pop();
-            ans.push_back(tmp);
-            for(auto nbr : graph[tmp]){
-                indegree[nbr]--;
-                if(indegree[nbr] == 0)
-                    q.push(nbr);
+            
+            string ing = q.front(); q.pop();
+            
+            if(ress.find(ing)!=ress.end())
+                ans.push_back(ing);
+            
+            
+            for(string in: adj[ing]){
+                indegree[in]--;
+                
+                
+                if(indegree[in]==0){
+                    q.push(in);
+                }
             }
-        }
+        }//while
+        
+        /*vector<string> ans;
+        for(string res: recipes){
+            if(indegree[res]==0) ans.push_back(res);
+        }*/
+        
+        
         return ans;
     }
-    
 };
