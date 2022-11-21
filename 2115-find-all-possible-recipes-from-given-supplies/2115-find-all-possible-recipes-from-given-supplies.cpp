@@ -1,0 +1,53 @@
+class Solution {
+public:
+    vector<string> findAllRecipes(vector<string>& recipes, vector<vector<string>>& ingredients, vector<string>& supplies) {
+        
+        int N = recipes.size();
+        
+        unordered_map<string, int> indegree;
+        unordered_map<string, vector<string> > adj;
+        
+        for(int i=0; i<N;i ++){
+            
+            for(string ingr: ingredients[i]){
+                
+                
+                adj[ingr].push_back(recipes[i]);
+                indegree[recipes[i]]++;
+            }
+        }
+        
+        
+        queue<string>q;
+        //all ingredient in the supies has indegree 0
+        for(string sup: supplies){
+            q.push(sup);
+        }
+        
+        
+        //process the indegree 0
+        while(!q.empty()){
+            
+            string ing = q.front();
+            q.pop();
+            
+            
+            for(string in: adj[ing]){
+                indegree[in]--;
+                
+                
+                if(indegree[in]==0){
+                    q.push(in);
+                }
+            }
+        }//while
+        
+        vector<string> ans;
+        for(string res: recipes){
+            if(indegree[res]==0) ans.push_back(res);
+        }
+        
+        
+        return ans;
+    }
+};
