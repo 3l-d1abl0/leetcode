@@ -49,12 +49,6 @@ public:
             }
         }//while
         
-        /*vector<string> ans;
-        for(string res: recipes){
-            if(indegree[res]==0) ans.push_back(res);
-        }*/
-        
-        
         return ans;
     }
 };
