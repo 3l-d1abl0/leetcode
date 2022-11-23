@@ -91,9 +91,9 @@ public:
     int trap(vector<int>& h) {
         
         //linear- max of left right
-        return method1(h);
+        //return method1(h);
         
-        //return method2(h);
+        return method2(h);
         
         //return method3(h);
     }
