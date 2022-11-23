@@ -13,6 +13,9 @@ public:
             right[i]= arr.size()-i;
         }
         
+        //left 1->2->3->4
+        //right 4->3->2->1
+        
         stack<int> st;
         
         
