@@ -56,7 +56,7 @@ public:
             
         }
         //l==r
-        cout<<l<<" "<<r<<endl;
+        //cout<<l<<" "<<r<<endl;
         if(nums[l]==target)
             return l;
 
