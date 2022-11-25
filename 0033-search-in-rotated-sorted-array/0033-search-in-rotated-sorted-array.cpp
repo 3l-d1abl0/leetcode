@@ -55,8 +55,13 @@ public:
             }
             
         }
+        //l==r
         
-        return -1;
+        if(nums[l]==target)
+            return l;
+
+        else
+            return -1;
     }
     
     int search(vector<int>& nums, int target) {
@@ -66,9 +71,9 @@ public:
         
         int st = 0, ed = nums.size();
         
-        return rotatedBS(nums, target, st, ed-1);
+        //return rotatedBS(nums, target, st, ed-1);
         
-        //return rotatedBSItr(nums, target, st, ed-1);
+        return rotatedBSItr(nums, target, st, ed-1);
         
     }
 };
