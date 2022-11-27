@@ -23,7 +23,7 @@ public:
         int rows = mat.size();
         int cols = mat[0].size();
         
-       cout<<rows<<"x"<<cols<<endl;
+       
         int topRow = 0;
         int botRow = rows-1;
         
@@ -34,8 +34,8 @@ public:
             
             int col = max_element(mat, midRow, cols);
             
-            cout<<"midRow = "<<midRow<<" "<<col<<endl;
-            cout<<"1.----"<<endl;
+            
+            
             //1. Top most Row
             if(midRow==0){
                 
@@ -46,7 +46,7 @@ public:
                     continue;
                 }
             }
-          cout<<"2.----"<<endl;
+          
             //2. Bottom Row
             if(midRow == rows-1){
                 
@@ -60,7 +60,7 @@ public:
                 
             }
             
-           cout<<"3.----"<<endl;
+           
             //3. if this ele is the one
             if(mat[midRow-1][col] < mat[midRow][col] && mat[midRow+1][col] < mat[midRow][col])
                 return {midRow, col};
