@@ -53,6 +53,10 @@ public:
                 //cout<<mat[midRow-1][col]<<" < "<<mat[midRow][col]<<endl;
                 if(mat[midRow-1][col] < mat[midRow][col])
                     return {midRow, col};
+                else{
+                    botRow = midRow-1;
+                    continue;
+                }
                 
             }
             
