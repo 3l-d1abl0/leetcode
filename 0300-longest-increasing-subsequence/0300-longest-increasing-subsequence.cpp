@@ -17,7 +17,7 @@ public:
         
     }
     
-    int ceilIdx(vector<int> v, int key){
+    int ceilIdx(vector<int> &v, int key){
 
     int n =v.size();
         
