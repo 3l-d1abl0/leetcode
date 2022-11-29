@@ -30,7 +30,7 @@ public:
             
             //2. Shrink the dq id sum of range >=k
             while(!dq.empty() && cSum-dq.front().sum >= k){
-                minn = min(minn, dq.back().idx-dq.front().idx);
+                minn = min(minn, i-dq.front().idx);
                 dq.pop_front();
             }
             
