@@ -24,9 +24,9 @@ public:
         if(pair>0)btr(cur+')',s,left,right,pair-1,index+1,lt,rt-1);
     }
     vector<string> removeInvalidParentheses(string s) {
-        ios_base::sync_with_stdio(false);
+        /*ios_base::sync_with_stdio(false);
         cin.tie(NULL);
-        cout.tie(NULL);
+        cout.tie(NULL);*/
         int left=0,lt=0;
         int right=0,rt=0; // lt and rt are used to store total number of ( and )
         for(auto c:s){
