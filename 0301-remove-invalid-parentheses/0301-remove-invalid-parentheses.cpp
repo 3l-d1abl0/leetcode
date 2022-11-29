@@ -1,50 +1,59 @@
 class Solution {
 public:
-    unordered_set<string>st;
-    void btr(string cur, string s, int left, int right, int pair, int index,int lt, int rt){
-        //cout<<"inside"<<index<<endl;
-        if(index==s.size()){
-            //cout<<"found";
-            if(left==0 && right==0 && pair==0)st.insert(cur);
-            return;
-        }
-        if(s[index]!='(' && s[index]!=')'){
-            cur+=s[index];
-            btr(cur,s,left,right,pair,index+1,lt,rt);
-            return;
-        }
-        if(s[index]=='('){
-            if(left>0){
-                btr(cur,s,left-1,right,pair,index+1,lt-1,rt);
+    vector<string> ans;
+    unordered_set<string> uset; 
+    int countRemoval(string s){
+        stack<char> st;
+        for(int i=0;i<s.size();i++){
+            if(s[i]=='('){
+                st.push('(');
             }
-            if(rt) btr(cur+'(',s,left,right,pair+1,index+1,lt-1,rt);
-            return;
-        }
-        if(right>0)btr(cur,s,left,right-1,pair,index+1,lt,rt-1);
-        if(pair>0)btr(cur+')',s,left,right,pair-1,index+1,lt,rt-1);
-    }
-    vector<string> removeInvalidParentheses(string s) {
-        /*ios_base::sync_with_stdio(false);
-        cin.tie(NULL);
-        cout.tie(NULL);*/
-        int left=0,lt=0;
-        int right=0,rt=0; // lt and rt are used to store total number of ( and )
-        for(auto c:s){
-            if(c=='('){
-                left++;
-                lt++;
-            }
-            if(c==')'){
-                rt++;
-                if(left)left--;
-                else right++;
+            else if(s[i]==')'){
+                if(st.size()==0){
+                    st.push(')');
+                }
+                else if(st.top()==')'){
+                    st.push(')');
+                }
+                else if(st.top()=='('){
+                    st.pop();
+                }
             }
         }
         
-        string cur="";
-        btr(cur,s,left,right,0,0,lt,rt);
-        //void btr(string cur, string s, int left, int right, int pair, int index,int lt, int rt)
-        //cout<<st.size();
-        return vector<string>(st.begin(),st.end());
+        int invalid=st.size(); //minimum removals
+        
+        return invalid;
+    }
+   
+    void helper(int invalid,string s){
+        if(invalid<0) return;
+        if(invalid==0){ 
+            int invalidNow=countRemoval(s);
+            if(invalidNow==0){
+                ans.push_back(s);
+            }
+            return;
+        }
+      for(int i=0;i<s.size();i++){
+          if (s[i] != ')' && s[i] != '(')
+                {
+                continue;
+                }
+          
+          string left=s.substr(0,i);
+          string right=s.substr(i+1);
+          string temp=left+right;
+          if(uset.find(temp)==uset.end()){
+              uset.insert(temp);
+            helper(invalid-1,temp);       
+          }
+               
+      }  
+    }
+    vector<string> removeInvalidParentheses(string s) {
+        int invalid=countRemoval(s);
+        helper(invalid,s);
+        return ans;
     }
 };
