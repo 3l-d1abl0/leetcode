@@ -15,12 +15,12 @@ public:
         }
         if(s[index]=='('){
             if(left>0){
-                btr(cur,s,left-1,right,pair,index+1,lt,rt);
+                btr(cur,s,left-1,right,pair,index+1,lt-1,rt);
             }
             if(rt) btr(cur+'(',s,left,right,pair+1,index+1,lt-1,rt);
             return;
         }
-        if(right>0)btr(cur,s,left,right-1,pair,index+1,lt,rt);
+        if(right>0)btr(cur,s,left,right-1,pair,index+1,lt,rt-1);
         if(pair>0)btr(cur+')',s,left,right,pair-1,index+1,lt,rt-1);
     }
     vector<string> removeInvalidParentheses(string s) {
@@ -43,6 +43,7 @@ public:
         
         string cur="";
         btr(cur,s,left,right,0,0,lt,rt);
+        //void btr(string cur, string s, int left, int right, int pair, int index,int lt, int rt)
         //cout<<st.size();
         return vector<string>(st.begin(),st.end());
     }
