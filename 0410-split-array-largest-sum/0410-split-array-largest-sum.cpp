@@ -7,13 +7,13 @@ public:
         int sum =0;
         for(int ele: nums){
             
-            //if(ele>maxSum) return false;
+            if(ele>maxSum) return INT_MAX;
             
             if(sum+ele<=maxSum){
                 sum +=ele;
             }else{
                 subS++;
-                //if(subS > m) return false;
+                if(subS > m) return INT_MAX;
                 sum = ele;
             }
         }
