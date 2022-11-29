@@ -1,59 +1,76 @@
 class Solution {
 public:
-    vector<string> ans;
-    unordered_set<string> uset; 
-    int countRemoval(string s){
-        stack<char> st;
-        for(int i=0;i<s.size();i++){
-            if(s[i]=='('){
-                st.push('(');
-            }
-            else if(s[i]==')'){
-                if(st.size()==0){
-                    st.push(')');
-                }
-                else if(st.top()==')'){
-                    st.push(')');
-                }
-                else if(st.top()=='('){
-                    st.pop();
-                }
-            }
-        }
+    
+    void recur(int idx, string &s, string str, unordered_set<string> &st, int extraLeft, int totalLeft, int pair, int extraRight, int totalRight ){
         
-        int invalid=st.size(); //minimum removals
-        
-        return invalid;
-    }
-   
-    void helper(int invalid,string s){
-        if(invalid<0) return;
-        if(invalid==0){ 
-            int invalidNow=countRemoval(s);
-            if(invalidNow==0){
-                ans.push_back(s);
-            }
+        if(idx== s.size()){
+            if(extraLeft==0 && extraRight==0 && pair==0)
+                st.insert(str);
+            
             return;
         }
-      for(int i=0;i<s.size();i++){
-          if (s[i] != ')' && s[i] != '(')
-                {
-                continue;
-                }
-          
-          string left=s.substr(0,i);
-          string right=s.substr(i+1);
-          string temp=left+right;
-          if(uset.find(temp)==uset.end()){
-              uset.insert(temp);
-            helper(invalid-1,temp);       
-          }
-               
-      }  
-    }
+        
+        //anyhting apart fron ( and ), , just add
+        if(s[idx]!='(' && s[idx]!=')')
+            return recur(idx+1, s, str+s[idx], st, extraLeft, totalLeft, pair, extraRight, totalRight );
+        
+        
+        if(s[idx]=='('){
+            
+            if(extraLeft){
+                recur(idx+1, s, str, st, extraLeft-1, totalLeft-1, pair, extraRight, totalRight );
+            }
+            
+            if(totalRight)  //if there are right backets remaining, process a left bracket
+                return recur(idx+1, s, str+s[idx], st, extraLeft, totalLeft-1, pair+1, extraRight, totalRight );
+            
+        }
+        
+        if(s[idx]==')'){
+            
+            if(extraRight){
+                recur(idx+1, s, str, st, extraLeft, totalLeft, pair, extraRight-1, totalRight-1 );
+            }
+            
+            if(pair)
+                return recur(idx+1, s, str+s[idx], st, extraLeft, totalLeft, pair-1, extraRight, totalRight-1 );
+        }
+        
+        
+    } 
+    
     vector<string> removeInvalidParentheses(string s) {
-        int invalid=countRemoval(s);
-        helper(invalid,s);
+        
+        int extraLeft =0, totalLeft=0;
+        int extraRight =0, totalRight=0;
+        
+        for(char ch: s){
+            if(ch=='('){
+                totalLeft++;
+                extraLeft++;
+            }else if(ch==')'){
+                
+                if(extraLeft>0){
+                    extraLeft--;
+                }else{
+                    extraRight++;
+                }
+                
+                totalRight++;
+            }
+        }
+        
+        
+        
+        unordered_set<string> st;
+        recur(0, s, "", st, extraLeft, totalLeft, 0, extraRight, totalRight );
+        
+        /*for(string str: st){
+            cout<<str<<endl;
+        }*/
+        
+        vector<string> ans(st.begin(), st.end());
+        
         return ans;
     }
 };
