@@ -1,55 +1,49 @@
 class Solution {
 public:
-    vector<string> removeInvalidParentheses(string s) {
-        unordered_set<string> result;
-        int left_removed = 0;
-        int right_removed = 0;
-        for(auto c : s) {
-            if(c == '(') {
-                ++left_removed;
-            }
-            if(c == ')') {
-                if(left_removed != 0) {
-                    --left_removed;
-                }
-                else {
-                    ++right_removed;
-                }
-            }
+    unordered_set<string>st;
+    void btr(string cur, string s, int left, int right, int pair, int index,int lt, int rt){
+        //cout<<"inside"<<index<<endl;
+        if(index==s.size()){
+            //cout<<"found";
+            if(left==0 && right==0 && pair==0)st.insert(cur);
+            return;
         }
-        helper(s, 0, left_removed, right_removed, 0, "", result);
-        return vector<string>(result.begin(), result.end());
+        if(s[index]!='(' && s[index]!=')'){
+            cur+=s[index];
+            btr(cur,s,left,right,pair,index+1,lt,rt);
+            return;
+        }
+        if(s[index]=='('){
+            if(left>0){
+                btr(cur,s,left-1,right,pair,index+1,lt,rt);
+            }
+            if(rt) btr(cur+'(',s,left,right,pair+1,index+1,lt-1,rt);
+            return;
+        }
+        if(right>0)btr(cur,s,left,right-1,pair,index+1,lt,rt);
+        if(pair>0)btr(cur+')',s,left,right,pair-1,index+1,lt,rt-1);
     }
-private:
-    void helper(string s, int index, int left_removed, int right_removed, int pair, string path, unordered_set<string>& result) {
+    vector<string> removeInvalidParentheses(string s) {
+        ios_base::sync_with_stdio(false);
+        cin.tie(NULL);
+        cout.tie(NULL);
+        int left=0,lt=0;
+        int right=0,rt=0; // lt and rt are used to store total number of ( and )
+        for(auto c:s){
+            if(c=='('){
+                left++;
+                lt++;
+            }
+            if(c==')'){
+                rt++;
+                if(left)left--;
+                else right++;
+            }
+        }
         
-        if(left_removed + right_removed > s.size() - index)
-            return;
-        
-        if(index == s.size()) {
-            if(left_removed == 0 && right_removed == 0 && pair == 0) {
-                result.insert(path);
-            }
-            return;
-        }
-        if(s[index] != '(' && s[index] != ')') {
-            helper(s, index + 1, left_removed, right_removed, pair, path + s[index], result);
-        }
-        else {
-            if(s[index] == '(') {
-                if(left_removed > 0) {
-                    helper(s, index + 1, left_removed - 1, right_removed, pair, path, result);
-                }
-                helper(s, index + 1, left_removed, right_removed, pair + 1, path + s[index], result);
-            }
-            if(s[index] == ')') {
-                if(right_removed > 0) {
-                    helper(s, index + 1, left_removed, right_removed - 1, pair, path, result);
-                }
-                if(pair > 0) {
-                    helper(s, index + 1, left_removed, right_removed, pair - 1, path + s[index], result);
-                }
-            }
-        }
+        string cur="";
+        btr(cur,s,left,right,0,0,lt,rt);
+        //cout<<st.size();
+        return vector<string>(st.begin(),st.end());
     }
 };
