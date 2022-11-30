@@ -1,88 +1,44 @@
 class Solution {
 public:
-    int twoPointer(int target, vector<int> &nums){
+    int minSubArrayLen(int K, vector<int>& A) {
         
-                int N = nums.size();
+        int n = A.size();
+                
+        // use multimap to store previous prefix sums. using set has
+        // advantage of being sorted, so it is possible find 
+        // sums in range in logN rather than N (with unsorted container)
+        // we also store index of the sum so subarray len can be calculated       
+        multimap<long long int, int> prefSumsSoFar;
+        prefSumsSoFar.insert({0, -1});
         
-        int minLen = 1e9;
-        long long sum =0;
-        int left=0;
-        for(int right=0; right<N; right++){
-            
-            sum += nums[right];
-            
-            while(sum>=target){
-                minLen = min(minLen, right-left+1);
-                sum -= nums[left];
-                left++;
-                //cout<<minLen<<" ";
-            }
-        }
-        
-        
-        if(minLen==1e9)
-            return 0;
-        else
-            return minLen;
+        long long int prefSumI = 0;
+        int res = INT_MAX;
+        for(int i = 0; i < n; i++)
+        {
+            // calculate pref sum so far and store it
+            prefSumI += A[i];
+            prefSumsSoFar.insert({prefSumI, i});
+                
+            // since prefSumI - prefSumJ >= K, prefSumJ <= prefSumI - K,
+            // so we find all prefSums that satisfy this condition
+            auto prefSumJ_uppBnd = prefSumsSoFar.upper_bound(prefSumI - K);
+            // if no sum satisfies above condition, continue to next element
+            if(prefSumJ_uppBnd == prefSumsSoFar.begin()) continue;
 
-    }
-    
-    bool sumOfLength(vector<int> &nums, int target, int len){
-        //sliding window
-        
-        long long sum = 0;
-        for(int i=0; i<len; i++){
-            sum += nums[i];
+            // loop trough all sums that are <= prefSumI - K and find one with 
+            // min distance to current element
+            for(auto it = prefSumsSoFar.begin(); it != prefSumJ_uppBnd; it++)
+                res = min(res, i - it->second);
+
+            // sums that we found we dont need to consider anymore, since even
+            // if they can satisfy prefSumI - prefSumJ >= K for latter prefSumI (ie next elements)
+            // resulting subarray will be larger than current result. So, delete them.
+            // This is crucial to not have N^2 buth rather NlogN time complexity
+            prefSumsSoFar.erase(prefSumsSoFar.begin(), prefSumJ_uppBnd);       
         }
         
-        int l =0, r= len-1;
-        
-        while(r!= nums.size()-1){
-            
-            r++;
-            sum += nums[r];
-            
-            sum -=nums[l];
-            l++;
-            
-            if(target == sum) return true;
-        }
-        
-        return false;
-            
-    }
-    
-    int binarySearch(int target, vector<int> &nums){
-        
-        int l=0, r= nums.size(); //possible length
-        bool minLen = false;
-        while(l<r){
-            
-            int mid = l+(r-l)/2;
-            //cout<<mid<<endl;
-            if(sumOfLength(nums, target, mid)==true){
-                r=mid;
-                minLen = true;    
-                //cout<<"len = "<<mid<<endl;
-            }else{
-                l=mid+1;
-            }
-            
-        }
-        
-        
-        if(minLen == true)
-            return l;
-        else return 0;
-        
-    }
-    
-    int minSubArrayLen(int target, vector<int>& nums) {
-             
-        
-        return twoPointer(target, nums);
-        
-        //return binarySearch(target, nums);
+        if(res == INT_MAX) return 0;
+        else return res;
         
     }
 };
