@@ -7,7 +7,7 @@ struct Endpoint {
 bool comp(const Endpoint& a, const Endpoint& b) {
     if (a.val != b.val)
         return a.val < b.val;
-    //cout<<a.isStart<<endl;
+    //prioratize departing time
     return a.isStart == false && b.isStart == true;
 }
 
