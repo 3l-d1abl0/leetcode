@@ -1,44 +1,95 @@
 class Solution {
 public:
-    int minSubArrayLen(int K, vector<int>& A) {
+    /*
+    int twoPointer(int target, vector<int> &nums){
         
-        int n = A.size();
-                
-        // use multimap to store previous prefix sums. using set has
-        // advantage of being sorted, so it is possible find 
-        // sums in range in logN rather than N (with unsorted container)
-        // we also store index of the sum so subarray len can be calculated       
-        multimap<long long int, int> prefSumsSoFar;
-        prefSumsSoFar.insert({0, -1});
+                int N = nums.size();
         
-        long long int prefSumI = 0;
-        int res = INT_MAX;
-        for(int i = 0; i < n; i++)
-        {
-            // calculate pref sum so far and store it
-            prefSumI += A[i];
-            prefSumsSoFar.insert({prefSumI, i});
-                
-            // since prefSumI - prefSumJ >= K, prefSumJ <= prefSumI - K,
-            // so we find all prefSums that satisfy this condition
-            auto prefSumJ_uppBnd = prefSumsSoFar.upper_bound(prefSumI - K);
-            // if no sum satisfies above condition, continue to next element
-            if(prefSumJ_uppBnd == prefSumsSoFar.begin()) continue;
-
-            // loop trough all sums that are <= prefSumI - K and find one with 
-            // min distance to current element
-            for(auto it = prefSumsSoFar.begin(); it != prefSumJ_uppBnd; it++)
-                res = min(res, i - it->second);
-
-            // sums that we found we dont need to consider anymore, since even
-            // if they can satisfy prefSumI - prefSumJ >= K for latter prefSumI (ie next elements)
-            // resulting subarray will be larger than current result. So, delete them.
-            // This is crucial to not have N^2 buth rather NlogN time complexity
-            prefSumsSoFar.erase(prefSumsSoFar.begin(), prefSumJ_uppBnd);       
+        int minLen = 1e9;
+        long long sum =0;
+        int left=0;
+        for(int right=0; right<N; right++){
+            
+            sum += nums[right];
+            
+            while(sum>=target){
+                minLen = min(minLen, right-left+1);
+                sum -= nums[left];
+                left++;
+                //cout<<minLen<<" ";
+            }
         }
         
-        if(res == INT_MAX) return 0;
-        else return res;
+        
+        if(minLen==1e9)
+            return 0;
+        else
+            return minLen;
+
+    }
+    */
+    
+    int bSearch(vector<int> &prefixSum, int val, int N){
+        
+        int l=-1, r=N;
+        
+        while(r-l>1){
+            
+            int mid = l+(r-l)/2;
+            if(prefixSum[mid]<=val){
+                l=mid;
+            }else{
+                r=mid;
+            }
+        }
+        
+        //cout<<l<<" , "<<r<<endl;
+        return l;
+    }
+    
+    int binarySearch(int k, vector<int> &nums){
+        
+        int N = nums.size();
+        vector<int> prefixSum(N+1, 0);
+        for(int i=1; i<=N; i++)
+            prefixSum[i] = prefixSum[i-1]+nums[i-1];
+        
+        /*for(int ele: prefixSum)
+            cout<<ele<<" ";
+        cout<<endl;*/
+        
+        int minLen = INT_MAX;
+        int prefix =0;
+        for(int i=0; i<N; i++){
+            
+            prefix +=nums[i];
+            /*
+                prefixsum[i]-prefixsum[j-1] >= k  //i-j+1
+                prefixsum[i]-k  >= prefixsum[j-1]
+                find (greatest) num which is lesser than eq to prefixsum[i]-k
+            */
+            if(prefix>=k){
+                //cout<<"i = "<<i<<" p ="<<prefixSum[i+1]<<" val= "<<prefix-k<<endl;
+                int idx = bSearch(prefixSum, prefix-k, N+1);
+                minLen = min(minLen, i-idx+1);
+                //cout<<"len= "<<minLen<<endl;
+            }
+            
+        }
+        
+        if(minLen==INT_MAX)
+            return 0;
+        else
+            return minLen;
+        
+    }
+    
+    int minSubArrayLen(int target, vector<int>& nums) {
+             
+        
+        //return twoPointer(target, nums);
+        
+        return binarySearch(target, nums);
         
     }
 };
