@@ -1,6 +1,6 @@
 class Solution {
 public:
-    /*
+    
     int twoPointer(int target, vector<int> &nums){
         
                 int N = nums.size();
@@ -27,7 +27,7 @@ public:
             return minLen;
 
     }
-    */
+    
     
     int bSearch(vector<int> &prefixSum, int val, int N){
         
@@ -87,9 +87,9 @@ public:
     int minSubArrayLen(int target, vector<int>& nums) {
              
         
-        //return twoPointer(target, nums);
+        return twoPointer(target, nums);    //O(N)
         
-        return binarySearch(target, nums);
+        //return binarySearch(target, nums);  //O(NlogN)
         
     }
 };
