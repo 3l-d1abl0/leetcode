@@ -27,4 +27,5 @@ public:
         
         
     }
+    //https://leetcode.com/problems/shortest-subarray-with-sum-at-least-k/discuss/1023707/C%2B%2B-NlogN-solution-using-binary-search-(STL-multimap)
 };
