@@ -48,13 +48,59 @@ class Solution{
     }
     
     
+    int method2(int arr[], int dep[], int n){
+        
+        if(n==0)
+            return 0;
+            
+            
+            
+        vector<pair<int, int> > interval(n);
+
+    	for (int i = 0; i < n; i++) {
+    		interval[i] = { arr[i], dep[i] };
+    	}
+            
+        sort(interval.begin(), interval.end());
+        
+        
+        int plat = 1;
+        
+        //min heap for ending time
+        priority_queue<int, vector<int>, greater<int>> pq;
+        
+        pq.push(interval[0].second);
+        
+        for(int i=1; i<n; i++){
+        
+            /*looking for platform
+             check if a meetign has ended
+            */
+            
+            if(interval[i].first <= pq.top()) //new train arrives before existing train leaves
+                plat++;
+            else
+                pq.pop();
+            
+            pq.push(interval[i].second);
+            
+        }
+        
+        
+        return plat;
+        
+        
+    }
+    
     int findPlatform(int arr[], int dep[], int n){
     
         //sorting
-        return method1(arr, dep, n);
+        //return method1(arr, dep, n);
         
         //heap
-        return method2
+        return method2(arr, dep, n);
+            
+        
     }
 };
 
