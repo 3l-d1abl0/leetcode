@@ -16,9 +16,9 @@ public:
             }
         }//while
 
-        for(int ele: arr){
+        /*for(int ele: arr){
             cout<<ele<<" ";
-        }cout<<endl;
+        }cout<<endl;*/
 
 
         vector<int> ans;
