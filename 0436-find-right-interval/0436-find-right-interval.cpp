@@ -28,14 +28,6 @@ public:
             end.push({intervals[i][1], i});
         }
         
-        
-        /*while(!start.empty()){
-            cout<<start.top().val<<" "<<start.top().id<<endl;
-            
-            start.pop();
-        }*/
-        
-        
         while(!start.empty() && !end.empty()){
             if(start.top().val >= end.top().val){
                 ans[end.top().id] = start.top().id;
