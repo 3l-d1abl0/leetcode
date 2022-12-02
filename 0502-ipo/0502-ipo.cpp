@@ -1,4 +1,4 @@
-/*
+
 class Compare
 {
     public:
@@ -6,7 +6,7 @@ class Compare
             return a.second>b.second;
         }
 };
-*/
+
 
 class Solution {
 public:
