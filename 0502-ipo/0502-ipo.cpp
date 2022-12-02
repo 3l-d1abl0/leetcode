@@ -1,40 +1,33 @@
-class Compare
-{
-    public:
-        bool operator()(pair<int,int> a, pair<int,int> b){
-            return a.second>b.second;
-        }
-};
+#define pi pair<int,int>
+#define f first
+#define s second
 
 class Solution {
 public:
-    int findMaximizedCapital(int k, int W, vector<int>& profits, vector<int>& capital) {
+    int findMaximizedCapital(int k, int W, vector<int>& p, vector<int>& c) {
         
-        priority_queue< pair<int, int>, vector<pair<int, int>>, greater<pair<int, int>> > cap; //min  heap
-        priority_queue< pair<int, int> > prof; //max
+        int n = p.size();
+        vector<pair<int,int>> projects;
+        for(int i=0 ; i<n ; i++)    projects.push_back({p[i],c[i]});
+
+        sort(projects.begin(),projects.end(),[&](pi a,pi b){ return a.s<b.s;});
         
-        int N = profits.size();
-        for(int i=0; i<N; i++)
-            cap.push({capital[i], profits[i]});    
+        priority_queue<int> pq;
         
+        int i=0;
         
-        while(k--){
+        while(k){
+            while(i<n && projects[i].s<=W)     
+                pq.push(projects[i++].f);
             
-            while(!cap.empty() && cap.top().first <= W){
-                prof.push({cap.top().second, cap.top().second});
-                
-                cap.pop();
+            if(!pq.empty()){
+                W += pq.top();
+                pq.pop();
             }
-            
-            if(prof.empty())
-                return W;
-            
-            W+= prof.top().first;
-            prof.pop();
-            
+            k--;
         }
         
-        
         return W;
+        
     }
 };
