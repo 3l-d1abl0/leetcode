@@ -7,6 +7,13 @@ public:
     priority_queue<int> maxQ;
     priority_queue<int, vector<int>, greater<int>> minQ;
     
+    
+    /*
+    1 2 3 4 5 6 ....... 19 20
+    maxHeap   min Heap
+    SZ:    +1    0
+    */
+    
     void addNum(int num) {
         
         if(maxQ.empty()){
@@ -14,7 +21,7 @@ public:
             return;
         }
         
-        if (maxQ.size() == minQ.size()){
+        if (maxQ.size() == minQ.size()){ //even size so far
             
             
             if(!minQ.empty() && num >= minQ.top()){
@@ -28,7 +35,9 @@ public:
               //  cout<<"2"<<endl;
                 maxQ.push(num);
             }
-        }else{
+            
+            
+        }else{  //odd size so far
             
             if( num<= maxQ.top()){
                 auto temp = maxQ.top();
