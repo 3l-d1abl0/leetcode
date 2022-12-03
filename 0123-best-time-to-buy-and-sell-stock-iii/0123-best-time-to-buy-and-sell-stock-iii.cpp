@@ -14,7 +14,7 @@ public:
         for(int i=N-1; i>=0; i--){
             
             
-            for(int buy=0; buy<=1; buy++){
+            for(int buy=1; buy>=0; buy--){
                 
                 for(int tx=1; tx<=2; tx++){
                     
