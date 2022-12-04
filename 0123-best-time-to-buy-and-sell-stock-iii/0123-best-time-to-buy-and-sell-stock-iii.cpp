@@ -120,17 +120,17 @@ public:
         
     }
     
-    int topDownSpaceOpti(vector<int> &stocks, int K){
+    int topDownSpaceOpti(vector<int> &stocks, int k){
         
         int N = stocks.size();
         
-        vector<vector<int>> prev (K+1, vector<int> (2, 0));
-        vector<vector<int>> curr (K+1, vector<int> (2, 0));
+        vector<vector<int>> prev (k+1, vector<int> (2, 0));
+        vector<vector<int>> curr (k+1, vector<int> (2, 0));
         
         //Base case N == 0 and K==0 all 0
         
         for(int idx = N-1; idx>=0; idx--){
-            for(int K=1; K <=2; K++){
+            for(int K=1; K <=k; K++){
                 for(int buy = 0; buy <=1; buy++){
                         
         
@@ -152,7 +152,7 @@ public:
             
         }//for
         
-        return curr[K][1];
+        return curr[k][1];
         
         
     }
@@ -171,9 +171,9 @@ public:
 	    //return recur(0, 1, K, stocks, N, memo);
         
         //Converting recursion to Top Down
-        return topDown(stocks, K);
+        //return topDown(stocks, K);
         
         //Optimizign to 2D DP
-        //return topDownSpaceOpti(stocks, K);
+        return topDownSpaceOpti(stocks, K);
     }
 };
