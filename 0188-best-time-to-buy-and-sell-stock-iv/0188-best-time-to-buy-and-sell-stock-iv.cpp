@@ -104,7 +104,10 @@ public:
 		//return dp(0, true, K, prices);
         
         //2. TopDown DP
-        return topDown(prices, K);
+        //return topDown(prices, K);
+        
+        //Optimizign to 2D DP
+        return topDownSpaceOpti(prices, K);
         
     }
 };
