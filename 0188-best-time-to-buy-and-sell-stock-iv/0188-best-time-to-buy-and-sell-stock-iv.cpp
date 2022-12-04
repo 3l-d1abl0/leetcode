@@ -194,9 +194,9 @@ public:
         //vector<vector<int>> memo(N, vector<int> (2*K, -1));
         //return altRecur(0, 0, prices, K, memo);
         
-        return altDP(prices, K);
+        //return altDP(prices, K);
         
-        //return altDPOpti(prices, K);
+        return altDPOpti(prices, K);
         
         
     }
