@@ -91,7 +91,7 @@ public:
         
         int N = stocks.size();
         
-        vector<vector<vector<int>>> dp(N, vector<vector<int>> (K+1, vector<int> (2, 0)));
+        vector<vector<vector<int>>> dp(N, vector<vector<int>> (K+1, vector<int> (2, -1)));
         
         dp[0][0][0] = dp[0][0][1] = 0; 
         
