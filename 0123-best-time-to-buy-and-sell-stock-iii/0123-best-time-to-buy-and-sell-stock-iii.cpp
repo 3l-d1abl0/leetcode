@@ -87,15 +87,53 @@ public:
         return memo[idx][K][buy] = profit;
     }
     
+    int topDown(vector<int> &stocks, int K){
+        
+        int N = stocks.size();
+        
+        vector<vector<vector<int>>> dp(N, vector<vector<int>> (K+1, vector<int> (2, 0)));
+        
+        dp[0][0][0] = dp[0][0][1] = 0; 
+        
+        for(int idx = N-1; idx>=0; idx--){
+            for(int K=1; K <=2; K++){
+                for(int buy = 0; buy <=1; buy++){
+                        
+        
+                dp[idx][K][buy] = dp[idx+1][K][buy]; //recur(idx+1, buy, K, stocks, N, memo);  //skip
+
+                if(buy){
+                    dp[idx][K][buy] = max(dp[idx][K][buy] , -stocks[idx] +dp[idx+1][K][0]);
+
+                }else{
+                    dp[idx][K][buy] = max(dp[idx][K][buy] , stocks[idx] +dp[idx+1][K-1][1]);
+                }
+                    
+                    
+                    
+                }
+            }
+            
+        }//for
+        
+        return dp[0][K][1];
+        
+    }
+    
     int maxProfit(vector<int>& stocks) {
 
         //return method1(stocks);
         //return maxProfit3(stocks);
         
+        
+        //Recursion
         int K=2;    //true- can buy false - can't buy
         int N = stocks.size();
         
         vector<vector<vector<int>>> memo (N, vector<vector<int>> (K+1, vector<int> (2, -1)));
 	    return recur(0, 1, K, stocks, N, memo);
+        
+        //Converting recursion to Top Down
+        return topDown(stocks, K);
     }
 };
