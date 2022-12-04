@@ -157,6 +157,26 @@ public:
         
     }
     
+    int altRecur(int idx, int txNo, vector<int> &stocks, int K, vector<vector<int>> &memo){
+        
+        if(idx == stocks.size() || txNo == 2*K)
+            return 0;
+        
+        if(memo[idx][txNo]!=-1)
+            return memo[idx][txNo];
+        
+        int profit = altRecur(idx+1, txNo, stocks, K, memo);
+        
+        if(txNo%2==0){ // Buy
+            
+            profit = max(profit, -stocks[idx] + altRecur(idx+1, txNo+1, stocks, K, memo) );
+        }else{
+            profit = max(profit, stocks[idx] + altRecur(idx+1, txNo+1, stocks, K, memo) );
+        }
+        
+        return memo[idx][txNo] = profit;
+    }
+    
     int maxProfit(vector<int>& stocks) {
 
         //return method1(stocks);
@@ -174,6 +194,14 @@ public:
         //return topDown(stocks, K);
         
         //Optimizign to 2D DP
-        return topDownSpaceOpti(stocks, K);
+        //return topDownSpaceOpti(stocks, K);
+        
+        
+        /*N*4
+            0 1 2 3 4
+            B S B S B
+        */
+        vector<vector<int>> memo(N, vector<int> (2*K, -1));
+        return altRecur(0, 0, stocks, K, memo);
     }
 };
