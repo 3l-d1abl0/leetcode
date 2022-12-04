@@ -41,12 +41,9 @@ public:
         return dp[0][1][2];
     }
     
-    int maxProfit(vector<int>& stocks) {
-
+    int method1(vector<int> &stocks){
         
-        return maxProfit3(stocks);
-        
-	    int N = stocks.size();
+        int N = stocks.size();
 	    vector<vector<int>> dp(3, vector<int> (N,0));
 
 
@@ -67,5 +64,38 @@ public:
         
         
         return dp[2][N-1];
+        
+    }
+    
+    int recur(int idx, bool buy, int K, vector<int> &stocks, int N, vector<vector<vector<int>>> &memo ){
+        
+        if(idx == N || K==0)
+            return 0;
+        
+        if(memo[idx][K][buy] !=-1)
+            return memo[idx][K][buy];
+        
+        int profit = recur(idx+1, buy, K, stocks, N, memo);  //skip
+        
+        if(buy){
+            profit = max(profit, -stocks[idx] +recur(idx+1, 0, K, stocks, N, memo));
+            
+        }else{
+            profit = max(profit, stocks[idx] +recur(idx+1, 1, K-1, stocks, N, memo));
+        }
+        
+        return memo[idx][K][buy] = profit;
+    }
+    
+    int maxProfit(vector<int>& stocks) {
+
+        //return method1(stocks);
+        //return maxProfit3(stocks);
+        
+        int K=2;    //true- can buy false - can't buy
+        int N = stocks.size();
+        
+        vector<vector<vector<int>>> memo (N, vector<vector<int>> (K+1, vector<int> (2, -1)));
+	    return recur(0, 1, K, stocks, N, memo);
     }
 };
