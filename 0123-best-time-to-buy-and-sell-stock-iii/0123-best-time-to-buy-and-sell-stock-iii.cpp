@@ -171,7 +171,7 @@ public:
 	    //return recur(0, 1, K, stocks, N, memo);
         
         //Converting recursion to Top Down
-        return topDown(stocks, K);
+        //return topDown(stocks, K);
         
         //Optimizign to 2D DP
         return topDownSpaceOpti(stocks, K);
