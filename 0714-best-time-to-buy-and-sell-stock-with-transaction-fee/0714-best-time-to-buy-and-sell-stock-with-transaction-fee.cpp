@@ -47,16 +47,54 @@ public:
         return memo[idx][buy] = profit;
     }
     
+    
+    int topDown(vector<int> &stocks, int fee){
+        
+        int N = stocks.size();
+        
+        vector<vector<int>> dp(N+1, vector<int> (2, 0));
+        
+        //base
+        dp[N][0] = dp[N][1] = 0;
+        
+        
+        for(int idx = N-1; idx >=0; idx--){
+            
+            
+            for(int buy=0; buy<=1; buy++){
+                
+                
+                dp[idx][buy] = dp[idx+1][buy];
+
+                if(buy==0){
+                    dp[idx][buy] = max(dp[idx][buy], -stocks[idx]+dp[idx+1][1]);
+                }else{
+                    dp[idx][buy] = max(dp[idx][buy], stocks[idx]-fee+ dp[idx+1][0]);
+                }
+                
+                
+                
+            }
+        }//for
+        
+        return dp[0][0];
+    }
+    
     int maxProfit(vector<int>& stocks, int fee) {
         
         int N = stocks.size();
         
-        //Crest Trough
+        //1.Crest Trough
         //return maxProfit2(stocks, fee);
         
-        vector<vector<int>> memo(N, vector<int>(2, -1));
-        return recur(0, 0, fee, stocks, N, memo);
         
+        //2. Recursion + memoization
+        //vector<vector<int>> memo(N, vector<int>(2, -1));
+        //return recur(0, 0, fee, stocks, N, memo);
+        
+        
+        //3. Top Down DP
+        return topDown(stocks, fee);
         
         vector<vector<int>> dp(N+1, vector<int> (2,0));
         
