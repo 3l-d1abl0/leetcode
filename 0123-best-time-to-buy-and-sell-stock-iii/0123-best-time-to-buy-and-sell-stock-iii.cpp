@@ -91,7 +91,7 @@ public:
         
         int N = stocks.size();
         
-        vector<vector<vector<int>>> dp(N, vector<vector<int>> (K+1, vector<int> (2, -1)));
+        vector<vector<vector<int>>> dp(N+1, vector<vector<int>> (K+1, vector<int> (2, 0)));
         
         dp[0][0][0] = dp[0][0][1] = 0; 
         
@@ -130,8 +130,8 @@ public:
         int K=2;    //true- can buy false - can't buy
         int N = stocks.size();
         
-        vector<vector<vector<int>>> memo (N, vector<vector<int>> (K+1, vector<int> (2, -1)));
-	    return recur(0, 1, K, stocks, N, memo);
+        //vector<vector<vector<int>>> memo (N, vector<vector<int>> (K+1, vector<int> (2, -1)));
+	    //return recur(0, 1, K, stocks, N, memo);
         
         //Converting recursion to Top Down
         return topDown(stocks, K);
