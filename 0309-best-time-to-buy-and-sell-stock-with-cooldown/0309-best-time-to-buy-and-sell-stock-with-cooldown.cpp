@@ -56,15 +56,67 @@ public:
         
     }
     
+    
+        int topDownOpti(vector<int> &prices, int N){
+
+            vector<vector<int>> dp(N+1, vector<int>(2, 0));
+            
+            vector<int> last(2, 0);
+            vector<int> prev(2, 0);
+            vector<int> curr(2, 0);
+
+            //base case
+            prev[0] = prev[1] = 0;
+
+
+            for(int idx = N-1; idx>=0; idx--){
+
+                for(int buy =0; buy<=1; buy++){
+
+
+                    curr[buy] = prev[buy];
+
+                    if(buy==0){
+                        curr[buy] = max(curr[buy], -prices[idx] + prev[1]);    
+                    }else{
+                        //adding cool down
+                        if(idx+2<=N-1)
+                            curr[buy] = max(curr[buy], prices[idx] +last[0] ); 
+                        else
+                            curr[buy] = max(curr[buy], prices[idx] +0 ); 
+                    }
+
+                }
+                
+                
+                last = prev;
+                prev = curr;
+                
+
+            }//for
+
+
+            return prev[0];
+
+        }
+    
+    
+    
+    
     int maxProfit(vector<int>& prices) {
         
         int N= prices.size();
         
+        ///1. Recursion + memoization
         //vector<vector<int>> memo(N, vector<int> (2, -1));
         //0 - can but ,1 - can't buy
         //return recur(0, 0, prices, N, memo);
         
         
-        return topDown(prices, N);
+        //2. TopDown DP
+        //return topDown(prices, N);
+        
+        //3. TopDown - OPti
+        return topDownOpti(prices, N);
     }
 };
