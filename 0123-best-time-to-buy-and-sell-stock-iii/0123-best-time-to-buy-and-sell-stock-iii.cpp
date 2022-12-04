@@ -202,6 +202,37 @@ public:
         return dp[0][0];
     }
     
+        int altDPOpti(vector<int> &stocks, int K){
+        
+            int N = stocks.size();
+
+            vector<int> prev( (2*K)+1, 0);
+            vector<int> curr( (2*K)+1, 0);
+            
+            for(int idx =N-1; idx >=0; idx--){
+
+                for(int txNo=2*K-1 ; txNo >=0; txNo--){
+
+                        curr[txNo] = prev[txNo];
+
+                        if(txNo%2==0){ // Buy
+
+                            curr[txNo] = max(curr[txNo], -stocks[idx] + prev[txNo+1] );
+                        }else{
+                            curr[txNo] = max(curr[txNo], stocks[idx] + prev[txNo+1] );
+                        }
+
+
+                }
+                
+                prev = curr;
+            }//for
+
+            return prev[0];
+        }
+    
+    
+    
     int maxProfit(vector<int>& stocks) {
 
         //return method1(stocks);
@@ -229,6 +260,8 @@ public:
         //vector<vector<int>> memo(N, vector<int> (2*K, -1));
         //return altRecur(0, 0, stocks, K, memo);
         
-        return altDP(stocks, K);
+        //return altDP(stocks, K);
+        
+        return altDPOpti(stocks, K);
     }
 };
