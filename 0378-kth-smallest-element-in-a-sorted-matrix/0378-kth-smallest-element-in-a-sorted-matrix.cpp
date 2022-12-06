@@ -28,7 +28,7 @@ public:
                 
                 int mid = l+(r-l)/2;
 
-                if(matrix[i][mid]>num)
+                if(matrix[i][mid] > num)
                     r=mid;
                 else
                     l=mid;
@@ -61,11 +61,11 @@ public:
             
             long long int mid = (l+r)/2;
             
-            int cnt = lessThan(matrix, mid);
+            //int cnt = ;
             //cout<<cnt<<" mid="<<mid<<endl;
             
-            if(cnt>=k)
-                r=mid;
+            if(lessThan(matrix, mid)>=k)
+                r=mid;  //look for lesser mid
             else
                 l=mid;
         }
