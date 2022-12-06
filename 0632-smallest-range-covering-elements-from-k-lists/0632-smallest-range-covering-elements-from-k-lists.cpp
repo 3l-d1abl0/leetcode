@@ -1,52 +1,57 @@
+struct Node{
+    int val, row, col;
+};
+
+struct CompareFn{
+    
+    bool operator()(Node const &v1, Node const &v2){
+        return v1.val > v2.val;
+    }
+    
+};
+
 class Solution {
 public:
-    vector<int> smallestRange(vector<vector<int>>& arrays) {
+    vector<int> smallestRange(vector<vector<int>>& nums) {
         
-        // The result.
-      pair<int, int> min_range{
-        numeric_limits<int>::min(),
-        numeric_limits<int>::max()
-      };
-
-      // Sweeping index on each row.
-      vector<int> indices(arrays.size());
-
-      // M.
-      std::priority_queue< pair<int, int>, std::vector<pair<int, int>>, std::greater<pair<int, int>> > minimums;
-      // max(M).
-      auto max = arrays[0][0];
-      for (auto i = 0; i < arrays.size(); i++) {
-        auto v = arrays[i][0];
-        minimums.push({v, i});
-        if (max < v) {
-          max = v;
-        }
-      }
-
-
-      while (true) {
-        auto min = minimums.top();
-        auto min_val = min.first;
-        auto min_row = min.second;
-        minimums.pop();
-        if (long(min_range.second) - long(min_range.first) >
-            long(max) - long(min_val)) {
-          min_range = {min_val, max};
-        }
-        indices[min_row]++;
-        if (indices[min_row] == arrays[min_row].size()) {
-          return { min_range.first, min_range.second };
-        }
-        auto v = arrays[min_row][indices[min_row]];
-        if (max < v) {
-          max = v;
-        }
-        minimums.push({v, min_row});
-      }
-
-
-      return { min_range.first, min_range.second };
+        int N = nums.size();
         
+        vector<int> ans{(int)-1e6, (int)1e6};
+        
+        priority_queue<Node, vector<Node>, CompareFn> minHeap;
+        
+        int maxx = -1e6;
+        for(int i=0; i<N; i++){
+            minHeap.push({nums[i][0], i, 0});
+            maxx = max(maxx, nums[i][0]);
+        }
+        
+        
+        //loop terminates when any of the list runs out of elements
+        while(true){
+            
+            Node nodeVal = minHeap.top(); minHeap.pop();
+            //cout<<nodeVal.val<<" "<<nodeVal.row<<" "<<nodeVal.col<<endl;
+            if(maxx - nodeVal.val < ans[1]-ans[0]){
+                ans[0] = nodeVal.val;
+                ans[1] = maxx;
+                //cout<<"ans ="<<ans[0]<<" "<<ans[1]<<endl;
+            }
+            
+            //chec if any list has ended
+            if(nodeVal.col+1 >= nums[nodeVal.row].size())
+                return ans;
+            
+            //check for a new Max
+            maxx = max(maxx, nums[nodeVal.row][nodeVal.col+1]);
+            
+            minHeap.push({nums[nodeVal.row][nodeVal.col+1], nodeVal.row, nodeVal.col+1});
+            
+            
+        }
+        
+        
+        return ans;
         
     }
 };
