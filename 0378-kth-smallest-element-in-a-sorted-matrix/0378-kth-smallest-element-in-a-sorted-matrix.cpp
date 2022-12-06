@@ -22,7 +22,7 @@ public:
         int sum =0;
         for(int i=0; i<N; i++){
         
-            int l =-1, r = M;
+            int l =-1, r = matrix[i].size();;
             
             while(r-l>1){
                 
