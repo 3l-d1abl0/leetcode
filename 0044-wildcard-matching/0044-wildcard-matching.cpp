@@ -51,14 +51,8 @@ public:
         for(int i=0; i<N; i++)
             dp[i][M] = false;
 
-        /*if(idx1==N){
-            for(int i=idx2; i<M; i++){
-                if(p[i]!='*')
-                    return false;
-            }
-            return true;
-        }*/
         
+        ///for every index i less than M
         for(int i=M-1; i>=0; i--){
             
             bool flag = true;
