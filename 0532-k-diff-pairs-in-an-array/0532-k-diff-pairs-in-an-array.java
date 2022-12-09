@@ -1,6 +1,8 @@
 class Solution {
     public int findPairs(int[] nums, int k) {
         
+        //https://leetcode.com/problems/k-diff-pairs-in-an-array/discuss/1756933/An-explanation-Going-from-O(NlogN)-greater-O(N)
+        
         Map<Integer, Integer> map = new HashMap<>();
         
         for(int num : nums){
