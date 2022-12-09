@@ -6,6 +6,8 @@ public:
         vector<int> res;
         if (!nums.size()) return res;
         unordered_map<int, int> cnt;
+        
+        
         for (auto num : nums) cnt[num]++;
         vector<vector<int>> bucket(nums.size() + 1);
         for (auto kv : cnt) {
@@ -41,19 +43,23 @@ public:
         return res;
         
     }
+    
+    
     vector<int> topKFrequent(vector<int>& nums, int k) {
         
         //1. method1
         //return method1(nums, k);
         
-        //2. method2
+        //2. method2 - heap
         return method2(nums, k);
         
-        
+        //3. Method3 - QuickSelect
         vector<int> res;
         if (!nums.size()) return res;
+        
         unordered_map<int, int> cnt;
         for (auto num : nums) cnt[num]++;
+        
         vector<pair<int, int>> num_with_cnt;
         for (auto kv : cnt) {
             num_with_cnt.push_back({kv.first, kv.second});
