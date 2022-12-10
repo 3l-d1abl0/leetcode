@@ -1,18 +1,22 @@
 //int freq[201] = {0};
 vector<int> freq(201, 0);
 
-/*struct CompareFn{
-  
-    bool operator()(int &a, int &b){
+struct Node{
+    int freq;
+    int num;
+};
+
+struct CompareFn{
+    bool operator()(Node const &a, Node const &b){
         
-        if(freq[a+100]==freq[b+100])
-            return a <b;
+        if(a.freq ==b.freq)
+            return a.num <b.num;
         
-        return freq[a+100] > freq[b+100];
+        return a.freq > b.freq;
         
     }
     
-};*/
+};
 
     
 bool compare(int &a, int &b){
@@ -28,8 +32,38 @@ bool compare(int &a, int &b){
 
 class Solution {
 public:
+    
+    vector<int> useHeap(vector<int> &nums){
+        
+        unordered_map<int, int> freq;
+        for(int ele: nums){
+            freq[ele]++;
+        }
+        
+        priority_queue<Node, vector<Node>, CompareFn> hp;
+        
+        for(auto [f, s]: freq)
+            hp.push({s, f});
+        
+        vector<int> ans;
+        while(!hp.empty()){
+            int num = hp.top().num;
+            int freq = hp.top().freq;
+            //cout<<hp.top().num<<" "<<hp.top().freq<<endl;
+            for(int i=0; i<freq; i++){
+                ans.push_back(num);
+            }
+            hp.pop();
+        }
+        
+        return ans;
+    }
+    
     vector<int> frequencySort(vector<int>& nums) {
         
+        
+        //1. method1 - use heap
+        return useHeap(nums);
         vector<int> freq(201, 0);
         //fill(freq.begin(), freq.end(), 0);
         
