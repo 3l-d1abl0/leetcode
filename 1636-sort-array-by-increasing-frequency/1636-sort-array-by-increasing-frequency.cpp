@@ -10,9 +10,9 @@ struct CompareFn{
     bool operator()(Node const &a, Node const &b){
         
         if(a.freq ==b.freq)
-            return a.num <b.num;
+            return a.num <b.num; //bigger first, descending
         
-        return a.freq > b.freq;
+        return a.freq > b.freq; //smaller freq first, ascending
         
     }
     
