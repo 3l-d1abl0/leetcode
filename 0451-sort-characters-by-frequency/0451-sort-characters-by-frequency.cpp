@@ -45,13 +45,44 @@ public:
         return ans;
     }
     
+    
+    string method3(string &s){
+        
+        unordered_map<char, int> mp;
+        
+        for(char c: s){
+            mp[c]++;
+        }
+        
+        priority_queue<pair<int, char> > maxHeap;
+        
+        for(auto &[c, f]: mp){
+            maxHeap.push({f, c});
+        }
+        
+        string ans;
+        while(!maxHeap.empty()){
+            
+            int f = maxHeap.top().first;
+            char c = maxHeap.top().second;
+            
+            ans.append(f, c);
+            maxHeap.pop();
+        }
+        
+        return ans;
+    }
+    
     string frequencySort(string s) {
         
         
         //1. sort based on frequency - TC:O(NlogN) SC: O(logN)
         //return method1(s);
         
-        //2. sort by freq, char pair
-        return method2(s);
+        //2. sort by freq, char pair - TC O(N) + )(NlogN) SC: O(N)
+        //return method2(s);
+        
+        //3. heap sort
+        return method3(s);
     }
 };
