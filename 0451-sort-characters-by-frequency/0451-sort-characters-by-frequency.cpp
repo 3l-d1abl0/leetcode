@@ -19,10 +19,39 @@ public:
         return s;
     }
     
+    string method2(string &s){
+        
+        unordered_map<char, int> mp;
+        
+        for(char c: s){
+            mp[c]++;
+        }
+        
+        vector< pair<int, char>> arr;
+        for(auto &[c, f]: mp){
+            arr.push_back({f, c});
+        }
+        
+        sort(arr.begin(), arr.end(), [](const auto &a, const auto &b){
+            //descending order by freq
+            return a.first > b.first;
+        });
+        
+        string ans;
+        for(auto &[f, c]: arr){
+            ans.append(f, c); //f times c
+        }
+        
+        return ans;
+    }
+    
     string frequencySort(string s) {
         
         
-        //1. sort based on frequency
-        return method1(s);
+        //1. sort based on frequency - TC:O(NlogN) SC: O(logN)
+        //return method1(s);
+        
+        //2. sort by freq, char pair
+        return method2(s);
     }
 };
