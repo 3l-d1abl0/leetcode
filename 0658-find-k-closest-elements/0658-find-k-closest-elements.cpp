@@ -27,36 +27,32 @@ public:
         
         vector<node> vec;
         
-        for(int i=0; i<arr.size(); i++){
-            
+        for(int i=0; i<arr.size(); i++)
             vec.push_back({abs(arr[i]-x), arr[i]});
-            
-            //cout<<vec[i].diff<<" "<<vec[i].num<<endl;
-        }
         
         sort(vec.begin(), vec.end(), cmp);
+        
+        //for(auto ele: vec)
+        //    cout<<ele.diff<<" "<<ele.num<<endl;
+        
+        vector<int> ans;
+        for(int i=0; i<k; i++){
+            ans.push_back(vec[i].num);
+        }
+        sort(ans.begin(), ans.end());
+        
+        return ans;
+        
+        
+        /*Lambda Function for sorting 
         sort(arr.begin(), arr.end(), [&](int a, int b){
-            
             return abs(a-x) == abs(b-x) ? a<b : abs(a-x)<abs(b-x);
         });
         
         sort(arr.begin(), arr.begin()+k);
         vector<int> ans(arr.begin(), arr.begin()+k);
         return ans;
-        for(auto ele: vec){
-            cout<<ele.diff<<" "<<ele.num<<endl;
-        }
-        
-        /*
-        vector<int> ans;
-        for(int i=0; i<k; i++){
-            ans.push_back(vec[i].num);
-        }
-        
-        
-        sort(ans.begin(), ans.end());
-        
-        return ans;*/
+        */
         
     }
     
@@ -147,8 +143,8 @@ public:
     vector<int> findClosestElements(vector<int>& arr, int k, int x) {
         
         
-        //1. Simple sorting - TC: O(NlogN) + O()
-        return justSort(arr, k, x);
+        //1. Simple sorting - TC: O(NlogN) + O(KlogK), SC: O(K)
+        //return justSort(arr, k, x);
         
         //2. 2 Pointer
         //return twoPointer(arr, x);
