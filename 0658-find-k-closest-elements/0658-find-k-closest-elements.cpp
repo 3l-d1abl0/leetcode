@@ -138,7 +138,7 @@ public:
                     r=mid;
                 }
                 
-            }else if(abs(arr[mid]-x) < abs(arr[mid+k]-x)){
+            }else if(abs(arr[mid]-x) <= abs(arr[mid+k]-x)){ //skip right one
                 r=mid;
             }else{
                 l=mid+1;
@@ -155,14 +155,16 @@ public:
         //1. Simple sorting - TC: O(NlogN) + O(KlogK), SC: O(K)
         //return justSort(arr, k, x);
         
-        //2. 2 Pointer - 
-        return twoPointer(arr, k, x);
+        //2. 2 Pointer - O(N)
+        //return twoPointer(arr, k, x);
         
         //3. Binary Search+2 Pointer - O(logN) + O(K)
         //return binarySearch2Pointer(arr, k, x);
         
-        //4. Just Binary Search
-        //return binarySearch(arr, k, x);
+        //4. Just Binary Search - O(logN)
+        return binarySearch(arr, k, x);
+        
+        //5. Use Heap
         
     }
 };
