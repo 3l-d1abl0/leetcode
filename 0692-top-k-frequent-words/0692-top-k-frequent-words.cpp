@@ -35,6 +35,8 @@ public:
     struct CompareFn{
         
         bool operator()(pair<int, string> &a, pair<int, string> &b){
+            // lesse freq comes first
+            //if freq equal lexi > str comes first
             return a.first == b.first ? a.second < b.second : a.first > b.first;
         }
     };
