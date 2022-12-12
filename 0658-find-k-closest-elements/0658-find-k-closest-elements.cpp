@@ -96,10 +96,11 @@ public:
     
     vector<int> binarySearch2Pointer(vector<int>& arr, int k, int x) {
         
-        int R = lowerBound(arr, x);
+        int R = lowerBound(arr, x); //find the number closest to x (>=x)
         int L = R-1;
         int N = arr.size();
         
+        //expand to the left and right
         while(k--){
             
             if(R>=N ||( L>=0 && abs(arr[L]-x) <= (arr[R]-x)))
@@ -108,7 +109,7 @@ public:
                 R++;
             
         }
-        cout<<L<<" "<<R<<endl;
+        //cout<<L<<" "<<R<<endl;
         return vector<int> (arr.begin()+L+1, arr.begin()+R);
     }
     
@@ -146,10 +147,10 @@ public:
         //1. Simple sorting - TC: O(NlogN) + O(KlogK), SC: O(K)
         //return justSort(arr, k, x);
         
-        //2. 2 Pointer
+        //2. 2 Pointer - 
         //return twoPointer(arr, x);
         
-        //3. Binary Search+2 Pointer
+        //3. Binary Search+2 Pointer - O(logN) + O(K)
         return binarySearch2Pointer(arr, k, x);
         
         //4. Just Binary Search
