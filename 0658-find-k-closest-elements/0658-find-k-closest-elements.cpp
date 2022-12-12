@@ -61,7 +61,7 @@ public:
      
         int l = 0, r= arr.size()-1;
         
-        while(r-l>=k){
+        while(r-l>=k){//size of subset >= k
             
             if(abs(arr[l]-x) <= abs(arr[r]-x) )
                 r--;
@@ -69,7 +69,14 @@ public:
                 l++;
         }
         
+        cout<<l<<" "<<r<<endl;
+        vector<int> ans;
         return vector<int> (arr.begin()+l, arr.begin()+r+1);
+        //for(int i=l; i<=r; i++)
+        //    ans.push_back(arr[i]);
+        
+        
+        return ans;
         
     }
     
@@ -141,6 +148,7 @@ public:
         
         return vector<int> (arr.begin() + l, arr.begin()+l+k);
     }
+    
     vector<int> findClosestElements(vector<int>& arr, int k, int x) {
         
         
@@ -148,13 +156,13 @@ public:
         //return justSort(arr, k, x);
         
         //2. 2 Pointer - 
-        //return twoPointer(arr, x);
+        return twoPointer(arr, k, x);
         
         //3. Binary Search+2 Pointer - O(logN) + O(K)
-        return binarySearch2Pointer(arr, k, x);
+        //return binarySearch2Pointer(arr, k, x);
         
         //4. Just Binary Search
-        return binarySearch(arr, k, x);
+        //return binarySearch(arr, k, x);
         
     }
 };
