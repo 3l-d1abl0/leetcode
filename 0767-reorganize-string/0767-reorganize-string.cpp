@@ -2,7 +2,10 @@ class Solution {
 public:
     string reorganizeString(string s) {
         
+        //Method2 - Greedt
         
+        
+        //Method1 - heap
         unordered_map<char, int> mp;
         
         int freq =-1;
