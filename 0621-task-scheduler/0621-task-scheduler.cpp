@@ -8,7 +8,8 @@ struct CompareFn{
 
 class Solution {
 public:
-    int leastInterval(vector<char>& tasks, int n) {
+    
+    int method1(vector<char> &tasks, int n){
         
         
         unordered_map<char, int> freq;
@@ -54,5 +55,36 @@ public:
         
         
         return ans;
+        
+    }
+    
+    int method2(vector<char> &tasks, int n){
+        
+        unordered_map<char, int> mp;
+        int maxFreq = 0;
+        for(char ch:tasks){
+            mp[ch]++;
+            maxFreq = max(maxFreq, mp[ch]);
+        }
+        
+        int maxCycles = (n+1) *(maxFreq-1);
+        
+        for(auto ele: mp)
+            if(maxFreq == ele.second)
+                maxCycles++;
+        
+        //cout<<maxCycles<<endl;
+        return max((int)tasks.size(), maxCycles);
+        
+        
+    }
+    
+    int leastInterval(vector<char>& tasks, int n) {
+        
+        //1. method1 - O(LlogK)
+        //return method1(tasks, n);
+        
+        //2. method2 - O(K)
+        return method2(tasks, n);
     }
 };
