@@ -1,39 +1,28 @@
 class FreqStack {
-    
-private:
-    int seq;
-    unordered_map<int, int> freq;
-    
-    struct Node{
-        int val, freq, seq;
-    };
-    
-        struct CompareFn{
-        
-        bool operator()(Node &a, Node &b){
-            
-            return a.freq == b.freq ? a.seq < b.seq : a.freq < b.freq;
-        }
-    };
-
-    
-    priority_queue<Node, vector<Node> , CompareFn> maxH;
-    
 public:
+    
+     unordered_map<int, int> freq;
+    unordered_map<int, stack<int>> m;
+    int maxfreq = 0;
+    
     FreqStack() {
-        seq =0;
+        
     }
     
-    void push(int val) {
-        maxH.push({val, ++freq[val], ++seq});
+    void push(int x) {
+        
+        maxfreq = max(maxfreq, ++freq[x]);
+        m[freq[x]].push(x);
+        
     }
     
     int pop() {
-        auto ele = maxH.top();
-        maxH.pop();
-        freq[ele.val]--;
-        //cout<<ele.val<<" "<<ele.freq<<" "<<ele.seq<<endl;
-        return ele.val;
+        
+        int x = m[maxfreq].top();
+        m[maxfreq].pop();
+        if (!m[freq[x]--].size()) maxfreq--;
+        return x;
+        
     }
 };
 
