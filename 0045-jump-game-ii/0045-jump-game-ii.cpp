@@ -30,7 +30,11 @@ public:
         //return bfs2(nums);
         
         //12ms
-        return minJump(nums);
+        //return minJump(nums);
+        
+        //Linear
+        return linear(nums);
+        
         
     }
     
@@ -142,6 +146,32 @@ public:
         }//for
         
         return jump + 1;
+    }
+    
+    
+    int linear(vector<int> &nums){
+        
+        int steps =0;
+        int l =0, r = 0;
+        while(r<nums.size()-1){
+            
+            int farthest = 0;
+            
+            //get the farthest Range
+            for(int i=l; i<=r; i++){
+                farthest = max(farthest, i+nums[i]);
+            }
+            
+            //next left border
+            l = r+1;
+            //next right border
+            r= farthest;
+            
+            steps++;
+        }
+        
+        
+        return steps;
     }
     
 };
