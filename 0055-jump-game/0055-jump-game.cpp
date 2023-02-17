@@ -42,8 +42,8 @@ public:
     
     bool canJump(vector<int>& nums) {
         
-       vector<int> dp(nums.size(), -1);
-       return jump(nums, 0, dp)==1;
+       //vector<int> dp(nums.size(), -1);
+       //return jump(nums, 0, dp)==1;
         
         return singleLoop(nums);
         
