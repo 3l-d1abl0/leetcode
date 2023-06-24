@@ -44,7 +44,7 @@ public:
         priority_queue<tuple<long long, int>, vector<tuple<long long, int>>, greater<tuple<long long, int>> > pq;//min Queue
         
         
-        vector<long long> nodeWt(N, 1e13);
+        //vector<long long> nodeWt(N, 1e13);
         vector<bool> isMst(N, false);
         
         //nodeWt[0] =0;
