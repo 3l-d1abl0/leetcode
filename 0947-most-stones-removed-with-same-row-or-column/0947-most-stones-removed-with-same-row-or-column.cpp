@@ -67,11 +67,37 @@ public:
     }
 };
 
-
-class Solution {
-public:
-    int removeStones(vector<vector<int>>& stones) {
+void dfs(vector<vector<int>>& stones, int index, vector<bool>& visited) {
+        visited[index] = true;
         
+        int n = stones.size();
+        for(int i = 0; i<n; i++) {
+            if(!visited[i] &&
+               ((stones[i][0] == stones[index][0]) || (stones[i][1] == stones[index][1]))) {
+                dfs(stones, i, visited);
+            }
+        }
+}
+
+int method1(vector<vector<int>>& stones){
+
+        int n = stones.size();
+        vector<bool> visited(n, false);
+        
+        int count = 0;
+        for(int i = 0; i<n; i++) {
+            if(visited[i])
+                continue;
+            dfs(stones, i, visited);
+            count++;
+        }
+        
+        return n - count;
+}
+    
+
+int method2(vector<vector<int>> &stones){
+    
         int N = stones.size();
         int maxRow=-1, maxCol =-1;
         for(auto row: stones){
@@ -79,6 +105,17 @@ public:
             maxCol = max(row[1], maxCol);
         }
         
+        /*
+        Treat each row/column as node
+
+        2x3 grid
+        R1 - node1
+        R2 - node2
+        C1 - node3
+        C2 - node4
+        C3 - node5
+        */
+
         DisjointSet ds(maxCol+maxRow+1);
         
         for(auto row: stones){
@@ -88,5 +125,17 @@ public:
         
         //cout<<ds.componentSize()<<endl;
         return N-ds.componentSize();
+    
+}
+
+class Solution {
+public:
+    int removeStones(vector<vector<int>>& stones) {
+        
+        
+        return method1(stones); ///dfs
+        
+        //return method2(stones); //union-find
+        
     }
 };
