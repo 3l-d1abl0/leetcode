@@ -19,7 +19,61 @@ public:
     */
     
     int totalCam = 0;
+    
+    unordered_set<TreeNode* > covered;
     int minCameraCover(TreeNode* root) {
+        
+        
+        //1. Method1
+        //return method1(root);
+        
+        
+        //2. Method2
+        return method2(root);
+        
+        
+        //3.
+        
+    }
+    
+    int method2(TreeNode *root){
+        covered.insert(NULL);
+        dfsMethod2(root, NULL);
+        return totalCam;
+    }
+    
+    
+    void dfsMethod2(TreeNode *root, TreeNode *par){
+        
+        if(root==NULL)
+            return;
+        
+        dfsMethod2(root->left, root);
+        dfsMethod2(root->right, root);
+        
+        /*
+            If any of the leaf is not covered - current node needs to be covered.
+            If there is no parent and the current node is not covered - current node needs to be covered
+            
+            If the current node is covered, its parent and all child are covered by camera
+        */
+        
+        if( covered.find(root->left) == covered.end() || 
+            covered.find(root->right) == covered.end()||
+          par==NULL && covered.find(root) == covered.end()){
+            
+            totalCam++;
+            
+            covered.insert(root);
+            covered.insert(par);
+            covered.insert(root->left);
+            covered.insert(root->right);
+            
+        }
+        
+    }
+    
+    int method1(TreeNode *root){
         
         int status = dfs(root);
         
@@ -28,6 +82,7 @@ public:
             totalCam++;
         
         return totalCam;
+        
     }
     
     int dfs(TreeNode* root){
