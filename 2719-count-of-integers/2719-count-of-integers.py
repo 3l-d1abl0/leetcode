@@ -1,32 +1,34 @@
-mod = 10**9 + 7
-
-def digitDP(s, minSum, maxSum):
-	n = len(s)
-
-	dp = [[[0]*(maxSum+20) for _ in range(2)] for _ in range(n+1)]
-
-	# Empty prefix with sum=0
-	dp[0][1][0] = 1
-
-	for i in range(n):
-		for tight in range(2):
-			for sm in range(maxSum+1):
-				up = int(s[i]) if tight else 9
-				for digit in range(up + 1):
-					dp[i+1][tight and (digit == up)][sm+digit] += dp[i][tight][sm]
-					dp[i+1][tight and (digit == up)][sm+digit] %= mod
-
-	res = 0
-	for i in range(minSum, maxSum+1):
-		res += (dp[n][1][i] + dp[n][0][i])
-		res %= mod
-
-	return res % mod
-
-
 class Solution:
-	def count(self, num1: str, num2: str, minSum: int, maxSum: int) -> int:
-		res = digitDP(num2,minSum,maxSum) 
-		res -= digitDP(str(int(num1)-1),minSum,maxSum)
-		return res % mod
+		def count(self, num1: str, num2: str, min_sum: int, max_sum: int) -> int:
+			s = ""
+			mod = 10**9 + 7
 
+			@lru_cache(None)
+			def dfs(idx, tight, sm):  
+				nonlocal s,min_sum,max_sum,mod
+
+				if idx == len(s):
+					if sm >= min_sum and sm <= max_sum:
+						return 1
+					return 0
+
+				up = int(s[idx]) if tight else 9  
+				res = 0
+				for digit in range(up + 1):
+					newSum = sm + digit
+					if newSum > max_sum: # next digits are more greater than curr so newSum always greater
+						break
+					res += dfs(idx + 1, tight and digit == up, newSum)
+					res %= mod
+				return res
+
+
+			s = num2
+			res = dfs(0,1,0)
+
+			dfs.cache_clear()  # clear the dp states for new dfs
+
+			s = str(int(num1)-1)
+			res -= dfs(0,1,0)
+
+			return res % mod
