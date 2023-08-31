@@ -28,17 +28,19 @@ public:
     
     vector<int> method2(vector<int> &nums, int k){
         
-        priority_queue<pair<int, int>, vector<pair<int, int>>, greater<pair<int, int>>> pq;
+        
+        //Min Heap
+        priority_queue<pair<int, int>, vector<pair<int, int>>, greater<pair<int, int>>> minHeap;
         unordered_map<int, int> cnt;
         for (auto num : nums) cnt[num]++;
         for (auto kv : cnt) {
-            pq.push({kv.second, kv.first});
-            while (pq.size() > k) pq.pop();
+            minHeap.push({kv.second, kv.first});
+            while (minHeap.size() > k) minHeap.pop();
         }
         vector<int> res;
-        while (!pq.empty()) {
-            res.push_back(pq.top().second);
-            pq.pop();
+        while (!minHeap.empty()) {
+            res.push_back(minHeap.top().second);
+            minHeap.pop();
         }
         return res;
         
@@ -47,11 +49,11 @@ public:
     
     vector<int> topKFrequent(vector<int>& nums, int k) {
         
-        //1. method1
+        //1. method1 - Freq Count - Bucket - O(N*avg Freq)
         //return method1(nums, k);
         
-        //2. method2 - heap
-        return method2(nums, k);
+        //2. method2 - heap - Nlog(K)
+        //return method2(nums, k);
         
         //3. Method3 - QuickSelect
         vector<int> res;
