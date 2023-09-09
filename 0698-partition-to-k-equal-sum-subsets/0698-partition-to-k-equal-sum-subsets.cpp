@@ -37,9 +37,50 @@ public:
         
         vector<bool> taken(nums.size(), false);
         
+        //sort(nums.begin(), nums.end());
         
         return recur(0, totalSum/k, k, nums, 0, taken);
         
+    }
+    
+    
+bool method2(vector<int> &nums, int k){
+        
+        int totalSum =0;
+        totalSum = accumulate(nums.begin(), nums.end(), totalSum );
+        
+        if(totalSum <k || totalSum%k !=0 )
+            return false;
+        
+        int N = nums.size();
+        int sz = 1<<N;
+        
+        vector<int> dp(sz, -1);
+        
+        int subsetSum = totalSum/k;
+        
+        
+        dp[0]=0; //we can alwasy make zero
+        for(int mask=0; mask<sz; mask++){
+
+            if(dp[mask]==-1)
+                continue;
+            
+            for(int i=0; i<N; i++){
+                
+                if( !(mask & (1<<i)) && dp[mask] +nums[i] <= subsetSum ){
+                    
+                    
+                    int new_mask = (mask | (1<<i));   //new state/ mask - set the ith bit
+                    
+                    dp[new_mask] = (dp[mask]+nums[i])%subsetSum;
+                }
+                
+            }//for i
+        
+        }//for mask
+        
+        return dp[sz-1]==0;
     }
     
     bool canPartitionKSubsets(vector<int>& nums, int k) {
@@ -55,6 +96,9 @@ public:
             look for new combo in K=1, then try for k=2
         */
         
-        return method1(nums, k);
+        //return method1(nums, k);
+        
+        
+        return method2(nums, k);
     }
 };
