@@ -1,29 +1,42 @@
 class Solution {
 public:
-    int distributeCookies(vector<int>& cookies, int k) {
-        int n = cookies.size();
-        vector<vector<int>>dp(k + 1, vector<int>(1ll << n, INT_MAX));
+    int dfs(int i, vector<int>& distribute, vector<int>& cookies, int k, int zeroCount) {
+        // If there are not enough cookies remaining, return INT_MAX 
+        // as it leads to an invalid distribution.
+        if (cookies.size() - i < zeroCount) {
+            return INT_MAX;
+        }
+
+        // After distributing all cookies, return the unfairness of this
+        // distribution.
+        if (i == cookies.size()) {
+            return *max_element(distribute.begin(), distribute.end());
+        }
+
+        // Try to distribute the i-th cookie to each child, and update answer
+        // as the minimum unfairness in these distributions.
+        int answer = INT_MAX;
+        for (int j = 0; j < k; ++j) {
+            
+            if(distribute[j]+cookies[i]> answer)
+                continue;
+            
+            zeroCount -= distribute[j] == 0 ? 1 : 0;
+            distribute[j] += cookies[i];
+            
+            // Recursively distribute the next cookie.
+            answer = min(answer, dfs(i + 1, distribute, cookies, k, zeroCount)); 
+            
+            distribute[j] -= cookies[i];
+            zeroCount += distribute[j] == 0 ? 1 : 0;
+        }
         
-        vector<int>sum(1ll << n);
-        for(int mask = 0;mask<(1ll << n); mask++){
-            int total = 0;
-            for(int i = 0;i<n;i++){
-                if(mask & (1ll << i)){
-                    total += cookies[i];
-                }
-            }
-            sum[mask] = total;
-        }
+        return answer;
+    }
+    
+    int distributeCookies(vector<int>& cookies, int k) {
+        vector<int> distribute(k, 0);
 
-        dp[0][0] = 0;
-        for(int person = 1;person<=k;person++){
-            for(int mask = 0;mask<(1ll << n);mask++){
-                for(int submask=mask;submask;submask=(submask - 1)&mask){
-                    dp[person][mask] = min(dp[person][mask], max(sum[submask], dp[person - 1][mask ^ submask]));
-                }
-            }
-        }
-
-        return dp[k][(1ll << n) - 1];
-    }   
+        return dfs(0, distribute, cookies, k, k);
+    }
 };
