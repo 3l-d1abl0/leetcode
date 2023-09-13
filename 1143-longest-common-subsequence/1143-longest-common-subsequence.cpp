@@ -22,22 +22,9 @@ public:
         return memo[idx1][idx2] = maxLen;
     }
         
-    
-    
-    
-    
-    int longestCommonSubsequence(string str1, string str2) {
-        
-        int N = str1.length();
-	    int M = str2.length();
-        
-        //1. Top Down - memoization
-        vector< vector<int>> memo(N, vector<int>(M, -1));
-        return topDown(0, str1, N, 0, str2, M, memo);
-        
-        
-        
-	    vector<vector<int>> dp(N+1, vector<int>(M+1, 0));
+    int bottomUp(string str1, int N, string str2, int M){
+
+        vector<vector<int>> dp(N+1, vector<int>(M+1, 0));
 
         for(int i=1; i<=N; i++){
             for(int j=1; j<=M; j++){
@@ -50,6 +37,24 @@ public:
         }
 
 
-	return dp[N][M];
+	    return dp[N][M];
+        
+    }
+    
+    
+    
+    int longestCommonSubsequence(string str1, string str2) {
+        
+        int N = str1.length();
+	    int M = str2.length();
+        
+        //1. Top Down - memoization
+        vector< vector<int>> memo(N, vector<int>(M, -1));
+        //return topDown(0, str1, N, 0, str2, M, memo);
+        
+        
+        //2. Bottom Up - Tabulation
+        return bottomUp(str1, N, str2, M);
+
     }
 };
