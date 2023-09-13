@@ -1,35 +1,42 @@
 class Solution {
 public:
     
-    bool recur(int idx1, string &s, int N, int idx2, string &p, int M, vector<vector<int>> &memo){
+    bool recur(int sidx, string &s, int N, int pidx, string &p, int M, vector<vector<int>> &memo){
         
         
-        if(idx1==N && idx2==M)
+        //Both have been exhausted
+        if(sidx==0 && pidx==0)
                 return true;
         
-        if(idx2==M && idx1<N)
+        //pattern has exhausted but string hasnt
+        if(sidx>0 && pidx==0)
             return false;
 
-
-        if(idx1==N && idx2<M){
-            for(int i=idx2; i<M; i++){
-                if(p[i]!='*')
+        
+        //String has finished but we have remaining pattern
+        //just check if it is * or not
+        if(sidx==0 && pidx>0){
+            
+            for(int i=pidx; i>=1; i--){
+            
+                if(p[i-1]!='*')   //stop if is not a *
                     return false;
             }
             return true;
         }
         
         
-        if(memo[idx1][idx2]!=-1)
-            return memo[idx1][idx2];
+        if(memo[sidx][pidx]!=-1)
+            return memo[sidx][pidx];
         
         bool ans = false;
         
-        //cout<<s[idx1]<<" "<<p[idx2]<<endl;
-        if (p[idx2]=='*'){
-            ans = recur(idx1+1, s, N, idx2, p, M, memo) || recur(idx1, s, N, idx2+1, p, M, memo);
-        }else if(s[idx1]==p[idx2] || p[idx2]=='?'){
-                ans = recur(idx1+1, s, N, idx2+1, p, M, memo);
+        
+        
+        if (p[pidx-1]=='*'){  //match one | doesnt match
+            ans = recur(sidx-1, s, N, pidx, p, M, memo) || recur(sidx, s, N, pidx-1, p, M, memo);
+        }else if(s[sidx-1]==p[pidx-1] || p[pidx-1]=='?'){
+                ans = recur(sidx-1, s, N, pidx-1, p, M, memo);
         }else{
                 //cout<<"NOTEQUAL"<<endl;
                 ans = false;
@@ -37,47 +44,46 @@ public:
         
             
         
-        return memo[idx1][idx2] = ans;
+        return memo[sidx][pidx] = ans;
         
     }
     
+    
+    
     bool bottomUp(string &s, int N, string &p, int M){
         
-        vector<vector<int>> dp(N+1, vector<int> (M+1, false));
+        vector<vector<bool>> dp(N+1, vector<bool> (M+1, false));
         
+        //both readched end
         //BaseCases
-        dp[N][M] = true;
+        dp[0][0] = true;
         
-        for(int i=0; i<N; i++)
-            dp[i][M] = false;
+        //pattern has ended but string is not
+        for(int sidx=1; sidx<=N; sidx++)
+            dp[sidx][0] = false;
 
         
-        ///for every index i less than M
-        for(int i=M-1; i>=0; i--){
-            
-            bool flag = true;
-            
-            for(int j=i; j<M; j++){
+        //String has finished but we have remaining pattern
+        //just check if it is * or not
+        //for every sidx ==0 && pattern index > 0, check if its * or not
+        bool status = true;
+        for(int pidx=1; pidx<=M; pidx++){
+            if(p[pidx-1]!='*')   //stop if is not a *
+                status = false;
 
-                if(p[j]!='*'){
-                    flag = false;
-                    break;
-                }
-
-                
-            }
-            
-            dp[N][i] = flag;
+            dp[0][pidx] = status;
         }
         
-        for(int i=N-1; i>=0; i--){
+        
+        
+        for(int i=1; i<=N; i++){
             
-            for(int j=M-1; j>=0; j--){
+            for(int j=1; j<=M; j++){
                 
-                if (p[j]=='*'){
-                    dp[i][j] = dp[i+1][j] || dp[i][j+1];
-                }else if(s[i]==p[j] || p[j]=='?'){
-                        dp[i][j] = dp[i+1][j+1];
+                if (p[j-1]=='*'){
+                    dp[i][j] = dp[i-1][j] || dp[i][j-1];
+                }else if(s[i-1] == p[j-1] || p[j-1]=='?'){
+                        dp[i][j] = dp[i-1][j-1];
                 }else{
                         dp[i][j] = false;
                 }
@@ -86,21 +92,37 @@ public:
         }
         
         
-        return dp[0][0];
+        //print(dp);
+        
+        return dp[N][M];
         
     }
     
+    void print(vector<vector<bool>> &dp){
+
+
+        for(auto row: dp){
+            for(int ele: row){
+                cout<<ele<<" ";
+            }
+            cout<<endl;
+        }
+    }
+        
     bool isMatch(string s, string p) {
         
         int N = s.size();
         int M = p.size();
         
-        //1. Recursion + Backtracking
-        //vector<vector<int>> memo(N, vector<int> (M, -1));
-        //return recur(0, s, N, 0, p, M, memo);
+        //1. Recursion + Backtracking - topDown
+        vector<vector<int>> memo(N+1, vector<int> (M+1, -1));
+        return recur(N, s, N, M, p, M, memo);
         
         
         //2. Botom Up
-        return bottomUp(s, N, p, M);
+        //return bottomUp(s, N, p, M);
+        
+        
+        //return bottomUpOpti(s, N, p, M);
     }
 };
