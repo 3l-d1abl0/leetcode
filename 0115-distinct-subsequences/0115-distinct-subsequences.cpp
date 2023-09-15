@@ -17,24 +17,32 @@ public:
     
     int recur(int idx1, string &s, int N, int idx2, string &t, int M, vector<vector<int>> &memo){
         
-        if(idx2==M) return 1;
-        if(idx1==N) return 0;
+        //the pattern has ended
+        if(idx2==0) return 1;
+        
+        //the string has ended
+        if(idx1==0) return 0;
         
         if(memo[idx1][idx2]!=-1)
             return memo[idx1][idx2];
         
         //skip this - OR this does not match
-        int exclude = recur(idx1+1, s, N, idx2, t, M, memo);
-        int include = 0;
+        int ans = 0;
         
         
-        if(s[idx1]==t[idx2]){
+        if(s[idx1-1]==t[idx2-1]){
             
-            include = recur(idx1+1, s, N, idx2+1, t, M, memo);
+            int matches = recur(idx1-1, s, N, idx2-1, t, M, memo) + recur(idx1-1, s, N, idx2, t, M, memo);
+            ans = matches;
+            
+        }else{
+            
+            int doesNot = recur(idx1-1, s, N, idx2, t, M, memo);
+            ans = doesNot;
         }
         
         
-        return memo[idx1][idx2] = include + exclude;
+        return memo[idx1][idx2] = ans;
     }
     
     int bottomUp(string &s, int N, string &t, int M){
@@ -44,32 +52,33 @@ public:
         //base cases
         //all idx ==M =1
         
-        /*for(int idx2 =0 ; idx2<=M; idx2++ ){
-            dp[N][idx2] =0;
-        }*/
+        //When string goes empty
+        for(int idx2=0; idx2<=M; idx2++)
+            dp[0][idx2] = 0;
         
+        //WHen pattern goes empty
         for(int idx1=0; idx1<=N; idx1++){
-            dp[idx1][M] =1;
+            dp[idx1][0] =1;
         }
         
         //rint2D(dp,"1.");
         //cout<<"------"<<N+1<<M+1<<endl;
-        for(int idx1 = N-1; idx1>=0; idx1--){
+        for(int idx1 = 1; idx1<=N; idx1++){
             
-            for(int idx2= M-1; idx2>=0; idx2--){
+            for(int idx2= 1; idx2<=M; idx2++){
                 
-                //1.exclude /skip
-                dp[idx1][idx2] = dp[idx1+1][idx2];
-                
-                //2. Include
-                if(s[idx1]==t[idx2])
-                    dp[idx1][idx2] += dp[idx1+1][idx2+1];
+                //1. Include+skip
+                if(s[idx1-1]==t[idx2-1]){
+                    dp[idx1][idx2] = dp[idx1-1][idx2-1]+dp[idx1-1][idx2];
+                }else{  //2. skip
+                    dp[idx1][idx2] = dp[idx1-1][idx2];
+                }
                 
             }
         }
         
         //print2D(dp,"2.");
-        return dp[0][0];
+        return dp[N][M];
         
     }
     
@@ -78,9 +87,9 @@ public:
         int N = s.size();
         int M = t.size();
         
-        //1. recursion + memo
-        //vector<vector<int>> memo(N, vector<int> (M, -1));
-        //return recur(0, s, N, 0, t, M, memo);
+        //1. recursion + memo (topDown)
+        //vector<vector<int>> memo(N+1, vector<int> (M+1, -1));
+        //return recur(N, s, N, M, t, M, memo);
         
         
         //2. Bottom Up DP
