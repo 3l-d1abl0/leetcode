@@ -11,32 +11,33 @@ public:
         vector<vector<int>> dp(N+1, vector<int> (M+1, 0));
         
         //Base case - all M is 0
-        /*for(int idx1=N-1; idx1>=0; idx1--)
-            dp[idx1][M] =0;
+        for(int idx1=0; idx1<=N; idx1++)
+            dp[idx1][0] =0;
         
         //base case all N is 0
-        for(int idx2=M-1; idx2>=0; idx2--)
-            dp[N][idx2] =0;
-        */
+        for(int idx2=0; idx2<=M; idx2++)
+            dp[0][idx2] =0;
         
         
-        for(int idx1= N-1; idx1>=0; idx1--){
+        
+        
+        for(int idx1= 1; idx1<=N; idx1++){
             
-            for(int idx2=M-1; idx2>=0; idx2--){
+            for(int idx2=1; idx2<=M; idx2++){
             
-                if(str1[idx1] == str2[idx2]){
+                if(str1[idx1-1] == str2[idx2-1]){
                     
-                    dp[idx1][idx2] = 1+ dp[idx1+1][idx2+1];
+                    dp[idx1][idx2] = 1+ dp[idx1-1][idx2-1];
                     
                 }else{
-                    dp[idx1][idx2] = max(dp[idx1+1][idx2], dp[idx1][idx2+1]);
+                    dp[idx1][idx2] = max(dp[idx1-1][idx2], dp[idx1][idx2-1]);
                 }
                     
             }
         }//for
         
         
-        return dp[0][0];
+        return dp[N][M];
         
     }
     
@@ -48,6 +49,16 @@ public:
     }
     
     int minInsertions(string s) {
+     
+        /*
+            Find the longes palindromic subsequence,
+            find the rest of the characters.
+            If you delete those characters string becomes palindrome.
+            If you insert those characters in the stringm, yo can make it Palindrome.
+            
+            Hence those are the min number of insertion.
+        
+        */
         
         return s.size() - LPS(s);
     }
