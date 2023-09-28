@@ -21,14 +21,16 @@ public:
         for(int i=0; i<N; i++){    
             
             while(!st.empty() && heights[st.top()]> heights[i]){
+                
+                /*for top() i is the smaller element on its left
+                */
                 right[st.top()]= i-st.top();
                 st.pop();
             }
                                      
             if(!st.empty())
-                //left[i] = -1;
-            //else                                     
                 left[i] = i-st.top();
+            /*for i top() is the smaller element on its left*/
                                      
             st.push(i);
             
