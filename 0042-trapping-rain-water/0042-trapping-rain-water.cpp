@@ -69,9 +69,18 @@ public:
         stack<int> st;
         for(int i=0; i<N; i++){
             
-            while(!st.empty() && h[i] > h[st.top()]){
+            while(!st.empty() && h[st.top()] < h[i]){
                 
                 int top = st.top(); st.pop();
+                /*
+                    At this point:
+                    [i] is on the right of [top] and is Greater than [top]
+                    
+                    [st.top()] is on left of [top] and is greater than it
+                    
+                    thats all we need
+                
+                */
                 
                 if(st.empty()) break;
                 
@@ -90,12 +99,14 @@ public:
     
     int trap(vector<int>& h) {
         
-        //linear- max of left right
+        //linear- max of left right- 14ms 21MB
         //return method1(h);
         
-        return method2(h);
-        
-        //return method3(h);
+        //Two Pointer - 16ms 20MB
+        //return method2(h);
+
+        //Stack - 10ms = 20.7MB
+        return method3(h);
     }
                        
 
