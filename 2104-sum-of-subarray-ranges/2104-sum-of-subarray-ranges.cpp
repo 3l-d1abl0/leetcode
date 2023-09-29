@@ -46,6 +46,10 @@ public:
     
     long long subArrayRanges(vector<int>& nums) {
         
+        /*
+            Same Logic As : https://leetcode.com/problems/sum-of-subarray-minimums/
+        */
+        
         Arr ans[nums.size()];
         
         for(int i=0; i<nums.size(); i++){
