@@ -32,7 +32,7 @@ public:
     
     int rotatedBSItr(vector<int> &nums, int target, int l, int r){
         
-        while(l<r){
+        while(l<=r){
             
             int mid = l+(r-l)/2;
             
@@ -41,27 +41,22 @@ public:
             
             if(nums[l]<=nums[mid]){//ledt side is sorted
                 
-                if(nums[l]<=target && target< nums[mid])
+                if(nums[l]<=target && target<= nums[mid])
                     r= mid-1;
                 else
                     l=mid+1;
                 
             }else{  //right side is sorted
                 
-                if(nums[mid]<target && target <=nums[r])
+                if(nums[mid]<=target && target <=nums[r])
                     l=mid+1;
                 else
                     r=mid-1;
             }
             
-        }
-        //l==r
-        //cout<<l<<" "<<r<<endl;
-        if(nums[l]==target)
-            return l;
-
-        else
-            return -1;
+        }//while
+        
+         return -1;
     }
     
     int search(vector<int>& nums, int target) {
