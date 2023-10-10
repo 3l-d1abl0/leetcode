@@ -5,7 +5,7 @@
 <p>Return the least weight capacity of the ship that will result in all the packages on the conveyor belt being shipped within <code>days</code> days.</p>
 
 <p>&nbsp;</p>
-<p><strong>Example 1:</strong></p>
+<p><strong class="example">Example 1:</strong></p>
 
 <pre><strong>Input:</strong> weights = [1,2,3,4,5,6,7,8,9,10], days = 5
 <strong>Output:</strong> 15
@@ -19,7 +19,7 @@
 Note that the cargo must be shipped in the order given, so using a ship of capacity 14 and splitting the packages into parts like (2, 3, 4, 5), (1, 6, 7), (8), (9), (10) is not allowed.
 </pre>
 
-<p><strong>Example 2:</strong></p>
+<p><strong class="example">Example 2:</strong></p>
 
 <pre><strong>Input:</strong> weights = [3,2,2,4,1,4], days = 3
 <strong>Output:</strong> 6
@@ -29,7 +29,7 @@ Note that the cargo must be shipped in the order given, so using a ship of capac
 3rd day: 1, 4
 </pre>
 
-<p><strong>Example 3:</strong></p>
+<p><strong class="example">Example 3:</strong></p>
 
 <pre><strong>Input:</strong> weights = [1,2,3,1,1], days = 4
 <strong>Output:</strong> 3
@@ -46,4 +46,5 @@ Note that the cargo must be shipped in the order given, so using a ship of capac
 <ul>
 	<li><code>1 &lt;= days &lt;= weights.length &lt;= 5 * 10<sup>4</sup></code></li>
 	<li><code>1 &lt;= weights[i] &lt;= 500</code></li>
-</ul></div>
+</ul>
+</div>
