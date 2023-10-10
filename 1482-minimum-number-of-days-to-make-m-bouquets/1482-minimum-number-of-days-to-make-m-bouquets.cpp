@@ -1,7 +1,11 @@
 class Solution {
 public:
-    int calBou(vector<int> &bloomDay, int m, int k, int mid){
+    int calBou(vector<int> &bloomDay, int k, int mid){
+        /*
         
+            This function finds the total number of bouquets one can make on 'mid'th day
+            with k adjacent flowers
+        */
         int bo =0, idx =0;
         while(idx<bloomDay.size()){
             
@@ -42,7 +46,7 @@ public:
             int mid = l+(r-l)/2;
             
             //cout<<l<<" "<<mid<<" "<<r<<endl;
-            if(calBou(bloomDay, m, k, mid) >= m)
+            if(calBou(bloomDay, k, mid) >= m)
                 r=mid;
             else
                 l=mid;
