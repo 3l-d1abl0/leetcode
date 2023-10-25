@@ -1,11 +1,4 @@
 
-class Compare
-{
-    public:
-        bool operator()(pair<int,int> a, pair<int,int> b){
-            return a.second>b.second;
-        }
-};
 
 
 class Solution {
@@ -30,7 +23,10 @@ public:
             
             if(prof.empty())
                 return W;
-            
+            /*
+            Of all the projects that can be completed,
+            get the one with max profit
+            */
             W+= prof.top();
             prof.pop();
             
