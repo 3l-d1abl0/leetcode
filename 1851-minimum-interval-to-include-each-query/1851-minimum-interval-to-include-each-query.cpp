@@ -17,7 +17,7 @@ public:
         auto comp = [](const pair<int, int> &a, const pair<int, int> &b){
             
             if((a.second -a.first) == (b.second - b.first))
-                return a.second < b.second;
+                return a.first > b.first;
 
             
             return (a.second -a.first) > (b.second - b.first); //smallest first
