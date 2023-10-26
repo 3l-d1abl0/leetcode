@@ -1,7 +1,7 @@
 struct CompareFn{
     
     bool operator()(pair<char, int> &a, pair<char, int> &b){
-        return a.second < b.second;
+        return a.second < b.second; //Max Frequency First
     }
     
 };
@@ -10,7 +10,22 @@ class Solution {
 public:
     
     int method1(vector<char> &tasks, int n){
+       /*
+        if n=2
+        A__A - There is a Cycle of if Size n+1, obly after n+1 terms any character can be repeated
         
+        pick (n+1) characters (at max) from the Heap
+        
+        put them in a Wait Q.
+        pick each ele in waitQ , subtract their freq and add them back to the heap
+        
+        if the heap is empty, no more elements to process
+        > the cycle might no thave been completerd
+        
+        if heap is not empty 
+        > full cycle has been completed
+       
+       */ 
         
         unordered_map<char, int> freq;
         for(char ch: tasks)
@@ -28,14 +43,14 @@ public:
             queue< pair<char, int> > waitQ;
             
             //process n+1 elements from Heap
-            for(int i=1; i<=cycle; i++){
+            for(int i=1; i<=cycle && !maxH.empty(); i++){
                 
-                if(!maxH.empty()){
+                //if(!maxH.empty()){
                     waitQ.push(maxH.top());
                     maxH.pop();
 
                     time++;
-                }
+                //}
                 
             }
             
@@ -50,6 +65,7 @@ public:
             }
             
             
+            //If heap is not empty
             ans += !maxH.empty() ? cycle : time;
         }//while
         
@@ -58,7 +74,7 @@ public:
         
     }
     
-    int method2(vector<char> &tasks, int n){
+    int method2(vector<char> &tasks, int n){ 
         
         unordered_map<char, int> mp;
         int maxFreq = 0;
@@ -74,6 +90,7 @@ public:
                 maxCycles++;
         
         //cout<<maxCycles<<endl;
+        //For cases where n ==1
         return max((int)tasks.size(), maxCycles);
         
         
@@ -81,10 +98,12 @@ public:
     
     int leastInterval(vector<char>& tasks, int n) {
         
-        //1. method1 - O(LlogK)
+        //K - max Freq 
+        
+        //1. method1 - O((n+1)(k)log(26))
         //return method1(tasks, n);
         
-        //2. method2 - O(K)
+        //2. method2 - O(N)
         return method2(tasks, n);
     }
 };
