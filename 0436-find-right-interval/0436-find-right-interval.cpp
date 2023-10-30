@@ -1,42 +1,87 @@
-struct Node{
-    int val, id;
-};
-
-struct CompareVal {
-    bool operator()(Node const& n1, Node const& n2){
-        //n1 ordered before n2
-        return n1.val != n2.val ? n1.val > n2.val : n1.id >n2.id;
-    }
-};
-
-
 class Solution {
 public:
-    vector<int> findRightInterval(vector<vector<int>>& intervals) {
+    
+    struct CompFn{
+        
+        bool operator()(const pair<int, int> &a, const pair<int, int> &b){
+            
+            if(a.first==b.first)
+                return a.second > b.second;
+            else
+                return a.first > b.first;
+        }
+    };
+    
+    vector<int> method1(vector<vector<int>>& intervals) {
         
         int N = intervals.size();
-        if(N==1)
-            return {-1};
-        
-        priority_queue<Node, vector<Node>, CompareVal > start;
-        priority_queue<Node, vector<Node>, CompareVal > end;
-        
+             
         vector<int> ans (N, -1);
         
-        for(int i=0; i<N ; i++){
-            start.push({intervals[i][0], i});
-            end.push({intervals[i][1], i});
+        priority_queue<pair<int, int>, vector<pair<int, int>>, CompFn> minStartHeap;
+        priority_queue<pair<int, int>, vector<pair<int, int>>, CompFn> minEndHeap;
+        
+        for(int i=0; i<N; i++ ){
+            
+            minStartHeap.push({intervals[i][0], i});
+            minEndHeap.push({intervals[i][1], i});
         }
         
-        while(!start.empty() && !end.empty()){
-            if(start.top().val >= end.top().val){
-                ans[end.top().id] = start.top().id;
-                end.pop();
+        while(!minEndHeap.empty() && !minStartHeap.empty()){
+            
+            if(minStartHeap.top().first >= minEndHeap.top().first){
+                ans[minEndHeap.top().second] = minStartHeap.top().second;
+                minEndHeap.pop();
             }else{
-                start.pop();
+                minStartHeap.pop();
             }
-        }
+            
+        }//while
+        
         
         return ans;
+        
+    }
+    
+    
+    vector<int> method2(vector<vector<int>>& intervals) {
+        
+        int N = intervals.size();
+        
+        map<int, int> start;
+        
+        for(int i=0; i<N; i++){
+            
+            start[intervals[i][0]] = i;
+            
+        }
+        
+        
+        vector<int> ans(N, -1);
+        
+        for(int i=0; i<N; i++){
+            
+            //lower bound - >=
+            auto itr = start.lower_bound(intervals[i][1]);
+            
+            if(itr == start.end())
+                ans[i] = -1;
+            else
+                ans[i] = itr->second;
+        }
+        
+        
+        return ans;
+    }
+    
+    vector<int> findRightInterval(vector<vector<int>>& intervals) {
+        
+        //Using 2 Heaps
+        //return method1(intervals);
+        
+        
+        //Using OrderedMap + Binary Search
+        return method2(intervals);
+     
     }
 };
