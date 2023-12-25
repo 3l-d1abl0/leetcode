@@ -41,7 +41,7 @@ public:
                 maxScore = max(maxScore, (runningSum+nums1[nums3[i].first])*nums3[i].second );
                 
                 
-                if(!minHeap.empty() && nums1[nums3[i].first] > minHeap.top()){
+                if(!minHeap.empty() && nums1[nums3[i].first] > minHeap.top()){ 
                     
                     runningSum -= minHeap.top();
                     minHeap.pop();
