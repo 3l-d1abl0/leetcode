@@ -63,10 +63,35 @@ public:
         
     }
     
+    vector<int> method2(int N, vector<vector<int>>& edges){
+        
+        vector<int> indegree(N, 0);
+        
+        for(auto edge: edges){
+            
+            indegree[edge[1]]++;
+        }
+        
+        vector<int> ans;
+        
+        
+        for(int node=0; node<N; node++){
+            
+            if(indegree[node]==0)
+                ans.push_back(node);
+        }
+        
+        
+        return ans;
+    }
+    
     vector<int> findSmallestSetOfVertices(int n, vector<vector<int>>& edges) {
         
         //1. Method1 : visit nodes
-        return method1(n, edges);
+        //return method1(n, edges);
         
+        
+        //2. Method2: check for 
+        return method2(n, edges);
     }
 };
