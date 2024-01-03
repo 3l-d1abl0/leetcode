@@ -1,6 +1,7 @@
 class Solution {
 public:
-    int numOfMinutes(int N, int headID, vector<int>& manager, vector<int>& informTime) {
+    
+    int method1(int N, int headID, vector<int>& manager, vector<int>& informTime) {
         
         vector<vector<int>> adj(N);
         
@@ -36,5 +37,47 @@ public:
         
         
         return maxTime;
+        
+    }
+    
+    int method2(int N, int headID, vector<int>& manager, vector<int>& informTime) {
+        
+        vector<vector<int>> adj(N);
+        for(int empl=0; empl<manager.size(); empl++){
+            if(manager[empl]==-1)
+                continue;
+            
+            adj[manager[empl]].push_back(empl);
+        }
+        
+        return dfs(headID, informTime, adj);
+        
+        
+    }
+    
+    int dfs(int node, vector<int>& informTime, vector<vector<int>> &adj){
+        
+        int ans =0;
+        
+        for(int neigh: adj[node]){
+            
+            ans = max(ans,dfs( neigh, informTime, adj) );
+        }
+        
+        
+        return ans+ informTime[node];
+    }
+    
+    
+    int numOfMinutes(int N, int headID, vector<int>& manager, vector<int>& informTime) {
+        
+        
+        //1. Method1: BFS
+        //return method1(N, headID, manager, informTime);
+        
+        
+        //2. Method2: DFS
+        return method2(N, headID, manager, informTime);
+        
     }
 };
