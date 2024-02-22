@@ -154,12 +154,12 @@ public:
         TC: O(N). No node will wil traversed at more than 2 Times.
         SC: O(h)
     */
-            return method1(root, target, k);
+            //return method1(root, target, k);
         
         
         /**/
         
-              //return method2(root, target, k);
+             return method2(root, target, k);
             
             
     }
