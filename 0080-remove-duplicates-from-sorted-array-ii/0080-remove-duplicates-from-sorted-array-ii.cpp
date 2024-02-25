@@ -26,12 +26,7 @@ public:
         return nextPos;
     }
     
-    
-    int removeDuplicates(vector<int>& nums) {
-        
-        
-        
-        return method1(nums);
+    int method2(vector<int> &nums){
         
         int lf=0, rt=0;
         int N = nums.size();
@@ -62,6 +57,58 @@ public:
         
         
         return lf;
+        
+    }
+    
+    
+    int method3(vector<int> &nums){
+        
+        int candidate, N =nums.size();
+        int pos=0;
+        int maxx = 0;
+        
+        for(int i=0; i<N; i++){
+            
+            candidate = nums[i];
+            
+            while(i<N && nums[i]==candidate){
+                
+                maxx++;
+                
+                if(maxx>2){
+                    i++;
+                    continue;
+                }else{
+                    nums[pos]=nums[i];
+                    pos++;
+                    i++;
+                }
+                
+            }
+            
+            i--;
+            maxx=0;
+        }
+        
+        
+        return pos;
+        
+    }
+    
+    int removeDuplicates(vector<int>& nums) {
+        
+        
+        
+        //return method1(nums);
+        
+        
+        //return method2(nums);
+        
+        
+        
+        return method3(nums);
+        
+        
         
     }
 };
