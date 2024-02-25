@@ -2,7 +2,7 @@ class Solution {
 public:
     vector<vector<int>> fourSum(vector<int>& arr, int target) {
 
-        //TC: O(NlogN + N63)
+        //TC: O(NlogN + N^3)
         
                 int N = arr.size();
 
