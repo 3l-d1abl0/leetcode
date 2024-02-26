@@ -2,6 +2,9 @@ class Solution {
 public:
     bool isHappy(int n) {
         
+        
+        //TC: O(logN)
+        
         int slow = n;
         int fast = n;
         
@@ -11,7 +14,7 @@ public:
         }while(slow != fast);
             
             
-            
+        //If its stuck in 1
         return slow == 1;
     }
     
