@@ -40,8 +40,10 @@ public:
     
     int characterReplacement(string s, int k) {
         
-        
-        return method1(s, k);
+        /*  TC: O(26.N)
+          SC: O(N)
+          */
+        //return method1(s, k);
         
         
         int maxLen = INT_MIN;
@@ -53,15 +55,15 @@ public:
             
             mp[s[rt]]++;
             
+            
             maxFreq = max(maxFreq, mp[s[rt]]);
             
             int replaceLen = (rt-lf+1)-maxFreq;
             if(replaceLen > k){ //cant replace as > k, hence make window small
                 mp[s[lf]]--;
                 lf++;
-            }else{
-                maxLen = max(maxLen, rt-lf+1);
             }
+                maxLen = max(maxLen, rt-lf+1);
             
             
         }//for
