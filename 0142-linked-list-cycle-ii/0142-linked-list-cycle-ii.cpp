@@ -16,6 +16,7 @@ public:
             slow = slow->next;
         }
         
+        //cout<<head->val<<endl;
         return head;
     }
     
