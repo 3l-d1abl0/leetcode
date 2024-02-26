@@ -38,13 +38,7 @@ public:
         return maxx;
     }
     
-    int characterReplacement(string s, int k) {
-        
-        /*  TC: O(26.N)
-          SC: O(N)
-          */
-        //return method1(s, k);
-        
+    int method2(string &s, int k){
         
         int maxLen = INT_MIN;
         int maxFreq = INT_MIN;
@@ -55,13 +49,19 @@ public:
             
             mp[s[rt]]++;
             
-            
+            //some char with max Frequency
             maxFreq = max(maxFreq, mp[s[rt]]);
             
             int replaceLen = (rt-lf+1)-maxFreq;
             if(replaceLen > k){ //cant replace as > k, hence make window small
                 mp[s[lf]]--;
                 lf++;
+                /*
+                even if the character with max Frequency goes out of the window 
+                it wont change the answer
+                as the max the Freq is the can be th elength of the string as we can more 
+                replacement chars
+                */
             }
                 maxLen = max(maxLen, rt-lf+1);
             
@@ -69,5 +69,20 @@ public:
         }//for
         
         return maxLen;
+        
+    }
+    
+    int characterReplacement(string s, int k) {
+        
+        /*  TC: O(26.N)
+          SC: O(N)
+          */
+        //return method1(s, k);
+        
+        /*  TC: O(N)
+            SC: O(N)
+        */
+        return method2(s, k);
+        
     }
 };
