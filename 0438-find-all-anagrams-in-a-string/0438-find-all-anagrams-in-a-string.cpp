@@ -1,20 +1,6 @@
 class Solution {
 public:
     
-    bool angram(unordered_map<char, int> &mp1, unordered_map<char, int> &mp2){
-        
-        
-        if(mp1.size()!= mp2.size())  return false;
-        
-        for(auto it= mp1.begin(); it!= mp1.end(); it++){
-            
-            if(mp2[(*it).first] != (*it).second)
-                return false;
-        }
-        
-        return true;
-    }
-    
     
     vector<int> method2(string &s, string &p){
         
@@ -56,37 +42,53 @@ public:
         
     }
     
-    vector<int> method1(string &s2, string &s1){
+    bool angram(unordered_map<char, int> &mp1, unordered_map<char, int> &mp2){
+        
+        
+        if(mp1.size()!= mp2.size())  return false;
+        
+        for(auto it= mp1.begin(); it!= mp1.end(); it++){
+            
+            if(mp2[(*it).first] != (*it).second)
+                return false;
+        }
+        
+        return true;
+    }
+    
+    vector<int> method1(string &str, string &pattern){
         
         vector<int> occ;
         unordered_map<char, int> mp1;
         unordered_map<char, int> mp2;
         
-        int N = s1.size();
-        int M = s2.size();
+        int N = pattern.size();
+        int M = str.size();
         
+        //If patttern length is Greater
         if(N>M) return {};
         
+        //freq count of first N character
         for(int i=0; i<N; i++){
-            mp1[s1[i]]++;
-            mp2[s2[i]]++;
+            mp1[pattern[i]]++;
+            mp2[str[i]]++;
         }
         
         
         for(int i=0; i<=M-N; i++){
             
-            
+            //For every Window check if its freq count is same
             if(angram(mp1, mp2)){
                 occ.push_back(i);
             }
             
             //cout<<"i ="<<i<<endl;
             if(i<M-N){
-                mp2[s2[i]]--;   //remove the left most element
-                if(mp2[s2[i]]==0)
-                    mp2.erase(s2[i]);
+                mp2[str[i]]--;   //remove the left most element
+                if(mp2[str[i]]==0)
+                    mp2.erase(str[i]);
 
-                mp2[s2[i+N]]++; //add the rightmost element
+                mp2[str[i+N]]++; //add the rightmost element
             }
             
             
@@ -160,10 +162,10 @@ public:
     }
     
     vector<int> findAnagrams(string s2, string s1) {
-        
-        //return method1(s2, s1);
+        //TC: O(M-N * N) SC: O(M+N) //M - size of str, N - size of pattern
+        return method1(s2, s1);
         //return method2(s2, s1);
-        return method3(s2, s1);
+        //return method3(s2, s1);
         
     }
 };
