@@ -101,21 +101,25 @@ public:
         
     }
     
-    vector<int> method3(string s2, string s1){
+    vector<int> method3(string &str, string &pattern){
         //s1-  pattern
         
         vector<int> occ;
         vector<short int> m1(26, 0);    
         vector<short int> m2(26, 0);
         
-        int N = s1.size();
-        int M = s2.size();
+        int N = pattern.size();
+        int M = str.size();
         
+        //If pattern length is greater than String
         if(N>M) return occ;
         
+        
+        
+        //Process the pattern and first N elements
         for(int i=0; i<N; i++){
-            m1[s1[i]-'a']++;
-            m2[s2[i]-'a']++;
+            m1[pattern[i]-'a']++;
+            m2[str[i]-'a']++;
         }
         
         int count =0;
@@ -135,7 +139,7 @@ public:
             }
             
             //process incoming element
-            int r= s2[rt]-'a';
+            int r= str[rt]-'a';
             m2[r]++;
             
             if(m2[r]==m1[r]){
@@ -145,7 +149,7 @@ public:
             }
             
             //process outgoing element
-            int l=s2[rt-N]-'a';
+            int l=str[rt-N]-'a';
             m2[l]--;
             if(m2[l]==m1[l]){
                 count++;
@@ -168,10 +172,13 @@ public:
         //return method1(s2, s1);
         
         //TC: O(M-N * N) SC: O(M+N) //M - size of str, N - size of pattern
-        return method2(s2, s1);
+        //return method2(s2, s1);
         
-        //
-        //return method3(s2, s1);
+        //TC: O(N+M) SC: O(M+N)
+        return method3(s2, s1);
+        
+        
+        
         
     }
 };
