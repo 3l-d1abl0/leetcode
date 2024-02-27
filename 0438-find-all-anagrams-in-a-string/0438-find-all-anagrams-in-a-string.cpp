@@ -24,6 +24,8 @@ public:
         
         while(right < len)
         {
+            
+            //Whole vector Compare
             if(phash == hash)
             {
                 ans.push_back(left);
@@ -163,8 +165,12 @@ public:
     
     vector<int> findAnagrams(string s2, string s1) {
         //TC: O(M-N * N) SC: O(M+N) //M - size of str, N - size of pattern
-        return method1(s2, s1);
-        //return method2(s2, s1);
+        //return method1(s2, s1);
+        
+        //TC: O(M-N * N) SC: O(M+N) //M - size of str, N - size of pattern
+        return method2(s2, s1);
+        
+        //
         //return method3(s2, s1);
         
     }
