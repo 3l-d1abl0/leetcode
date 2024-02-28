@@ -37,7 +37,7 @@ public:
             
             //if we have same number of unique charactrs as the pattern
             while(ctr==unq && lf<=rt){
-                cout<<lf<<" "<<rt<<endl;
+                //cout<<lf<<" "<<rt<<endl;
                 if(minn>rt-lf+1){
                     minn = rt-lf+1;
                     pos= lf;
@@ -67,51 +67,79 @@ public:
             return s.substr(pos, minn);
     }
     
-    string findSubstring(const string &str, const string &pattern) {
-        int windowStart = 0, matched = 0, minLength = str.length() + 1, subStrStart = 0;
-        unordered_map<char, int> charFrequencyMap;
-        for (auto chr : pattern) {
-          charFrequencyMap[chr]++;
-        }
-
-        // try to extend the range [windowStart, windowEnd]
-        for (int windowEnd = 0; windowEnd < str.length(); windowEnd++) {
-          char rightChar = str[windowEnd];
-          if (charFrequencyMap.find(rightChar) != charFrequencyMap.end()) {
-            charFrequencyMap[rightChar]--;
-            if (charFrequencyMap[rightChar] >= 0) {  // count every matching of a character
-              matched++;
+    
+    string method2(string &str, string &pattern){
+        
+        /*to calculate freq of each char,
+        
+        character exhaused in current window
+        if +ive - count that can be added in current window
+        if -iv - count exceeded, in excess
+        */
+        unordered_map<char, int> map;
+        
+        //calc freq
+        for(char ch: pattern)
+            map[ch]++;
+        
+        
+        int minLen = INT_MAX, pos = -1, lf=0;
+        int matched =0;
+        
+        for(int rt=0; rt<str.size(); rt++){
+            
+            //Process In coming
+            char inChar = str[rt];
+            if(map.find(inChar) != map.end()){
+                
+                if(map[inChar] > 0 ){   //can be added
+                    matched++;
+                }
+                
+                //1 exhausted
+                map[inChar]--;
             }
-          }
-
-          // shrink the window if we can, finish as soon as we remove a matched character
-          while (matched == pattern.length()) {
-            if (minLength > windowEnd - windowStart + 1) {
-              minLength = windowEnd - windowStart + 1;
-              subStrStart = windowStart;
-            }
-
-            char leftChar = str[windowStart++];
-            if (charFrequencyMap.find(leftChar) != charFrequencyMap.end()) {
-              // note that we could have redundant matching characters, therefore we'll decrement the
-              // matched count only when a useful occurrence of a matched character is going out of the
-              // window
-              if (charFrequencyMap[leftChar] == 0) {
-                matched--;
-              }
-              charFrequencyMap[leftChar]++;
-            }
-          }
-        }
-
-        return minLength > str.length() ? "" : str.substr(subStrStart, minLength);
-  }
+            
+            
+            //If the characters are found in the current window, try to shrink it
+            while(lf<=rt && matched== pattern.size()){
+                
+                if(minLen> rt-lf+1){
+                    minLen = rt-lf+1;
+                    pos = lf;
+                }
+                
+                char outChar = str[lf];
+                if(map.find(outChar)!=map.end()){
+                    
+                    map[outChar]++;
+                    
+                    if(map[outChar]>0)
+                        matched--;
+                }
+                
+                lf++;
+            }//while
+            
+        }//for
+        
+        
+        if(pos==-1)
+            return "";
+        else
+            return str.substr(pos, minLen);
+        
+    }
     
     string minWindow(string s, string t) {
         
         //return m1(s, t);
         
+        /* Implementation 2
         
-        return findSubstring(s, t);
+        TC: O(M+N) SC: O(M)
+        M- pattern len
+        */
+        return method2(s, t);
     }
 };
