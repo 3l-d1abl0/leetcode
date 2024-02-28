@@ -167,18 +167,75 @@ public:
         return occ;
     }
     
+    
+    
+    vector<int> method4(string &pattern, string &str){
+        
+        unordered_map<char, int> map;
+        
+        if(pattern.size() > str.size())
+            return {};
+        
+        
+        vector<int> ans;
+        
+        ///freq table for pattern
+        for(char ch: pattern){
+            map[ch]++;
+        }
+        
+        int freqCount=0, lf=0;
+        for(int rt=0; rt<str.size(); rt++){
+            
+            //process incoming character
+            char inChar = str[rt];
+            if(map.find(inChar) != map.end()){
+                
+                map[inChar]--;
+                if(map[inChar]==0){
+                    freqCount++;
+                }
+            }
+            
+            
+            
+            //process outgoing character
+            if(rt>=pattern.size()){
+                
+                char outChar = str[lf];
+                if(map.find(outChar) != map.end()){
+                    
+                    if(map[outChar]==0){
+                        freqCount--;
+                    }
+                    
+                    map[outChar]++;
+                }
+                
+                lf++;
+            }//if
+            
+            if(freqCount== map.size())
+                ans.push_back(lf);
+        }
+        
+        
+        return ans;
+    }
     vector<int> findAnagrams(string s2, string s1) {
-        //TC: O(M-N * N) SC: O(M+N) //M - size of str, N - size of pattern
+        //TC: O(M-N * N) SC: O(M+N) //M - size of str, N - size of pattern - 41ms
         //return method1(s2, s1);
         
-        //TC: O(M-N * N) SC: O(M+N) //M - size of str, N - size of pattern
+        //TC: O(M-N * N) SC: O(M+N) //M - size of str, N - size of pattern  - 14ms
         //return method2(s2, s1);
         
-        //TC: O(N+M) SC: O(M+N)
-        return method3(s2, s1);
+        //TC: O(N+M) SC: O(M+N) //
+        //return method3(s2, s1);
         
         
         
+        //TC
+        return method4(s1, s2);
         
     }
 };
