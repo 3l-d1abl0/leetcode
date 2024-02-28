@@ -234,7 +234,7 @@ public:
         
         
         
-        //TC
+        //TC: O(M+N)    SC: O(M)
         return method4(s1, s2);
         
     }
