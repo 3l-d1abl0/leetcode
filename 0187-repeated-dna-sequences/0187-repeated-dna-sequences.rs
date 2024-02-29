@@ -23,12 +23,6 @@ impl Solution {
 
             *map.entry(str.to_string()).or_insert(0) += 1;
             
-            
-//             let count = map.entry(t).or_insert(0);
-//             *count += 1;
-//             if *count == 2 {
-//                 ans.push(t.to_string());
-//             }
         }
         ans
         
