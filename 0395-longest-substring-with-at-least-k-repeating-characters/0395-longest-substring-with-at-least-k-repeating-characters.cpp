@@ -48,12 +48,14 @@ public:
         
         unordered_map<char, int> map;
         for(char ch: s)
-            map[s[ch]]++;
+            map[ch]++;
         
         int maxUniqueChars = map.size();
+        //cout<<"MxUnq ="<<maxUniqueChars<<endl;
         int maxLen =0;
         
-        for(int uniqCharPermit=0; uniqCharPermit< maxUniqueChars ; uniqCharPermit++){
+        for(int uniqCharPermit=1; uniqCharPermit<= maxUniqueChars ; uniqCharPermit++){
+        //for(int uniqCharPermit=2; uniqCharPermit<= 2 ; uniqCharPermit++){
             
             int kCount =0, uniqueChar=0, lf=0;
             map.clear();
@@ -68,9 +70,6 @@ public:
                 if(map.find(inChar) == map.end())
                     uniqueChar++;
                 
-                //if freq is already k
-                if(map[inChar]==k)
-                    kCount--;
                 
                 map[inChar]++;
                 
@@ -96,7 +95,10 @@ public:
                     lf++;
                 }//while
                 
-                if(uniqueChar == uniqCharPermit && kCount ==k){
+                //cout<<uniqueChar<<" "<<uniqCharPermit<<" kcnt="<<kCount<<" lf= "<<lf<<" rt= "<<rt<<endl;
+                //If total number of unique Characters are same as permitted
+                // and all of them have a count of k
+                if(uniqueChar == uniqCharPermit && kCount == uniqCharPermit){
                     maxLen = max(maxLen, rt-lf+1);
                 }
                 
@@ -112,7 +114,7 @@ public:
     int longestSubstring(string s, int k) {
         
         //TC: O(26*N*N) SC:O(26)
-        return method1(s, k);
+        //return method1(s, k);
         
         //
         return method2(s, k);
