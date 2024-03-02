@@ -26,12 +26,30 @@ public:
         return cnt;
     }
     
+    int zeroSum(vector<int> &nums) {
+        
+        int cnt = 0;
+        int res = 0;
+        
+        for ( int i = 0; i < nums.size(); i++ ) {
+            if ( nums[i] == 0 ) {
+                cnt++;
+                res += cnt;
+            }
+            else {
+                cnt = 0;
+            }
+        }
+        return res;
+    }
     
     int method2(vector<int> &nums, int goal){
         
         int lf=0, subarray=0;
         int sum=0, ans =0;
         
+        if (goal==0)
+            return zeroSum(nums);
         
         for(int rt=0; rt<nums.size(); rt++){
             
@@ -41,7 +59,7 @@ public:
             }
             
             
-            while(sum==goal){
+            while(sum==goal && lf<=rt){
                 
                 subarray++;
                 
@@ -50,7 +68,6 @@ public:
                 
                 lf++;
             }
-            
             
             ans+=subarray;
         }
@@ -62,9 +79,9 @@ public:
     int numSubarraysWithSum(vector<int>& nums, int goal) {
   
         //TC: O(N) SC O(N)
-        return method1(nums, goal);
+        //return method1(nums, goal);
         
-        //TC
+        //TC: O(N), SC: O(1)
         return method2(nums, goal);
     }
 };
