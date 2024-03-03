@@ -1,19 +1,41 @@
 class Solution {
 public:
-    int subarraysWithKDistinct(vector<int>& nums, int k) {
-    int cnt[20001] = {}, res = 0, sz = nums.size();
-    for (int l = 0, m = 0, r = 0; r < sz; ++r) {
-        if (++cnt[nums[r]] == 1)
-            if (--k < 0) {
-                cnt[nums[m++]] = 0;
-                l = m;
+    int subarraysWithKDistinct(vector<int>& A, int K) {
+        
+         int res = 0, prefix = 0;
+        int start = 0;
+        int distinctCount = 0;
+        unordered_map<int, int> countMap;
+
+        for (int right = 0; right < A.size(); right++) {
+            int rightNum = A[right];
+
+            if (countMap.find(rightNum) == countMap.end() || countMap[rightNum] == 0) {
+                distinctCount++;
             }
-        if (k <= 0) {
-            while (cnt[nums[m]] > 1)
-                --cnt[nums[m++]];
-            res += m - l + 1;   
+
+            countMap[rightNum] = countMap[rightNum] + 1;
+
+            if (distinctCount > K) {
+                int startNum = A[start];
+                start++;
+                prefix = 0;
+                countMap[startNum] = countMap[startNum] - 1;
+                distinctCount--;
+            }
+
+            while (countMap[A[start]] > 1) {
+                int startNum = A[start++];
+                countMap[startNum] = countMap[startNum] - 1;
+                prefix++;
+            }
+
+            if (distinctCount == K) {
+                res += prefix + 1;
+            }
         }
+
+        return res;
+        
     }
-    return res;
-} 
 };
