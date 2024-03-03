@@ -1,41 +1,42 @@
 class Solution {
 public:
-    int subarraysWithKDistinct(vector<int>& A, int K) {
+    int subarraysWithKDistinct(vector<int>& nums, int k) {
         
-         int res = 0, prefix = 0;
-        int start = 0;
-        int distinctCount = 0;
-        unordered_map<int, int> countMap;
+        
+    unordered_map<int, int> count;
+    //lf -rt
+    int subarray =0, lf=0, result =0;
+    for(int rt=0; rt<nums.size(); rt++){
 
-        for (int right = 0; right < A.size(); right++) {
-            int rightNum = A[right];
+        //process the incoming element
+        int inc = nums[rt];
+        count[inc]++;
 
-            if (countMap.find(rightNum) == countMap.end() || countMap[rightNum] == 0) {
-                distinctCount++;
-            }
+        //if distinct elements are > k
+        if(count.size() > k){
 
-            countMap[rightNum] = countMap[rightNum] + 1;
-
-            if (distinctCount > K) {
-                int startNum = A[start];
-                start++;
-                prefix = 0;
-                countMap[startNum] = countMap[startNum] - 1;
-                distinctCount--;
-            }
-
-            while (countMap[A[start]] > 1) {
-                int startNum = A[start++];
-                countMap[startNum] = countMap[startNum] - 1;
-                prefix++;
-            }
-
-            if (distinctCount == K) {
-                res += prefix + 1;
-            }
+            //freq of [lf] is always 1
+            count.erase(nums[lf]);
+            lf++;
+            subarray=0;
         }
 
-        return res;
+
+        if(count.size() ==k){
+            //Shrink the window to its min size with distinct ele e =k
+            while(count[nums[lf]]>1){
+
+                count[nums[lf]]--;
+                subarray++;
+                lf++;
+            }
+
+            result += (subarray+1);
+        }
+    }//for
+
+
+    return result;
         
     }
 };
