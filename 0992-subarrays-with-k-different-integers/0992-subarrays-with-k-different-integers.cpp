@@ -2,6 +2,22 @@ class Solution {
 public:
     int subarraysWithKDistinct(vector<int>& nums, int k) {
         
+    /*
+        Idea is to find the smallest window with distinct ele k .
+        Whenever the distinct ele == k , shrink the window from left
+        
+        all the preceding elements from left will make subarray with 
+        the current min size window.
+        
+        Once the distcount becomes > k
+        create an new windo  by movein left by 1
+        as [left] freq wil lalways be one as we are maintaining
+        smallest window - and the subarray will reset to zero.
+        
+        
+    
+    */
+        
         
     unordered_map<int, int> count;
     //lf -rt
