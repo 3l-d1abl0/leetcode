@@ -1,42 +1,62 @@
 class Solution {
 public:
+    
+    bool collision(int leftAst, int rightAst){
+        
+        if(leftAst > 0 && rightAst<0)
+            return true;
+        else
+            return false;
+    }
+    
     vector<int> asteroidCollision(vector<int>& asteroids) {
+        /*
+            L R
+            + + no collision
+            - - no collision
+            - + no collision
+            + - collision
+        */
         
         stack<int> st;
+        int N = asteroids.size();
         
-        for(int ele: asteroids){
+        for(int i=0; i<N ; i++){
             
-            if(ele>=0){
-                st.push(ele);
+            while(!st.empty() && collision(st.top(), asteroids[i])){
+                
+                if( abs(st.top()) >= abs(asteroids[i]) )
+                    break;  //right asteroid gets destroyed
+                else
+                    st.pop();   //left asteroid gets destroyed
+                
+            }
+            
+            /*
+                1. stack is empty no left asteroid
+                2. no collision
+                3. collision but both are equal
+                3. collision but right gets destroyed
+            */
+            
+            if(st.empty()){
+                st.push(asteroids[i]);
+            }else if (!collision(st.top(), asteroids[i])){
+                st.push(asteroids[i]);
             }else{
-                
-                
-                while(!st.empty() && st.top() >=0 && ele<0 && abs(st.top()) < abs(ele)){
-                    
+                if(abs(st.top())==abs(asteroids[i]))
                     st.pop();
-                    
-                }
-                
-                //either the stack is empty or the the top is > equal to ele
-                if(st.empty() || st.top()<0){
-                    st.push(ele);
-                }else if(st.top() == abs(ele)){
-                    st.pop();
-                }
-                
             }
         }//for
         
-        
         int sz = st.size();
-        //cout<<sz<<endl;
-        vector<int> ans (sz);
+        vector<int> ans(sz);
         
         while(!st.empty()){
             ans[--sz] = st.top();
-            
             st.pop();
         }
+        
         
         
         return ans;
