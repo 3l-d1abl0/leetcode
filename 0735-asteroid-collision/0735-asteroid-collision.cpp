@@ -23,6 +23,7 @@ public:
         
         for(int i=0; i<N ; i++){
             
+            //keep going left till the asteroids on left gets destroyed
             while(!st.empty() && collision(st.top(), asteroids[i])){
                 
                 if( abs(st.top()) >= abs(asteroids[i]) )
