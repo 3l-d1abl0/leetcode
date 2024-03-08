@@ -60,7 +60,7 @@ public:
         }
     }
     
-    int method2(vector<vector<int>> &isConnected, int N){
+    int method1(vector<vector<int>> &isConnected, int N){
         
         
         vector<bool> visited(N, false);
@@ -75,13 +75,8 @@ public:
         return ctr;
     }
     
-    int findCircleNum(vector<vector<int>>& isConnected) {
-        
-        
-        int N = isConnected.size();
-        
-        //DFS
-        return method2(isConnected, N);
+    
+    int method2(vector<vector<int>>& isConnected, int N){
         
         UnionFind uf(N);
         
@@ -101,5 +96,20 @@ public:
         }
         
         return ctr;
+        
+    }
+    
+    int findCircleNum(vector<vector<int>>& isConnected) {
+        
+        
+        int N = isConnected.size();
+        
+        //Mrthod1 - DFS - TC: O(V)+O(E)
+        //return method1(isConnected, N);
+        
+        //Method2 - UnionFind
+        return method2(isConnected, N);
+        
+
     }
 };
