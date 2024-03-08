@@ -24,7 +24,12 @@ public:
     Node* cloneGraph(Node* node) {
         
         
-        //unordered_map<int, Node *> mp;
+        /*
+            The number of nodes in the graph is in the range [0, 100].
+            1 <= Node.val <= 100
+            Node.val is unique for each node.
+        */
+        //to keep a check if a node has been created
         vector<Node *> mp(101, nullptr);
         
         
