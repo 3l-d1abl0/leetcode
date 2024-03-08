@@ -25,6 +25,7 @@ public:
                                
     int dfs(int x, int y, vector<vector<int>>& grid){
         
+        //visited - so modify the value to 0
         grid[x][y] = 0;
         int cnt = 0;
         
