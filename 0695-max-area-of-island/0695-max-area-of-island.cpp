@@ -6,13 +6,13 @@ public:
         int M = grid[0].size();
         
         int maxi =0;
-        int cnt =0;
+        
         for(int i=0; i<N; i++){
             for(int j=0; j<M; j++){
                 if(grid[i][j]==1){
-                    dfs(i, j, grid, cnt);
+                    int cnt = 1+dfs(i, j, grid);
                     maxi = max(cnt, maxi);
-                    cnt =0;
+                    
                 }
                                
             }
@@ -23,10 +23,10 @@ public:
         return maxi;
     }
                                
-    void dfs(int x, int y, vector<vector<int>>& grid, int &cnt){
+    int dfs(int x, int y, vector<vector<int>>& grid){
         
         grid[x][y] = 0;
-        cnt++;
+        int cnt = 0;
         
         int dx[] = {-1, 1, 0, 0};
         int dy[] = {0, 0, 1, -1};
@@ -39,13 +39,13 @@ public:
             if(newX>=0 && newX<grid.size() && newY>=0 && newY<grid[0].size() && grid[newX][newY] ==1){
                 
                 
-                    dfs(newX, newY, grid, cnt);
+                    cnt += (1+ dfs(newX, newY, grid));
             
             }
             
             
-        }
+        }//for
         
-        
+        return cnt;
     }
 };
