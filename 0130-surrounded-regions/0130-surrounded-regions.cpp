@@ -1,6 +1,15 @@
 class Solution {
 public:
     void solve(vector<vector<char>>& board) {
+    
+        
+        /*
+            The node will cannote be surroundes on all sides
+            are the ones lying on the edges,
+            hence every node connected to it
+            wont be able to get surrounded
+        
+        */
         
         int N = board.size();
 	
@@ -38,6 +47,9 @@ public:
 	}
 	
 	
+    /*
+    Nodes that cannot be surrounded will be unvisited as ogf now
+    */
 	for(int i=1; i<N-1; i++){
 		for(int j=1; j<M-1; j++){
 			
