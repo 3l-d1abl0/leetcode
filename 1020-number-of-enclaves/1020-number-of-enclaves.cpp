@@ -3,24 +3,22 @@ public:
     int numEnclaves(vector<vector<int>>& grid) {
      
         
+        /*
+            Start from the edges and mark off all the land cells
+            from whiohc we can walk off the Grid
+            
+            
+            Traverse again to check the unmarked
+        */
+        
         int N = grid.size();
         int M = grid[0].size();
         
         
-        for(int i=0; i<N; i++){
-            
-            for(int j=0; j<M; j++){
-                    
-                
-                if((i==0 || j==0 || i==N-1 || j==M-1) && (grid[i][j]==1) ){
-                   
+        for(int i=0; i<N; i++)
+            for(int j=0; j<M; j++)
+                if((i==0 || j==0 || i==N-1 || j==M-1) && (grid[i][j]==1) )
                     dfs(i, j, grid);
-                    
-                }
-                
-            }
-            
-        }//for
         
         
         int ctr =0;
@@ -56,12 +54,6 @@ public:
         dfs(i+1, j, grid);
         dfs(i, j-1, grid);
                     
-                    
-                    
-                    
-        
-        
-        
     }
     
     void printdp(vector<vector<int>> &grid){
