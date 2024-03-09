@@ -8,7 +8,10 @@ static int speedUp=[](){
 class Solution {
 public:
     int ladderLength(string beginWord, string endWord, vector<string>& wordList) {  
+        
+        //dict/set for wordList
         unordered_set<string> myset;
+        
         bool isPresent = false; //Checks if endWord is present in Dict
         //Insert all words from Dict in myset
         for(auto word: wordList)
@@ -41,17 +44,22 @@ public:
                         temp[i] = c;
                         if(curr.compare(temp)==0)
                             continue;   //Skip the same word
+                        
                         if(temp.compare(endWord)==0)
                             return depth+1; //endWord found
+                        
                         if(myset.find(temp)!=myset.end())
                         {
                             q.push(temp);
+                            
+                            //remove it from set so that , doesn't end in a loop
                             myset.erase(temp);
                         }
                     }
                 }
             }
         }
+        
         return 0;
     }
 };
