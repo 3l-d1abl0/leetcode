@@ -1,16 +1,7 @@
 class Solution {
 public:
-    vector<vector<int>> updateMatrix(vector<vector<int>>& mat) {
-        
-        /*
-            for every cell with 1, find nearest 0
-            
-            Instead of going from 1 every zero, because everu zero migh get visited again
-            
-            go from 0 to 1,
-            as soon as you find 1, keep track of the hp it took to reach there
-            bfs with unit distance between each node, it will give min distance
-        */
+    
+    vector<vector<int>> method1(vector<vector<int>>& mat) {
         
         queue< pair< pair<int, int>, int> > q;
         
@@ -68,5 +59,24 @@ public:
         
         
         return ans;
+        
+    }
+    
+    vector<vector<int>> updateMatrix(vector<vector<int>>& mat) {
+        
+        /*
+            for every cell with 1, find nearest 0
+            
+            Instead of going from 1 every zero, because everu zero migh get visited again
+            
+            go from 0 to 1,
+            as soon as you find 1, keep track of the hp it took to reach there
+            bfs with unit distance between each node, it will give min distance
+        */
+        
+        //Mehthod1:BFS  TC:O(M*N)
+        //SC: O(2*(M*N))
+        return method1(mat);
+        
     }
 };
