@@ -1,129 +1,146 @@
-class Solution
-{
-    // Create a map of type word->level to get the idea 
-    // on which level the word comes after the transformations.
-    unordered_map<string, int> mpp;
-
-    // A vector for storing the final answer.
-    vector<vector<string>> ans;
-    string b;
-
-private:
-    void dfs(string word, vector<string> &seq)
-    {
-        // Function for implementing backtracking using the created map
-        // in reverse order to find the transformation sequence in less time.
-
-        // Base condition :
-        // If word equals beginWord, we’ve found one of the sequences
-        // simply reverse the sequence and return. 
-        if (word == b)
-        {
-            reverse(seq.begin(), seq.end());
-            ans.push_back(seq);
+class Solution {
+public:
     
-            // reverse again so that the dfs calls are not disturbed.
-            reverse(seq.begin(), seq.end());
+    void dfs(string &currentWord, string &beginWord, vector<vector<string>> &ans, unordered_map<string, int> &levelOf, vector<string> &path){
+        
+        //currentWord always exist in levelOf
+        
+        if(currentWord == beginWord){
+            
+            vector<string> begToEnd(path.rbegin(), path.rend());
+            ans.push_back(begToEnd);
             return;
         }
-        int sz = word.size();
-        int steps = mpp[word];
+        
+        //current level
+        int currentLevel = levelOf[currentWord];
 
-        // Replace each character of the word with letters from a-z 
-        // and check whether the transformed word is present in the map
-        // and at the previous level or not.  
-        for (int i = 0; i < sz; i++)
-        {
-            char original = word[i];
-            for (char ch = 'a'; ch <= 'z'; ch++)
-            {
-                word[i] = ch;
-                if (mpp.find(word) != mpp.end() && mpp[word] + 1 == steps)
-                {
-                    seq.push_back(word);
-                    dfs(word, seq);
-                    // pop the current word from the back of the queue
-                    // to traverse other possibilities.
-                    seq.pop_back();
+        //Loop for each character of the word
+        for(int i=0; i<currentWord.size(); i++){
+
+            char originalChar = currentWord[i];
+            //loop for each possible character for the current character at[i]
+            for(char ch = 'a'; ch<='z'; ch++){
+         
+                if(ch==currentWord[i])
+                    continue;
+                
+                currentWord[i] = ch;
+                
+                if(levelOf.find(currentWord) != levelOf.end() && currentLevel-1 == levelOf[currentWord] ){
+                    path.push_back(currentWord);
+                    dfs(currentWord, beginWord, ans, levelOf, path);
+                    path.pop_back();
                 }
-            }
-            word[i] = original;
-        }
+                
+            }//for ch
+            currentWord[i] = originalChar;
+            
+        }//for i
+        
+        
     }
-
-public:
-    vector<vector<string>> findLadders(string beginWord, string endWord, vector<string> &wordList)
-    {
-        // Push all values of wordList into a set
-        // to make deletion from it easier and in less time complexity.
-        unordered_set<string> st(wordList.begin(), wordList.end());
-
-        // Perform BFS traversal and push the string in the queue
-        // as soon as they’re found in the wordList.
+    
+    vector<vector<string>> findLadders(string beginWord, string endWord, vector<string>& wordList) {
+        
+        /*
+            Approach 1:
+            Do a bfs , track every path in each level
+            the level which finds the endWorld, is the shortest path
+            save all the path in that level which finds reaches the endword.
+            
+            The causes memeory limit Exceeded since we are storing path in each state,
+            so the total number of possible path could be 26^5.
+            
+            
+            
+            Another approach is to do a bfs to reach the end word.
+            This will give us the shortest path.
+            Also, while travelling we keep a mapping of word -> to
+            So, once we have reached the end word, each word will map to 
+            a level, the shortest level it could be.
+            
+            
+            Now from endWorld we will try dfs to generate each possbile path till beign word
+            
+            endWord - word1 - word2 - word3 - word4 - beginWord
+            the catch is while hopping from 1 word to another
+            we check if it is in a level lesser than the current word
+            
+            eg:
+            
+            endWord [6] - word1 [5] - word2 [4] - word3 [3] - word4 [2] - beginWord [1]
+        
+        */
+        
+        unordered_set<string> wordBank(wordList.begin(), wordList.end());
+        unordered_map<string, int> levelOf;
         queue<string> q;
-        b = beginWord;
-        q.push({beginWord});
-
-        // beginWord initialised with level 1.
-        mpp[beginWord] = 1;
-        int sz = beginWord.size();
-        st.erase(beginWord);
-        while (!q.empty())
-        {
-
-            string word = q.front();
-            int steps = mpp[word];
+        
+        q.push(beginWord);
+        levelOf[beginWord] = 1; //beginWorld is at level 1
+        wordBank.erase(beginWord);
+        
+        while(!q.empty()){
+            
+            string currentWord = q.front();
             q.pop();
             
-            // Break out if the word matches the endWord
-            if (word == endWord)
+            if(currentWord == endWord){
+                
                 break;
-
-            // Replace each character of the word with letters from a-z 
-            // and check whether the transformed word is present in the 
-            // wordList or not, if yes then push to queue
-            for (int i = 0; i < sz; i++)
-            {
-                char original = word[i];
-
-                for (char ch = 'a'; ch <= 'z'; ch++)
-                {
-
-                    word[i] = ch;
-                    if (st.count(word))
-                    {
-                        q.push(word);
-                        st.erase(word);
-                       
-                        // push the word along with its level
-                        // in the map data structure.
-                        mpp[word] = steps + 1;
-                    }
-                }
-                word[i] = original;
+                /* At this point all the words in the previous level have been assigned their level number
+                and the endWord also has its level number, which the min len path
+                */
+                
             }
+            
+            //current level
+            int currentLevel = levelOf[currentWord];
+            
+            //Loop for each character of the word
+            for(int i=0; i<currentWord.size(); i++){
+                
+                char originalChar = currentWord[i];
+                //loop for each possible character for the current character at[i]
+                for(char ch = 'a'; ch<='z'; ch++){
+                    
+                    if(ch==currentWord[i])
+                        continue;
+                    
+                    currentWord[i] = ch;
+                    
+                    //if a valid word
+                    if(wordBank.find(currentWord) == wordBank.end())
+                        continue;
+                    
+                    levelOf[currentWord] = currentLevel+1;
+                    q.push(currentWord);
+                    
+                    wordBank.erase(currentWord);
+                    
+                }//for ch
+                
+                currentWord[i] = originalChar;
+                
+            }//for i
+            
+        }//while q
+        
+        
+        vector<vector<string>> ans;
+        
+        //check if reached the endWord;
+        if(levelOf.find(endWord) != levelOf.end()){
+            
+            //cout<<levelOf[endWord]<<endl;
+            
+            vector<string> path;
+            path.push_back(endWord);
+            dfs(endWord, beginWord, ans, levelOf, path);
+            
         }
-    
-        // If we reach the endWord, we stop and move to step-2
-        // that is to perform reverse dfs traversal.
-        if (mpp.find(endWord) != mpp.end())
-        {
-            vector<string> seq;
-            seq.push_back(endWord);
-            dfs(endWord, seq);
-        }
+        
         return ans;
     }
 };
-
-// A comparator function to sort the answer.
-/*bool comp(vector<string> a, vector<string> b)
-{
-    string x = "", y = "";
-    for (string i : a)
-        x += i;
-    for (string i : b)
-        y += i;
-
-    return x < y;
-}*/
