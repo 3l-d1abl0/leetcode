@@ -117,7 +117,7 @@ public:
 };
 
 // A comparator function to sort the answer.
-bool comp(vector<string> a, vector<string> b)
+/*bool comp(vector<string> a, vector<string> b)
 {
     string x = "", y = "";
     for (string i : a)
@@ -126,4 +126,4 @@ bool comp(vector<string> a, vector<string> b)
         y += i;
 
     return x < y;
-}
+}*/
