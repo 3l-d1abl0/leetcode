@@ -1,51 +1,53 @@
 class Solution {
 public:
     
-        int dfs(int i, vector<vector<int>> &graph, vector<int> &isSafe){
-        
-            //if already decided
-        if(isSafe[i] != -1) return isSafe[i];
-        
-        isSafe[i] = 2;  //consider it unsafe
-        
-        for(int node : graph[i]){
-            
-            if(dfs(node, graph, isSafe)==2){
-                return 2;
-            }
-            
-        }
-        
-        //if its not unsafe, its safe
-        return isSafe[i] =1;
-        
-        
-    }
+    bool dfsCheck(int node, vector<vector<int>> &adj, vector<int> &vis, vector<int> &pathVis, vector<int> &check) {
+		
+        vis[node] = 1;
+		pathVis[node] = 1;
+		check[node] = 0;
+		// traverse for adjacent nodes
+		for (auto it : adj[node]) {
+			// when the node is not visited
+			if (!vis[it]) {
+			if (dfsCheck(it, adj, vis, pathVis, check) == true) {
+					check[node] = 0;
+					return true;
+				}
+
+			}
+			// if the node has been previously visited
+			// but it has to be visited on the same path
+			else if (pathVis[it]) {
+				check[node] = 0;
+				return true;
+			}
+		}
+		check[node] = 1;
+		pathVis[node] = 0;
+		return false;
+	}
+    
     
     vector<int> eventualSafeNodes(vector<vector<int>>& graph) {
         
-        int N = graph.size();
+        int V = graph.size();
+    
+        vector<int> vis(V, 0);
+		vector<int> pathVis(V, 0);
+		vector<int> check(V,0);
+		vector<int> safeNodes;
         
-        vector<int> isSafe(N, -1);
-        vector<int> safe;
-        
-        /* -1 not decided
-            1 - safe
-            2- unsafe
-        */
-        
-        for(int i=0; i<N; i++){
-            
-            if(dfs(i, graph, isSafe)==1){
-                safe.push_back(i);        
-            }
-            
-        }
-                
-        
-        return safe;
+		for (int i = 0; i < V; i++) {
+			if (!vis[i]) {
+				dfsCheck(i, graph, vis, pathVis, check);
+			}
+		}
+		for (int i = 0; i < V; i++) {
+			if (check[i] == 1) safeNodes.push_back(i);
+		}
+		
+        return safeNodes;
         
     }
-    
-    
 };
