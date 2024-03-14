@@ -21,7 +21,7 @@ public:
 	
         for(int i=0; i<prerequisites.size(); i++){
 
-            adj[prerequisites[i][1]].push_back(prerequisites[i][0]);
+            adj[prerequisites[i][0]].push_back(prerequisites[i][1]);
 
         }
         
