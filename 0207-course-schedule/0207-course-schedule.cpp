@@ -2,11 +2,13 @@ class Solution {
 public:
     bool canFinish(int N, vector<vector<int>>& prerequisites) {    
         
+        //Course --> Prerequisite
+        
         //Method1: using DFS 12ms
-        return dfs(N, prerequisites);
+        //return dfs(N, prerequisites);
         
         //Method2: Using BFS
-        //return bfs(N, prerequisites); //kahns Topo 16ms
+        return bfs(N, prerequisites); //kahns Topo 16ms
     }
     
     
@@ -19,7 +21,7 @@ public:
 	
         for(int i=0; i<prerequisites.size(); i++){
 
-            adj[prerequisites[i][0]].push_back(prerequisites[i][1]);
+            adj[prerequisites[i][1]].push_back(prerequisites[i][0]);
 
         }
         
@@ -62,7 +64,7 @@ public:
 	
         for(int i=0; i<prerequisites.size(); i++){
 
-            adj[prerequisites[i][1]].push_back(prerequisites[i][0]);
+            adj[prerequisites[i][0]].push_back(prerequisites[i][1]);
 
         }
 
