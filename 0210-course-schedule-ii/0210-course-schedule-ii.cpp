@@ -2,6 +2,14 @@ class Solution {
 public:
     vector<int> findOrder(int numCourses, vector<vector<int>>& prerequisites) {
         
+        /*
+            Prerequisite --> Course 
+            Order: pre... course
+            
+            
+            Course --> Prerequisite
+            Order: course .. pre
+        */
         
         vector<int> indegree(numCourses, 0);
         
@@ -9,9 +17,9 @@ public:
         
         for(auto row: prerequisites){
             
-            indegree[row[0]]++;
+            indegree[row[1]]++;
             
-            adj[row[1]].push_back(row[0]);
+            adj[row[0]].push_back(row[1]);
             
         }
         
@@ -43,7 +51,9 @@ public:
         //cout<<endl;
         if(ans.size()!= numCourses)
             return {};
-        else
+        else{
+            reverse(ans.begin(), ans.end());
             return ans;
+        }
     }
 };
