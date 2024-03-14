@@ -1,12 +1,18 @@
 class Solution {
 public:
     bool canFinish(int N, vector<vector<int>>& prerequisites) {    
-        //return dfs(N, prerequisites);
-        return bfs(N, prerequisites); //kahns Topo
+        
+        //Method1: using DFS
+        return dfs(N, prerequisites);
+        
+        //Method2: Using BFS
+        //return bfs(N, prerequisites); //kahns Topo 16ms
     }
     
     
     bool bfs(int V, vector<vector<int>>& prerequisites){
+        
+        //course -> prerequisite
         
         vector<int> indegree(V, 0);
         vector<vector<int>>adj(V);
