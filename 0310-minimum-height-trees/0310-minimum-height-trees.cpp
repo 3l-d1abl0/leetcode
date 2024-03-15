@@ -19,8 +19,11 @@ public:
         vector<int> ans;
         queue<int> q;
         for(int i=0; i<V; i++){
+            
+            //Process the leaves
             if(indegree[i]==1) q.push(i);
 
+            //disconnected graph or, graph with one node
             if(indegree[i]==0) ans.push_back(i);
 
         }
@@ -52,7 +55,24 @@ public:
         return ans;
     }
     
-        vector<int> method1(int n, vector<vector<int>> &edges){
+    vector<int> method1(int n, vector<vector<int>> &edges){
+        /*
+            Consider the longest path - one node to another node
+            
+            the height of the min height tree has to be half of the longest path
+            If The longest path is odd => there is one node for min height Tree (considering longest path size is unique)
+            If the longest path is eve => 2 nodes of min Height Tree
+            
+            How do we find the longest path and the mid nodes ?
+            
+            Start pruning the leaves , till we have > 2 total nodes
+            remaing to process
+            
+            Last 2 or 1 remaiing node will be the min height Tree node;
+        
+        */
+        
+        
         return minHeightTree(n, edges);
     }
     
@@ -151,10 +171,10 @@ public:
     vector<int> findMinHeightTrees(int n, vector<vector<int>>& edges) {
   
             //1. topo Sort
-            return method1(n, edges);
+            //return method1(n, edges);   //132ms
 
             //2. Re rooting
-            //return method2(n, edges);
+            return method2(n, edges);
     }
     
 };
