@@ -174,7 +174,7 @@ public:
             //return method1(n, edges);   //132ms
 
             //2. Re rooting
-            return method2(n, edges);
+            return method2(n, edges);   //174ms
     }
     
 };
