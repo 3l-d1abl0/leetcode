@@ -150,11 +150,11 @@ public:
     
     vector<int> findMinHeightTrees(int n, vector<vector<int>>& edges) {
   
-                        //1. topo Sort
-            //return method1(n, edges);
+            //1. topo Sort
+            return method1(n, edges);
 
             //2. Re rooting
-            return method2(n, edges);
+            //return method2(n, edges);
     }
     
 };
