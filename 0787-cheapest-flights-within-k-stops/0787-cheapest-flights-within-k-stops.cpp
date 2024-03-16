@@ -26,6 +26,8 @@ public:
             if(state.k==0 || dst==state.node)
                 continue;
             
+            if(state.k==0)
+                continue;
             /*//visited[vec[0]] = vec[1];
             
             if(vec[0]==dst){
