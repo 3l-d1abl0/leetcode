@@ -14,8 +14,13 @@ public:
         queue< pair<int, int> > Q;
         
         dist[0][0] =1;
-        Q.push( {0,0} );
+        Q.push( {0,0} );    //x, y
         int len =0;
+        
+        
+        vector< vector<int> > dir { {-1, -1}, {-1, 0}, {-1, 1},
+                                {0, -1}, {0, 1},
+                           {1, -1}, {1, 0}, {1, 1}};
         
         while(Q.size()){
             
@@ -27,10 +32,6 @@ public:
             
             if(x==R-1 && y==C-1)
                 return dist[x][y];
-            
-            vector< vector<int> > dir { {-1, -1}, {-1, 0}, {-1, 1},
-                                            {0, -1}, {0, 1},
-                                       {1, -1}, {1, 0}, {1, 1}};
             
             
             for(int i=0; i<8; i++){
