@@ -1,68 +1,112 @@
 class Solution {
 public:
     
-    int dijkstra(int src, int dst, int k, vector<vector<pair<int, int>>> &adj, int n){
+    void BFS(int src, int dst, vector<int> &visited, vector<vector<pair<int, int>>> &adj, int k){
+     
         
+        queue<vector<int>> q;   //row,price, k
+        vector<int> vec{src, 0, k+1};
         
-        priority_queue< vector<int>, vector<vector<int>>, greater<vector<int>> >  pq;
-        //smallest distance first
+        q.push(vec);
+        visited[src] = 0;
         
-        
-        vector<int> dist(n+1, 1e7); dist[src]=0;
-        vector<int> hops(n+1, 1e7); hops[src]=0;
-        
-        
-        pq.push({ 0, 0, src});    //cost, hops, vertex
-        
-        
-        while(!pq.empty()){
+        //cout<<"Loop"<<endl;
+        while(!q.empty()){
             
-            auto ele = pq.top(); pq.pop();
-            int currDist = ele[0], currHops = ele[1], node = ele[2];
-           
-           // cout<<"c:"<<currDist<<" h:"<<currHops<<" v:"<<node<<endl;
-            //if destination is reached, the current distance/price is the best
-            if(node==dst) return currDist;
+            vec = q.front(); q.pop();
             
-            //if current hops exceeds k, no need to proceed
-            if(currHops==k+1) continue;
+            if(vec[2]==0 || dst==vec[0]) continue;
             
-            for(auto row: adj[node]){
-                
-                
-                //1. if we can reach the adj node with less price/distance than already calculated
-                //2. if we can reach the adj node with lesser hops than already calculated
-                if(currDist + row.second < dist[row.first] || currHops+1 <hops[row.first]){ 
-                    dist[row.first] = currDist +row.second;
-                    hops[row.first] = currHops+1;
+            /*//visited[vec[0]] = vec[1];
+            
+            if(vec[0]==dst){
+                //visited[vec[0]] = vec[1];
+                continue;
+            }*/
+            
+            
+            
+            //cout<<vec[2]<<" "<<vec[0]<<" "<<vec[1]<<endl;
+            
+            
+            for(auto row: adj[vec[0]]){
+            
+                if(vec[1]+row.second <= visited[row.first]){
                     
-                    pq.push({dist[row.first], hops[row.first], row.first});
+                    visited[row.first] = vec[1]+row.second;
+                    
+                    vector<int> node{row.first, vec[1]+row.second, vec[2]-1 };
+                    q.push(node);
                 }
-                
-            }
             
+            
+            
+            }
             
         }
         
         
-        /*for(int i=0; i<n; i++){
-            cout<<dist[i]<<","<<hops[i]<<" ";
-        }*/
+    }
+    
+    void DFS(int src, int dst, int curr_price, vector<bool> &visited, vector<vector<pair<int, int>>> &adj, int k, int &max_price){
         
-        return -1;
+        
+        //cout<<"K: "<<k<<" "<<src<<endl;
+        
+        //k stops have been exhausted, it has to be the destination or stop
+        if(k==0 && src!=dst)
+            return;
+        
+        // If you meet the destination while K>0
+        if(src==dst){
+            max_price = min(max_price, curr_price);
+            return;
+        }
+        
+        visited[src] = true;
+        
+        for(auto row: adj[src]){
+            
+            if(visited[row.first]==false && curr_price+row.second <= max_price){
+                
+                DFS(row.first, dst, curr_price+row.second, visited, adj, k-1, max_price);
+            }
+            
+            
+            
+        }
+        
+        visited[src] = false;
         
     }
     
     int findCheapestPrice(int n, vector<vector<int>>& flights, int src, int dst, int k) {
         
+        ios_base::sync_with_stdio(false);
+        cin.tie(NULL);
+        cout.tie(NULL);
         
         
-        vector<vector<pair<int, int>>> adj (n);
-        for(auto row: flights){
-            adj[row[0]].push_back({row[1], row[2]}); //v, wt
+        vector<vector<pair<int, int>>> adj(n);
+        
+        for(auto ele: flights){
+            
+            adj[ele[0]].push_back({ele[1], ele[2]});
+            
         }
         
+        vector<int> visited(n, 1e7);
         
-        return dijkstra(src, dst, k, adj, n);
+        
+        //for(auto row: adj[src]){
+          //  if(visited[row.first]==false)
+                BFS(src, dst, visited, adj, k);
+                //DFS(row.first, dst, 0+row.second, visited, adj, k, max_price);
+        //}
+        
+        for(int ele: visited){
+            cout<<ele<<" ";
+        }cout<<endl;
+        return visited[dst]==1e7 ? -1: visited[dst];
     }
 };
