@@ -12,7 +12,6 @@ public:
      
         
         queue<Node> q;   //node,price, k
-        //vector<int> vec{src, 0, k+1};
         
         q.push(Node{src, 0, k+1});
         price[src] = 0;
@@ -26,19 +25,9 @@ public:
             if(state.k==0 || dst==state.node)
                 continue;
             
+            //If k stops have passed and not reached the destination, no point in going further
             if(state.k==0)
                 continue;
-            /*//visited[vec[0]] = vec[1];
-            
-            if(vec[0]==dst){
-                //visited[vec[0]] = vec[1];
-                continue;
-            }*/
-            
-            
-            
-            //cout<<vec[2]<<" "<<vec[0]<<" "<<vec[1]<<endl;
-            
             
             for(auto row: adj[state.node]){
             
@@ -48,16 +37,25 @@ public:
                     
                     q.push( Node{row.first, price[row.first], state.k-1 } );
                 }
+
+            }//for
             
-            
-            
-            }
-            
-        }
+        }//while
         
         
     }
     
+    //return method1(n, adj, src, dst, k);
+    int method1(int n, vector<vector<pair<int, int>>> &adj, int src, int dst, int k) {
+        
+        //Default maxx Price
+        vector<int> price(n, 1e7);
+        
+        BFS(src, dst, price, adj, k);
+        
+        return price[dst]==1e7 ? -1: price[dst];
+        
+    }
     
     int findCheapestPrice(int n, vector<vector<int>>& flights, int src, int dst, int k) {
         
@@ -70,18 +68,9 @@ public:
         
         for(auto ele: flights)            
             adj[ele[0]].push_back({ele[1], ele[2]});
-            
-        //Default maxx Price
-        vector<int> price(n, 1e7);
+    
         
+        return method1(n, adj, src, dst, k);    //16ms BFS
         
-        BFS(src, dst, price, adj, k);
-                
-        
-        /*for(int ele: price){
-            cout<<ele<<" ";
-        }cout<<endl;
-        */
-        return price[dst]==1e7 ? -1: price[dst];
     }
 };
