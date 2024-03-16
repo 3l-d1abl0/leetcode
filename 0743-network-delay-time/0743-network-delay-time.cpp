@@ -35,11 +35,13 @@ public:
     int dijkstra(int src, vector<vector<pair<int,int>>> &adj, int n){
         
         
-        vector<int> dist (n+1, 1e7); dist[src] =0;
+        vector<int> dist (n+1, 1e7);
+        dist[src] =0;
         
+        //minheap
         priority_queue< pair<int, int>, vector<pair<int, int>>, greater<pair<int, int>> > pq;
         
-        pq.push({0, src});
+        pq.push({0, src});  //time, node
         
         while(!pq.empty()){
             
@@ -59,9 +61,9 @@ public:
                    // cout<<"To heap : "<<vtx<<" with time "<<dist[vtx]<<endl;
                     
                 }
-            }
+            }//for
             
-        }
+        }//while
         
         
         /*for(int ele: dist){
@@ -88,10 +90,11 @@ public:
             
         
         
-        //return dijkstra(k, adj, n);
+        //method 1 - Dijkstra
+        return dijkstra(k, adj, n);
         
         
-        return bfs(k, adj, n);
+        //return bfs(k, adj, n);
         
         
         
