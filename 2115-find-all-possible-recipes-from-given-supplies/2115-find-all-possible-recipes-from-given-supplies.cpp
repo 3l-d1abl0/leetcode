@@ -11,7 +11,12 @@ public:
         int N = recipes.size();
         bool newSupply = false;
         do{
-            
+            /*
+                In a cycle of recipe check if a new supply is created,
+                that new supply could be an ingredient for another recipe.
+                
+                If no new supply is made, exit.
+            */
             newSupply = false;
             for(int idx=0; idx<N; idx++){
 
