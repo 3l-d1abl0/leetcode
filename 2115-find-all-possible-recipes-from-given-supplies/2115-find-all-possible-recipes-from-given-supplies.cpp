@@ -54,7 +54,7 @@ public:
     vector<string> findAllRecipes(vector<string>& recipes, vector<vector<string>>& ingredients, vector<string>& supplies) {
         
         
-        //Method1: Using Sets
+        //Method1: Using Sets   - 1180ms    - O(N*N)
         return method1(recipes, ingredients, supplies);
         
     }
