@@ -44,16 +44,14 @@ public:
         priority_queue<tuple<long long, int>, vector<tuple<long long, int>>, greater<tuple<long long, int>> > pq;//min Queue
         
         
-        //vector<long long> nodeWt(N, 1e13);
         vector<bool> isMst(N, false);
         
-        //nodeWt[0] =0;
         pq.push({0, 0});    //dist, src
         long long cost =0;
         
         
         while(!pq.empty()){
-         //for(int i = 0; i<N; i++){  
+         
             auto [dist, node] = pq.top(); pq.pop();
             
             if(isMst[node] == false){
@@ -65,8 +63,8 @@ public:
                 for(auto [src, wt]: adj[node]){
 
 
-                    if(isMst[src]== false /*&& nodeWt[src]> wt*/){
-                        //nodeWt[src] = wt;
+                    if(isMst[src]== false ){
+                        
                         pq.push({wt, src});
                     }
 
