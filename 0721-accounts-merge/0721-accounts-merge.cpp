@@ -61,43 +61,50 @@ public:
         
         
         int N = accounts.size();
-        int idx =0;
+        
         
         unordered_map<string, int> mp;
         
         DisjointSet ds(N);
         
+        int account_idx =0;
         for(auto row: accounts){
             
             for(int i=1; i<row.size(); i++){
                 
-                if(mp.find(row[i])==mp.end()){
-                    mp.insert( {row[i], idx} );
+                string email = row[i];
+                
+                //IF email doesnt exit , create a mapping
+                if(mp.find(email)==mp.end()){
+                    mp.insert( {email, account_idx} );
                 }else{
-                    ds.unionByRank(idx, mp[row[i]]);
+                    //If email exists join the twoo accounts
+                    ds.unionByRank(account_idx, mp[email]);
                 }
                 
             }
-            idx++;
+            
+            account_idx++;
         }//for
         
         
-        //form list
+        //form list - gather all emails of a parent
         vector<vector<string>> ls(N, vector<string>());
         
         for(auto row: accounts){
             
-            for(int i=1; i<row.size(); i++){
+            //find parent account
+            int parent = ds.findParent(mp[row[1]]);
+            
+            //push all emails to parent account
+            for(int i=1; i<row.size(); i++)
+                ls[parent].push_back(row[i]);
                 
-                int p = ds.findParent(mp[row[i]]);
-                ls[p].push_back(row[i]);
-                
-            }
         }//for
         
         
         //form answer
-        idx=0;        
+        int idx=0;        
         vector<vector<string>> ans;
         for(auto row: ls){
             
