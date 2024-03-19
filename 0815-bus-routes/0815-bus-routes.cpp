@@ -16,14 +16,6 @@ public:
             bus++;
         }
         
-        /*for(auto node: getRoutes){
-            cout<<node.first<<":: ";
-            for(int stop: node.second)
-                cout<<stop<<" ";
-            
-            cout<<endl;
-        }*/
-        
         queue<int> q;
         unordered_set<int> visitedBusRoute;
         
@@ -47,7 +39,8 @@ public:
             
             int sz = q.size();
             hop++;
-            
+         
+            //process the enitre level
             for(int i=0; i<sz; i++){
                 
                 int stop = q.front();
