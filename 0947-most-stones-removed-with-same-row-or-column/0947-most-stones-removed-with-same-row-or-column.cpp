@@ -91,7 +91,7 @@ int method1(vector<vector<int>>& stones){
             dfs(stones, i, visited);
             count++;
         }
-        
+        cout<<count<<endl;
         return n - count;
 }
     
@@ -114,13 +114,23 @@ int method2(vector<vector<int>> &stones){
         C1 - node3
         C2 - node4
         C3 - node5
+        
+        4x2
+        R0 - 0
+        R1 - 1
+        R2 - 2
+        R3 - 3
+        C0 - 4
+        C1 - 5
         */
 
         DisjointSet ds(maxCol+maxRow+1);
         
         for(auto row: stones){
             
+            //Join the Row and Column
             ds.unionBySize(row[0], maxRow+1+row[1]);
+            
         }
         
         //cout<<ds.componentSize()<<endl;
@@ -132,10 +142,25 @@ class Solution {
 public:
     int removeStones(vector<vector<int>>& stones) {
         
+        /*
+            Method1: DFS
+            155ms
+            start wuith every node if unvisited
+            keep traversing to any stone which lies on same row , column
+            
+            The idea here is that we can remove all stones from the group of connected stones except the last one.
+            hence = N - (components)
         
-        return method1(stones); ///dfs
+        */
         
-        //return method2(stones); //union-find
+        //return method1(stones); ///dfs
+        
+        /*
+            DSU - 25ms
+            
+            give number to each row and column
+        */
+        return method2(stones); //union-find
         
     }
 };
