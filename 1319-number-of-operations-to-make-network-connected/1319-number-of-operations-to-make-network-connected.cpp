@@ -58,6 +58,14 @@ class Solution {
 public:
     int makeConnected(int n, vector<vector<int>>& connections) {
         
+        
+        /*
+            Loop over the edges and cheek , which edges are redundant.
+            If the edge connects the already connected component
+            
+            If the number of extra edges is greater than teh number of component that needs to be added.
+        */
+        
         DisjointSet ds(n);
         
         int ext =0;
