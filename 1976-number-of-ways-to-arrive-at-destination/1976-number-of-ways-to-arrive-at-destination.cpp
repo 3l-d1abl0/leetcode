@@ -14,6 +14,7 @@ public:
         vector<int> ways(N,0);
         vector<long long> dist(N, 1e18);
         
+        //Number of ways of reaching source is 1
         ways[0] =1;
         dist[0] =0;
         
