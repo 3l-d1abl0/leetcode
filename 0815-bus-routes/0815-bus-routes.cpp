@@ -2,86 +2,80 @@ class Solution {
 public:
     int numBusesToDestination(vector<vector<int>>& routes, int source, int target) {
         
-        int N =1e6;
-        
-        //Stores for every bus-stop, the routes it belongs to
-        vector<vector<int>> giveRoutes(N, vector<int>());
-        
-        for(int i=0; i<routes.size(); i++){
-            
-            int routeNo = i;
-            
-            for(int j=0; j<routes[routeNo].size(); j++){
-                
-                int busStop = routes[routeNo][j];
-                
-                giveRoutes[busStop].push_back(routeNo);
-                
-            }
-            
-        }//for
-        
-        
-        if(source==target){
+        if(source==target)
             return 0;
+        
+        //Stop ==> routes 
+        unordered_map<int, vector<int>> getRoutes;
+        
+        int bus=0;
+        for(auto route: routes){
+            for(int stop: route)
+                getRoutes[stop].push_back(bus);
+            
+            bus++;
         }
         
-        vector<bool> visitedStop(N, false);
-        vector<bool> visitedRoutes(N, false);
+        /*for(auto node: getRoutes){
+            cout<<node.first<<":: ";
+            for(int stop: node.second)
+                cout<<stop<<" ";
+            
+            cout<<endl;
+        }*/
         
-        //stop and hops to reach there
-        queue< pair<int, int>> q;
-        q.push({source, 0});
+        queue<int> q;
+        unordered_set<int> visitedBusRoute;
         
-        visitedStop[source] =true;
+        //push all the stops that lies on source route
+        for(int route: getRoutes[source]){
+            
+            for(int stop: routes[route]){  //get all the stops in th bus route
+                
+                if(visitedBusRoute.find(stop) == visitedBusRoute.end()){
+                    q.push(stop);
+                }
+            }
+            
+            //entire route visited
+            visitedBusRoute.insert(route);
+            
+        }
         
-        
+        int hop =0;
         while(!q.empty()){
             
+            int sz = q.size();
+            hop++;
             
-            int busStop = q.front().first;
-            int hop = q.front().second;
-            
-            q.pop();
-            
-            if(busStop==target)
-                return hop;
-            
-            
-            for(int i=0; i<giveRoutes[busStop].size(); i++){
+            for(int i=0; i<sz; i++){
                 
-                int routeNo = giveRoutes[busStop][i];
+                int stop = q.front();
+                q.pop();
                 
+                if(stop==target)
+                    return hop;
                 
-                //Skip if this route has been visited
-                if(visitedRoutes[routeNo]==true)
-                    continue;
-                
-                visitedRoutes[routeNo]=true;
-                
-                //visit all bus Stop in thi sRoute
-                for(int idx=0; idx<routes[routeNo].size(); idx++){
-                    
-                    int nxtBusStop = routes[routeNo][idx];
-                    
-                    //Skip if this bus Stop has been visited
-                    if(visitedStop[nxtBusStop]==true)
-                        continue;
-                    
-                    visitedStop[nxtBusStop]=true;
-                    
-                    
-                    q.push({ nxtBusStop, hop+1 });
-                }//for idx
+                //push all the bus stops in the route that this stop is part of, for next hop
+                for(int route: getRoutes[stop]){
+
+                    if(visitedBusRoute.find(route) == visitedBusRoute.end()){
+                        
+                        for(int busStop: routes[route])  //get all the stops in th bus route
+                                q.push(busStop);
+                        
+                        visitedBusRoute.insert(route);
+                    }
+
+                }//for get Routes
                 
                 
-            }//for i
+            }//for queue size
             
             
-            
-        }//while q
-        
+        }//while
         
         return -1;
+        
     }
 };
