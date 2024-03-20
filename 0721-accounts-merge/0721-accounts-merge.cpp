@@ -80,6 +80,11 @@ public:
         
         DisjointSet ds(N);//there can be N components
         
+        /*
+            For every email,
+            map it to account-id or parent-account-id
+        */
+        
         int account_idx =0;
         for(auto row: accounts){
             
@@ -101,13 +106,19 @@ public:
         }//for
         
         
+        /*
+            parents-child connection has been formed
+            Each emails maps to it account-id or parent-accoutn-id
+        */
+        
         vector<vector<string>> ans;
-        //patent- to ans-id
+        //patent- to idx in ans vecrtor
         unordered_map<int, int> parToAns;
         for(auto row: mp){
             
             int parent_account_id = ds.findParent(row.second);
             
+            //does not exist in ans vecrtor
             if(parToAns.find(parent_account_id) == parToAns.end()){
                 ans.push_back({accounts[parent_account_id][0], row.first}); ///{name, email}
                 parToAns[parent_account_id] = ans.size() -1; 
@@ -117,50 +128,12 @@ public:
             }
         }
         
-        
+        //sort the emails
         for(auto& row: ans){
             sort(row.begin()+1, row.end());
         }
         
         return ans;
         
-        /*
-        //form list - gather all emails of every parent
-        //id - emails
-        unordered_map<int, vector<string>> emails(N);
-        for(auto row: accounts){
-            
-            //find parent account-id
-            int parent = ds.findParent(mp[row[1]]);
-            
-            //push all emails to parent account
-            for(int i=1; i<row.size(); i++)
-                ls[parent].push_back(row[i]);
-                
-        }//for
-        
-        
-        //form answer - push all emails to thier parent row
-        int idx=0;        
-        vector<vector<string>> ans;
-        for(auto row: ls){
-            
-            if(row.size()!=0){
-                
-                set<string> st(row.begin(), row.end());
-                
-                vector<string> tmp;
-                tmp.push_back(accounts[idx][0]);
-                for(auto ele: st){
-                    tmp.push_back(ele);
-                }
-                
-                ans.push_back(tmp);
-            }
-            
-            idx++;
-        }
-        
-        return ans;*/
     }
 };
