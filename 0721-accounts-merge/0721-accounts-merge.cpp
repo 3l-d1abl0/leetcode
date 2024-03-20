@@ -5,7 +5,7 @@ public:
         rank.resize(n+1, 0); 
         parent.resize(n+1);
         size.resize(n+1); 
-        for(int i = 0;i<=n;i++) {
+        for(int i = 0;i<n;i++) {
             parent[i] = i; 
             size[i] = 1; 
         }
@@ -52,6 +52,19 @@ public:
             
         }
     }
+    
+    int totalComponent(){
+        int N = parent.size();
+        int cnt=0;
+        for(int i=0; i<N;i++)
+            if(parent[i]==i){
+                cout<<i<<" => "<<parent[i]<<endl;
+                cnt++;
+            }
+        
+        
+        return cnt;
+    }
 };
 
 
@@ -62,10 +75,10 @@ public:
         
         int N = accounts.size();
         
-        
+        //Mapping of email -> account-id
         unordered_map<string, int> mp;
         
-        DisjointSet ds(N);
+        DisjointSet ds(N);//there can be N components
         
         int account_idx =0;
         for(auto row: accounts){
@@ -88,12 +101,36 @@ public:
         }//for
         
         
-        //form list - gather all emails of a parent
-        vector<vector<string>> ls(N, vector<string>());
+        vector<vector<string>> ans;
+        //patent- to ans-id
+        unordered_map<int, int> parToAns;
+        for(auto row: mp){
+            
+            int parent_account_id = ds.findParent(row.second);
+            
+            if(parToAns.find(parent_account_id) == parToAns.end()){
+                ans.push_back({accounts[parent_account_id][0], row.first}); ///{name, email}
+                parToAns[parent_account_id] = ans.size() -1; 
+            }else{
+                int ans_idx = parToAns[parent_account_id];
+                ans[ans_idx].push_back(row.first);
+            }
+        }
         
+        
+        for(auto& row: ans){
+            sort(row.begin()+1, row.end());
+        }
+        
+        return ans;
+        
+        /*
+        //form list - gather all emails of every parent
+        //id - emails
+        unordered_map<int, vector<string>> emails(N);
         for(auto row: accounts){
             
-            //find parent account
+            //find parent account-id
             int parent = ds.findParent(mp[row[1]]);
             
             //push all emails to parent account
@@ -103,7 +140,7 @@ public:
         }//for
         
         
-        //form answer
+        //form answer - push all emails to thier parent row
         int idx=0;        
         vector<vector<string>> ans;
         for(auto row: ls){
@@ -124,6 +161,6 @@ public:
             idx++;
         }
         
-        return ans;
+        return ans;*/
     }
 };
