@@ -76,20 +76,33 @@ public:
     
     int method2(vector<char> &tasks, int n){ 
         
+        
+        /*  n - cooling time
+            1 2 3 4 5 6 ... n n+1
+            1 2 3 4 5 6 ... n n+1
+        */
+        
+        
         unordered_map<char, int> mp;
         int maxFreq = 0;
+        //Get the frequency of each Task
         for(char ch:tasks){
             mp[ch]++;
             maxFreq = max(maxFreq, mp[ch]);
         }
         
+        //Calculate for 1 less batch
         int maxCycles = (n+1) *(maxFreq-1);
         
+        /*
+        number of task which has the feq,
+        same as maxFreq will contribute to
+        1 more cycle
+        */
         for(auto ele: mp)
             if(maxFreq == ele.second)
                 maxCycles++;
         
-        //cout<<maxCycles<<endl;
         //For cases where n ==1
         return max((int)tasks.size(), maxCycles);
         
