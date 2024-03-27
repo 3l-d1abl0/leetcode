@@ -17,7 +17,7 @@ struct Node{
 struct Comparator{
     
     bool operator()(Node &lhs, Node &rhs){
-        return lhs.num > rhs.num;
+        return lhs.num > rhs.num;//ascending
     }
 };
 
@@ -33,7 +33,7 @@ public:
         
         priority_queue<Node, vector<Node> , Comparator> pq;
         
-        
+        //push first element from every list
         for(int i=0; i<N; i++){
             
             if(lists[i]!=NULL){
@@ -45,20 +45,22 @@ public:
         int remList = N;
         while(!pq.empty()){
             
+            //pick the smallest one from heap
             Node tmp = pq.top();
             pq.pop();
             
             int num = tmp.num;
+            //Which List
             int pos = tmp.pos;
             
             temp->next = new ListNode(num);
+            temp = temp->next;
             
             if(lists[pos]!=NULL){
                 pq.push({lists[pos]->val, pos});
                 lists[pos] = lists[pos]->next;
             }
             
-            temp = temp->next;
         }
         
         
