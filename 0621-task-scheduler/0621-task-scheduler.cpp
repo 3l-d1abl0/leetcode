@@ -1,7 +1,7 @@
 struct CompareFn{
     
     bool operator()(pair<char, int> &a, pair<char, int> &b){
-        return a.second < b.second; //Max Frequency First
+        return a.second < b.second; //Max Frequency First, descending
     }
     
 };
@@ -12,7 +12,7 @@ public:
     int method1(vector<char> &tasks, int n){
        /*
         if n=2
-        A__A - There is a Cycle of if Size n+1, obly after n+1 terms any character can be repeated
+        A__A - There is a Batch of if Size n+1 cycles, only after n+1 terms any character can be repeated
         
         pick (n+1) characters (at max) from the Heap
         
@@ -31,6 +31,7 @@ public:
         for(char ch: tasks)
                 freq[ch]++;
         
+        //Create a maxHeap of all tasks, element with max freq is at Top.
         priority_queue< pair<char, int>, vector<pair<char, int>> , CompareFn > maxH (freq.begin(), freq.end());
         
         int cycle = n+1;
@@ -42,7 +43,7 @@ public:
             int time =0;
             queue< pair<char, int> > waitQ;
             
-            //process n+1 elements from Heap
+            //process n+1 elements from Heap asn push them to waitQ - Fill a Batch
             for(int i=1; i<=cycle && !maxH.empty(); i++){
                 
                 //if(!maxH.empty()){
@@ -59,13 +60,17 @@ public:
                 auto front = waitQ.front();
                 waitQ.pop();
                 
+                //decrease a the freq by 1 asn push it back on Heap
                 if(--front.second > 0){
                     maxH.push(front);
                 }
             }
             
             
-            //If heap is not empty
+            /*
+            If heap is empty , time will give the count of elements processed in this bacth.
+            Otherwise ente n+1 cycle was processed in the4Batch
+            */
             ans += !maxH.empty() ? cycle : time;
         }//while
         
@@ -114,9 +119,9 @@ public:
         //K - max Freq 
         
         //1. method1 - O((n+1)(k)log(26))
-        //return method1(tasks, n);
+        return method1(tasks, n);
         
         //2. method2 - O(N)
-        return method2(tasks, n);
+        //return method2(tasks, n);
     }
 };
