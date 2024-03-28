@@ -47,12 +47,34 @@ public:
             for(int i=1; i<=cycle && !maxH.empty(); i++){
                 
                 //if(!maxH.empty()){
-                    waitQ.push(maxH.top());
+                    if(maxH.top().second!=1)//If freq is 0, tit is the last time it is processed
+                        waitQ.push(maxH.top());
+                
+                    //cout<<maxH.top().first<<" "<<maxH.top().second<<", ";
                     maxH.pop();
-
                     time++;
                 //}
                 
+            }
+        
+            /*
+            If heap is empty , time will give the count of elements processed in this bacth.
+            Otherwise ente n+1 cycle was processed in the4Batch
+            */
+            
+            //ans += !maxH.empty() ? cycle : time;
+            if(!maxH.empty()){  //entire batch processed
+                ans+=cycle;
+                //cout<<"WB: "<<cycle<<endl;
+            }else{
+                
+                if(waitQ.empty()){   //no elements to push back to Heap - last Batch
+                    ans+=time;
+                    //cout<<"LB: "<<time<<endl;
+                }else{
+                    ans+=cycle; //ran the whole batch (idle included)
+                    //cout<<"Idle+ "<<cycle<<endl;
+                }
             }
             
             //clear the waiting Queue
@@ -66,12 +88,7 @@ public:
                 }
             }
             
-            
-            /*
-            If heap is empty , time will give the count of elements processed in this bacth.
-            Otherwise ente n+1 cycle was processed in the4Batch
-            */
-            ans += !maxH.empty() ? cycle : time;
+        
         }//while
         
         
