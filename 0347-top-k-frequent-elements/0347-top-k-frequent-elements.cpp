@@ -50,7 +50,7 @@ public:
     vector<int> topKFrequent(vector<int>& nums, int k) {
         
         //1. method1 - Freq Count - Bucket - O(N*avg Freq)
-        //return method1(nums, k);
+        return method1(nums, k);
         
         //2. method2 - heap - Nlog(K)
         //return method2(nums, k);
@@ -67,6 +67,7 @@ public:
             num_with_cnt.push_back({kv.first, kv.second});
         }
         kselection(num_with_cnt, 0, num_with_cnt.size()-1, k);
+        
         for (int i = 0; i < k && i < num_with_cnt.size(); ++i) {
             res.push_back(num_with_cnt[i].first);
         }
