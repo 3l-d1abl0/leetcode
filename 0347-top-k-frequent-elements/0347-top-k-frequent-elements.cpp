@@ -52,8 +52,8 @@ public:
         //1. method1 - Freq Count - Bucket - O(N*avg Freq)  - 17ms
         //return method1(nums, k);
         
-        //2. method2 - heap - Nlog(K)
-        return method2(nums, k);
+        //2. method2 - heap - Nlog(K)   - 17ms
+        //return method2(nums, k);
         
         //3. Method3 - QuickSelect
         vector<int> res;
