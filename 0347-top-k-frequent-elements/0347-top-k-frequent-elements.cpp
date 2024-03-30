@@ -49,11 +49,11 @@ public:
     
     vector<int> topKFrequent(vector<int>& nums, int k) {
         
-        //1. method1 - Freq Count - Bucket - O(N*avg Freq)
-        return method1(nums, k);
+        //1. method1 - Freq Count - Bucket - O(N*avg Freq)  - 17ms
+        //return method1(nums, k);
         
         //2. method2 - heap - Nlog(K)
-        //return method2(nums, k);
+        return method2(nums, k);
         
         //3. Method3 - QuickSelect
         vector<int> res;
