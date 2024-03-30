@@ -16,6 +16,7 @@ public:
     
     void addNum(int num) {
         
+        //Both empty
         if(maxQ.empty()){
             maxQ.push(num);
             return;
@@ -24,7 +25,7 @@ public:
         if (maxQ.size() == minQ.size()){ //even size so far
             
             
-            if(!minQ.empty() && num >= minQ.top()){
+            if(num >= minQ.top()){
              // cout<<"1"<<endl;
                  auto temp = minQ.top();
                minQ.pop();
@@ -39,7 +40,7 @@ public:
             
         }else{  //odd size so far
             
-            if( num<= maxQ.top()){
+            if( num< maxQ.top()){
                 auto temp = maxQ.top();
                 maxQ.pop();
                 minQ.push(temp);
@@ -55,10 +56,11 @@ public:
     
     double findMedian() {
         
+        //Even number of elements
         if(maxQ.size() == minQ.size()){
             //cout<<maxQ.top()<<"--"<<minQ.top()<<endl;
             return (maxQ.top()+minQ.top())/2.0;
-        }else{
+        }else{//odd number of elements
             //cout<<"----"<<maxQ.top()<<endl;
             return maxQ.top();
         }
