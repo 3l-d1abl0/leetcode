@@ -55,7 +55,7 @@ public:
         //2. method2 - heap - Nlog(K)   - 17ms
         //return method2(nums, k);
         
-        //3. Method3 - QuickSelect
+        //3. Method3 - QuickSelect  - 8ms
         vector<int> res;
         if (!nums.size()) return res;
         
