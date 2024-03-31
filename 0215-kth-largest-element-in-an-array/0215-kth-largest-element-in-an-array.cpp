@@ -3,9 +3,12 @@ class Solution {
     //Randomized Quick Select - gives better performance than normal quick select
     int partition(vector<int> &arr, int st, int ed){
 
-        int n= ed-st+1;
-        int piv = rand() % n;
+        //......[st ... ed]....
         
+        int n= ed-st+1;//number of elements
+        int piv = rand() % n;   //0-n-1
+        
+        //pull the pivot in the start
         swap(arr[st + piv], arr[st]);
         int partIdx = st;
 
@@ -29,26 +32,35 @@ class Solution {
 
     }
 
-    int kthLargest(vector<int> &arr, int k, int st, int ed){
+    int kthLargest(vector<int> &data, int k, int start, int end){
 
-        int n = arr.size()-1;
-        int kth = n-(k-1);
-        while(st<=ed){
-
-            int idx = partition(arr, st, ed);
-
-            if(idx ==kth){
-                return arr[idx];
-            }else if(idx <kth ){
-                return kthLargest(arr, k, idx+1, ed);
-            }else{
-                return kthLargest(arr, k, st, idx-1);
+        if (start >= end) return data[start];
+        
+        int rng = (rand() % (end-start+1) ) + start;
+        swap(data[rng], data[end]);
+        
+        auto pv = data[end];
+        int i = start;
+        int j = start;
+        while (i < end) {
+            if (data[i] > pv) {
+                swap(data[i++], data[j++]);
+            } else {
+                ++i;
             }
-
+        }
+        swap(data[j], data[end]);
+        
+        int num = j - start + 1;
+        if (num == k)
+            return data[j];
+        else if (num < k) {
+            return kthLargest(data, k-num, j + 1, end);
+        } else {
+            return kthLargest(data, k, start, j - 1);
         }
         
         
-        return -1;
     }
     
     int method1(vector<int>& arr, int K) {
@@ -78,7 +90,7 @@ public:
             1. Method1: Use Min heap
             TC: O(K) + O((N-K)*logK)
         */
-        return method1(nums, k);
+        //return method1(nums, k);
         
         
         /*
@@ -88,8 +100,8 @@ public:
             Avg: O(NlogN)
             Worst: O(N^2)
         */
-        int n = nums.size();
-        //return kthLargest(nums, k, 0, n-1);
+        int N = nums.size();
+        return kthLargest(nums, k, 0, N-1);
         
     }
 };
