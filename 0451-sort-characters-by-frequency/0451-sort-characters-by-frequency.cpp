@@ -66,6 +66,7 @@ public:
             int f = maxHeap.top().first;
             char c = maxHeap.top().second;
             
+            //f times c
             ans.append(f, c);
             maxHeap.pop();
         }
