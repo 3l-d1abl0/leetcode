@@ -5,6 +5,15 @@ class Solution {
 public:
     int findMaximizedCapital(int k, int W, vector<int>& profits, vector<int>& capital) {
         
+        /*
+        
+            1. find all the project which can be done with current capital
+            2. from all the selected project, get the one with max Profit
+            3. Get the profict from the selected project.
+            
+            repear k times.
+        */
+        
         priority_queue< pair<int, int>, vector<pair<int, int>>, greater<pair<int, int>> > cap; //min  heap
         priority_queue< int > prof; //max
         
