@@ -20,7 +20,12 @@ public:
         
         int x = m[maxfreq].top();
         m[maxfreq].pop();
-        if (!m[freq[x]--].size()) maxfreq--;
+        
+        freq[x]--;
+        
+        if (m[maxfreq].size()==0)
+            maxfreq--;
+        
         return x;
         
     }
