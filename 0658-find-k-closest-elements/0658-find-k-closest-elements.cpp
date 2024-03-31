@@ -126,9 +126,9 @@ public:
         int n = arr.size();
         int l = 0, r = n-k;
         
-        while(l<r){
+        while(r>l){
          
-            int mid = l+(r-l)/2;
+            /*int mid = l+(r-l)/2;
             
             if(arr[mid]== arr[mid+k]){
                 
@@ -142,7 +142,30 @@ public:
                 r=mid;
             }else{
                 l=mid+1;
+            }*/
+            
+            
+            
+            /*
+                mid to mid+k -> creates a windoow of k+1.
+                we compare the left boundary to the right one and make sure the left one stays close to the 
+                target, rather than the k+1.
+            
+                leftB ---------------- target ------------------- rightB
+                Predicate: the left boundary remains closer to the x, Actually the first index where leftB is closer to Riught B
+                
+                https://www.youtube.com/watch?v=1YWHJFw72sY
+            */
+            
+            
+            int mid = l+(r-l)/2;
+            
+            if(x-arr[mid] <= arr[mid+k]-x){
+                r=mid;  //move towards left find the first idx where left is closer than right
+            }else{
+                l=mid+1;    //mid cannot be the left boundary
             }
+            
         }
         
         
