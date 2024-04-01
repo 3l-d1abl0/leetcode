@@ -56,10 +56,11 @@ class Solution {
         
         if(h1.size() == 0){
             h1.insert(ele);
-        }else if (h1.size() == h2.size()+1){
+        }else if (h1.size() == h2.size()+1){//new element will make both size even
             
             long long int lastH1 = *prev(h1.end());
             //cout<<"lastH1:: "<<lastH1<<endl;
+            //if new element falls in the set1
             if(ele <=lastH1){
                 h1.insert(ele);
                 
@@ -72,7 +73,7 @@ class Solution {
                 
                 h2.insert(ele);
             }
-        }else if(h1.size() == h2.size()){
+        }else if(h1.size() == h2.size()){//set1 will end up haing a size +1
             
             long long int lastH1 = *prev(h1.end());
             
@@ -83,6 +84,7 @@ class Solution {
                 h2.insert(ele);
                 
                 //at this point // sz(h1)  = sz(h2) -1
+                //transfer 1 elemet from set2 to set1
                 h1.insert( *(h2.begin()) );
                 h2.erase( (h2.begin()) );
             }
@@ -95,7 +97,11 @@ class Solution {
         vector<double> median;
         /*
           Window:  [ -----h1---- | ----h2----]
-          
+                     < ---Ascending ------  >
+                     
+          If size of window is even both set will have same no. of elements
+          If size of window is odd, set1 will hve +1 no. of elements than set2
+                     
           k = 3
                 i         
           0 1 2 3 4 5 6 7 8
