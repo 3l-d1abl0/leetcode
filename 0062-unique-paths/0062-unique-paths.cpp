@@ -55,15 +55,50 @@ public:
     }
     
     
+    int opti(int m, int n) {
+        
+        vector<int> prev(n, 0);
+
+        for (int i = 0; i < m; i++) {
+
+            //current row
+            vector<int> temp(n, 0);
+            for (int j = 0; j < n; j++) {
+                
+                
+                if (i == 0 && j == 0) {
+                    temp[j] = 1;
+                    continue;
+                }
+
+                int up = 0;
+                int left = 0;
+
+                if (i > 0)
+                    up = prev[j];
+
+                if (j > 0)
+                    left = temp[j - 1];
+                temp[j] = up + left;
+            }
+
+            prev = temp;
+        }
+
+        return prev[n - 1];
+    }
+    
     int uniquePaths(int m, int n) {
      
         //vector<vector<int>> dp(m, vector<int>(n, -1));
 
-        // Call the utility function with the bottom-right cell as the starting point.
+        //1. Call the utility function with the bottom-right cell as the starting point.
         //return recMemo(m - 1, n - 1, dp);
         
+        //2. Tabulation
+        //return bottomUp(m, n);
         
-        return bottomUp(m, n);
-        
+        //3. opti
+        return opti(m, n);
     }
 };
