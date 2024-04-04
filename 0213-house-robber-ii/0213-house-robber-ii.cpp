@@ -43,6 +43,31 @@ public:
         
     }
     
+    int bottomUp(int N, vector<int> &nums){
+        
+        vector<int> dp(N, 0);
+        
+        for(int i=0; i<N; i++){
+            
+            int inSum =0, exSum =0;
+            
+            //pick/Include
+                inSum = nums[i]+ ( (i-2>=0)?dp[i-2]:0);
+        
+            //not pick //exclude
+            
+                exSum = (i-1>=0)?dp[i-1]:0;
+            
+            dp[i]=max(inSum, exSum);
+            
+        }
+        
+        
+        return dp[N-1];
+        
+        
+    }
+    
     int rob(vector<int>& nums) {
         /*
         Since it is circular , If you pick the first element,
@@ -64,10 +89,14 @@ public:
         
         //return max(justRob(noLast), justRob(noFirst));
         
-        vector<int> memo(N, -1);
+        /*vector<int> memo(N, -1);
         vector<int> memo1(N, -1);
         
         return max(recMemo(N - 1, noLast, memo), recMemo(N - 1, noFirst, memo1));
+        */
         
+        
+        //BottomUp -DP - Tabulation
+        return max(bottomUp(N, noLast), bottomUp(N, noFirst));
     }
 };
