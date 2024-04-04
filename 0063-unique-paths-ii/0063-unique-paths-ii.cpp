@@ -33,9 +33,61 @@ public:
         return recMemo(n - 1, m - 1, maze, memo); // Start from the bottom-right corner
     }
     
+    int bottomUp(vector<vector<int>> &maze) {
+        
+            int n = maze.size();
+            int m = maze[0].size();
+        
+            //dp
+            vector<vector<int>> dp(n, vector<int> (m, 0));
+        
+            for (int i = 0; i < n; i++) {
+                for (int j = 0; j < m; j++) {
+                    
+                    //destination
+                    if (i == 0 && j == 0) {
+                        if (maze[i][j] == 1)//If destination is a Rock
+                            return 0;
+                        else
+                            dp[i][j] =1;
+                        
+                        continue;
+                    }
+                    
+                    
+                    if(maze[i][j] == 1) {
+                        dp[i][j] = 0;
+                        continue;
+                    }
+
+
+                    int up = 0;
+                    int left = 0;
+
+                    // Check if we can move up and left (if not at the edge of the maze)
+                    if (i > 0)
+                        up = dp[i - 1][j];
+                    
+                    if (j > 0)
+                        left = dp[i][j - 1];
+
+            
+                    dp[i][j] = up + left;
+                }
+            }
+
+            
+            return dp[n - 1][m - 1];
+        }
+    
+    
     int uniquePathsWithObstacles(vector<vector<int>>& obstacleGrid) {
         
-        return recursive(obstacleGrid);      
+        //return recursive(obstacleGrid);      
+        
+        
+        
+        return bottomUp(obstacleGrid);
         
     }
 };
