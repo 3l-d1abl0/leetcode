@@ -1,6 +1,8 @@
 impl Solution {
 
         fn rec_memo(idx: usize, nums: &[i32], memo: &mut Vec<i32>) -> i32 {
+            
+        //IF we reach idx =0, it means we din not take idx=1, since have to maximize sum we include idx=0
         if idx == 0 {
             return nums[idx];
         }
