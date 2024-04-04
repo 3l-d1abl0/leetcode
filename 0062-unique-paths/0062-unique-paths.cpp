@@ -1,7 +1,7 @@
 class Solution {
 public:
     
-    int countWaysUtil(int i, int j, vector<vector<int>>& memo) {
+    int recMemo(int i, int j, vector<vector<int>>& memo) {
     // Base case: If we reach the top-left corner (0, 0), there is one way.
     if (i == 0 && j == 0)
         return 1;
@@ -15,8 +15,8 @@ public:
         return memo[i][j];
 
     // Calculate the number of ways by moving up and left recursively.
-    int up = countWaysUtil(i - 1, j, memo);
-    int left = countWaysUtil(i, j - 1, memo);
+    int up = recMemo(i - 1, j, memo);
+    int left = recMemo(i, j - 1, memo);
 
     // Store the result in the dp table and return it.
     return memo[i][j] = up + left;
@@ -27,7 +27,7 @@ public:
         vector<vector<int>> dp(m, vector<int>(n, -1));
 
         // Call the utility function with the bottom-right cell as the starting point.
-        return countWaysUtil(m - 1, n - 1, dp);
+        return recMemo(m - 1, n - 1, dp);
         
     }
 };
