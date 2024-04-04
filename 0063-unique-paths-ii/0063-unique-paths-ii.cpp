@@ -1,65 +1,41 @@
 class Solution {
 public:
-    int uniquePathsWithObstacles(vector<vector<int>>& obstacleGrid) {
-     
+    
+    
+    int recMemo(int i, int j, vector<vector<int>> &maze, vector<vector<int>> &dp) {
         
-        int M = obstacleGrid.size();
-        int N = obstacleGrid[0].size();
+        if (i < 0 || j < 0) return 0; // If we go out of bounds, return 0
+        if (i == 0 && j == 0)
+            return maze[i][j] == 0; // If we reach the destination (0, 0), return 1
         
-        vector<vector<int>> dp(M, vector<int>(N, 0));
-        
-        if(obstacleGrid[0][0]==1)
-            return 0;
-            //dp[0][0] =0;
-        else
-            dp[0][0]=1;
-            
-        //first row will have 1 if it can be reached, 0 if there was an obstacle befre any column
-        for(int i=1; i<N; i++){
-            
-            if(obstacleGrid[0][i]==1)
-                dp[0][i] = 0;
-            else
-                dp[0][i]= dp[0][i-1];
-        }
-        
-        for(int j=1; j<M; j++){
-            
-            if(obstacleGrid[j][0]==1)
-                dp[j][0] = 0;
-            else
-                dp[j][0]= dp[j-1][0];
-        }
+        // Base cases
+        if (i >= 0 && j >=0 && maze[i][j] == 1) return 0; // If there's an obstacle at (i, j), return 0
         
         
-        for(int i=1; i<M; i++){
-            
-            for(int j=1; j<N; j++){
-                
-                //cout<<dp[i-1][j]+dp[i][j-1]<<" ";
-                //cout<<obstacleGrid[i][j]<<" ";
-                
-                if(obstacleGrid[i][j] ==1)
-                    dp[i][j] = 0;
-                else
-                    dp[i][j] = dp[i-1][j]+dp[i][j-1];
-                
-            }
-            //cout<<endl;
-        }
-        
-        //print(obstacleGrid);
-        return dp[M-1][N-1];
+        if (dp[i][j] != -1)
+            return dp[i][j]; // If the result is already computed, return it
+
+        // Recursive calls to explore paths from (i, j) to (0, 0)
+        int up = recMemo(i - 1, j, maze, dp);
+        int left = recMemo(i, j - 1, maze, dp);
+
+        // Store the result in the DP table and return it
+        return dp[i][j] = up + left;
     }
     
-    void print(vector<vector<int>> &dp){
+    
+    int recursive(vector<vector<int>> &maze) {
         
-        for(auto row: dp){
-            
-            for(int ele: row){
-                cout<<ele<<" ";
-            }
-            cout<<endl;
-        }
+        int n = maze.size();
+        int m = maze[0].size();
+        
+        vector<vector<int>> memo(n, vector<int>(m, -1)); 
+        return recMemo(n - 1, m - 1, maze, memo); // Start from the bottom-right corner
+    }
+    
+    int uniquePathsWithObstacles(vector<vector<int>>& obstacleGrid) {
+        
+        return recursive(obstacleGrid);      
+        
     }
 };
