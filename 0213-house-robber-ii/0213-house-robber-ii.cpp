@@ -68,6 +68,28 @@ public:
         
     }
     
+    
+    int opti(vector<int> &nums){
+        
+            int N = nums.size();
+        
+        
+            int prev2 =0, prev1 = 0, curr =0;
+            
+            for(int i=0; i<N; i++){
+            
+                    //(include, exclude)
+                 curr = max(nums[i]+prev2, prev1);
+                
+                //prepare previous for the next iteration
+                prev2 = prev1;
+                prev1 = curr;
+            }
+        
+        return prev1;
+        
+    }
+    
     int rob(vector<int>& nums) {
         /*
         Since it is circular , If you pick the first element,
@@ -87,6 +109,7 @@ public:
         
         int N = noLast.size();
         
+        //recursion +memoization
         //return max(justRob(noLast), justRob(noFirst));
         
         /*vector<int> memo(N, -1);
@@ -97,6 +120,10 @@ public:
         
         
         //BottomUp -DP - Tabulation
-        return max(bottomUp(N, noLast), bottomUp(N, noFirst));
+        //return max(bottomUp(N, noLast), bottomUp(N, noFirst));
+        
+        
+        //Space Optimization
+        return max(opti(noLast), opti(noFirst));
     }
 };
