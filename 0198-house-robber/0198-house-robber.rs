@@ -23,11 +23,26 @@ impl Solution {
         memo[idx]
     }
     
+    fn bottom_up(n: usize, nums: &[i32]) -> i32 {
+        let mut dp = vec![0; n];
+
+        for i in 0..n {
+            let in_sum = nums[i] + if i >= 2 { dp[i - 2] } else { 0 };
+            let ex_sum = if i >= 1 { dp[i - 1] } else { 0 };
+
+            dp[i] = in_sum.max(ex_sum);
+        }
+
+        dp[n - 1]
+    }
+    
     pub fn rob(nums: Vec<i32>) -> i32 {
         
         let n = nums.len();
         let mut memo = vec![-1; n];
-        Solution::rec_memo(n - 1, &nums, &mut memo)        
+        //Solution::rec_memo(n - 1, &nums, &mut memo)        
+        
+        Solution::bottom_up(n, &nums)
     }
 
 }
