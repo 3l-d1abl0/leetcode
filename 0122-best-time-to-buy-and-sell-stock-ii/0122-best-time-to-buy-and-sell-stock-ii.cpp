@@ -1,7 +1,9 @@
 class Solution {
 public:
     
-    int recur(int idx, bool buy, vector<int> &prices, int N, vector<vector<int>> &memo){
+    int recur(int idx, bool buy, vector<int> &prices, vector<vector<int>> &memo){
+        
+        int N = prices.size();
         
         if(idx==N)
             return 0;
@@ -9,19 +11,21 @@ public:
         if(memo[idx][buy]!=-1)
             return memo[idx][buy];
         
-        //1. Skip
-        int maxProfit = recur(idx+1, buy, prices, N, memo);
+        //1. Skip - do nothing
+        int skipping = recur(idx+1, buy, prices, memo);
         
-        //2. Buy
+        //2. can Buy
+        int transaction = INT_MIN;
         if(buy){
-            maxProfit = max(maxProfit, -prices[idx]+recur(idx+1, false, prices, N, memo) );
+            transaction =  recur(idx+1, false, prices, memo) - prices[idx];
                         //also Zero Profit and Skip
         }else{  //3. sell
-            maxProfit = max(maxProfit, prices[idx]+recur(idx+1, true, prices, N, memo) );
+            transaction = recur(idx+1, true, prices, memo) + prices[idx];
         }
         
         
-        return memo[idx][buy] = maxProfit;
+        return memo[idx][buy] = max(skipping, transaction);
+        
     }
     
     int topDown(vector<int> &prices, int N){
@@ -58,11 +62,11 @@ public:
         
         int N = prices.size();
         
-        //vector<vector<int>> memo(N, vector<int> (2, -1));
+        vector<vector<int>> memo(N, vector<int> (2, -1));
         
-        //true - buy, false - sell
-        //return recur(0, true, prices, N ,memo);
+        //true - can buy, false - can sell
+        return recur(0, true, prices, memo);
         
-        return topDown(prices, N);
+        //return bottomUp(prices, N);
     }
 };
