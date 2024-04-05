@@ -1,3 +1,5 @@
+use std::cmp;
+
 impl Solution {
     
     
@@ -33,11 +35,26 @@ impl Solution {
         profit
     }
     
+    
+    fn way3(prices: Vec<i32>) -> i32 {
+        prices.into_iter()
+            .fold((std::i32::MAX, 0), |(low, profit), price|
+                (
+                    cmp::min(low, price),
+                    cmp::max(profit, price - low)
+                )
+            )
+            .1
+    }
+    
     pub fn max_profit(prices: Vec<i32>) -> i32 {
         
         //return Solution::way1(prices);
         
-        return Solution::way2(prices);
+        //return Solution::way2(prices);
+        
+        
+        return Solution::way3(prices);
         
     }
 }
