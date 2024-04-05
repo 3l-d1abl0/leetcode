@@ -92,36 +92,57 @@ public:
         return memo[idx][buy][K] = max(profit_when_skipped, transaction);
     }
     
-    int topDown(vector<int> &stocks, int k){
+    int bottomUp(vector<int> &stocks, int K){
         
         int N = stocks.size();
         
-        vector<vector<vector<int>>> dp(N+1, vector<vector<int>> (k+1, vector<int> (2, 0)));
+        vector<vector<vector<int>>> dp(N+1, vector<vector<int>> (2, vector<int> (K+1, -1e7)));
         
-        //Base case N == 0 and K==0 all 0
+        //Base case idx == N - for every buy and k
+        for(int k=0;  k<=K; k++){
+            for(int buy = 0; buy <=1; buy++){
+                dp[N][buy][k] = 0;
+            }
+        }
+        
+        //K==2 for all idx and buy
+        for(int idx=0;  idx<=N; idx++){
+            for(int buy = 0; buy <=1; buy++){
+                dp[idx][buy][K] = 0;
+            }
+        }
+        
         
         for(int idx = N-1; idx>=0; idx--){
-            for(int K=1; K <=k; K++){
+            for(int k=K-1; k >=0; k--){
                 for(int buy = 0; buy <=1; buy++){
                         
-        
-                dp[idx][K][buy] = dp[idx+1][K][buy]; //recur(idx+1, buy, K, stocks, N, memo);  //skip
+                    //skipping
+                    int skipping = dp[idx+1][buy][k];
 
-                if(buy){
-                    dp[idx][K][buy] = max(dp[idx][K][buy] , -stocks[idx] +dp[idx+1][K][0]);
+                    int transaction;
+                    //can buy
+                    if(buy){
+                        transaction = -stocks[idx] + dp[idx+1][0][k];
 
-                }else{
-                    dp[idx][K][buy] = max(dp[idx][K][buy] , stocks[idx] +dp[idx+1][K-1][1]);
-                }
+                    }else{
+                        transaction = stocks[idx] + dp[idx+1][1][k+1];
+                    }
                     
                     
+                    dp[idx][buy][k] = max (skipping, transaction);
                     
-                }
-            }
+                }//buy
+            }//k
             
         }//for
         
-        return dp[0][k][1];
+        //cout<<dp[0][0][0]<<" "<<dp[0][0][1]<<" "<<dp[0][0][2]<<endl;
+        //cout<<dp[0][1][0]<<" "<<dp[0][1][1]<<" "<<dp[0][1][2]<<endl;
+        //cout<<"-------------------"<<endl;
+        
+        //oth stock, can buy, 0 transaction
+        return dp[0][1][0];
         
     }
     
@@ -251,11 +272,17 @@ public:
         //1. Recursion + Memoization
         vector<vector<vector<int>>> memo (N, vector<vector<int>> (2, vector<int> (K+1, -1)));
         //true - can buy, false - can sell
-	    return recMemo(0, 1, 0, stocks, memo);
+	    //return recMemo(0, 1, 0, stocks, memo);
+        /*
+            N: 0--> N
+          buy: --> 1 -> 0 -> 1
+            k:  --> 0 -> 1 -> 2
+        */
+        
         
         
         //2. Converting recursion to Top Down
-        //return topDown(stocks, K);
+        return bottomUp(stocks, K);
         
         //3. Optimizign to 2D DP
         //return topDownSpaceOpti(stocks, K);
