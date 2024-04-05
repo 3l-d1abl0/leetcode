@@ -58,6 +58,45 @@ public:
         return dp[M-1][N-1];
     }
     
+    
+    int opti(vector<vector<int>> &grid){
+        
+        int M = grid.size();    //row
+        int N = grid[0].size();    //col
+        
+        vector<int> prev(N, INT_MAX);
+        
+        for(int i=0; i<M; i++){
+            
+            vector<int> curr(N, INT_MAX);
+            for(int j=0; j<N; j++){
+                
+        
+                if(i==0 && j==0){
+                    curr[j] = grid[0][0];
+                    continue;
+                }
+
+                int up=INT_MAX;
+                int left = INT_MAX;
+                if(i-1>=0)
+                    up = prev[j];
+
+                if(j-1>=0)
+                    left = curr[j-1];
+
+
+                curr[j] = min(up, left)+grid[i][j];
+                
+            }
+            
+            prev=curr;
+        }//for i
+        
+        return prev[N-1];
+    }
+    
+    
     int minPathSum(vector<vector<int>>& grid) {
         
         //1. Recursion+Memo
@@ -67,7 +106,10 @@ public:
         //vector<vector<int>> memo(M, vector<int>(N, -1));
         //return recMemo(M-1, N-1, grid, memo);
         
+        //2. Tabulation
+        //return bottomUp(grid);
         
-        return bottomUp(grid);
+        //3. Space Optimization
+        return opti(grid);
     }
 };
