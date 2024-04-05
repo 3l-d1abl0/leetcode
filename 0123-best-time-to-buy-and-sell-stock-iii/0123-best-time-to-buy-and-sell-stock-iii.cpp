@@ -115,7 +115,7 @@ public:
         
         for(int idx = N-1; idx>=0; idx--){
             for(int k=K-1; k >=0; k--){
-                for(int buy = 0; buy <=1; buy++){
+                for(int buy = 1; buy >=0; buy--){
                         
                     //skipping
                     int skipping = dp[idx+1][buy][k];
