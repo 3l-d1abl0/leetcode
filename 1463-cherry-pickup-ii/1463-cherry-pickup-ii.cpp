@@ -95,6 +95,68 @@ public:
             return dp[0][0][M - 1];
     }
     
+    int opti(vector<vector<int>> &grid) {
+        
+            int N = grid.size();
+            int M = grid[0].size();
+        
+        
+            // Create a 3D DP array to store computed results
+            vector<vector<int>> prev(M, vector<int>(M, 0));
+
+            // base case Last Row
+            for (int j1 = 0; j1 < M; j1++) {
+                for (int j2 = 0; j2 < M; j2++) {
+                    
+                    if (j1 == j2)
+                        prev[j1][j2] = grid[N - 1][j1];
+                    else
+                        prev[j1][j2] = grid[N - 1][j1] + grid[N - 1][j2];
+                }
+            }
+
+            // second last row to zero
+            for (int i = N - 2; i >= 0; i--) {
+                
+                vector<vector<int>> curr(M, vector<int>(M, 0));
+                
+                for (int j1 = 0; j1 < M; j1++) {
+                    for (int j2 = 0; j2 < M; j2++) {
+                        
+                        int maxx = INT_MIN;
+                        
+                                
+                        for(int di: {-1, 0, 1}){
+                            for(int dj: {-1, 0, 1}){
+                        
+                                if ((j1 + di < 0 || j1 + di >= M) || (j2 + dj < 0 || j2 + dj >= M))
+                                    continue;
+                                
+                                int ans=0;
+
+                                if (j1 == j2)
+                                    ans = grid[i][j1];
+                                else
+                                    ans = grid[i][j1] + grid[i][j2];
+
+                                
+                                    ans += prev[j1 + di][j2 + dj]; // Include the DP result from the next row
+
+                                maxx = max(ans, maxx); // Update the maximum result
+                            }
+                        }
+                        curr[j1][j2] = maxx; 
+                    }
+                }
+                
+                prev= curr;
+            }//i
+
+            //oth Row, oth cola dn M-1 col
+            return prev[0][M - 1];
+    }
+
+    
     int cherryPickup(vector<vector<int>>& grid) {
         
         /*int N = grid.size();
@@ -110,6 +172,10 @@ public:
         
         
         //2. Bottom Up 
-        return bottomUp(grid);
+        //return bottomUp(grid);
+        
+        
+        //3. opti
+        return opti(grid);
     }
 };
