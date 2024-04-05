@@ -47,6 +47,19 @@ impl Solution {
             .1
     }
     
+    fn way4(prices: Vec<i32>) -> i32 {
+        
+        prices.iter().fold((0, None), |(mut ret, mut lowest), p| {
+            
+            let lowest = lowest.map_or(Some(p), |l| {
+                ret = ret.max(p - l);
+                Some(if p > l {l}else{p})
+            });
+                
+            (ret, lowest)
+        }).0
+    }
+    
     pub fn max_profit(prices: Vec<i32>) -> i32 {
         
         //return Solution::way1(prices);
@@ -54,7 +67,9 @@ impl Solution {
         //return Solution::way2(prices);
         
         
-        return Solution::way3(prices);
+        //return Solution::way3(prices);
+        
+        return Solution::way4(prices);
         
     }
 }
