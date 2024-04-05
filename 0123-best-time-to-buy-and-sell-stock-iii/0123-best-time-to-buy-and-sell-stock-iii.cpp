@@ -145,6 +145,70 @@ public:
         return dp[0][1][0];
         
     }
+   
+    int bottomUpOpti(vector<int> &stocks, int K){
+        
+        
+            int N = stocks.size();
+            
+            //2xK+1
+            vector<vector<int>> prev(2, vector<int> (K+1, -1e7));
+        
+        
+            
+            //Base case idx == N - for every buy and k
+            for(int k=0;  k<=K; k++){
+                for(int buy = 0; buy <=1; buy++){
+                    prev[buy][k] = 0;
+                }
+            }
+
+
+            for(int idx = N-1; idx>=0; idx--){
+                
+                vector<vector<int>> curr(2, vector<int> (K+1, -1e7));
+
+                    //K==2 for all idx and buy
+                    for(int buy = 0; buy <=1; buy++){
+                            curr[buy][K] = 0;
+                    }
+                    
+
+
+                    for(int k=K-1; k >=0; k--){
+                        
+                        for(int buy = 1; buy >=0; buy--){
+
+                            //skipping
+                            int skipping = prev[buy][k];
+
+                            int transaction;
+                            //can buy
+                            if(buy){
+                                transaction = -stocks[idx] + prev[0][k];
+
+                            }else{
+                                transaction = stocks[idx] + prev[1][k+1];
+                            }
+
+
+                            curr[buy][k] = max (skipping, transaction);
+
+                        }//buy
+                    }//k
+
+                
+                    prev = curr;
+            }//for
+
+            //cout<<dp[0][0][0]<<" "<<dp[0][0][1]<<" "<<dp[0][0][2]<<endl;
+            //cout<<dp[0][1][0]<<" "<<dp[0][1][1]<<" "<<dp[0][1][2]<<endl;
+            //cout<<"-------------------"<<endl;
+
+            //oth stock, can buy, 0 transaction
+            return prev[1][0];
+        
+    }
     
     int topDownSpaceOpti(vector<int> &stocks, int k){
         
@@ -260,9 +324,6 @@ public:
     
     
     int maxProfit(vector<int>& stocks) {
-
-        //return method1(stocks);
-        //return maxProfit3(stocks);
         
         
         //Recursion
@@ -270,7 +331,7 @@ public:
         int N = stocks.size();
         
         //1. Recursion + Memoization
-        vector<vector<vector<int>>> memo (N, vector<vector<int>> (2, vector<int> (K+1, -1)));
+        //vector<vector<vector<int>>> memo (N, vector<vector<int>> (2, vector<int> (K+1, -1)));
         //true - can buy, false - can sell
 	    //return recMemo(0, 1, 0, stocks, memo);
         /*
@@ -282,10 +343,10 @@ public:
         
         
         //2. Converting recursion to Top Down
-        return bottomUp(stocks, K);
+        //return bottomUp(stocks, K);
         
         //3. Optimizign to 2D DP
-        //return topDownSpaceOpti(stocks, K);
+        return bottomUpOpti(stocks, K);
         
         
         /*N*4
