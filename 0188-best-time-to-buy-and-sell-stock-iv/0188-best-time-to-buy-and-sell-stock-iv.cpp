@@ -1,8 +1,8 @@
 class Solution {
 public:
     
+    int memo[1000][2][100];
     
-    	int memo[1001][2][101];
 	int dp(int i, int buy, int k, vector<int>& prices) {
 		if (i == prices.size()) return 0;
 		if (memo[i][buy][k] != -1) return memo[i][buy][k];
@@ -25,14 +25,12 @@ public:
     
     int recMemo(int idx, int buy, int tran, int K, vector<int> &prices, vector<vector<vector<int>>> &memo){
         
-        int N = prices.size();
-        
-        if(idx==N || tran==K){
+        if(idx== prices.size() || tran==K){
             return 0;
         }
         
         if( memo[idx][buy][tran] !=-1)
-            memo[idx][buy][tran];
+            return memo[idx][buy][tran];
         
         
         //skipping
@@ -203,12 +201,12 @@ public:
         int N = prices.size();
         
         //1.Recur +memo
-        memset(memo, -1, sizeof(memo));
-		return dp(0, true, K, prices);
+        //memset(memo, -1, sizeof(memo));
+		//return dp(0, true, K, prices);
         
         //1.Recur+ Memoization
         vector<vector<vector<int>>> memo(N, vector<vector<int>> (2, vector<int> (K, -1)));
-        //return recMemo(0, true, 0, K, prices, memo);
+        return recMemo(0, true, 0, K, prices, memo);
         
         //2. TopDown DP
         //return topDown(prices, K);
