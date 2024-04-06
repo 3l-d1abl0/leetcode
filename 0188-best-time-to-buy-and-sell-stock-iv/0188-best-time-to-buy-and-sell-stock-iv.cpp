@@ -37,7 +37,7 @@ public:
          vector<vector<vector<int>>> dp(N+1, vector<vector<int>> (2, vector<int> (K+1, -1e7)));
          
          //Basecase- when idx == N 
-         for(int buy=0; buy<=1; buy++){
+         /*for(int buy=0; buy<=1; buy++){
              for(int k=0; k<=K; k++){
                  dp[N][buy][k] = 0;
              }
@@ -47,13 +47,23 @@ public:
              for(int buy=0; buy<=1; buy++){
                  dp[idx][buy][K] = 0;
              }
-         }
+         }*/
          
-         for(int idx=N-1; idx>=0; idx--){
+         for(int idx=N; idx>=0; idx--){
              
              
-             for(int k=K-1; k>=0; k--){
+             for(int k=K; k>=0; k--){
                  for(int buy=0; buy<=1; buy++){
+                     
+                     
+                     if(idx==N){
+                         dp[idx][buy][k] = 0;
+                         continue;
+                     }
+                     if(k==K){
+                         dp[idx][buy][k] = 0;
+                         continue;
+                     }
                      
                      int skipping = dp[idx+1][buy][k];
                      
