@@ -61,9 +61,9 @@ public:
 
             vector<vector<int>> dp(N+1, vector<int>(2, 0));
             
-            vector<int> last(2, 0);
-            vector<int> prev(2, 0);
-            vector<int> curr(2, 0);
+            vector<int> last(2, 0); //i+2
+            vector<int> prev(2, 0); //i+1
+            vector<int> curr(2, 0); //i
 
             //base case
             prev[0] = prev[1] = 0;
