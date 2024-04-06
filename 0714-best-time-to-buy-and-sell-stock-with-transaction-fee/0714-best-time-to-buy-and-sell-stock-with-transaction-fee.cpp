@@ -48,7 +48,7 @@ public:
     }
     
     
-    int topDown(vector<int> &stocks, int fee){
+    int bottomUp(vector<int> &stocks, int fee){
         
         int N = stocks.size();
         
@@ -94,7 +94,7 @@ public:
         
         
         //3. Top Down DP
-        return topDown(stocks, fee);
+        return bottomUp(stocks, fee);
         
         vector<vector<int>> dp(N+1, vector<int> (2,0));
         
