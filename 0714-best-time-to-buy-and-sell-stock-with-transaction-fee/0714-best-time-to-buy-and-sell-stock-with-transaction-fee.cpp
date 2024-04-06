@@ -80,6 +80,43 @@ public:
         return dp[0][0];
     }
     
+    int bottomUpOpti(vector<int> &stocks, int fee){
+        
+        int N = stocks.size();
+        
+        vector<int> prev(2, -1e7);
+        
+        //base
+        prev[0] = prev[1] = 0;
+        
+        
+        for(int idx = N-1; idx >=0; idx--){
+            
+            
+            vector<int> curr(2, -1e7);
+            
+            for(int buy=0; buy<=1; buy++){
+                
+                
+                curr[buy] = prev[buy];
+
+                if(buy==0){
+                    curr[buy] = max(curr[buy], -stocks[idx]+prev[1]);
+                }else{
+                    curr[buy] = max(curr[buy], stocks[idx]-fee+ prev[0]);
+                }
+                
+                
+                
+            }
+            
+            prev = curr;
+        }//for
+        
+        return prev[0];
+    }
+    
+    
     int maxProfit(vector<int>& stocks, int fee) {
         
         int N = stocks.size();
@@ -94,7 +131,11 @@ public:
         
         
         //3. Top Down DP
-        return bottomUp(stocks, fee);
+        //return bottomUp(stocks, fee);
+        
+        
+        //Bottom Up - Space Optimization
+        return bottomUpOpti(stocks, fee);
         
         vector<vector<int>> dp(N+1, vector<int> (2,0));
         
