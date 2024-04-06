@@ -23,6 +23,33 @@ public:
 		return memo[i][buy][k] = ans;
 	}
     
+    int recMemo(int idx, int buy, int tran, int K, vector<int> &prices, vector<vector<vector<int>>> &memo){
+        
+        int N = prices.size();
+        
+        if(idx==N || tran==K){
+            return 0;
+        }
+        
+        if( memo[idx][buy][tran] !=-1)
+            memo[idx][buy][tran];
+        
+        
+        //skipping
+        int skipping = recMemo(idx+1, buy, tran, K, prices, memo);
+        
+        int transaction;
+        if(buy){
+            transaction = -prices[idx]+ recMemo(idx+1, 0, tran, K, prices, memo);
+        }else{
+            transaction = prices[idx]+ recMemo(idx+1, 1, tran+1, K, prices, memo);
+        }
+        
+        //cout<<idx<<" "<<buy<<" "<<tran<<" == "<<max(skipping, transaction)<<endl;
+        return memo[idx][buy][tran] = max(skipping, transaction);
+    }
+    
+    
     
     int topDown(vector<int> &stocks, int k){
         
@@ -126,10 +153,10 @@ public:
 
                         dp[idx][txNo] = dp[idx+1][txNo];
 
-                        if(txNo%2==0){ // Buy
+                        if(txNo%2==0){ // Buy 0
 
                             dp[idx][txNo] = max(dp[idx][txNo], -stocks[idx] + dp[idx+1][txNo+1] );
-                        }else{
+                        }else{ //1
                             dp[idx][txNo] = max(dp[idx][txNo], stocks[idx] + dp[idx+1][txNo+1] );
                         }
 
@@ -176,8 +203,12 @@ public:
         int N = prices.size();
         
         //1.Recur +memo
-        //memset(memo, -1, sizeof(memo));
-		//return dp(0, true, K, prices);
+        memset(memo, -1, sizeof(memo));
+		return dp(0, true, K, prices);
+        
+        //1.Recur+ Memoization
+        vector<vector<vector<int>>> memo(N, vector<vector<int>> (2, vector<int> (K, -1)));
+        //return recMemo(0, true, 0, K, prices, memo);
         
         //2. TopDown DP
         //return topDown(prices, K);
