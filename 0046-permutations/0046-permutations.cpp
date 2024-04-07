@@ -1,7 +1,7 @@
 class Solution {
 public:
     
-    void method2(vector<int>& nums, vector<vector<int>> &ans, int idx) {
+    void recur(int idx, vector<int>& nums, vector<vector<int>> &ans) {
         
         
         if(idx==nums.size()){    
@@ -13,7 +13,7 @@ public:
         for(int i=idx; i<nums.size(); i++){
             
             swap(nums[idx], nums[i]);
-            method2(nums, ans, idx+1);
+            recur(idx+1, nums, ans);
             swap(nums[idx], nums[i]);
         }
         
@@ -23,8 +23,8 @@ public:
         
         vector<vector<int>> ans;
         
-        //2. Method 2
-        method2(nums, ans, 0);
+        
+        recur(0, nums, ans);
         
         return ans;
     }
