@@ -12,6 +12,7 @@ public:
         //Include
         if(arr[idx]<= target){
             comb.push_back(arr[idx]);
+            //unlimited number of times- hence staying on the index
             combRec(idx, target-arr[idx], arr, comb, combList);    
             comb.pop_back();
         }
