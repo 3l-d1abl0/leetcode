@@ -37,8 +37,9 @@ public:
         
         for(int i=idx; i<nums.size(); i++){
             
-            if(i!= idx && nums[i]==nums[idx])
+            if(i!= idx && nums[i]==nums[i-1])
                 continue;
+            
             swap(nums[idx], nums[i]);
             recur(idx+1, nums, ans);
             swap(nums[idx], nums[i]);
@@ -75,20 +76,23 @@ public:
     vector<vector<int>> permuteUnique(vector<int>& nums) {
         
         //1. Method1
-        /*vector<vector<int>> ans;
+        /*sort(nums.begin(), nums.end());
+        vector<vector<int>> ans;
         recur(0, nums, ans);
         return ans;
+    
         This method fails because it is able to stop swapiing 
-        of an element of the same vale at idx.
+        of an element which is same as the previous.
         
-        but it is not able to stop the swapping of multiple values different than
-        'idx'
+        But will faisl since after swapping , the order of same numbers will change
+        (we cannot swap at ever level)
+        eg [0, 0, 1, 9]
         
-        eg:
-        2211
+        [ 0,1,9]    [conti] [1 0,0,9]   [9 0,1,0]
         
-        2[0] <-->1 [2]
-        2[0] <-->1[3]
+                                        [9,0  1,0]  [9,1  0,0]  [9,0  1,0]
+        
+
         
         Instread use Map to keep check of the elemts
         used at particular idx /level
@@ -104,10 +108,10 @@ public:
         
         
         //3.Method 3
-        /*
-            Create a frequency map
-            any any position (idx) place the unique chars
-        */
+        
+          //  Create a frequency map
+          //  any any position (idx) place the unique chars
+        
         int N = nums.size();
         
         vector<vector<int>> ans;
@@ -124,6 +128,6 @@ public:
         
         
         return ans;
-    
+        
     }
 };
