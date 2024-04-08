@@ -39,9 +39,9 @@ public:
     }
     
     
-    void usingIteration(int idx, vector<int> &arr, vector<int> set, vector<vector<int>> &ans){
+    void usingIteration(int idx, vector<int> &arr, vector<int> subset, vector<vector<int>> &ans){
 
-        ans.push_back(set);
+        ans.push_back(subset);
 
         if(idx==arr.size())
             return ;
@@ -49,13 +49,13 @@ public:
 
         for(int i=idx; i <arr.size(); i++){
 
-            set.push_back(arr[i]);
+            subset.push_back(arr[i]);
 
             //Set Starts with [i],
             //all the eleemtns from 0- i-l are excluded
-            usingIteration(i+1, arr, set, ans);
+            usingIteration(i+1, arr, subset, ans);
 
-            set.pop_back();
+            subset.pop_back();
         }
 
     }
