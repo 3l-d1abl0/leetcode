@@ -59,7 +59,7 @@ public:
     {
         
         //Method1 - bitset
-        return bitwisePowerSet(nums);
+        //return bitwisePowerSet(nums);
         
         
         sort(nums.begin(), nums.end());
