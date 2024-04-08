@@ -57,10 +57,12 @@ public:
     
     vector<vector<int>> subsetsWithDup(vector<int> &nums)
     {
-        //return bitwisePowerSet(nums);
+        
+        //Method1 - bitset
+        return bitwisePowerSet(nums);
+        
         
         sort(nums.begin(), nums.end());
-
         vector<vector<int>> res;
         vector<int> ans;
         
