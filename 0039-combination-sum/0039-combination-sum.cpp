@@ -72,8 +72,8 @@ public:
     vector<vector<int>> combinationSum(vector<int>& candidates, int target) {
         
         
-        return rec(target, candidates);
+        //return rec(target, candidates);
         
-        //return itr(target, candidates);
+        return itr(target, candidates);
     }
 };
