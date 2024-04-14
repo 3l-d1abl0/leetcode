@@ -113,9 +113,10 @@ public:
         
             vector<vector<int>> dp(N+1, vector<int> (K, false));
             
+            //Base Case 1
             for(int i=0; i<N; i++)
                 dp[i][K-1] = palin[i][N-1];
-        
+            //Base Case 2
             for(int j=0; j<=K-1; j++)
                 dp[N][j] = false;
         
