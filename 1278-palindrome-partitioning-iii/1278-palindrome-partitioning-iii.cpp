@@ -27,27 +27,22 @@ public:
     
     int recur(int idx, int part, string &s, int k, vector<vector<int>> &memo, vector<vector<int>> &palin){
         
-        
-        //cout<<idx<<" "<<part<<"= ";
-        
         //1 more cut remaining
         //insted of making cuts at several index
         //just calculate the cost of the remaingin string
         if(part==k-1){
             
+            //cant make one more cut
             if(idx==s.size())
                 return 1e7;
             
             //int ans = palindromeCost(idx, s.size()-1, s);
             int ans = cost(s, idx, s.size()-1, palin);
-            //cout<<ans<<endl;
             return ans;
         }
         
-        if(idx==s.size()){
-            //cout<<1e7<<endl;
-            return 1e7;
-        }
+        if(idx==s.size()) return 1e7;
+        
         
         if(memo[idx][part]!=-1)
             return memo[idx][part];
