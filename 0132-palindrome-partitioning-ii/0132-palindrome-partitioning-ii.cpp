@@ -62,10 +62,10 @@ public:
     
     int minCut(string str) {
         
-        /*int N = str.size();
+        int N = str.size();
         vector<int> memo(N, -1);
         return recur(0, str, memo)-1;
-        */
+        
         
         return bottomUp(str);
         
