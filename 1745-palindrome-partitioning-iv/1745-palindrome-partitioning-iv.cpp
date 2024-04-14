@@ -1,44 +1,62 @@
 class Solution {
 public:
     
-    bool is_palindrome(string& s, int i, int j)   //check the left part from i to j is palindrome or not
-    {
-        while(i<j)
-        {
-            if(s[i] != s[j])
+    int ispalindrome(int i, int j, string &str) {
+
+          while (i<=j) {
+
+              if(str[i] != str[j])
                 return false;
-            i++;
-            j--;
-        }
-        return true;
+
+            i++; j--;
+
+          }
+
+          return  true;
     }
-    
-    vector<vector<int>> dp;
-    bool solve(string& s, int i, int size, int k)   // variables for memoization are index i and value k
-    {
-        if(i>size) return false;
-        if(dp[i][k] != -1) return dp[i][k];
-        if(k == 1)    // when only rightmost part is remaining to check 
-        {
-            if(is_palindrome(s,i,size))
-            return dp[i][k] = true;
-            else return dp[i][k] = false;
+
+    int recur(int idx, int part, string &str, int K, vector<vector<int>> &memo) {
+
+        //1 partition remaining - char if its palin
+        if(part==K-1){
+            
+            //If partition cannot be made
+            if(idx==str.size())
+                return false;
+            
+            return ispalindrome(idx, str.size()-1, str);
         }
         
-        bool ans = false;
-        for(int l = i; l<=size; l++)   //try all valid partitions
-        {
-            if(is_palindrome(s,i,l))
-            {
-                ans = ans || solve(s,l+1,size,k-1); 
+        
+        if(idx==str.size())
+            return false;
+
+        if(memo[idx][part]!=-1)
+            return memo[idx][part];
+
+        int made = false;
+        for (int i= idx; i<str.size(); i++) {
+
+            
+            if (ispalindrome(idx, i, str)) {
+                made = made || recur(i+1, part+1, str, K, memo);
             }
+
         }
-        
-        return dp[i][k] = ans;
+
+
+        return memo[idx][part] = made;
     }
     
-    bool checkPartitioning(string s) {
-        dp = vector<vector<int>> (s.length(), vector<int> (4,-1));
-        return solve(s,0,s.length()-1,3);
+    bool checkPartitioning(string str) {
+     
+        //1. Memoization
+        int K = 3;
+        int N = str.size();
+        vector<vector<int>> memo(N, vector<int> (K, -1));
+        
+        return recur(0, 0, str, K, memo);
+        
+        
     }
 };
