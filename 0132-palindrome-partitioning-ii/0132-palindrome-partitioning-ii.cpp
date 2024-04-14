@@ -1,25 +1,21 @@
 class Solution {
 public:
     
-    int ispalindrome(int i, int j, string &str, vector<vector<int>> &palin) {
-
-        int ii =i, jj=j;
-        if(palin[i][j]!=-1)
-            return palin[i][j];
+    int ispalindrome(int i, int j, string &str) {
 
           while (i<=j) {
 
               if(str[i] != str[j])
-                return palin[i][j]= false;
+                return false;
 
             i++; j--;
 
           }
 
-          return palin[ii][jj] = true;
+          return  true;
     }
 
-    int recur(int idx, string &str, vector<int> &memo, vector<vector<int>> &palin) {
+    int recur(int idx, string &str, vector<int> &memo) {
 
         if(idx==str.size())
             return 0;
@@ -31,8 +27,8 @@ public:
         for (int i= idx; i<str.size(); i++) {
 
             int part =0;
-            if (ispalindrome(idx, i, str, palin)) {
-                int part = 1+ recur(i+1, str, memo, palin);
+            if (ispalindrome(idx, i, str)) {
+                int part = 1+ recur(i+1, str, memo);
                 minnPart = min(part, minnPart);
             }
 
@@ -67,11 +63,11 @@ public:
     
     int minCut(string str) {
         
+        //1. Memoization
         int N = str.size();
         vector<int> memo(N, -1);
         
-        vector<vector<int>> palin(N, vector<int> (N, -1));
-        return recur(0, str, memo, palin)-1;
+        return recur(0, str, memo)-1;
         
         
         //return bottomUp(str);
