@@ -1,7 +1,7 @@
 class Solution {
 public:
     
-    bool searchNext(vector<vector<char>> &board, string word, int row, int col, int index, int m, int n) {
+    bool searchNext(vector<vector<char>> &board, string &word, int row, int col, int index, int m, int n) {
 
         // if index reaches at the end that means we have found the word
         if (index == word.length())
@@ -13,6 +13,7 @@ public:
         word[index] or board[row][col] == '!')
             return false;
 
+        
         // this is to prevent reusing of the same character
         char c = board[row][col];
         board[row][col] = '!';
@@ -37,6 +38,11 @@ public:
         int n = board[0].size();
 
         int index = 0;
+        
+        //vector<vector<vector<int>>> memo(m, vector<vector<int>>(n, vector<int>(word.size(), -1)));
+                /*
+            For this problem though, the result of subproblem depends on the previously used characters' positions. Therefore, adding memoization is not applicable here. (similar for N-queens problem)
+        */
 
         // First search the first character
         for (int i = 0; i < m; i++) {
@@ -48,6 +54,7 @@ public:
                 }
             }
         }
+        
 
         return false;
         
