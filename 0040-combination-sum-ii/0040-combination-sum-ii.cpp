@@ -10,8 +10,12 @@ public:
         
         for(int i=idx; i<candidates.size(); i++){
             
+            //Skip the other occurances of of same element 
+            //as combination with it has already been considered in f(idx)
             if(i>idx && candidates[i]==candidates[i-1])
                 continue;
+            
+            
             if(candidates[i]<=target){
                 comb.push_back(candidates[i]);
                 combRec(i+1, target-candidates[i], candidates, comb, combList);
@@ -85,11 +89,11 @@ public:
     vector<vector<int>> combinationSum2(vector<int>& candidates, int target) {
         
         //1. Include + Exclude
-        return method1(candidates, target);
+        //return method1(candidates, target);
         
 
         //2. Recursion + Backtracking
-        //return method2(candidates, target);
+        return method2(candidates, target);
         
     }
 };
