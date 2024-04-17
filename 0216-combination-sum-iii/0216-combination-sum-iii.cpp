@@ -8,6 +8,8 @@ public:
                 combList.push_back(comb);
                 return;
             }
+            
+            return;
         }
 
         if(idx == candidates.size() )
