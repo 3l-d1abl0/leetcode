@@ -72,13 +72,25 @@ public:
         return combList;
     }
     
+    
+    vector<vector<int>> method2(int k, int n){
+        
+        vector<vector<int>> combList;
+        vector<int> comb;
+        
+        combinationItr(1, n, k, comb, combList);
+        
+        return combList;
+        
+    }
+    
     vector<vector<int>> combinationSum3(int k, int n) {
         
         //1. Include+Exclude
-        return method1(k,n);
+        //return method1(k,n);
         
-        //combinationItr(1, n, k, comb, combList);
-
-        //return combList;
+        //2. Recursion + Backtraking
+        return method2(k, n);
+        
     }
 };
