@@ -1,39 +1,27 @@
 class Solution {
 public:
     
-    bool rec(int N, int sum , vector<int> &arr){
 
-        if(sum==0)
+    //top-down approach - recursion
+    bool topDown(int idx, int sum, vector<int> &arr, vector<vector<int>> &memo) {
+
+        if(sum ==0)
             return true;
 
-        if(N<0 || sum <0)
-            return false;
+        if(idx==0)
+            return sum == arr[0];
 
-        bool exclude = rec(N-1, sum , arr);
-        bool include = rec(N-1, sum-arr[N], arr);
+        if(memo[idx][sum]!=-1)
+            return memo[idx][sum];
 
+        bool exclude = topDown(idx-1, sum, arr, memo);
 
-        return exclude | include;
-
-    }
-
-    //top-down approach
-    bool topDown(int N, int sum , vector<int> &arr, vector<vector<int>> &memo){
-
-        if(sum==0)
-            return true;
-
-        if(N<0 || sum <0)
-            return false;
-
-        if(memo[N][sum]!=-1) return memo[N][sum];
-
-        bool exclude = rec(N-1, sum , arr);
-        bool include = rec(N-1, sum-arr[N], arr);
+        bool include = false;
+        if(arr[idx]<=sum)
+            include = topDown(idx-1, sum-arr[idx], arr, memo);
 
 
-        return memo[N][sum] = (exclude | include);
-
+        return memo[idx][sum] = exclude | include;
     }
     
     
@@ -94,14 +82,14 @@ public:
         if(sum & 1) //odd cant be halved
             return false;
         
-        //return subset(0, nums, sum/2);
-        
         //recursion - TLE
         //return rec(nums.size()-1, sum/2, nums);
         
-        //topDown - TLE
-        //vector<vector<int>> memo (nums.size(), vector<int> ((sum/2)+1, -1));
-        //return topDown(nums.size()-1, sum/2, nums, memo);
+        //cout<<sum<<" "<<sum/2<<" N="<<nums.size()<<endl;
+        
+        //topDown - Recursion+Memo- TLE
+        vector<vector<int>> memo (nums.size(), vector<int> ((sum/2)+1, -1));
+        return topDown(nums.size()-1, sum/2, nums, memo);
         
         //Bottom UP - AC
         //return bottomUp(sum/2, nums);
