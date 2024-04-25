@@ -27,15 +27,19 @@ public:
     
     bool bottomUp(int sum, vector<int> &prices){
 
-                //N+1 x sum+1
+        //N+1 x sum+1
 
         int N = prices.size();
         vector<vector<bool>> dp(N+1, vector<bool> (sum+1, 0));
 
-
+        //row0 - H.boundary
+        //sum0 - V.boundary
+        //can always make zero
         for(int i=0; i<=N; i++)
-            dp[i][0] = true;    //can always make zero
-
+            dp[i][0] = true;    
+        
+        //dp[1][prices[0]] = true;
+        
         for(int i=1; i<=N; i++){
 
             for(int j=1; j<=sum; j++){
@@ -88,11 +92,11 @@ public:
         //cout<<sum<<" "<<sum/2<<" N="<<nums.size()<<endl;
         
         //topDown - Recursion+Memo- TLE
-        vector<vector<int>> memo (nums.size(), vector<int> ((sum/2)+1, -1));
-        return topDown(nums.size()-1, sum/2, nums, memo);
+        //vector<vector<int>> memo (nums.size(), vector<int> ((sum/2)+1, -1));
+        //return topDown(nums.size()-1, sum/2, nums, memo);
         
         //Bottom UP - AC
-        //return bottomUp(sum/2, nums);
+        return bottomUp(sum/2, nums);
         
         //Bottom up Space Optimizartion - AC
         return bottomUpSpaceOpti(sum/2, nums);
