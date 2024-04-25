@@ -96,7 +96,7 @@ public:
         //return topDown(nums.size()-1, sum/2, nums, memo);
         
         //Bottom UP - AC
-        return bottomUp(sum/2, nums);
+        //return bottomUp(sum/2, nums);
         
         //Bottom up Space Optimizartion - AC
         return bottomUpSpaceOpti(sum/2, nums);
