@@ -94,31 +94,40 @@ public:
     int bottomUp(int sum, vector<int> &arr){
 
         int N = arr.size();
-        vector< vector<int> > dp(N+1, vector<int> (sum+1));
+    
+        vector<vector<int>> dp(N, vector<int>(sum + 1, 0));
 
-        //i==0 =>INT_MX
-        for(int j=0; j<=sum; j++)
-            dp[0][j] = INT_MAX;
-
-        //Sum 0 cab be made with 0 coin
-        for(int i=0; i<=N; i++)
-            dp[i][0] = 0;
-
-
-        for(int i=1; i<=N; i++){
-
-            for(int j=1; j<=sum; j++){
-
-                if(j<arr[i-1])//exclude
-                    dp[i][j] = dp[i-1][j];
-                else
-                    dp[i][j] = min({INT_MAX*1LL, dp[i-1][j]*1LL, 1LL + dp[i][j-arr[i-1]] });
-
-            }
-
+        
+        for (int i = 0; i <= sum; i++) {
+            if (i % arr[0] == 0)
+                dp[0][i] = i / arr[0];
+            else
+                dp[0][i] = 1e9;
         }
 
-        return dp[N][sum];
+        
+        for (int idx = 1; idx < N; idx++) {
+            for (int target = 0; target <= sum; target++) {
+                
+                int notTake = dp[idx - 1][target];
+
+                
+                int take = 1e9; // Initialize 'take' to a very large value
+                if (arr[idx] <= target)
+                    take = 1 + dp[idx][target - arr[idx]];
+
+                // Store the minimum of 'notTake' and 'take' in the DP table
+                dp[idx][target] = min(notTake, take);
+            }
+        }
+
+        int ans = dp[N - 1][sum];
+
+        if (ans >= 1e9)
+            return -1;
+
+        return ans;
+        
     }
     
     
@@ -154,15 +163,15 @@ int bottomUpOpti(int sum, vector<int> &arr){
         //return rec(coins, amount);
         
         //memoization 
-        return memoization(coins, amount);
+        //return memoization(coins, amount);
         
         //bottomUp
-        //int ans = bottomUp(amount, coins);
-        //return ((ans>=INT_MAX || ans<0)?-1:ans);
+        int ans = bottomUp(amount, coins);
+        return ((ans>=INT_MAX || ans<0)?-1:ans);
         
         //bottomUpOpti
-        int ans = bottomUpOpti(amount, coins);
-        return ((ans>=INT_MAX || ans<0)?-1:ans);
+        //int ans = bottomUpOpti(amount, coins);
+        //return ((ans>=INT_MAX || ans<0)?-1:ans);
         
     }
     
