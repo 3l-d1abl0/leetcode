@@ -58,8 +58,8 @@ public:
                 return 1e7; // Otherwise, return a very large value to indicate it's not possible
         }
 
-        //if(sum==0)
-          //  return 0;
+        if(sum==0)
+          return 0;
 
 
         if(memo[idx][sum] != -1)
