@@ -137,20 +137,26 @@ int bottomUpOpti(int sum, vector<int> &arr){
     int N = arr.size();
     vector<int> dp(sum+1, INT_MAX);
 
-    for(int i=0; i<=N; i++)
-        dp[0] = 0;
+    for (int val = 0; val <= sum; val++) {
+        if (val % arr[0] == 0)
+            dp[val] = val / arr[0];
+        else
+            dp[val] = 1e9; // Set it to a very large value if not possible
+    }
 
+    for(int i=1; i<N; i++){
+           for(int val=1; val<=sum; val++){
 
-    for(int i=0; i<N; i++){
-           for(int j=1; j<=sum; j++){
-
-                if(j>= arr[i])
-                dp[j] = min({INT_MAX*1LL, dp[j]*1LL, 1LL + dp[j-arr[i]] });
+                if(arr[i] <= val)
+                    dp[val] = min( dp[val], 1 + dp[val-arr[i]] );
 
         }
 
     }
 
+    if (dp[sum] >= 1e9)
+        return -1;
+    
     return dp[sum];
 }
     
@@ -166,12 +172,11 @@ int bottomUpOpti(int sum, vector<int> &arr){
         //return memoization(coins, amount);
         
         //bottomUp
-        int ans = bottomUp(amount, coins);
-        return ((ans>=INT_MAX)?-1:ans);
+        //return bottomUp(amount, coins);
         
         //bottomUpOpti
-        //int ans = bottomUpOpti(amount, coins);
-        //return ((ans>=INT_MAX || ans<0)?-1:ans);
+        return bottomUpOpti(amount, coins);
+        
         
     }
     
