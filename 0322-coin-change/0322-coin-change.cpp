@@ -167,7 +167,7 @@ int bottomUpOpti(int sum, vector<int> &arr){
         
         //bottomUp
         int ans = bottomUp(amount, coins);
-        return ((ans>=INT_MAX || ans<0)?-1:ans);
+        return ((ans>=INT_MAX)?-1:ans);
         
         //bottomUpOpti
         //int ans = bottomUpOpti(amount, coins);
