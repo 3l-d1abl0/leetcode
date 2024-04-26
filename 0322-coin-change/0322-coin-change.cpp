@@ -48,29 +48,33 @@ public:
     
     int topDown(int idx, int sum, vector<int> &arr, vector< vector<int>> &memo){
 
-        if(sum ==0)
-            return 0;// memo[idx][sum]=0;
         
-        if(sum <0 || idx<0)
-            return INT_MAX;
+        // Base case: If we're at the first element
+        if(idx == 0){
+            // Check if the target sum is divisible by the first element
+            if(sum % arr[0] == 0)
+                return sum / arr[0]; // If yes, return the quotient as the answer
+            else
+                return 1e7; // Otherwise, return a very large value to indicate it's not possible
+        }
 
-        if(memo[idx][sum]!= -1 )
+        //if(sum==0)
+          //  return 0;
+
+
+        if(memo[idx][sum] != -1)
             return memo[idx][sum];
 
 
-        //exclude
-        int exc = topDown(idx-1, sum, arr, memo);
+        int notTaken = 0 + topDown(idx - 1, sum, arr, memo);
 
-        //include once
-        //int inc = topDown(idx-1, sum-arr[N], arr); covered in include again
+        int taken = 1e9; // Initialize 'taken' to a very large value
+        if(arr[idx] <= sum)
+            taken = 1 + topDown(idx, sum - arr[idx], arr, memo);
 
-        //incluide again
-        int inc1 = topDown(idx, sum-arr[idx], arr, memo);
-        if(inc1 != INT_MAX)
-            inc1++;
+        // Store the minimum of 'notTaken' and 'taken' in the DP array and return it
+        return memo[idx][sum] = min(notTaken, taken);
 
-
-        return memo[idx][sum] = min(exc, inc1);
 
 
     }
@@ -83,7 +87,7 @@ public:
         vector< vector<int>> memo(arr.size(), vector<int> (sum+1, -1));
         int ans = topDown(arr.size()-1, sum, arr, memo);
         
-        return ((ans>=INT_MAX || ans<0)?-1:ans);
+        return ((ans>=1e7)?-1:ans);
         
     }
     
@@ -149,7 +153,7 @@ int bottomUpOpti(int sum, vector<int> &arr){
         //recursion - TLE
         //return rec(coins, amount);
         
-        //memoization - TLE
+        //memoization 
         return memoization(coins, amount);
         
         //bottomUp
