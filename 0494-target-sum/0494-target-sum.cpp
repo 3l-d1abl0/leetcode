@@ -177,9 +177,9 @@ public:
         //return bottomUp(nums, target);
         
         //3. DP version 2 
-        return dpAlternative(nums, target);
+        //return dpAlternative(nums, target);
         
         //4.
-        //return bottomUpOpti(nums, target);
+        return bottomUpOpti(nums, target);
     }
 };
