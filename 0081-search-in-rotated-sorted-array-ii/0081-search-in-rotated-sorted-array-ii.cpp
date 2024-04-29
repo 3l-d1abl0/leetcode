@@ -16,10 +16,12 @@ public:
                 0
                 Shrink the search Space
             */
-            if(nums[l]==nums[mid] && nums[mid]==nums[r]){
+            while(nums[l]==nums[mid] && l<mid){
                 l = l+1;
-                r = r-1;
-                continue;
+            }
+            
+            while(nums[mid]==nums[r] && mid<r){
+                r=r-1;
             }
             
             if(nums[l]<=nums[mid]){//ledt side is sorted
