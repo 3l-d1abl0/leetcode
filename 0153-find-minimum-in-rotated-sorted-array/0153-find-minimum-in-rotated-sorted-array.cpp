@@ -7,7 +7,7 @@ public:
             
             int mid = st + (ed-st)/2;
             
-            if(nums[mid]>nums[ed]){
+            if(nums[st] <= nums[mid]){
                 return minBS(nums, mid+1, ed);
             }else{
                 return minBS(nums, st, mid);
@@ -41,7 +41,7 @@ public:
         int st =0;
         int N = nums.size();
         
-        //return minBS(nums, st, N-1);
-        return minBSItr(nums, st, N-1);
+        return minBS(nums, st, N-1);
+        //return minBSItr(nums, st, N-1);
     }
 };
