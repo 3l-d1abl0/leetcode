@@ -1,5 +1,8 @@
 class Solution {
 public:
+    
+    //lower bound
+    
     int searchInsert(vector<int>& arr, int x) {
         
         	int left =-1, right =arr.size();
