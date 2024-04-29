@@ -24,7 +24,7 @@ public:
             
             if(nums[l]<=nums[mid]){//ledt side is sorted
                 
-                if(nums[l]<=target && target<= nums[mid])
+                if(nums[l]<=target && target< nums[mid])
                     r= mid-1;
                 else
                     l=mid+1;
