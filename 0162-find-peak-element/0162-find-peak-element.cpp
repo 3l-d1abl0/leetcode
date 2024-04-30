@@ -23,7 +23,7 @@ public:
         
         int l=0, r= nums.size()-1;
         
-        while(l<r){
+        while(l<=r){
             
             int mid = l +(r-l)/2;
             
@@ -38,12 +38,49 @@ public:
         return l;
     }
     
+    int method1(vector<int> &arr){
+        
+            int n = arr.size(); //Size of array.
+
+            /*
+                Search space 1 - N-1
+            */
+            // Edge cases:
+            if (n == 1) return 0;
+              if (arr[0] > arr[1]) return 0;
+            if (arr[n - 1] > arr[n - 2]) return n - 1;
+        
+        
+            int low = 1, high = n - 2;
+            while (low <= high) {
+                int mid = (low + high) / 2;
+
+                //If arr[mid] is the peak:
+                if (arr[mid - 1] < arr[mid] && arr[mid] > arr[mid + 1])
+                    return mid;
+
+                // If we are in the left:
+                if (arr[mid] > arr[mid - 1])
+                    low = mid + 1;
+
+                // If we are in the right:
+                // Or, arr[mid] is a common point:
+                else
+                    high = mid - 1;
+            }
+            
+        // Dummy return statement        
+        return -1;
+    }
+    
     int findPeakElement(vector<int>& nums) {
         
         int st =0; int ed = nums.size()-1;
         
         
         //return BS(nums, st, ed);
-        return BSItr(nums, st, ed);
+        //return BSItr(nums, st, ed);
+        
+        return method1(nums);
     }
 };
