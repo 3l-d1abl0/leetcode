@@ -1,6 +1,7 @@
 class Solution {
 public:
     
+    //Finds the col of the max element in the midRow
     int max_element(vector<vector<int>> &mat, int midRow, int cols){
         
         int maxx = -1;
@@ -20,6 +21,8 @@ public:
     
     vector<int> findPeakGrid(vector<vector<int>>& mat) {
         
+        
+        //O(N logM)
         int rows = mat.size();
         int cols = mat[0].size();
         
@@ -32,41 +35,19 @@ public:
             
             int midRow = topRow +(botRow-topRow)/2;
             
+            //Finds the col of the max element in the midRow
             int col = max_element(mat, midRow, cols);
             
-            
-            
-            //1. Top most Row
-            if(midRow==0){
-                
-                if(mat[midRow+1][col] < mat[midRow][col])
-                    return {midRow, col};
-                else{
-                    topRow= midRow+1;
-                    continue;
-                }
-            }
-          
-            //2. Bottom Row
-            if(midRow == rows-1){
-                
-                //cout<<mat[midRow-1][col]<<" < "<<mat[midRow][col]<<endl;
-                if(mat[midRow-1][col] < mat[midRow][col])
-                    return {midRow, col};
-                else{
-                    botRow = midRow-1;
-                    continue;
-                }
-                
-            }
+            int top = ((midRow-1) >= 0) ? mat[midRow-1][col] : -1;  //check for Top Row
+            int bottom = ((midRow+1) <=botRow) ? mat[midRow+1][col]: -1;    //check for bottom Row
             
            
             //3. if this ele is the one
-            if(mat[midRow-1][col] < mat[midRow][col] && mat[midRow+1][col] < mat[midRow][col])
+            if(top < mat[midRow][col] && bottom < mat[midRow][col])
                 return {midRow, col};
             
             //4. elsse go to the greates neighour
-            if(mat[midRow+1][col] > mat[midRow][col])
+            if(bottom > mat[midRow][col])
                 topRow = midRow+1;
             else
                 botRow= midRow-1;
