@@ -33,7 +33,11 @@ public:
         int l = -1;
         int r= total;
         
-        
+        /*
+        1 -----------   N*M
+        row - mid/col 
+        col - mid%col
+        */
         while(r-l>1){
             
             int mid = l+(r-l)/2;
@@ -61,7 +65,7 @@ public:
     bool searchMatrix(vector<vector<int>>& matrix, int key) {
         
         
-        //1. method1
+        //1. method1 - O(n)
         //return method1(matrix, key);
     
         //2. method2 - Binary Search
