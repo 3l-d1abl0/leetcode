@@ -120,7 +120,7 @@ public:
                 }
             }//for
 
-            
+            prefixes.clear();
         }//for
         
         return ans;
