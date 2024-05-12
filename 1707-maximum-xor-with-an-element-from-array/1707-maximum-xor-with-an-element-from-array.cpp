@@ -39,8 +39,10 @@ class Solution {
             //int bit = (num & (1<<i))>0?1:0;
             int bit = (num >> i) & 1;
             
-                if(node->child[!bit]!=NULL){
+                if(node->child[!bit]!=NULL){    //if the other bit is found
                     node = node->child[!bit];
+                    
+                    //since the other bit is foundm the resultant bit is Zero !
                     ans |= (1<<i);
                 }else
                     node = node->child[bit];
@@ -88,44 +90,54 @@ public:
         return ans;
     }
     
+    vector<int> method1(vector<int> &nums, vector<vector<int>>& queries){
+        
+            int N= nums.size();
+            //1. sort the numbers - asc
+            sort(nums.begin(), nums.end());
+
+            vector<pair<int, pair<int, int> >> Q;
+            vector<int> ans(queries.size());
+
+            int idx =0;
+            for(auto ele: queries)
+                Q.push_back({ele[1], {ele[0], idx++} });
+                //limiting-number, number-to-be-xored, index
+
+
+            //2. Sort the queries
+            sort(Q.begin(), Q.end());
+
+            root = new Trie();
+
+            int i=0;
+            for(auto ele: Q){
+                
+                //while numbers in array are less than limiting number
+                while(nums[i]<=ele.first && i<N){
+                    insert(nums[i]);
+                    i++;
+                }
+
+                if(i==0)//if trie has no elements
+                    ans[ele.second.second] = -1;        
+                else
+                    ans[ele.second.second] = find(ele.second.first);
+
+            }
+
+
+            return ans;
+        
+    }
     
     vector<int> maximizeXor(vector<int>& nums, vector<vector<int>>& queries) {
         
+        //1. Trie
+        return method1(nums, queries);
+        
+        //2. Linear
         return method2(nums, queries);
         
-        int N= nums.size();
-        //1. sort the numbers
-        sort(nums.begin(), nums.end());
-        
-        vector<pair<int, pair<int, int> >> Q;
-        vector<int> ans(queries.size());
-        
-        int idx =0;
-        for(auto ele: queries)
-            Q.push_back({ele[1], {ele[0], idx++} });
-        
-        
-        //2. Sort the queries
-        sort(Q.begin(), Q.end());
-        
-        root = new Trie();
-        
-        int i=0;
-        for(auto ele: Q){
-            
-            while(nums[i]<=ele.first && i<N){
-                insert(nums[i]);
-                i++;
-            }
-            
-            if(i==0)
-                ans[ele.second.second] = -1;        
-            else
-                ans[ele.second.second] = find(ele.second.first);
-            
-        }
-        
-        
-        return ans;
     }
 };
