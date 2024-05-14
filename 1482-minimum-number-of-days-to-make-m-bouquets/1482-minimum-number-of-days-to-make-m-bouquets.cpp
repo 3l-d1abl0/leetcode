@@ -9,16 +9,18 @@ public:
         int bo =0, idx =0;
         while(idx<bloomDay.size()){
             
-            if(bloomDay[idx]>mid){
+            /*if(bloomDay[idx]>mid){
                 idx++;
                 continue;
-            }
+            }*/
             
             int kk=0;
             while(kk<k && idx<bloomDay.size()){
                 
-                if(bloomDay[idx]>mid)
+                if(bloomDay[idx]>mid){
+                    idx++;
                     break;
+                }
                 
                 kk++; idx++;
                 
