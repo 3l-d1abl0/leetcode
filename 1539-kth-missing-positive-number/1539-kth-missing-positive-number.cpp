@@ -72,7 +72,9 @@ public:
             }
         }//while
         
-        /*middingMore = k - arr[low] + low +1
+        /*middingMore = K- (arr[low]- expected_low)
+                        k - arr[low] + low +1
+                        
             arr[low] + missing more
             arr[low] + k - arr[low] + low +1
             low+1+k
