@@ -3,6 +3,8 @@ public:
     
     double findMedian(vector<int>& nums1, vector<int>& nums2) {
         
+        //Array1 is smaller in Length
+        
         /*
             num1 is the smaller array
             arr1: [     L1] | [R1            ]
@@ -21,33 +23,32 @@ public:
         int M = nums2.size();
         
         
-        int l = 0, r = N;
+        int l = 0, r = N;//Boundaries of 1st Array
         int medianPosition = (N + M + 1) / 2;
         
         while(l<=r){
             
-            int L1 = l + (r-l)/2; //(elements)
-            int L2 = medianPosition - L1;
-            
-            int minL1 = L1>0 ? nums1[L1-1]:INT_MIN;
-            int maxR1 = L1<N ? nums1[L1]:INT_MAX;
-            
-            int minL2 = L2>0 ? nums2[L2-1]:INT_MIN;
-            int maxR2 = L2<M ? nums2[L2]: INT_MAX;
+            int N1 = l + (r-l)/2; //(elements)
+            int N2 = medianPosition - N1;
             
             
-            if(minL1 <= maxR2 && minL2 < maxR1){
+            int L1 = N1>0 ? nums1[N1-1]:INT_MIN; int R1 = N1<N ? nums1[N1]:INT_MAX;
+            
+            int L2 = N2>0 ? nums2[N2-1]:INT_MIN; int R2 = N2<M ? nums2[N2]: INT_MAX;
+            
+            
+            if(L1 <= R2 && L2 < R1){
                 
                 if((N+M)&1){
-                    return max(minL1, minL2);
+                    return max(L1, L2);
                 }else{
-                    return (max(minL1, minL2) + min(maxR1, maxR2))/2.0;
+                    return (max(L1, L2) + min(R1, R2))/2.0;
                 }
                 
-            }else if (minL1 > maxR2){
-                r = L1-1;
+            }else if (L1 > R2){
+                r = N1-1;
             }else{
-                l = L1+1;
+                l = N1+1;
             }
             
         }//while
@@ -58,6 +59,8 @@ public:
     }//double
     
     double findMedianSortedArrays(vector<int>& nums1, vector<int>& nums2) {
+        
+        //smaller array first
         
         if(nums1.size() < nums2.size())
             return findMedian(nums1, nums2);
