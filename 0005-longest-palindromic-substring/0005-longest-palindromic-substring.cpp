@@ -92,7 +92,7 @@ public:
         int N = str.size();
         str[N-1]='#';
 
-        cout<<str<<endl;
+        //cout<<str<<endl;
 
         vector<int> P(N, 0);
         int C = 0, R = 0;
