@@ -78,6 +78,60 @@ public:
         return str.substr(beg, maxLen);
     }
     
+    
+    string manacher(string &s){
+    
+        //cout<<"_"<<s<<"_"<<endl;
+        
+        string  str = string((int)s.length() * 2 + 1, '_');
+        for(int idx =0; idx<s.size(); idx++){
+            str[idx*2] ='#';
+            str[(idx*2)+1]= s[idx];
+        }
+
+        int N = str.size();
+        str[N-1]='#';
+
+        cout<<str<<endl;
+
+        vector<int> P(N, 0);
+        int C = 0, R = 0;
+
+        for (int i = 1; i < N - 1; i++) {
+
+            // Expand around i
+            int mirror = 2 * C - i;
+            if (i < R) {
+                P[i] = min(R - i, P[mirror]);
+            }
+
+            //cout<<"#####"<<endl;
+            // Expand manually
+            while (i + 1 + P[i] < N && i - 1 - P[i] >= 0 && str[i + 1 + P[i]] == str[i - 1 - P[i]]) {
+                P[i]++;
+            }
+
+            //cout<<"#######"<<endl;
+            // Update C and R
+            if (i + P[i] > R) {
+                C = i;
+                R = i + P[i];
+            }
+        }
+
+        // Find the maximum length and start index
+        int max_len = 0, start = 0;
+        for (int i = 1; i < N - 1; i++) {
+            if (P[i] > max_len) {
+                max_len = P[i];
+                start = (i - P[i]) / 2;
+            }
+        }
+
+        // Convert back to the original string
+        return s.substr(start, max_len);
+        
+    }
     string longestPalindrome(string s) {
         
         ///expand around corners O(n^2)
@@ -85,7 +139,11 @@ public:
         
         
         //DP o(n^2)
-        return method2(s);
+        //return method2(s);
+        
+        
+        //3. Manacher
+        return manacher(s);
         
     }
 };
