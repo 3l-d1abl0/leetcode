@@ -1,6 +1,53 @@
 class Solution {
 public:
+    
+    int slidingWiondow3pointer(vector<int> &nums, int k){
+        
+        int lf=0, rt=0, mid=0;
+        int result =0;
+        unordered_map<int, int> count;
+        
+        for(int rt=0; rt<nums.size(); rt++){
+            
+            //include
+            count[nums[rt]]++;
+            
+            //>= characters
+            while(count.size() >k){
+                
+                count[nums[mid]]--;
+                
+                if(count[nums[mid]]==0)
+                    count.erase(nums[mid]);
+                
+                mid++;
+                lf=mid;
+            }//while
+            
+            
+            //If its equal to k , squeeze it
+            if(count.size() ==k){
+                
+                while(count[nums[mid]] >1){
+                    count[nums[mid]]--;
+                    mid++;
+                }
+                
+                
+                result += (mid-lf+1);
+            }
+        
+            
+        }//for
+        
+        
+        return result;
+    }
+    
     int subarraysWithKDistinct(vector<int>& nums, int k) {
+        
+        //1. 3 pointer
+        return slidingWiondow3pointer(nums, k);
         
     /*
         Idea is to find the smallest window with distinct ele k .
@@ -39,6 +86,9 @@ public:
 
 
         if(count.size() ==k){
+            
+            //subarray =1;
+            cout<<subarray<<" :: "<<endl;
             //Shrink the window to its min size with distinct ele e =k
             while(count[nums[lf]]>1){
 
@@ -48,7 +98,11 @@ public:
             }
 
             result += (subarray+1);
+            cout<<rt<<":: "<<subarray<<" "<<result<<endl;
         }
+        
+        //result += (subarray);
+        
     }//for
 
 
