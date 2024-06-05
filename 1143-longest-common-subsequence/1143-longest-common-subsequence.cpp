@@ -50,7 +50,7 @@ public:
         
         //1. Top Down - memoization
         vector< vector<int>> memo(N, vector<int>(M, -1));
-        //return topDown(0, str1, N, 0, str2, M, memo);
+        return topDown(0, str1, N, 0, str2, M, memo);
         
         
         //2. Bottom Up - Tabulation
