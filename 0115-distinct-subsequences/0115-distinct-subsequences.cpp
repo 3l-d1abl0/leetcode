@@ -15,7 +15,7 @@ public:
         
     }
     
-    int recur(int idx1, string &s, int N, int idx2, string &t, int M, vector<vector<int>> &memo){
+    int recur(int idx1, string &s, int idx2, string &t, vector<vector<int>> &memo){
         
         //the pattern has ended
         if(idx2==0) return 1;
@@ -31,13 +31,16 @@ public:
         
         
         if(s[idx1-1]==t[idx2-1]){
-            
-            int matches = recur(idx1-1, s, N, idx2-1, t, M, memo) + recur(idx1-1, s, N, idx2, t, M, memo);
+            /*
+                1. move on to the next character in both the sring
+                2. move onto the next char in the String (basicall look fo the next occurance)
+            */
+            int matches = recur(idx1-1, s, idx2-1, t, memo) + recur(idx1-1, s, idx2, t, memo);
             ans = matches;
             
         }else{
-            
-            int doesNot = recur(idx1-1, s, N, idx2, t, M, memo);
+            //move to the next char in the String
+            int doesNot = recur(idx1-1, s, idx2, t, memo);
             ans = doesNot;
         }
         
@@ -84,16 +87,21 @@ public:
     
     int numDistinct(string s, string t) {
         
+        /*
+            Basically, you have to check in how many ways t is a
+            subsequence in s
+        */
+        
         int N = s.size();
         int M = t.size();
         
         //1. recursion + memo (topDown)
-        //vector<vector<int>> memo(N+1, vector<int> (M+1, -1));
-        //return recur(N, s, N, M, t, M, memo);
+        vector<vector<int>> memo(N+1, vector<int> (M+1, -1));
+        return recur(N, s, M, t, memo);
         
         
         //2. Bottom Up DP
-        return bottomUp(s, N, t, M);
+        //return bottomUp(s, N, t, M);
         
     }
 };
