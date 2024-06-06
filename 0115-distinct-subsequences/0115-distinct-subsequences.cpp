@@ -96,12 +96,12 @@ public:
         int M = t.size();
         
         //1. recursion + memo (topDown)
-        vector<vector<int>> memo(N+1, vector<int> (M+1, -1));
-        return recur(N, s, M, t, memo);
+        //vector<vector<int>> memo(N+1, vector<int> (M+1, -1));
+        //return recur(N, s, M, t, memo);
         
         
         //2. Bottom Up DP
-        //return bottomUp(s, N, t, M);
+        return bottomUp(s, N, t, M);
         
     }
 };
