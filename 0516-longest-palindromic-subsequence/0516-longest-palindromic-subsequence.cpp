@@ -41,7 +41,11 @@ public:
     }
     
     int longestPalindromeSubseq(string s) {
-    
+        
+        /*
+        
+        Take LCS with the reversed String
+        */
         
         string s2 = s;
         reverse(s2.begin(), s2.end());
