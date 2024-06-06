@@ -3,6 +3,16 @@ public:
     int minDistance(string str1, string str2) {
         
         
+        /*
+            calculate LCS
+            
+            N-LCS(s1) ->> this many needs to be removed
+            
+            M-LCS(s2) ->> this many need to be added to convert
+            s1 to s2
+        */
+        
+        
         	int N = str1.length();
 	int M = str2.length();
 
