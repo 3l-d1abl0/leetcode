@@ -114,8 +114,8 @@ public:
         int M = p.size();
         
         //1. Recursion + Backtracking - topDown
-        vector<vector<int>> memo(N+1, vector<int> (M+1, -1));
-        return recur(N, s, N, M, p, M, memo);
+        //vector<vector<int>> memo(N+1, vector<int> (M+1, -1));
+        //return recur(N, s, N, M, p, M, memo);
         
         
         //2. Botom Up
