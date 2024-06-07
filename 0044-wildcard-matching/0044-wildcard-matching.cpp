@@ -18,7 +18,6 @@ public:
         if(sidx==0 && pidx>0){
             
             for(int i=pidx; i>=1; i--){
-            
                 if(p[i-1]!='*')   //stop if is not a *
                     return false;
             }
@@ -108,7 +107,7 @@ public:
             cout<<endl;
         }
     }
-        
+    
     bool isMatch(string s, string p) {
         
         int N = s.size();
@@ -120,9 +119,6 @@ public:
         
         
         //2. Botom Up
-        //return bottomUp(s, N, p, M);
-        
-        
-        //return bottomUpOpti(s, N, p, M);
+        return bottomUp(s, N, p, M);
     }
 };
