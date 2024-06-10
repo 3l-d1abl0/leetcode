@@ -75,7 +75,7 @@ public:
     }
     
     
-    int method2(vector<int> &nums){
+    int method3(vector<int> &nums){
         
         vector<int> lis;
         lis.push_back(nums[0]);
@@ -104,6 +104,27 @@ public:
         
     }
     
+    
+    int method2(vector<int> &nums){
+        
+        int N = nums.size();
+        vector<int> LIS(N, 1);
+ 
+        // Compute optimized LIS values in
+        // bottom up manner
+        for (int i = 1; i < N; i++) {
+            for (int j = 0; j < i; j++){
+             
+                if (nums[i] > nums[j] && LIS[i] < LIS[j] + 1)
+                    LIS[i] = LIS[j] + 1;
+                
+            }
+        }
+
+        // Return maximum value in lis[]
+        return *max_element(LIS.begin(), LIS.end());
+    }
+    
     int lengthOfLIS(vector<int>& nums) {
         
         
@@ -118,10 +139,20 @@ public:
         
         
         /*
-            2. Method 2 - Binary Search
+            2. Method 2 - bottom Up
+            
+            TC: O(N^2)
+            SC: O(N)
         */
         
-        return method2(nums);
+        //return method2(nums);
         
+        
+        /*
+        3. Method 3 - Binary Search
+        */
+        
+        
+        return method3(nums);
     }
 };
