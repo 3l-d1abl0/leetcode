@@ -39,8 +39,48 @@ public:
     return r;
 }
     
+    int recur(int idx, int prev_idx, vector<int> &nums, vector<vector<int>> &memo){
+        
+        if(idx== nums.size())
+            return 0;
+        
+        if(memo[idx][prev_idx+1] !=-1){  //+1 coz 
+            return memo[idx][prev_idx+1];
+        }
+        
+        
+        //exclude /skip
+        
+        int exce = 0+recur(idx+1, prev_idx, nums, memo);
+        
+        
+        
+        int inc = 0;
+        if( prev_idx ==-1 || nums[idx] > nums[prev_idx]){
+            inc = 1+ recur(idx+1, idx, nums, memo);
+        }
+        
+        
+        return memo[idx][prev_idx+1] = max(exce, inc);
+        
+        
+    }
+    
+    int recurMemo(vector<int>& nums){
+        
+        int N = nums.size();
+        vector<vector<int>> memo(N, vector<int> (N+1, -1));
+        
+        return recur(0, -1, nums, memo);
+    }
     
     int lengthOfLIS(vector<int>& nums) {
+        
+        
+        
+        //1. Method 1 - Recur + Memo
+        
+        return recurMemo(nums);
         
         vector<int> lis;
         lis.push_back(nums[0]);
