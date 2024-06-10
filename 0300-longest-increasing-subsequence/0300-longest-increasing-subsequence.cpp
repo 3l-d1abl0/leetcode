@@ -74,13 +74,8 @@ public:
         return recur(0, -1, nums, memo);
     }
     
-    int lengthOfLIS(vector<int>& nums) {
-        
-        
-        
-        //1. Method 1 - Recur + Memo
-        
-        return recurMemo(nums);
+    
+    int method2(vector<int> &nums){
         
         vector<int> lis;
         lis.push_back(nums[0]);
@@ -105,5 +100,28 @@ public:
         
         
         return len;
+        
+        
+    }
+    
+    int lengthOfLIS(vector<int>& nums) {
+        
+        
+        
+        /*1. Method 1 - Recur + Memo
+        
+            TC: O(N^2)
+            SC: O(N^2)
+        */
+        //return recurMemo(nums);
+        
+        
+        
+        /*
+            2. Method 2 - Binary Search
+        */
+        
+        return method2(nums);
+        
     }
 };
