@@ -2,6 +2,9 @@ class Solution {
 public:
     vector<int> largestDivisibleSubset(vector<int>& nums) {
         
+        if(nums.size()==1)
+            return nums;
+        
         sort(nums.begin(), nums.end());
         
         int N = nums.size();
@@ -14,7 +17,7 @@ public:
         
         
         int maxx_lis = lis[0];
-        int start;
+        int start=0;
         for(int i=1; i<N; i++){
             
             for(int j=0; j<i; j++){
@@ -34,12 +37,17 @@ public:
         }//for i
         
         
+        
+        cout<<maxx_lis<<" "<<start<<endl;
+        //return {};
+        
+        
         vector<int> ans;
-        while(start >=0 && path[start] != start){
-            
+        //ans.push_back(nums[start]);
+        while(path[start] != start){
             ans.push_back(nums[start]);
-            
             start = path[start];
+            
             
         }
         
