@@ -19,24 +19,24 @@ public:
     
     int ceilIdx(vector<int> &v, int key){
 
-    int n =v.size();
-        
-    int l=-1, r=n;
-        
-    while(r-l>1){
+        int n =v.size();
 
-        int mid = l + (r-l)/2;
-        if(v[mid]>=key){
-            r=mid;
-        }else{
-            l=mid;
+        int l=-1, r=n;
+
+        while(r-l>1){
+
+            int mid = l + (r-l)/2;
+            if(v[mid]>=key){
+                r=mid;
+            }else{
+                l=mid;
+            }
         }
-    }
 
-    if(l==-1)
-        return r;//0
+       // if(l==-1)
+            return r;//0
 
-    return r;
+        return r;
 }
     
     int recur(int idx, int prev_idx, vector<int> &nums, vector<vector<int>> &memo){
