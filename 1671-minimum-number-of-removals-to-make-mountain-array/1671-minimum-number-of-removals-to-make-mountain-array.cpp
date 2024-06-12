@@ -138,7 +138,7 @@ public:
         int N = nums.size();
         
         //
-        return method1(nums, N); //O(n^2)
+        //return method1(nums, N); //O(n^2)
         
         return method2(nums, N); //O(2NlonN + N)
     }
