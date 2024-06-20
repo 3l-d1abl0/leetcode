@@ -63,7 +63,7 @@ public:
             return memo[leftb][rightb];
         
         int maxPoints = INT_MIN;    
-        //the bulloon candidate for this level
+        //the last bulloon candidate for this level
         for(int i=leftb; i<=rightb; i++){
             
             int cost = nums[leftb-1]* nums[i]* nums[rightb+1];
