@@ -21,9 +21,8 @@ public:
         int x = m[maxfreq].top();
         m[maxfreq].pop();
         
-        freq[x]--;
-        
-        if (m[maxfreq].size()==0)
+        //maxFreq stack is empty, decrease maxFreq
+        if (!m[freq[x]--].size())
             maxfreq--;
         
         return x;
