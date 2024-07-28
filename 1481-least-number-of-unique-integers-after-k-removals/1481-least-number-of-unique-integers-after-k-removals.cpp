@@ -29,9 +29,14 @@ public:
     	}
         
         if(k<=dist){
-            return (dist-k)+(sz-dist);
+            
+            //sz-k  remove k eleements
+            //return (dist-k)+(sz-dist);
+            return sz-k;
         }
     	
+        
+        //remove the single frequency element first
         k-=dist;
     	
         //cout<<"K = "<<k<<" "<<minHeap.size()<<endl;
@@ -40,7 +45,7 @@ public:
     	    
     	    auto ele = minHeap.top();
     	    
-    	    
+    	    //freq of eleemt is greater than k
     	    if( ele.first > k){
     	        return minHeap.size();
     	    }
