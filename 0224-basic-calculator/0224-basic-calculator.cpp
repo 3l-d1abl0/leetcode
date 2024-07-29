@@ -6,25 +6,26 @@ public:
     
     void processSymbol(char sign, int num, stack<int> &st){
         
-        cout<<"adding "<<sign<<" "<<num<<" to stack "<<endl;
-        
-        int top;
-        if(st.empty()){
-            top=0;
-        }else{
-            top = st.top();
-            st.pop();
-        }
+        //cout<<"adding "<<sign<<" "<<num<<" to stack "<<endl;
         
         if (sign=='+'){
-            st.push(top+num);
+            st.push(num);
         }else if(sign=='-'){
-            st.push(top-num);
+            st.push(-num);
         }else if(sign=='*'){
+            int top = st.empty() ? 0: st.top();
+            st.pop();
             st.push(top*num);
         }else if(sign=='/'){
+            int top = st.empty() ? 0: st.top();
+            st.pop();
             st.push(top/num);
         }
+        
+        /*
+            for * amd /
+            current number operates with the earlier nuber in stack
+        */
             
     }
     
@@ -61,7 +62,7 @@ public:
                     st.pop();
                 }
                 
-                cout<<sum<<" "<<i<<endl;
+                //cout<<sum<<" "<<i<<endl;
                 return {sum, i};
             }
             
@@ -73,7 +74,7 @@ public:
         processSymbol(sign, num, st);
         //cout<<sign<<num<<" sz:"<<st.top()<<endl;
         while(!st.empty()){
-            cout<<"T: "<<st.top()<<endl;
+            //cout<<"T: "<<st.top()<<endl;
             sum+=st.top();
             st.pop();
         }
