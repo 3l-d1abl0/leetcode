@@ -6,7 +6,7 @@ public:
     
     void processSymbol(char sign, int num, stack<int> &st){
         
-        cout<<"adding "<<sign<<" "<<num<<" to stack "<<endl;
+        //cout<<"adding "<<sign<<" "<<num<<" to stack "<<endl;
         
         if (sign=='+'){
             st.push(num);
@@ -21,6 +21,11 @@ public:
             st.pop();
             st.push(top/num);
         }
+        
+        /*
+            for * amd /
+            current number operates with the earlier nuber in stack
+        */
             
     }
     
@@ -57,7 +62,7 @@ public:
                     st.pop();
                 }
                 
-                cout<<sum<<" "<<i<<endl;
+                //cout<<sum<<" "<<i<<endl;
                 return {sum, i};
             }
             
@@ -69,7 +74,7 @@ public:
         processSymbol(sign, num, st);
         //cout<<sign<<num<<" sz:"<<st.top()<<endl;
         while(!st.empty()){
-            cout<<"T: "<<st.top()<<endl;
+            //cout<<"T: "<<st.top()<<endl;
             sum+=st.top();
             st.pop();
         }
@@ -81,7 +86,14 @@ public:
     }
     
     int calculate(string s) {
-                pair<int, int> pp = solve(s, 0);
+        
+        /*
+            solve() -> solves the (experssion)
+            1st solve() call, calculates exp + (exp) +exp
+        
+        */
+        
+        pair<int, int> pp = solve(s, 0);
         
         cout<<pp.first<<" "<<pp.second<<endl;
         
