@@ -1,6 +1,6 @@
 struct Endpoint {
-    int val, load;
-    bool isStart;
+    int val, load;  //milestone, capacity
+    bool isStart;   //start or destination
 };
  
 // custom comparator function which is used by the c++ sort stl
@@ -115,10 +115,10 @@ public:
     bool carPooling(vector<vector<int>>& trips, int capacity) {
         
         //uses sorting 
-        //return method1(trips, capacity);
+        return method1(trips, capacity);
         
-        //sort + priority Queue
-        return method2(trips, capacity);
+        //sort + priority Queue - 9ms
+        //return method2(trips, capacity);
         
     }
 };
