@@ -9,6 +9,7 @@ bool comp(const Endpoint& a, const Endpoint& b) {
         return a.val < b.val;
     //prioratize departing time
     return a.isStart == false && b.isStart == true;
+    //return !a.isStart && b.isStart;
 }
 
 
@@ -114,7 +115,7 @@ public:
     
     bool carPooling(vector<vector<int>>& trips, int capacity) {
         
-        //uses sorting 
+        //uses sorting - 15ms
         return method1(trips, capacity);
         
         //sort + priority Queue - 9ms
