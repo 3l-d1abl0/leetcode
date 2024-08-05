@@ -11,20 +11,19 @@ bool comp(const Endpoint& a, const Endpoint& b) {
     return a.isStart == false && b.isStart == true;
 }
 
-bool func(vector<int> &a, vector<int> &b) {
-        return a[1] < b[1];
-}
 
+/**Method 2**/
+
+//function for Sorting function
+bool func(vector<int> &a, vector<int> &b) {
+        return a[1] < b[1]; //ascending
+}
 
 struct Endp {
     int end, cap;
 };
 
-/*bool custom(Endp const& a, Endp const &b) {
-    return a.end < b.end;
-}*/
-
-
+//Function for Heap Sort function
 struct custom {
 		constexpr bool operator()( Endp const& a, Endp const& b) const noexcept{
 			return a.end > b.end;	//min//asc
@@ -78,35 +77,34 @@ public:
         if(N==0)
             return 0;
         
+        //Sort the trip by start time
         sort(trips.begin(), trips.end(), func);
         
-        priority_queue<Endp, vector<Endp>, custom> pq;
+        //Sort by destination, smaller destination  first
+        priority_queue<Endp, vector<Endp>, custom> pq;  //min Heap
         
-        int cap =1;
         int load = trips[0][0];
-        int maxxLoad = load;
+        int maxxLoad = load;    //current occupied Seats
         
         Endp obj = {trips[0][2], trips[0][0]};
         pq.push(obj);
         
         for(int i=1; i<N; i++){
-            //cout<<"i= "<<i<<endl;
-            //cout<<trips[i][1]<<"  "<<pq.top().end<<endl;
-            /*if(trips[i][1] < pq.top().end){ // need new seat
-                cap++;
-                load += trips[i][0];
-            }else*/
             
+            //Clear the sets from trip, which ends before next trip
             while(!pq.empty() && pq.top().end<= trips[i][1]){
-                load -= pq.top().cap;
+                load -= pq.top().cap;   //decrese the occupied seat
                 pq.pop();
             }
             
-            load += trips[i][0];
+            load += trips[i][0];    //add the seats from next trip
             pq.push({trips[i][2], trips[i][0]});
             
             maxxLoad = max(maxxLoad, load);
             //cout<<"MaxLoad ="<<maxxLoad<<endl;
+            
+            if (maxxLoad > capacity)
+                return false;
         }
         
         //cout<<maxxLoad<<" "<<capacity<<endl;
@@ -116,7 +114,7 @@ public:
     
     bool carPooling(vector<vector<int>>& trips, int capacity) {
         
-        //uses dorting 
+        //uses sorting 
         //return method1(trips, capacity);
         
         //sort + priority Queue
