@@ -11,9 +11,10 @@ public:
             2. from all the selected project, get the one with max Profit
             3. Get the profict from the selected project.
             
-            repear k times.
+            recpear k times.
         */
         
+        //capital, profit
         priority_queue< pair<int, int>, vector<pair<int, int>>, greater<pair<int, int>> > cap; //min  heap
         priority_queue< int > prof; //max
         
