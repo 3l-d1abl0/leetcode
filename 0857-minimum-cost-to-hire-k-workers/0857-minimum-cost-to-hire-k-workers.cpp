@@ -89,25 +89,59 @@ public:
         int N = quality.size();
         
         vector<Workers> sortedRatio;
-        for(int i=0; i<N; i++) sortedRatio.push_back(Workers(wage[i], quality[i]));
+        for(int i=0; i<N; i++)
+            sortedRatio.push_back(Workers(wage[i], quality[i]));
         
         
         //sort(sortedRatio.begin(), sortedRatio.end(), CompareFn);
         sort(sortedRatio.begin(), sortedRatio.end(), []( Workers &a, Workers &b){
             return ((double)a.wage/a.quality) < (double)b.wage/b.quality ;
         });
+        //ascending as per wage per Quality ratio
         
-        
-        /*cout<<"N= "<<N<<endl;
+        /*
+        cout<<"N= "<<N<<endl;
         for(int i=0; i<N; i++){
-            cout<<sortedRatio[i].wage<<" "<<sortedRatio[i].quality<<endl;
+            cout<<sortedRatio[i].wage<<" "<<sortedRatio[i].quality<<" = "<<sortedRatio[i].wage/sortedRatio[i].quality<<endl;
         }
         
-        cout<<endl;*/
+        cout<<endl;
+        */
+        int runningQualitySum =0;
+        priority_queue<double> mxHeap;  // keep the min k Quality
+        double minCost = 1e9;
         
-        int runningSum =0;
-        priority_queue<double> mxHeap;
-        double ans = 1e9;
+        for(int i=0; i<k; i++){
+            runningQualitySum += sortedRatio[i].quality;
+            mxHeap.push(sortedRatio[i].quality);
+        }
+        
+        //cout<<((double)sortedRatio[k-1].wage/sortedRatio[k-1].quality)<<endl;
+        minCost = runningQualitySum *  ((double)sortedRatio[k-1].wage/sortedRatio[k-1].quality);
+        //cout<<"minCost: "<<minCost<<" running Sum: "<<runningQualitySum<<endl;
+        for(int i=k; i<N; i++){
+            
+            if(!mxHeap.empty() && sortedRatio[i].quality < mxHeap.top()){
+                
+                 runningQualitySum-= mxHeap.top();
+                 mxHeap.pop();
+                
+                 runningQualitySum += sortedRatio[i].quality;
+                 mxHeap.push(sortedRatio[i].quality);
+                
+            }
+            
+            minCost = min(minCost, runningQualitySum *  ((double)sortedRatio[i].wage/sortedRatio[i].quality));
+            
+             
+            
+        }
+        
+        
+        
+        return minCost;
+        
+        /*
         for(Workers ele: sortedRatio){
             
             double ratio = (double)ele.wage/ele.quality;
@@ -131,15 +165,56 @@ public:
         
         
         return ans;
+        */
         
     }
     
     double mincostToHireWorkers(vector<int>& quality, vector<int>& wage, int k) {
+        /*
+            BRUTE FORCE:
+            
+            Basically calculate the ratio for each worker:
+            i.e. cost of 1 Quality.
+            
+            Basically , choose a ratio, and using that ration calcluate the wages for every worker
+            for their Quality
+            
+            For every ratio chosen and every wages calcluated:
+            
+            choose the smalles k calculated ACCEPTED wages
+            
+            MIN(
+            (q1.R1 + q2.R1 + q3.R1 +...+ qk.R1 ),
+            (q1.R2 + q2.R2 + q3.R2 +...+ qk.R2 ),
+            (q1.R3 + q2.R3 + q3.R3 +...+ qk.R3 ),
+            ...
+            ...
+            (q1.R4 + q2.R4 + q3.R4 +...+ qk.R4 ) )
         
-        //Method1
+            offeredWage[x] >= ExpectedWage[x]
+            quantity[x] * ratio[captain] >= ExpectedWage[x]
+            
+            ratio[captain] >= ExpectedWage[x] / quantity[x]
+            
+            ratio[captain] >= ratio[x]
+            
+            So, thee wages will be decides by  the ratio selected,
+            so if the ratio select is lesser than any worker's ratio,
+            it will not meet its expected Salaray.
+            
+            So for a given ratio, workers with higher ratio cannot be 
+            accepted, the select ratio will work wit people with less ratio.
+            
+            For all those with leser ratio,
+            choose the minimuk k Quality, since we need to find minnimum Wage.
+        */
+        
+        
+        
+        //Method1 - Brute Force
         //return method1(quality, wage, k);
         
-        //method2
+        //method2 - Heap
         return method2(quality, wage, k);
         
     }
