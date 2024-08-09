@@ -18,7 +18,7 @@ public:
                 currMaxSum = max(nums[idx], mxHeap.top().first+nums[idx]);
             //cout<<"2. maxHeap= "<<maxSum<<endl;
             maxSum = max(currMaxSum, maxSum);
-            cout<<" , "<<currMaxSum<<" ";
+            //cout<<" , "<<currMaxSum<<" ";
             mxHeap.push({currMaxSum, idx});
         }//for
         
