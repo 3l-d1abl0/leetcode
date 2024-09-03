@@ -20,8 +20,13 @@ public:
         vector<vector<int>>adj(V);
 	
         for(int i=0; i<prerequisites.size(); i++){
+            
+            /*
+                In order to complete [0], u need to complete [1] first
+                [1] -> prerequisites
+            */
 
-            adj[prerequisites[i][0]].push_back(prerequisites[i][1]);
+            adj[prerequisites[i][1]].push_back(prerequisites[i][0]);
 
         }
         
