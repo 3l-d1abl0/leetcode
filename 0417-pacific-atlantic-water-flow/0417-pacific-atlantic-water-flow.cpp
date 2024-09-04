@@ -4,6 +4,13 @@ public:
     vector<vector<int>> bfs(vector<vector<int>> &heights, queue<pair<int, int>> &q, vector<vector<bool>> &O1, vector<vector<bool>> &O2){
         
         
+        /*
+        Call1 - queue has all the edge node which is touching 
+        Pacific Ocean
+        
+        
+        */
+        
         int R= heights.size();
         int C = heights[0].size();
         int cnt =0;
