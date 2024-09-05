@@ -15,7 +15,7 @@ public:
 	
 	int M = board[0].size();
 	
-	
+	//Mark all boundry nodes as true
 	vector<vector<bool> > visited (N, vector<bool> (M, false));
 	
 	
