@@ -42,6 +42,9 @@ public:
                     if (dist[destination] == -1) {
                         dist[destination] = dist[curr] + 1;
                         q.push(destination);
+                        
+                        if(destination == N*N)
+                            return dist[N*N];
                     }
                 }
             
