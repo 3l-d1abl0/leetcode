@@ -1,49 +1,44 @@
 class Solution {
 public:
-    int minReorder(int n, vector<vector<int>>& conn) {
+    
+    void dfs(int city, int &newEdges, vector<vector<int>> &adj, unordered_set<string> &neiCity, vector<bool> &visited){
+        
+        visited[city] = true;
         
         
-        //make and adj
-        //-ive to denote incoming edge, +ive to denote outgoing edge
-        
-        vector<bool> visited(n+1, false);
-        
-        vector<vector<int>> adj(n+1);
-        
-        for(auto ele: conn){
+        for(int neigh: adj[city]){
             
-            int u = ele[0]+1, v= ele[1]+1;
+            if(visited[neigh] == true)
+                continue;
             
-            adj[u].push_back(v);    //u->v
-            adj[v].push_back(-u);    //v <- -u
+            //is there is an edge from neighbour to current city
+            if( neiCity.find( to_string(neigh)+"#"+to_string(city) ) == neiCity.end())
+                newEdges++;
+            
+            dfs(neigh, newEdges, adj, neiCity, visited);
         }
-        
-        int src =1;
-        int count = 0;
-        dfs(src, adj, visited, count);
-        cout<<endl;
-        
-        return count;
     }
     
-    
-    void dfs(int src, vector<vector<int>> &adj, vector<bool> &visited, int &count){
+    int minReorder(int n, vector<vector<int>>& connections) {
+        /*
+            Start from the Source and move radially Outward
             
-        visited[src] = true;
-        cout<<src<<" "; 
+            When at any node, it means we have computed its way from the Capital City
+        */
         
-        for(auto node: adj[src]){
+        vector<vector<int>> adj(n, vector<int>());
+        unordered_set<string> neiCity;  //set of edges from neighbour to city
+        for(auto row: connections){
+            neiCity.insert( to_string(row[0])+"#"+to_string(row[1]) );
             
-            if(visited[abs(node)]==false){    //if not visited
-                
-                if(node>0)  //outgoing edge, needs to be reversed
-                    count++;
-                
-                dfs(abs(node), adj, visited, count);
-                
-            }
-            
-            
+            adj[row[0]].push_back(row[1]);
+            adj[row[1]].push_back(row[0]);
         }
+        
+        vector<bool> visited(n, false);
+        int newEdges =0;
+        dfs(0, newEdges, adj, neiCity, visited);
+        
+        return newEdges;
     }
 };
