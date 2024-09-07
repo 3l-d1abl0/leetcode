@@ -3,7 +3,7 @@ public:
     
     struct trie{
         bool isLeaf;
-        map<string, trie*> children;
+        unordered_map<string, trie*> children;
         trie(){
             isLeaf = false;
         }
