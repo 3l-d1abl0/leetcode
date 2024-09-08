@@ -10,17 +10,17 @@ public:
             
             if(v==parent)
                 continue;
-            cout<<node<<"-->"<<v<<" :: "<<endl;
+            //cout<<node<<"-->"<<v<<" :: "<<endl;
             if(dis[node] > dis[v]){
                 //from higher end to lower end
-                cout<<dis[node]<<" "<<dis[v]<<" = "<<dis[node]-dis[v]+1<<endl;
+                //cout<<dis[node]<<" "<<dis[v]<<" = "<<dis[node]-dis[v]+1<<endl;
                 minCycle = min(minCycle, dis[node]-dis[v]+1);
             }else if (dis[node]+1<dis[v]){
                 //v has been visted earlier with higher distance (>+1), reviste with Shorter cycle
                 dfs(v, node, dist+1, dis, adj, minCycle);
             }else{
                 //dis[node] == dis[v]
-                cout<<dis[node]+dis[v]+1<<endl;
+                //cout<<dis[node]+dis[v]+1<<endl;
             }
             
         }
