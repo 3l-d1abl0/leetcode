@@ -15,7 +15,6 @@ public:
         
         dist[0][0] =1;
         Q.push( {0,0} );    //x, y
-        int len =0;
         
         
         vector< vector<int> > dir { {-1, -1}, {-1, 0}, {-1, 1},
@@ -24,7 +23,6 @@ public:
         
         while(Q.size()){
             
-            len ++;
             auto node  = Q.front(); Q.pop();
             
             int x = node.first;
