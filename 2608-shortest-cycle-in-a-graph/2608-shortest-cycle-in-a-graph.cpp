@@ -28,7 +28,7 @@ public:
         
     }
     
-    int findShortestCycle(int n, vector<vector<int>>& edges) {
+    int method1(int n, vector<vector<int>>& edges){
         
         //1. Create Adj List
         vector<vector<int>> adj(n);
@@ -53,5 +53,14 @@ public:
         }
         
         return minCycle==INT_MAX? -1: minCycle;
+        
+    }
+    
+    int findShortestCycle(int n, vector<vector<int>>& edges) {
+        
+        //1. DFS
+        return method1(n, edges);
+        
+        
     }
 };
