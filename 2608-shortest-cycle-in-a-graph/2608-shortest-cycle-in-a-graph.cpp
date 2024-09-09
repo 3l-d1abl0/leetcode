@@ -56,11 +56,54 @@ public:
         
     }
     
+    int method2(int n, vector<vector<int>>& edges){
+        
+        //1. Create Adj List
+        vector<vector<int>> adj(n);
+        for (auto& e: edges) {
+            adj[e[0]].push_back(e[1]);
+            adj[e[1]].push_back(e[0]);
+        }
+        
+        
+        int minCycle = INT_MAX;
+        vector<int> dis(n, INT_MAX);
+        
+        for (int i = 0; i < n; ++i) {
+            
+            
+            dis[i] = 0;
+            
+            queue<int> q;
+            q.push(i);
+            
+            while (!q.empty()) {
+            
+                auto node = q.front(); q.pop();
+                for (auto v: adj[node]) {
+                    
+                    if (dis[v] == INT_MAX){
+                        dis[v] = dis[node] + 1;
+                        q.push(v);
+                    }else if (dis[v] >= dis[node])
+                        minCycle = min(minCycle, dis[v] + dis[node] + 1);
+                }
+            }//while
+            
+            fill(dis.begin(), dis.end(), INT_MAX);
+        }
+        
+        return minCycle==INT_MAX? -1: minCycle;
+    }
+    
     int findShortestCycle(int n, vector<vector<int>>& edges) {
         
         //1. DFS
-        return method1(n, edges);
+        //return method1(n, edges);
         
+        
+        //2. BFS
+        return method2(n, edges);
         
     }
 };
