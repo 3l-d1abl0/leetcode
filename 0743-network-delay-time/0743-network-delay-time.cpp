@@ -90,11 +90,11 @@ public:
             
         
         
-        //method 1 - Dijkstra
-        return dijkstra(k, adj, n);
+        //method 1 - Dijkstra - 90ms
+        //return dijkstra(k, adj, n);
         
-        
-        //return bfs(k, adj, n);
+        //method 2 - BFS
+        return bfs(k, adj, n);
         
         
         
