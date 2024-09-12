@@ -38,7 +38,9 @@ public:
 		for (int city = 0; city < n; city++) {
 			int cnt = 0;
 			for (int adjCity = 0; adjCity < n; adjCity++) {
-				if (dist[city][adjCity] <= distanceThreshold)
+                
+                
+				if (city != adjCity && dist[city][adjCity] <= distanceThreshold)
 					cnt++;
 			}
 
@@ -128,9 +130,11 @@ public:
     
     int findTheCity(int n, vector<vector<int>>& edges, int distanceThreshold) {
         
+        //19ms
         return floydWarshall(n, edges, distanceThreshold);  //O(n^3)
         
-        //return Dijkstra(n, edges, distanceThreshold);   //O(ElogV)
+        //Apply dij for each node - 
+        //return Dijkstra(n, edges, distanceThreshold);   //O(V+ElogV)
         
     }
 };
