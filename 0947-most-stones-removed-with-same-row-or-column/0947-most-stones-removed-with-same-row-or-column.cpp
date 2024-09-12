@@ -81,18 +81,19 @@ void dfs(vector<vector<int>>& stones, int index, vector<bool>& visited) {
 
 int method1(vector<vector<int>>& stones){
 
+        //row, col
         int n = stones.size();
         vector<bool> visited(n, false);
         
-        int count = 0;
+        int componentCount = 0;
         for(int i = 0; i<n; i++) {
             if(visited[i])
                 continue;
             dfs(stones, i, visited);
-            count++;
+            componentCount++;
         }
-        cout<<count<<endl;
-        return n - count;
+        //cout<<componentCount<<endl;
+        return n - componentCount;
 }
     
 
@@ -153,14 +154,14 @@ public:
         
         */
         
-        //return method1(stones); ///dfs
+        return method1(stones); ///dfs
         
         /*
             DSU - 25ms
             
             give number to each row and column
         */
-        return method2(stones); //union-find
+        //return method2(stones); //union-find
         
     }
 };
