@@ -130,11 +130,11 @@ public:
     
     int findTheCity(int n, vector<vector<int>>& edges, int distanceThreshold) {
         
-        //19ms
-        return floydWarshall(n, edges, distanceThreshold);  //O(n^3)
+        //32ms
+        //return floydWarshall(n, edges, distanceThreshold);  //O(n^3)
         
         //Apply dij for each node - 
-        //return Dijkstra(n, edges, distanceThreshold);   //O(V+ElogV)
+        return Dijkstra(n, edges, distanceThreshold);   //O(V+ElogV)
         
     }
 };
