@@ -154,14 +154,14 @@ public:
         
         */
         
-        return method1(stones); ///dfs
+        //return method1(stones); ///dfs
         
         /*
             DSU - 25ms
             
             give number to each row and column
         */
-        //return method2(stones); //union-find
+        return method2(stones); //union-find
         
     }
 };
