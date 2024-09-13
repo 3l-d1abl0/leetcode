@@ -4,6 +4,7 @@ static int speedUp=[](){
     cout.tie(nullptr);
     return 0;
 }();
+
 class DSU{
     
     private:
