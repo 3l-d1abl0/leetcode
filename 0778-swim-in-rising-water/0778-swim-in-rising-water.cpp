@@ -19,7 +19,7 @@ public:
         
         int N = grid.size();
         
-        //<wait_time, cell_coords>
+        //<wait_time, cell_coords<x, y>>
         priority_queue< pair<int, pair<int, int>>, vector<pair<int, pair<int, int>> >,  greater<pair<int, pair<int, int>> > >minHeap;
         
         vector<vector<bool>> vis(N, vector<bool> (N, false));
@@ -52,6 +52,7 @@ public:
                 int xx = coord.first+dx[i];
                 int yy = coord.second+dy[i];
                 
+                //If outside matrix
                 if(xx <0 || xx >= N || yy <0 || yy>=N || vis[xx][yy]==true)
                     continue;
                 
