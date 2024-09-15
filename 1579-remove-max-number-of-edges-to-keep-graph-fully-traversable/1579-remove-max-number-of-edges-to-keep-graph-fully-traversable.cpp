@@ -133,6 +133,9 @@ public:
             }
         }
 
+        
+        cout<<Alice.getSize()<<" "<<Bob.getSize()<<endl;
+            
         if(Alice.getSize()==1 && Bob.getSize()==1)
             return edges.size() - usedEdge;
 
