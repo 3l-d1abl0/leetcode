@@ -26,7 +26,7 @@ class DSU{
     
     void unionBySize(int u, int v){
         
-        cout<<"Joining : "<<u<<" "<<v<<endl;
+        //cout<<"Joining : "<<u<<" "<<v<<endl;
         
         int pv = findParent(v);
         int pu = findParent(u);
@@ -47,7 +47,7 @@ class DSU{
             }
         }else{
             join++;
-            cout<<u<<", "<<v<<endl;
+            //cout<<u<<", "<<v<<endl;
         }
         
         //cout<<"Size : "<<size[pu]<<" "<<size[pv]<<endl;
@@ -61,17 +61,19 @@ class DSU{
         }
         cout<<endl;
         */
-        for(int i=0; i<N; i++){
+        
+        /*for(int i=0; i<N; i++){
             cout<<size[i]<<" ";
         }
         cout<<endl;
         
         cout<<"join:: "<<join<<endl;
+        */
         
         int serverCount =0;
         for(int i=0; i<N; i++){
             if(i==parent[i] && size[i]>2){
-                cout<<size[i]-1<<"* ";
+                //cout<<size[i]-1<<"* ";
                 serverCount += (size[i]-1);
                 
             }
