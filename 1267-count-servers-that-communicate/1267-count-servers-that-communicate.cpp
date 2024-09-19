@@ -147,6 +147,8 @@ public:
             count the total servers, remove the ones which are not connected
             TC: O()
             SC: ()
+            
+            method3 : DFS
         */
         
         return method2(grid);
