@@ -100,13 +100,15 @@ public:
             }
             
             //process outgoing element
-            int l=s2[rt-N]-'a';
+            int l=s2[lf]-'a';
             m2[l]--;
             if(m2[l]==m1[l]){
                 count++;
             }else if(m2[l] == m1[l]-1){
                 count--;
             }
+            
+            lf++;
             
         }
         
@@ -169,11 +171,11 @@ public:
         
         //return method1(s1, s2);   //O(M*N)
         
-        //return method2(s1, s2);
+        return method2(s1, s2);
         
         
         //TC: O(N+M) SC: O(M) where M is the len of pattern
-        return method3(s1, s2);
+        //return method3(s1, s2);
         
     }
 };
