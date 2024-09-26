@@ -154,6 +154,8 @@ public:
         
         TC: O(M+N) SC: O(M)
         M- pattern len
+        
+        24ms 10.8MB
         */
         return method2(s, t);
     }
