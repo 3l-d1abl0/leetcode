@@ -3,7 +3,14 @@ public:
     
     string m1(string &s, string &t) {
         
-        vector<int> MP(58, 0);
+        /*
+            A-Z -> 65 -90
+            a-z -> 97-122
+            
+            57
+        */
+        
+        vector<int> MP(58, 0);//map for the pattern
         vector<int> M(58, 0);
         
         
@@ -35,7 +42,7 @@ public:
                 ctr++;
             }
             
-            //if we have same number of unique charactrs as the pattern
+            //if we have same number of unique charactrs as the pattern, Shrink it
             while(ctr==unq && lf<=rt){
                 //cout<<lf<<" "<<rt<<endl;
                 if(minn>rt-lf+1){
@@ -133,13 +140,18 @@ public:
     
     string minWindow(string s, string t) {
         
-        //return m1(s, t);
+        /*
+        TC: O(M+N)
+        SC: O(58)
+        */
+        
+        return m1(s, t);
         
         /* Implementation 2
         
         TC: O(M+N) SC: O(M)
         M- pattern len
         */
-        return method2(s, t);
+        //return method2(s, t);
     }
 };
