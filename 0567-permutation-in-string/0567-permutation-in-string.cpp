@@ -171,11 +171,11 @@ public:
         
         //return method1(s1, s2);   //O(M*N)
         
-        return method2(s1, s2);
+        //return method2(s1, s2);
         
         
         //TC: O(N+M) SC: O(M) where M is the len of pattern
-        //return method3(s1, s2);
+        return method3(s1, s2);
         
     }
 };
