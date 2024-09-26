@@ -1,7 +1,7 @@
 class Solution {
 public:
     
-    string m1(string &s, string &t) {
+    string method1(string &s, string &t) {
         
         /*
             A-Z -> 65 -90
@@ -143,15 +143,18 @@ public:
         /*
         TC: O(M+N)
         SC: O(58)
-        */
         
-        return m1(s, t);
+        3ms - 10MB
+        
+        
+        return method1(s, t);
+        */
         
         /* Implementation 2
         
         TC: O(M+N) SC: O(M)
         M- pattern len
         */
-        //return method2(s, t);
+        return method2(s, t);
     }
 };
