@@ -21,5 +21,14 @@ public:
         
         return count;
         
+        /*
+        
+        If anty subarray has all three:
+        1. Count the subarray with all the character ahead with it.
+        (as the subarray will form valid subarray will all the ahead character)
+        
+        2. if all char are stisfied, shrink the subaaray with left
+        */
+        
     }
 };
