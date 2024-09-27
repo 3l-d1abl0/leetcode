@@ -72,7 +72,7 @@ public:
         //return method1(nums, k);
         
         /*TC: O(N) SC: O(N)
-        
+        96ms - 70.3ms
         */
         return method2(nums, k);
     }
