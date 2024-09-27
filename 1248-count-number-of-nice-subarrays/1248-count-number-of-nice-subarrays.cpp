@@ -66,10 +66,14 @@ public:
     
     int numberOfSubarrays(vector<int>& nums, int k) {
         
-        //TC: O(N) SC: O(N)
-        return method1(nums, k);
+        /*  TC: O(N) SC: O(N)
+            164ms - 94.2MB
+        */
+        //return method1(nums, k);
         
-        //TC: O(N) SC: O(N)
-        //return method2(nums, k);
+        /*TC: O(N) SC: O(N)
+        
+        */
+        return method2(nums, k);
     }
 };
