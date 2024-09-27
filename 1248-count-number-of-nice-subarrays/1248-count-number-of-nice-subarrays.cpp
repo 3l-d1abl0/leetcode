@@ -3,19 +3,22 @@ public:
     
     int method1(vector<int>& nums, int k) {
         
+        //Keep a cumulative count of #odds found
+        
         unordered_map<int, int> map;
         
         const int N = nums.size();
         
         int ans = 0;
-        int oddCount = 0;
+        int oddCount = 0;   //cumulative odd count since Zero
         
         for (int i = 0; i < N; ++i) {
             oddCount += (nums[i]&1);
             
-            if(oddCount==k)
+            if(oddCount==k) //current subarr has k odd count
                 ans++;
-            if(map.find(oddCount-k) != map.end())
+            
+            if(map.find(oddCount-k) != map.end())//are there any subarray with count-k odds ?
                 ans += map[oddCount-k];
             
             map[oddCount]++;
@@ -64,9 +67,9 @@ public:
     int numberOfSubarrays(vector<int>& nums, int k) {
         
         //TC: O(N) SC: O(N)
-        //return method1(nums, k);
+        return method1(nums, k);
         
         //TC: O(N) SC: O(N)
-        return method2(nums, k);
+        //return method2(nums, k);
     }
 };
