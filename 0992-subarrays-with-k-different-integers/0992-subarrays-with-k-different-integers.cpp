@@ -3,7 +3,32 @@ public:
     
     int slidingWiondow3pointer(vector<int> &nums, int k){
         
-        int lf=0, rt=0, mid=0;
+        /*
+        lf, mif, rt
+        
+        Count the number of Suending at rt.
+        lf - rt -> biggest subarray with K distinct characters.
+        mid - rt -> smallest subarray with K distinct characters.
+        
+        eg:
+        1, 2, 1, 2, 3
+        
+        l,m  r
+        1    2 1 2 3     => subarray [1, 2]
+        
+        l m r
+        1 2 1 2 3   => [2, 1], [1, 2, 1]        
+        
+        l   m r
+        1 2 1 2 3   =>  [1, 2], [2, 1, 2], [1, 2, 1, 2]
+        
+        l   m   r           l,m    r
+        1 2 1 2 3   =>  1 2 1    2 3    =>  [1, 2, 3]
+        
+        
+        */
+        
+        int lf=0, mid=0;
         int result =0;
         unordered_map<int, int> count;
         
@@ -19,9 +44,8 @@ public:
                 
                 if(count[nums[mid]]==0)
                     count.erase(nums[mid]);
-                
-                mid++;
-                lf=mid;
+                //reset the lf pointer
+                mid++; lf=mid;
             }//while
             
             
@@ -32,8 +56,6 @@ public:
                     count[nums[mid]]--;
                     mid++;
                 }
-                
-                
                 result += (mid-lf+1);
             }
         
@@ -77,21 +99,17 @@ public:
 
         //if distinct elements are > k
         if(count.size() > k){
-
             //freq of [lf] is always 1
             count.erase(nums[lf]);
             lf++;
             subarray=0;
         }
 
-
         if(count.size() ==k){
-            
             //subarray =1;
             cout<<subarray<<" :: "<<endl;
             //Shrink the window to its min size with distinct ele e =k
             while(count[nums[lf]]>1){
-
                 count[nums[lf]]--;
                 subarray++;
                 lf++;
@@ -100,9 +118,7 @@ public:
             result += (subarray+1);
             cout<<rt<<":: "<<subarray<<" "<<result<<endl;
         }
-        
-        //result += (subarray);
-        
+        //result += (subarray);        
     }//for
 
 
