@@ -78,10 +78,10 @@ public:
     
     int numSubarraysWithSum(vector<int>& nums, int goal) {
   
-        //TC: O(N) SC O(N)
-        //return method1(nums, goal);
+        //TC: O(N) SC O(N)- Cumulative Sum - MAP
+        return method1(nums, goal);
         
-        //TC: O(N), SC: O(1)
-        return method2(nums, goal);
+        //TC: O(N), SC: O(1) - Sliding Window/2 Pointer - 21ms
+        //return method2(nums, goal);
     }
 };
