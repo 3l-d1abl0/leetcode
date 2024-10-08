@@ -19,7 +19,7 @@ public:
         for(char ch: t){
             if(MP[ch-'A']==0)
                 unq++;
-            MP[ch-'A']++;
+               MP[ch-'A']++;
         }
         
         //cout<<"unq= "<<unq<<endl;
