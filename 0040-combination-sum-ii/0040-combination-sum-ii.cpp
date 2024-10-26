@@ -35,7 +35,22 @@ public:
         includeExclude(idx-1, target, candidates, comb, combList);
     }
     
-        void combRec(int idx, int target, vector<int> &candidates, vector<int> &comb, vector<vector<int>> &combList){
+    
+    
+    vector<vector<int>> method1(vector<int> &candidates, int target){
+
+        sort(candidates.begin(), candidates.end()); //to bring single order
+        vector<vector<int>> combList;
+        vector<int> comb;
+        
+        int N=candidates.size();
+        includeExclude(N-1, target, candidates, comb, combList);
+        
+        
+        return combList;
+    }
+    
+    void combRec(int idx, int target, vector<int> &candidates, vector<int> &comb, vector<vector<int>> &combList){
             
         if(target==0){
             combList.push_back(comb);
@@ -62,20 +77,6 @@ public:
         
     }
     
-    
-    
-    vector<vector<int>> method1(vector<int> &candidates, int target){
-
-        sort(candidates.begin(), candidates.end()); //to bring single order
-        vector<vector<int>> combList;
-        vector<int> comb;
-        
-        int N=candidates.size();
-        includeExclude(N-1, target, candidates, comb, combList);
-        
-        
-        return combList;
-    }
     
     vector<vector<int>> method2(vector<int> &candidates, int target){
         
