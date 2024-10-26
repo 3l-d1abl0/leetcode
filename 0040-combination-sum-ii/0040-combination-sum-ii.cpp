@@ -35,13 +35,13 @@ public:
             return ;   
         }
         
-        if(idx==0)
+        if(idx==-1)
             return;
         
         //Include
-        if(candidates[idx-1]<=target){
-            comb.push_back(candidates[idx-1]);
-            includeExclude(idx-1, target-candidates[idx-1], candidates, comb, combList);
+        if(candidates[idx]<=target){
+            comb.push_back(candidates[idx]);
+            includeExclude(idx-1, target-candidates[idx], candidates, comb, combList);
             comb.pop_back();
         }
         
@@ -56,7 +56,7 @@ public:
             current idx => idx-1
         */
         //reach at the last occurance of the curernt element
-        while(idx-2 >=0 && candidates[idx-2] == candidates[idx-1])
+        while(idx-1 >=0 && candidates[idx-1] == candidates[idx])
             idx--;
         
         includeExclude(idx-1, target, candidates, comb, combList);
@@ -69,7 +69,7 @@ public:
         vector<int> comb;
         
         int N=candidates.size();
-        includeExclude(N, target, candidates, comb, combList);
+        includeExclude(N-1, target, candidates, comb, combList);
         
         
         return combList;
@@ -89,11 +89,11 @@ public:
     vector<vector<int>> combinationSum2(vector<int>& candidates, int target) {
         
         //1. Include + Exclude
-        //return method1(candidates, target);
+        return method1(candidates, target);
         
 
         //2. Recursion + Backtracking
-        return method2(candidates, target);
+        //return method2(candidates, target);
         
     }
 };
