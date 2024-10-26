@@ -1,5 +1,14 @@
 class Solution {
 public:
+    
+    /*
+    
+        Input: nums = [1,2,2]
+        Output: [[],[1],[1,2],[1,2,2],[2],[2,2]]
+        
+        [1,2] [1,2] [2] [2]
+    
+    */
      void subsetsRecursion(int idx, vector<int> &nums, vector<int> &ans, vector<vector<int>> &res){
 
         res.push_back(ans);
@@ -29,27 +38,26 @@ public:
         //to maintain the order of keys
         sort(nums.begin(), nums.end());
 
-        for (int i = 0; i < (1 << N); i++)
-        {
+        for (int i = 0; i < (1 << N); i++){
 
             vector<int> vec;
             string key;
 
-            for (int j = 0; j < N; j++)
-            {
+            for (int j = 0; j < N; j++){
 
-                if (i & (1 << j))
-                {
+                if (i & (1 << j)){
                     vec.push_back(nums[j]);
+                    //Crete a Key to hash and check if it occurs again
                     key += to_string(nums[j]) + "-";
                 }
             }
 
-            if (subsets_string.find(key) == subsets_string.end())
-            {
+            //not already processed
+            if (subsets_string.find(key) == subsets_string.end()){
                 res.push_back(vec);
                 subsets_string.insert(key);
             }
+            
         }
 
         return res;
@@ -59,7 +67,7 @@ public:
     {
         
         //Method1 - bitset
-        //return bitwisePowerSet(nums);
+        return bitwisePowerSet(nums);
         
         
         sort(nums.begin(), nums.end());
