@@ -33,7 +33,33 @@ public:
 
 }
     
+    void backtrack(string combination, string next_digits, string phone_map[], vector<string>& output) {
+        if (next_digits.empty()) {
+            output.push_back(combination);
+        } else {
+            std::string letters = phone_map[next_digits[0] - '2'];
+            for (char letter : letters) {
+                backtrack(combination + letter, next_digits.substr(1), phone_map, output);
+            }
+        }
+    }
+    
+    
+    vector<string> method1(string digits) {
+        if (digits.empty()) return {};
+
+        std::string phone_map[] = {"abc", "def", "ghi", "jkl", "mno", "pqrs", "tuv", "wxyz"};
+        std::vector<std::string> output;
+        backtrack("", digits, phone_map, output);
+        return output;
+    }
+    
+    
     vector<string> letterCombinations(string digits) {
+        
+        
+        //Method1 Recursion
+        return method1(digits);
      
         
         unordered_map<char, string> map =
