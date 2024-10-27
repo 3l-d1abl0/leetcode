@@ -13,13 +13,14 @@ public:
 
         res.push_back(ans);
 
-                if (nums.size() == idx)
+        if (nums.size() == idx)
             return;
 
 
         for(int i=idx; i<nums.size(); i++){
 
-            if(i>idx && nums[i]==nums[i-1]) continue;
+            if(i>idx && nums[i]==nums[i-1])
+                continue;
 
             ans.push_back(nums[i]);
             subsetsRecursion(i+1, nums, ans, res);
@@ -67,15 +68,16 @@ public:
     {
         
         //Method1 - bitset
-        return bitwisePowerSet(nums);
+        //return bitwisePowerSet(nums);
         
         
+        //Method 2 - Iteration
         sort(nums.begin(), nums.end());
         vector<vector<int>> res;
         vector<int> ans;
         
         /*
-        Key a set
+        set a KEY
         create string key , concatenating athe keys in a Subset
         
         Similar thing can be done with Inclue _Exlude Method
