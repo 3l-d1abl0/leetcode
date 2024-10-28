@@ -11,7 +11,6 @@ public:
         
         //If reached the Target
         if(target==0){
-            //cout<<"t= "<<target<<endl;
                 combList.push_back(comb);
                     return ;
         }
@@ -44,17 +43,15 @@ public:
         
         if(target<0)    return;
         
-        if(target==0){
-            
+        if(target==0){  
             combList.push_back(comb);
             return ;
         }
         
-        
+        //start from the same Index
         for(int i=idx; i<can.size(); i++){
             
             if(can[i]<=target){
-                
                 comb.push_back(can[i]);
                 combItr(i, target-can[i], can, comb, combList);
                 comb.pop_back();
@@ -81,8 +78,9 @@ public:
     vector<vector<int>> combinationSum(vector<int>& candidates, int target) {
         
         //1. Method 1 - Recursion
-        return rec(target, candidates);
+        //return rec(target, candidates);
         
-        //return itr(target, candidates);
+        //2. Method 2 - Iteration
+        return itr(target, candidates);
     }
 };
