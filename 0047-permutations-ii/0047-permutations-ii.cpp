@@ -8,7 +8,7 @@ public:
             return ;
         }
         
-        
+        // from o - N
         for(auto pp: freq){
             
             if(freq[pp.first]==0)
@@ -101,21 +101,23 @@ public:
         Instread use Map to keep check of the elemts
         used at particular idx /level
         
-        */
+        
         ///////////////
         
-        //2.Medthod2
+        //2.Medthod2 - 3ms
         vector<vector<int>> ans2;
         recurMap(0, nums, ans2);
         return ans2;
+        */
         
         
-        
-        //3.Method 3
+        /*3.Method 3 - 4ms
         
           //  Create a frequency map
           //  any any position (idx) place the unique chars
-        
+          
+            O(N×N!)
+        */
         int N = nums.size();
         
         vector<vector<int>> ans;
