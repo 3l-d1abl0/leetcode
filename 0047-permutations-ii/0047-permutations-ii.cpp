@@ -111,7 +111,7 @@ public:
         */
         
         
-        /*3.Method 3 - 4ms
+        /*3.Method 3 - 0ms
         
           //  Create a frequency map
           //  any any position (idx) place the unique chars
