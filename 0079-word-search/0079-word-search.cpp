@@ -14,7 +14,7 @@ public:
             return false;
 
         
-        // this is to prevent reusing of the same character
+        // this is to prevent reusing of the same character - visited
         char c = board[row][col];
         board[row][col] = '!';
 
