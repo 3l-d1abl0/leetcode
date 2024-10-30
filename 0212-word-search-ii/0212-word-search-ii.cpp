@@ -22,10 +22,13 @@ public:
         if(r<0 || c<0 || r>=board.size() || c>= board[0].size() || board[r][c] == '\0')
             return;
         
+        //If the character [r][c] does not exit in 
         if(node->children[board[r][c]-'a'] == nullptr)
             return;
         
         Trie *child = node->children[board[r][c]-'a'];
+        
+        //If a leaf node
         if(child->leaf != nullptr){
          
             ans.push_back( *(child->leaf) );
