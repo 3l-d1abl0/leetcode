@@ -34,6 +34,8 @@ public:
     
     bool exist(vector<vector<char>>& board, string word) {
         
+        //TODO: USE TRIE
+        
         int m = board.size();
         int n = board[0].size();
 
