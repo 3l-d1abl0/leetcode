@@ -53,6 +53,14 @@ public:
     
     int method2(int idx, string s, vector<string> &wd, vector<int> &dp){
         
+        /*
+            Total Time Complexity:
+                The number of unique recursive states is O(n) due to memoization.
+                For each state, there are O(m) iterations, and each comparison can take O(n).
+                Therefore, the total time complexity is:
+                    O(n×m×n)=O(n^2×m)
+        */
+        
         if(idx==s.size())
             return 1;
         //cout<<"idx = "<<idx<<endl;
