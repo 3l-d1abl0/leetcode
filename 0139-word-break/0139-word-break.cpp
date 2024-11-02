@@ -86,12 +86,12 @@ public:
         // set < string > word_set(wordDict.begin(), wordDict.end());
         // return method0(0, s, word_set, memo);
         
-        //Method1 -
-        return method1(s, wordDict);    //27ms  - O(n^2) * O(nlogn)
+        //Method1 - dp - 15ms  - O(n^2)
+        //return method1(s, wordDict);
         
-        //vector<int> dp(s.size()+1,-1);
-        //dp[s.size()] = 1;
-        //return method2(0, s, wordDict, dp);     //8ms - memoization
+        vector<int> dp(s.size()+1,-1);
+        dp[s.size()] = 1;
+        return method2(0, s, wordDict, dp);     //8ms - memoization
     }
     
 };
