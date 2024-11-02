@@ -1,16 +1,21 @@
 class Solution {
 public:
 
-    bool wordBreakRecur(string & s, set < string > & word_set, int start) {
-          if (start == s.length()) {
+        
+    bool wordBreakRecur(int idx, string &s, set <string> &word_set, vector<int> &memo){
+          if (idx >= s.length())
             return true;
-          }
-          for (int end = start + 1; end <= s.length(); end++) {
-            if (word_set.find(s.substr(start, end - start)) != word_set.end() and wordBreakRecur(s, word_set, end)) {
-              return true;
+          
+            //cout<<"idx: "<<idx<<endl;
+            if (memo[idx]!=-1)
+                return memo[idx];
+        
+          for (int end = idx + 1; end <= s.length(); end++) {
+            if (word_set.find(s.substr(idx, end - idx)) != word_set.end() and wordBreakRecur(end, s, word_set, memo)) {
+              return memo[idx] = true;
             }
           }
-          return false;
+          return memo[idx] = false;
     }
     
     bool method0(string s, vector<string> &wordDict){
@@ -85,14 +90,18 @@ public:
     
     bool wordBreak(string s, vector < string > & wordDict) {
         
-        //set < string > word_set(wordDict.begin(), wordDict.end());
-        //return wordBreakRecur(s, word_set, 0);
+        //Method1 - TLE - Set + Recursion - 35 / 47
+        vector<int> memo(s.size(), -1);
+        set < string > word_set(wordDict.begin(), wordDict.end());
+        return wordBreakRecur(0, s, word_set, memo);
         
+        //Method2 - 
         //return method0(s, wordDict);    //34ms - O(n^2) * O(nlogn)
+        
         //return method1(s, wordDict);    //27ms  - O(n^2) * O(nlogn)
-        vector<int> dp(s.size()+1,-1);
-        dp[s.size()] = 1;
-        return method2(0, s, wordDict, dp);     //8ms - memoization
+        //vector<int> dp(s.size()+1,-1);
+        //dp[s.size()] = 1;
+        //return method2(0, s, wordDict, dp);     //8ms - memoization
     }
     
 };
