@@ -85,6 +85,37 @@ public:
         return dp[idx];
     }
     
+    int method3(string s, vector<string> &wd){
+        
+        
+        int N = s.size();
+        
+        vector<int> dp(N+1, false);
+        
+        dp[N] = true;
+        
+        for(int idx=N-1; idx>=0; idx--){
+            
+            for(int i=0; i<wd.size(); i++){
+                
+                int len = wd[i].size();
+                
+                if(idx+len-1 >=N)
+                    continue;
+                
+                if(wd[i].compare(s.substr(idx, len))==0){
+                
+                    if(dp[idx+len]==true){
+                        dp[idx] = true;
+                        break; //no need to check more wd[i]    
+                    }
+                }
+                
+            }//for i
+        }//for idx
+        
+        return dp[0];
+    }
 
     
     bool wordBreak(string s, vector < string > & wordDict) {
@@ -97,9 +128,12 @@ public:
         //Method1 - dp - 15ms  - O(n^2)
         //return method1(s, wordDict);
         
-        vector<int> dp(s.size()+1,-1);
-        dp[s.size()] = 1;
-        return method2(0, s, wordDict, dp);     //8ms - memoization
+        // vector<int> dp(s.size()+1,-1);
+        // dp[s.size()] = 1;
+        // return method2(0, s, wordDict, dp);     //8ms - memoization
+        
+        
+        return method3(s, wordDict);
     }
     
 };
