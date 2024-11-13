@@ -34,20 +34,35 @@ public:
 
         return memo[idx] = minnPart;
     }
-    /*
+    
+    
     int bottomUp(string &str) {
 
         int N = str.size();
-        vector<int> dp(N+1, INT_MAX);
-
-        //Base 
+        vector<int> dp(N+1, INT_MAX);   
+        /*
+        dp[i] -> min # cuts needed to partition i-(N-1)
+        
+        
+        if i-j is palindrome then ,
+        min cuts needed = 1+dp[j+1]
+        dp[i] = 1+ dp[j]
+        
+        min # cuts needed to partition i-(N-1)
+        = 1+ min # cuts needed to partition j+1-(N-1)
+        
+        i-j is already a plaindrome
+        
+        
+        Base case [N] =0
+        */
         dp[N] = 0;
 
         for (int i=N-1; i>=0; i--) {
 
             for (int j=i; j<N; j++) {
 
-                if (ispalindrome(i, j, str)) {
+                if (ispalindrome(str, i, j)) {
                     dp[i] = min(dp[i], 1+dp[j+1]); 
                 }
             }//for j
@@ -57,18 +72,18 @@ public:
     }
     
     
-    */
+    
     int minCut(string str) {
         
         //1. Recursion + Memoization    - 1674 ms
-        int N = str.size();
-        vector<int> memo(N, -1);
+//         int N = str.size();
+//         vector<int> memo(N, -1);
         
-        return recur(0, str, memo)-1;
+//         return recur(0, str, memo)-1;
         
         
         
-        //return bottomUp(str);
+        return bottomUp(str);
         
     }
 };
