@@ -1,16 +1,12 @@
 class Solution {
 public:
     
-    int ispalindrome(int i, int j, string &str) {
+    int ispalindrome(string &s, int start, int end) {
 
-          while (i<=j) {
-
-              if(str[i] != str[j])
+          while(start<=end){
+            if(s[start++]!=s[end--])
                 return false;
-
-            i++; j--;
-
-          }
+        }
 
           return  true;
     }
@@ -27,7 +23,8 @@ public:
         for (int i= idx; i<str.size(); i++) {
 
             int part =0;
-            if (ispalindrome(idx, i, str)) {
+            //check if string [start end] is palindrome
+            if (ispalindrome(str, idx, i)) {
                 int part = 1+ recur(i+1, str, memo);
                 minnPart = min(part, minnPart);
             }
@@ -37,7 +34,7 @@ public:
 
         return memo[idx] = minnPart;
     }
-    
+    /*
     int bottomUp(string &str) {
 
         int N = str.size();
@@ -60,18 +57,18 @@ public:
     }
     
     
-    
+    */
     int minCut(string str) {
         
-        //1. Memoization
-        /*int N = str.size();
+        //1. Recursion + Memoization    - 1674 ms
+        int N = str.size();
         vector<int> memo(N, -1);
         
         return recur(0, str, memo)-1;
-        */
         
         
-        return bottomUp(str);
+        
+        //return bottomUp(str);
         
     }
 };
