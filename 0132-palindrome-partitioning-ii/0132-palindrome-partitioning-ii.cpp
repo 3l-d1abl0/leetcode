@@ -1,55 +1,93 @@
 class Solution {
 public:
     
-    bool isPalin(int beg, int en, string &s){
-        
-        while(beg<en){
-            if(s[beg++]!=s[en--])
+    int ispalindrome(string &s, int start, int end) {
+
+          while(start<=end){
+            if(s[start++]!=s[end--])
                 return false;
         }
-        return true;
+
+          return  true;
+    }
+
+    int recur(int idx, string &str, vector<int> &memo) {
+
+        if(idx==str.size())
+            return 0;
+
+        if(memo[idx]!=-1)
+            return memo[idx];
+
+        int minnPart = INT_MAX;
+        for (int i= idx; i<str.size(); i++) {
+
+            int part =0;
+            //check if string [start end] is palindrome
+            if (ispalindrome(str, idx, i)) {
+                int part = 1+ recur(i+1, str, memo);
+                minnPart = min(part, minnPart);
+            }
+
+        }
+
+
+        return memo[idx] = minnPart;
     }
     
     
-    int minPartDp(string &s){
+    int bottomUp(string &str) {
+
+        int N = str.size();
+        vector<int> dp(N+1, INT_MAX);   
+        /*
+        dp[i] -> min # cuts needed to partition i-(N-1)
         
-        if(s.size()==0) return 0;
         
-        int N = s.size();
-        vector<int> dp(N+1, 1e8);
+        if i-j is palindrome then ,
+        min cuts needed = 1+dp[j+1]
+        dp[i] = 1+ dp[j]
+        
+        min # cuts needed to partition i-(N-1)
+        = 1+ min # cuts needed to partition j+1-(N-1)
+        
+        i-j is already a plaindrome
         
         
+        Base case [N] =0
+        */
         dp[N] = 0;
-        
-        for(int i=N-1; i>=0; i--){
+
+        for (int i=N-1; i>=0; i--) {
             
             int minn = INT_MAX;
-            
-            for(int j=i; j<N; j++){
 
-                if(isPalin(i, j, s)){
+            for (int j=i; j<N; j++) {
 
-                    minn = min(minn, dp[j+1]+1);
+                if (ispalindrome(str, i, j)) {
+                    minn = min(minn, 1+dp[j+1]);
                 }
-            }
-        
+            }//for j
+            
             dp[i]=minn;
-        }
-        
-        /*for(int ele: dp){
-            cout<<ele<<" ";
-        }cout<<endl;
-        */
+        }//for i
+
         return dp[0]-1;
-        
     }
     
-    int minCut(string s) {
+    
+    
+    int minCut(string str) {
+        
+        //Method 1. Recursion + Memoization    - 1674 ms
+//         int N = str.size();
+//         vector<int> memo(N, -1);
+        
+//         return recur(0, str, memo)-1;
         
         
-        //vector<int> memo(s.size(), -1);
-        //return minpart(0, s, memo)-1;
+        //Method 2. - 1777ms
+        return bottomUp(str);
         
-        return minPartDp(s);
     }
 };
