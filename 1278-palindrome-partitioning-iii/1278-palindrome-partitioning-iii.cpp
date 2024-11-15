@@ -1,13 +1,13 @@
 class Solution {
 public:
     
-    int cost(string& s, int i, int j, vector<vector<int>> &palin){
+    int costPalin(string& s, int i, int j, vector<vector<int>> &palin){
         
         if(i >= j) return 0;
         if(palin[i][j] != -1)
             return palin[i][j];
         
-        return palin[i][j] = (s[i] != s[j]) + cost(s, i+1, j-1, palin);
+        return palin[i][j] = (s[i] != s[j]) + costPalin(s, i+1, j-1, palin);
     }
     
     int palindromeCost(int i, int j, string &s){
@@ -37,11 +37,13 @@ public:
                 return 1e7;
             
             //int ans = palindromeCost(idx, s.size()-1, s);
-            int ans = cost(s, idx, s.size()-1, palin);
+            //Just check if the rest of the string can be made palindrome at What cost
+            int ans = costPalin(s, idx, s.size()-1, palin);
             return ans;
         }
         
-        if(idx==s.size()) return 1e7;
+        if(idx==s.size())
+            return 1e7;
         
         
         if(memo[idx][part]!=-1)
@@ -51,17 +53,17 @@ public:
         for(int i=idx; i<s.size(); i++){
             
             //int tmpCost = palindromeCost(idx, i, s);
-            int tmpCost = cost(s, idx, i, palin);
-            int recCost = recur(i+1, part+1, s, k, memo, palin);
+            int tmpCost = costPalin(s, idx, i, palin);//The cost of turning idx - i to a palindrome
+            int recCost = tmpCost + recur(i+1, part+1, s, k, memo, palin);
             
             
-            ans = min(ans, tmpCost+recCost);
+            ans = min(ans, recCost);
         }
         
         return memo[idx][part] = ans;
     }
     
-    int recur(string &s, int K){
+    int bottomUp(string &s, int K){
         
         int N = s.size();
         vector<vector<int>> palin(N, vector<int>(N, 1e7));
@@ -139,13 +141,13 @@ public:
         
         
         //1. Memoization
-        
-        //vector<vector<int>> palin(s.size(), vector<int>(s.size(), -1));
-        //vector<vector<int>> memo(s.size(), vector<int>(k, -1));
-        //return recur(0, 0, s, k, memo, palin);
+        //stores the minimum changes needed to make [i j] into a palindrome
+        vector<vector<int>> palin(s.size(), vector<int>(s.size(), -1));
+        vector<vector<int>> memo(s.size(), vector<int>(k, -1));
+        return recur(0, 0, s, k, memo, palin);
         
         
         //2. DP
-        return recur(s, k);
+        //return bottomUp(s, k);
     }
 };
