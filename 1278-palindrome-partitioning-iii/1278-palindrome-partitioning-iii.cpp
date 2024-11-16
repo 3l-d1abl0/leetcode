@@ -68,16 +68,16 @@ public:
         int N = s.size();
         vector<vector<int>> palin(N, vector<int>(N, 1e7));
         
-        //calculate palindrome - table
+        //calculate palindrome cost - table
         for(int i=0; i<N; i++)
-            palin[i][i] =0;
+            palin[i][i] =0; //same indices no cost
         
-        //palindrome of 2 length
+        //palindrome of consequtive 2 length
         for(int i=0; i<N-1; i++){
             if(s[i]!=s[i+1])
-                palin[i][i+1] =1;
+                palin[i][i+1] =1;//cost
             else
-                palin[i][i+1] =0;
+                palin[i][i+1] =0;//no cost
             
         }
         //palindrome of length 3 and above
@@ -96,24 +96,21 @@ public:
             }
         }
         
-        
+        ///////////////////////////N+1 x K
         vector<vector<int>> dp(N+1, vector<int>(K, -1e6));
         //base case idx ==N
         for(int j=0; j<K; j++)
             dp[N][j] = 1e7;
         
-        //Second Last partition
+        /* Second Last partition
+            When putting the last cut at i
+            cost to convert i-(N-1) to palindrome
+        */
         for(int i=0; i<N; i++)
             dp[i][K-1] = palin[i][N-1];
         
         
         for(int idx=N-1; idx>=0; idx--){
-            
-            
-            
-            
-                
-                
                 
             for(int part=K-2; part >=0; part--){
                 
@@ -140,14 +137,24 @@ public:
     int palindromePartition(string s, int k) {
         
         
-        //1. Memoization
+        //1. Memoization - 3ms - 8.3MB
+        /*
+          Space Complexity:
+
+            palin table: O(n^2)
+            memo table: O(n. k)
+            Recursive Stack: O(k) depth of recursion of k
+
+
+            Total Space Complexity: O(n^2 + n.k)  
+        */
         //stores the minimum changes needed to make [i j] into a palindrome
-        vector<vector<int>> palin(s.size(), vector<int>(s.size(), -1));
-        vector<vector<int>> memo(s.size(), vector<int>(k, -1));
-        return recur(0, 0, s, k, memo, palin);
+        // vector<vector<int>> palin(s.size(), vector<int>(s.size(), -1));
+        // vector<vector<int>> memo(s.size(), vector<int>(k, -1));
+        // return recur(0, 0, s, k, memo, palin);
         
         
         //2. DP
-        //return bottomUp(s, k);
+        return bottomUp(s, k);
     }
 };
