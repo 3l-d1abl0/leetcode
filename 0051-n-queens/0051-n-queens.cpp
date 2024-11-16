@@ -79,6 +79,13 @@ public:
     
     vector<vector<string>> solveNQueens(int N) {
      
+        /*
+        Traversing by columns (left to right), so need check for:
+        1. Row
+        2. upper left - no pieces on the right
+        3. bottom left - no pieces on the right
+        
+        */
         
         vector<bool> rowCheck(N, false);
         vector<bool> bottomleft(N, false);
