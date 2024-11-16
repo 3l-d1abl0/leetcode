@@ -118,8 +118,6 @@ public:
                 for(int i=idx; i<N; i++){
                     
                     int recCost = dp[i+1][part+1] + palin[idx][i];
-                    
-                    
                     ans = min(ans, recCost);
                 }
                 
