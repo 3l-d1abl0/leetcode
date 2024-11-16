@@ -102,7 +102,7 @@ public:
         for(int j=0; j<K; j++)
             dp[N][j] = 1e7;
         
-        /* Second Last partition
+        /*  Last partition
             When putting the last cut at i
             cost to convert i-(N-1) to palindrome
         */
@@ -117,12 +117,10 @@ public:
                 int ans = 1e7;
                 for(int i=idx; i<N; i++){
                     
-                    
-                    int tmpCost = palin[idx][i];
-                    int recCost = dp[i+1][part+1];
+                    int recCost = dp[i+1][part+1] + palin[idx][i];
                     
                     
-                    ans = min(ans, tmpCost+recCost);
+                    ans = min(ans, recCost);
                 }
                 
                 dp[idx][part] = ans;
