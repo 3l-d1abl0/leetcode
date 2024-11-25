@@ -10,7 +10,7 @@ public:
             sum += val;
         }
         if (sum % 4 != 0) return false;
-        //sort(nums.begin(), nums.end(), [](const int &l, const int &r){return l > r;}); // second
+        sort(nums.begin(), nums.end(), [](const int &l, const int &r){return l > r;}); // second
         vector<int> sidesLength(4, 0);
         return dfs(sidesLength, nums, 0, sum / 4);
         
