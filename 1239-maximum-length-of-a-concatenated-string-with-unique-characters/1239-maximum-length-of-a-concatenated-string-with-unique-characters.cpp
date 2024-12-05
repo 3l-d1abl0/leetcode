@@ -3,11 +3,15 @@ public:
     
     int check(int idx, string concatenatedStr, vector<string> &arr){
         
+        
         //check if the concatenated string has duplicate characters
         unordered_set<char> st(concatenatedStr.begin(), concatenatedStr.end());
         
         if(concatenatedStr.length() != st.size())   //if duplicate Characters
             return 0;
+        
+        if(idx == arr.size())
+            return concatenatedStr.length();
         
         //cout<<": "<<concatenatedStr<<endl;
         int ans = concatenatedStr.length();
