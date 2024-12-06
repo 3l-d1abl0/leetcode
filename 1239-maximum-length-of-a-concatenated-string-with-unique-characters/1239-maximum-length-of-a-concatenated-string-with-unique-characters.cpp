@@ -26,7 +26,12 @@ public:
     int maxLength(vector<string>arr) {
         
         
-        
+        //1. Method 1 - DFS
+        /*
+            the overall time complexity of the code is O(2^n * L), where:
+            n is the number of strings in arr
+            L is the total length of all strings in arr
+        */
         return check(0, "", arr);
         
     }
