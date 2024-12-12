@@ -23,8 +23,9 @@ public:
         return ans;
     }
     
-        bool hasCommon(string &s1, string& s2) {
-        int arr[26] = {0};
+    bool hasCommon(string &s1, string& s2) {
+        
+        vector<int> arr(26, 0);
         
         for(char &ch : s1) {
             if(arr[ch-'a'] > 0)
@@ -40,26 +41,26 @@ public:
         return false;
     }
     
-    unordered_map<string, int> mp;
     
-    int solve(int idx, vector<string>& arr, string temp, int n) {
-        if(idx >= n)
-            return temp.length();
+    int solve(int idx, vector<string>& arr, string concatString, int N, unordered_map<string, int> &mp) {
         
-        if(mp.find(temp) != mp.end())
-            return mp[temp];
+        if(idx >= N)
+            return concatString.length();
+        
+        if(mp.find(concatString) != mp.end())
+            return mp[concatString];
         
         int include = 0;
         int exclude = 0;
-        if(hasCommon(arr[idx], temp)) {
-            exclude = solve(idx+1, arr, temp, n);
+        if(hasCommon(arr[idx], concatString)) {
+            exclude = solve(idx+1, arr, concatString, N, mp);//skip
         } else {
-            exclude = solve(idx+1, arr, temp, n);
-            temp += arr[idx];
-            include = solve(idx+1, arr, temp, n);
+            exclude = solve(idx+1, arr, concatString, N, mp);//skip
+            concatString += arr[idx];
+            include = solve(idx+1, arr, concatString, N, mp);//include
         }
         
-        return mp[temp] = max(include, exclude);
+        return mp[concatString] = max(include, exclude);
     }
     
     int maxLength(vector<string>arr) {
@@ -74,11 +75,11 @@ public:
         //return check(0, "", arr);
         
         //2. Method2 - Exclude-Include
-        string temp = "";
-        mp.clear();
-        int n = arr.size();
+        string concatString = "";
+        unordered_map<string, int> mp;
+        int N = arr.size();
         
-        return solve(0, arr, temp, n);
+        return solve(0, arr, concatString, N, mp);
         
         
     }
