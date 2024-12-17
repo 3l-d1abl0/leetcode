@@ -63,6 +63,54 @@ public:
         return mp[concatString] = max(include, exclude);
     }
     
+    
+    int dfsBit(int idx, int previousStringVal, vector<int> &uniqueCharStrings){
+        
+         int len = __builtin_popcount(previousStringVal);
+        
+        if(idx == uniqueCharStrings.size())
+            return len;
+        
+        for (int i = idx; i < uniqueCharStrings.size(); i++) {
+                
+                if ((previousStringVal & uniqueCharStrings[i]) == 0) { //means no duplicate characters in temp and uniqueCharStrings[i]
+                    
+                    len = max( len, dfsBit(i + 1, previousStringVal | uniqueCharStrings[i], uniqueCharStrings) );
+                    
+                }
+        }//for
+        
+        
+        return len;
+        
+        
+    }
+    
+    int solveBit(vector<string> &arr){
+        
+        vector<int> uniqueCharStrings;
+        
+        for (string &s : arr) {
+            
+            unordered_set<char> charSet(begin(s), end(s));
+            //If duplicate Character
+            if (charSet.size() != s.length())
+                continue;
+            
+            //store each string as number
+            int val =0;
+            for (char &ch : s) 
+                val |= 1 << (ch - 'a');
+            
+            uniqueCharStrings.push_back(val);
+            
+        }//for
+        
+        
+        return dfsBit(0, 0, uniqueCharStrings);
+        
+    }
+    
     int maxLength(vector<string>arr) {
         
         
@@ -75,11 +123,17 @@ public:
         //return check(0, "", arr);
         
         //2. Method2 - Exclude-Include
-        string concatString = "";
-        unordered_map<string, int> mp;
-        int N = arr.size();
+//         string concatString = "";
+//         unordered_map<string, int> mp;
+//         int N = arr.size();
         
-        return solve(0, arr, concatString, N, mp);
+//         return solve(0, arr, concatString, N, mp);
+        
+        
+        //3. Method 3- DFS + bit memoization
+        
+        
+        return solveBit(arr);
         
         
     }
