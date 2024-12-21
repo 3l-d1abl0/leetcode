@@ -90,7 +90,7 @@ public:
         
         int N = noLast.size();
         
-        //recursion +memoization
+        //Method1: recursion +memoization
         
         /*vector<int> memo(N, -1);
         vector<int> memo1(N, -1);
@@ -99,11 +99,11 @@ public:
         */
         
         
-        //BottomUp -DP - Tabulation
-        //return max(bottomUp(N, noLast), bottomUp(N, noFirst));
+        //Method2: BottomUp -DP - Tabulation
+        return max(bottomUp(N, noLast), bottomUp(N, noFirst));
         
         
-        //Space Optimization
-        return max(opti(noLast), opti(noFirst));
+        //Method3: Space Optimization
+        //return max(opti(noLast), opti(noFirst));
     }
 };
