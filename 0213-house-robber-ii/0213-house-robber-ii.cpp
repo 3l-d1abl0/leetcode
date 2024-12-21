@@ -1,25 +1,6 @@
 class Solution {
 public:
     
-    int justRob(vector<int>& nums) {
-     
-            int N = nums.size();
-        
-        
-            int prev2 =0, prev1 = 0, curr =0;
-            
-            for(int i=0; i<N; i++){
-                    
-                 curr = max(nums[i]+prev2, prev1);
-                
-                
-                prev2 = prev1;
-                prev1 = curr;
-            }
-        
-        return curr;
-    }
-    
         int recMemo(int idx, vector<int> &nums, vector<int> &memo){
         
         if(idx<0)
@@ -110,7 +91,6 @@ public:
         int N = noLast.size();
         
         //recursion +memoization
-        //return max(justRob(noLast), justRob(noFirst));
         
         /*vector<int> memo(N, -1);
         vector<int> memo1(N, -1);
