@@ -82,13 +82,14 @@ public:
     string manacher(string &s){
     
         //cout<<"_"<<s<<"_"<<endl;
-        
+        //SUB --> #S#U#B_
         string  str = string((int)s.length() * 2 + 1, '_');
         for(int idx =0; idx<s.size(); idx++){
             str[idx*2] ='#';
             str[(idx*2)+1]= s[idx];
         }
-
+        
+        //Set last pos as #     #S#U#B_ --> #S#U#B# 
         int N = str.size();
         str[N-1]='#';
 
@@ -132,6 +133,7 @@ public:
         return s.substr(start, max_len);
         
     }
+    
     string longestPalindrome(string s) {
         
         ///expand around corners O(n^2)
