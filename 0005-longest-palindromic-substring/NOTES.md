@@ -1,1 +1,3 @@
-​
+"abacdfgdcaba"
+"babad"
+"cbbd"
