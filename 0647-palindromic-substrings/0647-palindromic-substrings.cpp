@@ -84,7 +84,7 @@ public:
         //1. Method 1: Expand at each index TC: O(N^2)
         //return method1(s);
         
-        //2. Method 2: 
+        //2. Method 2: Manacher algorithm
         return method2(s);
     }
 };
