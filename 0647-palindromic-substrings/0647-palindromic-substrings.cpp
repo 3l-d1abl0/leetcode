@@ -37,7 +37,8 @@ private:
         vector<int> P(N, 0); //stores half-lenght of the palindrome at the index
         int C = 0; //center of the rewcent palindrome
         int R = 0; //rightmost boundary of the recent palindrome
-
+    
+        int count =0;
         for (int i = 1; i < N - 1; i++) {
 
         
@@ -57,16 +58,20 @@ private:
                 C = i;
                 R = i + P[i];
             }
+            
+            
+            
+            count+=(P[i]+1)/2;
         }
         
         //         for(int val: P){
         //     cout<<val<<" ";
         // }cout<<endl;
         
-        int count =0;
-        for(int i=0; i<N; i++){
-            count+=(P[i]+1)/2;
-        }
+//         int count =0;
+//         for(int i=0; i<N; i++){
+            
+//         }
         
         
         return count;
