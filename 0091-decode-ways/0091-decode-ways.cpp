@@ -75,10 +75,11 @@ public:
     
     int numDecodings(string s) {
         
-        return memoization(s);
+        //1. Method1 - recursion + memoization
+        //return memoization(s);
         
-        
-        //return dynamicP(s);
+        //2. DP -
+        return dynamicP(s);
         
     }
 };
