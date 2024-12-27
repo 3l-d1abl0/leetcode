@@ -11,13 +11,20 @@ private:
         return res;
     }
     
-public:
-    int countSubstrings(string s) {
+    int method1(string s){
         int res = 0;
         for (int i = 0; i < s.size(); i++) {
             res += countPali(s, i, i);
             res += countPali(s, i, i + 1);
         }
         return res;
+    }
+    
+public:
+    int countSubstrings(string s) {
+        
+        //1. Method 1: Expand at each index TC: O(N^2)
+        return method1(s);
+        
     }
 };
