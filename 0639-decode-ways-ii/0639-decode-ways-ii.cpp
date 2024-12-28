@@ -91,7 +91,7 @@ public:
     int numDecodings(string s) {
         
 
-        //1. Method1
+        //1. Method1 - Recursion - top Down
         return method1(s);
     }
 };
