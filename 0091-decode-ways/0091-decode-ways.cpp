@@ -10,9 +10,15 @@ public:
         if(dp[idx]!=-1) return dp[idx];
         
         
-        int ans =0;
-        int val =0;
-        for(int i=idx; i<N; i++){
+        int ans =0, val =0;
+        ans += decode(idx+1,s, N, dp);  //single Digit
+
+        if(idx+1 <N){
+            if(s[idx]=='1' ||  (s[idx]=='2' && s[idx+1]<='6'))
+             ans += decode(idx+2, s, N, dp);
+        }
+
+        /*for(int i=idx; i<N; i++){
             val = val*10+(s[i]-'0');
             if(val>=1 && val <=26){
                 //cout<<val<<endl;
@@ -20,7 +26,7 @@ public:
             }else{
                 break;
             }
-        }
+        }*/
         
         
         
@@ -75,11 +81,11 @@ public:
     
     int numDecodings(string s) {
         
-        //1. Method1 - recursion + memoization
-        //return memoization(s);
+        //1. Method1 - recursion + memoization from 0 to N
+        return memoization(s);
         
         //2. DP -
-        return dynamicP(s);
+        //return dynamicP(s);
         
     }
 };
