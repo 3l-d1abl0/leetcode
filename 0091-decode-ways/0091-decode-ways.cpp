@@ -51,41 +51,54 @@ public:
         
         int N = s.size();
         if(N==0) return 0;
+        //cant start with Zero
         if(s[0] == '0') return 0;
             
         vector<int> dp(N+1, 0);
-        
         //base
-        dp[0] =1;
+        dp[N] =1;
         
-        dp[1] = (s[0] -'0')!=0?1:0;
+        //dp[1] = (s[0] -'0')!=0?1:0;
         
-        for(int i=2; i<=N; i++){
+        for(int i=N-1; i>=0; i--){
             
-            int one = s[i-1] -'0';
+            if(s[i]!='0'){
+                dp[i] +=dp[i+1];//single Digit
+
+                //Two digits
+                if(i+1<=N-1){
+                    if (s[i]=='1' || (s[i]=='2' && s[i+1]<='6'))
+                        dp[i] +=dp[i+2];
+                    cout<<"I: "<<i<<endl;
+                }
+            }
+
+            // int one = s[i-1] -'0';
             
-            if(one>=1 && one<=9)
-                dp[i] +=dp[i-1];
+            // if(one>=1 && one<=9)
+                
             
-            int two = (s[i-2]-'0')*10 + one;
+            // int two = (s[i-2]-'0')*10 + one;
             
-            if(two >=10 && two <=26)
-                dp[i] +=dp[i-2];
+            // if(two >=10 && two <=26)
+            //     dp[i] +=dp[i-2];
             
         }
         
         
-        return dp[N];
+        return dp[0];
         
     }
     
     int numDecodings(string s) {
         
-        //1. Method1 - recursion + memoization from 0 to N
-        return memoization(s);
+        //1. Method1 - Top Down recursion + memoization from 0 to N
+        //TC - O(2^N) SC -O(N)
+        //return memoization(s);
         
-        //2. DP -
-        //return dynamicP(s);
+        //2. DP - bottom Up 0 - N
+        //TC - O(N) SC - O(N)
+        return dynamicP(s);
         
     }
 };
