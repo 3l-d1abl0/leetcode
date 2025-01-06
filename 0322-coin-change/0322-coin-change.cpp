@@ -169,13 +169,13 @@ int bottomUpOpti(int sum, vector<int> &arr){
         //return rec(coins, amount);
         
         //memoization 
-        //return memoization(coins, amount);
+        return memoization(coins, amount);
         
         //bottomUp
         //return bottomUp(amount, coins);
         
         //bottomUpOpti
-        return bottomUpOpti(amount, coins);
+        //return bottomUpOpti(amount, coins);
         
         
     }
