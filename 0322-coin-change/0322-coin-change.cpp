@@ -8,22 +8,22 @@ public:
         }cout<<endl;
     }
     
-    long long int minCoins(int N, int sum, vector<int> &arr){
+    long long int minCoins(int idx, int sum, vector<int> &arr){
 
-        if(sum <0 || N<0)
+        if(sum <0 || idx<0)
             return INT_MAX;
 
         if(sum ==0)
             return 0;
 
         //exclude
-        long long int exc = minCoins(N-1, sum, arr);
+        long long int exc = minCoins(idx-1, sum, arr);
 
         //include once
         //int inc = minCoins(N-1, sum-arr[N], arr); covered in include again
 
-        //incluide again
-        long long int inc1 = minCoins(N, sum-arr[N], arr)+1;
+        //incluide again - stay at the Same Index
+        long long int inc1 = minCoins(idx, sum-arr[idx], arr)+1;
 
 
         if(exc >= INT_MAX)
@@ -37,7 +37,7 @@ public:
 
     }
     
-    
+    //1.
     int rec(vector<int> &arr, int sum){
         
         long long int ans = minCoins(arr.size()-1, sum, arr);
@@ -66,7 +66,7 @@ public:
             return memo[idx][sum];
 
 
-        int notTaken = 0 + topDown(idx - 1, sum, arr, memo);
+        int notTaken = 0 + topDown(idx - 1, sum, arr, memo);//exclude
 
         int taken = 1e9; // Initialize 'taken' to a very large value
         if(arr[idx] <= sum)
@@ -81,7 +81,7 @@ public:
     
     
     
-    
+    //2.
     int memoization(vector<int> &arr, int sum){
         
         vector< vector<int>> memo(arr.size(), vector<int> (sum+1, -1));
@@ -97,7 +97,7 @@ public:
     
         vector<vector<int>> dp(N, vector<int>(sum + 1, 0));
 
-        
+        //Base Case - For just one Coin
         for (int i = 0; i <= sum; i++) {
             if (i % arr[0] == 0)
                 dp[0][i] = i / arr[0];
@@ -106,8 +106,8 @@ public:
         }
 
         
-        for (int idx = 1; idx < N; idx++) {
-            for (int target = 0; target <= sum; target++) {
+        for (int idx = 1; idx < N; idx++) {//coins
+            for (int target = 0; target <= sum; target++) {//sums
                 
                 int notTake = dp[idx - 1][target];
 
@@ -121,7 +121,7 @@ public:
             }
         }
 
-        int ans = dp[N - 1][sum];
+        int ans = dp[N - 1][sum];//when Included all coins and sum
 
         if (ans >= 1e9)
             return -1;
@@ -169,10 +169,10 @@ int bottomUpOpti(int sum, vector<int> &arr){
         //return rec(coins, amount);
         
         //memoization 
-        return memoization(coins, amount);
+        //return memoization(coins, amount);
         
         //bottomUp
-        //return bottomUp(amount, coins);
+        return bottomUp(amount, coins);
         
         //bottomUpOpti
         //return bottomUpOpti(amount, coins);
