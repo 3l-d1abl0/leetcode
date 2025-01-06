@@ -166,16 +166,20 @@ int bottomUpOpti(int sum, vector<int> &arr){
         
         
         //recursion - TLE
+        //TC - O(2^N) SC - O(sum)
         //return rec(coins, amount);
         
         //memoization 
+        //TC - O(Nxsum) SC - O(Nxsum) + O(sum)
         //return memoization(coins, amount);
         
         //bottomUp
-        return bottomUp(amount, coins);
+        //TC - O(Nxsum) SC - O(Nxsum)
+        //return bottomUp(amount, coins);
         
         //bottomUpOpti
-        //return bottomUpOpti(amount, coins);
+        //TC - O(nxsum) SC - O(sum)
+        return bottomUpOpti(amount, coins);
         
         
     }
