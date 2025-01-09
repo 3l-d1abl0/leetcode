@@ -15,71 +15,60 @@ private:
         if(s[idx]=='0')
             return 0;
 
-        int ans =0;
+        long long int ans =0;
         int val=0;
-        
 
-        if(s[idx]=='*'){
-            for(int wild=1; wild<=9; wild++){
-                int newVal = val*10+wild;
-                ans+=recur(idx+1, s, memo);
-                ans%=MOD;
+        int ways = 1;
 
-                if(idx+1<N){
+        if(s[idx]=='*')
+            ways = 9;
 
-                    if(s[idx+1]=='*'){
+        ans = ( 1ll * (ways%MOD) * (recur(idx+1, s, memo)%MOD) )%MOD;   //when considering just 1 char (*)
+        ways =0;
+        //consider Two Character
+        if(idx+1 < N){
 
-                        for(int wild=1; wild<=9; wild++){
-                            int newVal2 = newVal*10+wild;
-                            if(newVal2>=1 && newVal2 <=26){
-                                ans+=recur(idx+2, s, memo);
-                                ans%=MOD;
-                            }
-                        }
+            if(s[idx] == '*'){
 
-                    }else{
+                if(s[idx+1] == '*')
+                    ways = 15;
+                else{
+                    if(s[idx+1]<='6')
+                        ways = 2;
+                    else
+                        ways =1;
+                }
 
-                        int newVal2 = newVal*10+(s[idx+1]-'0');
-                        if(newVal2>=1 && newVal2 <=26){
-                            ans+=recur(idx+2, s, memo);
-                            ans%=MOD;
-                        }
+            }else if (s[idx] < '3'){
 
-                    }
-                }//if N
+                //1_
+                //2_
 
-            }//for
-        }else{
+                if(s[idx+1] =='*'){ //second char is *
 
-            int newVal = val*10+(s[idx]-'0');
-            ans+=recur(idx+1, s, memo);
-                
-            if(idx+1<N){
-
-                if(s[idx+1]=='*'){
-
-                    for(int wild=1; wild<=9; wild++){
-                        int newVal2 = newVal*10+wild;
-                        if(newVal2>=1 && newVal2 <=26){
-                            ans+=recur(idx+2, s, memo);
-                            ans%=MOD;
-                        }
-                    }
+                    if(s[idx]=='1')
+                        ways = 9;  //11 .. 19
+                    else
+                        ways = 6;   //21 ..26
 
                 }else{
+                    //both place are digit - just check if between 1-26
 
-                    int newVal2 = newVal*10+(s[idx+1]-'0');
-                    if(newVal2>=1 && newVal2 <=26){
-                        ans+=recur(idx+2, s, memo);
-                        ans%=MOD;
-                    }
-
+                    if(stoi(s.substr(idx, 2)) <= 26)
+                        ways = 1;
                 }
-            }//if N
 
+            }
 
-        }//else *
+            if(ways !=0){
+
+                
+
+                ans+= 1ll*ways*recur(idx+2, s, memo);;
+            }
+        }
         
+        //cout<<"IDX: "<<idx<<" "<<ans<<endl;
         return memo[idx] = ans%MOD;
     }
     int method1(string &s){
@@ -132,10 +121,10 @@ public:
         
 
         //1. Method1 - Recursion - top Down
-        //return method1(s);
+        return method1(s);
 
 
         //2. Method2 - Dynamic Programming
-        return method2(s);
+        //return method2(s);
     }
 };
