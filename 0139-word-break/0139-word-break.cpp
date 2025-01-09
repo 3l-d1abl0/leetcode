@@ -51,7 +51,7 @@ public:
         
     }
     
-    int method2(int idx, string s, vector<string> &wd, vector<int> &dp){
+    int method2(int idx, string s, vector<string> &wordDict, vector<int> &memo){
         
         /*
             Total Time Complexity:
@@ -64,25 +64,25 @@ public:
         if(idx==s.size())
             return 1;
         //cout<<"idx = "<<idx<<endl;
-        if(dp[idx]!=-1)
-            return dp[idx];
+        if(memo[idx]!=-1)
+            return memo[idx];
         
-        for(int i=0; i<wd.size(); i++){
+        for(int i=0; i<wordDict.size(); i++){
             
-            int len = wd[i].size();
+            int len = wordDict[i].size();   //size of ith Word
             
-            if(wd[i].compare(s.substr(idx, len))==0){
+            if(wordDict[i].compare(s.substr(idx, len))==0){
                 
-                if(method2(idx+len, s, wd, dp)){
-                    dp[idx] = 1;
-                    return dp[idx];
+                if(method2(idx+len, s, wordDict, memo)){
+                    memo[idx] = 1;
+                    return memo[idx];
                 }
             }
                
         }//for
         
-        dp[idx]=0;
-        return dp[idx];
+        memo[idx]=0;
+        return memo[idx];
     }
     
     int method3(string s, vector<string> &wd){
@@ -128,12 +128,13 @@ public:
         //Method1 - dp - 15ms  - O(n^2)
         //return method1(s, wordDict);
         
-        // vector<int> dp(s.size()+1,-1);
-        // dp[s.size()] = 1;
-        // return method2(0, s, wordDict, dp);     //8ms - memoization
+        //Method2 - //8ms - memoization
+         vector<int> memo(s.size()+1,-1);
+         memo[s.size()] = 1;
+         return method2(0, s, wordDict, memo);     
         
-        
-        return method3(s, wordDict);
+        //DP - 0ms
+        //return method3(s, wordDict);
     }
     
 };
