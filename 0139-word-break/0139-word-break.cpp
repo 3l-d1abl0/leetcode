@@ -70,6 +70,9 @@ public:
         for(int i=0; i<wordDict.size(); i++){
             
             int len = wordDict[i].size();   //size of ith Word
+
+            if(idx+len-1 >=s.size())
+                continue;
             
             if(wordDict[i].compare(s.substr(idx, len))==0){
                 
@@ -128,13 +131,13 @@ public:
         //Method1 - dp - 15ms  - O(n^2)
         //return method1(s, wordDict);
         
-        //Method2 - //8ms - memoization
-         vector<int> memo(s.size()+1,-1);
-         memo[s.size()] = 1;
-         return method2(0, s, wordDict, memo);     
+        //Method2 - //4ms - memoization
+        // vector<int> memo(s.size()+1,-1);
+        // memo[s.size()] = 1;
+        // return method2(0, s, wordDict, memo);     
         
-        //DP - 0ms
-        //return method3(s, wordDict);
+        //DP - 0ms //O(n⋅m⋅k)
+        return method3(s, wordDict);
     }
     
 };
