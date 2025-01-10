@@ -78,6 +78,79 @@ private:
     }
 
     int method2(string &s){
+
+            int N = s.size();
+            vector<int> dp(N+1, -1);
+
+            dp[N]=1;
+
+            long long int ans = 0;
+            for(int idx=N-1; idx>=0; idx--){
+
+                        if(s[idx]=='0'){
+                            dp[idx] =0;
+                            continue;
+                        }
+
+                        int ways = 1;
+
+                        if(s[idx]=='*')
+                            ways = 9;
+
+                        ans = ( 1ll * (ways%MOD) * (dp[idx+1]%MOD) )%MOD;   //when considering just 1 char (*)
+                        ways =0;
+                        //consider Two Character
+                        if(idx+1 < N){
+
+                            if(s[idx] == '*'){
+
+                                if(s[idx+1] == '*')
+                                    ways = 15;
+                                else{
+                                    if(s[idx+1]<='6')
+                                        ways = 2;
+                                    else
+                                        ways =1;
+                                }
+
+                            }else if (s[idx] < '3'){
+
+                                //1_
+                                //2_
+
+                                if(s[idx+1] =='*'){ //second char is *
+
+                                    if(s[idx]=='1')
+                                        ways = 9;  //11 .. 19
+                                    else
+                                        ways = 6;   //21 ..26
+
+                                }else{
+                                    //both place are digit - just check if between 1-26
+
+                                    if(stoi(s.substr(idx, 2)) <= 26)
+                                        ways = 1;
+                                }
+
+                            }
+
+                            if(ways !=0){
+
+                                
+
+                                ans+= 1ll*ways*dp[idx+2];
+                            }
+                        }//if idx+1<N
+
+                        dp[idx] = ans%MOD;
+
+            }//for idx
+
+
+            return dp[0];
+    }
+
+    int method3(string &s){
         const int M = 1e9 + 7;
         int n = s.size();
         vector<long long> dp(n + 1, -1); // Memoization array initialized to -1
@@ -121,10 +194,12 @@ public:
         
 
         //1. Method1 - Recursion - top Down
-        return method1(s);
+        //return method1(s);
 
+        //2. Method - Dynamic Programming - bottom Up
+        return method2(s);
 
-        //2. Method2 - Dynamic Programming
-        //return method2(s);
+        //2. Method3 - Dynamic Programming
+        //return method3(s);
     }
 };
