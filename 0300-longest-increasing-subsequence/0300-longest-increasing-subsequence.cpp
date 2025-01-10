@@ -131,7 +131,7 @@ public:
         
         /*1. Method 1 - Recur + Memo
         
-            TC: O(N^2)
+            TC: O(N^2) with memo O(2^N) with Memo
             SC: O(N^2)
         */
         //return recurMemo(nums);
@@ -150,6 +150,8 @@ public:
         
         /*
         3. Method 3 - Binary Search
+            TC: O(NlogN)
+            SC: O(N)
         */
         
         
