@@ -13,16 +13,31 @@ public:
             return memo[i][target];
         
         int inc = 0;
-        if(arr[i]<=target){
+        if(arr[i]<=target){ //Include and start from the beginning
             inc = rec(arr.size()-1, target-arr[i], arr, memo);
         }
-        
+        //exclude - go to next Index
         int exc = rec(i-1, target, arr, memo);
         
         return memo[i][target] = inc+exc;
     }
     
-    
+    int recursion(int target, vector<int> &nums, vector<int> &memo){
+
+        if(target==0)
+            return 1;
+
+        if(memo[target]!=-1)
+            return memo[target];
+
+        int ans =0;
+        for(int idx =0; idx<nums.size(); idx++){
+            if(nums[idx]<=target)
+                ans+=recursion(target-nums[idx], nums, memo);
+        }
+        
+        return memo[target] = ans;
+    }
     
     int bottomUp(int target, vector<int> &nums){
         
@@ -36,10 +51,10 @@ public:
             for(int j=1; j<=target; j++){
                 for(int i=1;i<=nums.size(); i++){
                     
-                    if(nums[i-1]<=j)
+                    if(nums[i-1]<=j)//Exclude+Include
                         dp[i][j] = ( (dp[i-1][j]%INT_MAX) + (dp[nums.size()][j-nums[i-1]]%INT_MAX) )%INT_MAX;
                     else{
-                        dp[i][j] = dp[i-1][j];
+                        dp[i][j] = dp[i-1][j];//Exclude
                     }
                 
             }//i
@@ -74,12 +89,20 @@ public:
     
     int combinationSum4(vector<int>& nums, int target) {
         
-        //return bottomUp(target, nums);
-        return bottomUp1D(target, nums);
-        
+        //Method1 - Rec+ Memo
         //vector<vector<int>> memo(nums.size(), vector<int>(target+1, -1) );
-        
         //return rec(nums.size()-1, target, nums, memo);
+        
+        //Method1.1 - Recursion
+        vector<int> memo(vector<int>(target+1, -1) );
+        return recursion(target, nums, memo);
+
+        //Method2 - DP
+        //return bottomUp(target, nums);
+
+        //Method3 - 
+        //return bottomUp1D(target, nums);
+        
         
         
         
