@@ -39,6 +39,30 @@ public:
         return memo[target] = ans;
     }
     
+    int dp(vector<int> &nums, int target){
+
+            vector<int> memo (target+1, 0);
+
+            memo[0]=1;
+
+            for(int tar=1; tar<=target; tar++){
+
+
+                long long int ans =0;
+                for(int i=0; i<nums.size(); i++){
+
+                    if(nums[i]<=tar)
+                        ans += memo[tar-nums[i]];
+                }
+
+                memo[tar] = ans%INT_MAX;
+            }
+
+
+            return memo[target];
+    }
+
+
     int bottomUp(int target, vector<int> &nums){
         
         vector<vector<long long int>> dp(nums.size()+1, vector<long long int> (target+1, 0));
@@ -94,8 +118,11 @@ public:
         //return rec(nums.size()-1, target, nums, memo);
         
         //Method1.1 - Recursion
-        vector<int> memo(vector<int>(target+1, -1) );
-        return recursion(target, nums, memo);
+        //vector<int> memo(vector<int>(target+1, -1) );
+        //return recursion(target, nums, memo);
+
+        ////Method1.2 - DP
+        return dp(nums, target);
 
         //Method2 - DP
         //return bottomUp(target, nums);
