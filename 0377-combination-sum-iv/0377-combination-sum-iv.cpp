@@ -113,21 +113,40 @@ public:
     
     int combinationSum4(vector<int>& nums, int target) {
         
-        //Method1 - Rec+ Memo
+        /*Method1 - Rec+ Memo 
+            Without memo : TC - O(2^N)  SC: O(n)
+            Memo : TC - O(N×target) SC : O(N×target) + O(N)
+        
+        */
         //vector<vector<int>> memo(nums.size(), vector<int>(target+1, -1) );
         //return rec(nums.size()-1, target, nums, memo);
         
-        //Method1.1 - Recursion
+        /*Method1.1 - Recursion
+            Without memo: TC - O(N^target) - loop runs for 1- target, at every step it can have N possible calls. SC - O(target)
+            With memo: TC - O(N*target) SC - O(target)
+        */
         //vector<int> memo(vector<int>(target+1, -1) );
         //return recursion(target, nums, memo);
 
         ////Method1.2 - DP
+        /*
+            TC - O(N×target)
+            SC - O(N×target)
+        */
         return dp(nums, target);
 
         //Method2 - DP
+        /*
+            TC - O(N×target)
+            SC - O(N×target)
+        */
         //return bottomUp(target, nums);
 
-        //Method3 - 
+        //Method3 - DP - 1DArray
+        /*
+            TC - O(N×target)
+            SC - O(target)
+        */
         //return bottomUp1D(target, nums);
         
         
