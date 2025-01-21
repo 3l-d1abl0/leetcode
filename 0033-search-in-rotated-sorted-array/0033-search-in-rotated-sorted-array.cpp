@@ -41,14 +41,14 @@ public:
             
             if(nums[l]<=nums[mid]){//ledt side is sorted
                 
-                if(nums[l]<=target && target<= nums[mid])
+                if(nums[l]<=target && target< nums[mid])
                     r= mid-1;
                 else
                     l=mid+1;
                 
             }else{  //right side is sorted
                 
-                if(nums[mid]<=target && target <=nums[r])
+                if(nums[mid]<target && target <=nums[r])
                     l=mid+1;
                 else
                     r=mid-1;
