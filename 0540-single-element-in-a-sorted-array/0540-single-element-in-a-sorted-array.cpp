@@ -3,8 +3,12 @@ public:
     int singleNonDuplicate(vector<int>& nums) {
      
         /*
-            Even pos - 1st occur
-            Odd pos - 2nd Occur
+            Normal:
+                Even pos - 1st occur
+                Odd pos - 2nd Occur
+            Disturbed:
+                Odd pos - 1st pos
+                Even pos - 2nd pos
                    X  00 ev
              0  1  2  3  4  5  6  7  8
             [1, 1, 2, 3, 3, 4, 4, 8, 8]
@@ -18,16 +22,14 @@ public:
                 
                 if (mid % 2 == 0) { //first element of the pair is at even index
                     
-                    if (nums[mid] != nums[mid + 1]) 
-                    //Checking whether we are in right half
-
+                    
+                    if (nums[mid] != nums[mid + 1]) //Disturbed - the single element is on the left of current mid
                         high = mid - 1; //Shrinking the right half
                     else
                         low = mid + 1; //Shrinking the left half
                 } else {
-
-                    //Checking whether we are in right half
-                    if (nums[mid] == nums[mid + 1]) 
+                    //mid is odd
+                    if (nums[mid] == nums[mid + 1]) //Disturbed - the single element is on the left of current mid
                         high = mid - 1; //Shrinking the right half
                     else
                         low = mid + 1; //Shrinking the left half
