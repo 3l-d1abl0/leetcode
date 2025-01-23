@@ -68,7 +68,7 @@ public:
         //1. method1 - O(n)
         //return method1(matrix, key);
     
-        //2. method2 - Binary Search
+        //2. method2 - Binary Search - O(M*N)
         return method2(matrix, key);
 	
     }
