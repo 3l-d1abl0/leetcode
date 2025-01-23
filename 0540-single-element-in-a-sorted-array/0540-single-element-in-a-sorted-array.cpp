@@ -1,5 +1,15 @@
 class Solution {
 public:
+
+    bool onRight(int mid, vector<int> & nums){
+        //Check for condition to be on the Right
+
+        if(mid&1){
+            return nums[mid] == nums[mid+1];
+        }else{
+            return nums[mid] != nums[mid+1];
+        }
+    }
     int singleNonDuplicate(vector<int>& nums) {
      
         /*
@@ -16,26 +26,28 @@ public:
             int n=nums.size();
             int low = 0;
             int high = n - 2;
-        
+
+
             while (low <= high) {
                 int mid = (low + high) / 2;
                 
                 if (mid % 2 == 0) { //first element of the pair is at even index
                     
                     
-                    if (nums[mid] != nums[mid + 1]) //Disturbed - the single element is on the left of current mid
-                        high = mid - 1; //Shrinking the right half
-                    else
+                    if (nums[mid] == nums[mid + 1]) //Disturbed - the single element is on the right of current mid
                         low = mid + 1; //Shrinking the left half
+                    else
+                        high = mid - 1; //Shrinking the right half,  mid is the second element in the Pair
                 } else {
                     //mid is odd
                     if (nums[mid] == nums[mid + 1]) //Disturbed - the single element is on the left of current mid
                         high = mid - 1; //Shrinking the right half
                     else
-                        low = mid + 1; //Shrinking the left half
+                        low = mid + 1; //Shrinking the left half, mid is the second element in the Pair
                 }
             }
-
+            
+            //cout<<nums[low]<<" "<<nums[high];
             return nums[low];
         
     }
