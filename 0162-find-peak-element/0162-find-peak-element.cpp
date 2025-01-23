@@ -39,7 +39,7 @@ public:
     }
     
     int method1(vector<int> &arr){
-        
+            //return any peak
             int n = arr.size(); //Size of array.
 
             /*
@@ -47,8 +47,8 @@ public:
             */
             // Edge cases:
             if (n == 1) return 0;
-              if (arr[0] > arr[1]) return 0;
-            if (arr[n - 1] > arr[n - 2]) return n - 1;
+            if (arr[0] > arr[1]) return 0;  //0 is the peak
+            if (arr[n - 2] < arr[n - 1]) return n - 1;  //n-1 is peak
         
         
             int low = 1, high = n - 2;
@@ -59,14 +59,15 @@ public:
                 if (arr[mid - 1] < arr[mid] && arr[mid] > arr[mid + 1])
                     return mid;
 
-                // If we are in the left:
-                if (arr[mid] > arr[mid - 1])
-                    low = mid + 1;
+                // Increasing slope
+                if ( arr[mid - 1] < arr[mid]){
+                    //mid could be a peak, or we can find a another peak
 
-                // If we are in the right:
-                // Or, arr[mid] is a common point:
-                else
+                    low = mid + 1;
+                }else{
+                    //mid-1 > mid , mid-1 can be a peak, or find another peak
                     high = mid - 1;
+                }
             }
             
         // Dummy return statement        
