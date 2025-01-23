@@ -67,13 +67,15 @@ public:
         int st =0, ed = ma.length()-1;
         
         int bitonicIdx = bitonicPoint(ma);
-        cout<<bitonicIdx<<endl;
+        //cout<<bitonicIdx<<endl;
+
+        //If the target is greater than the Peak
         if(target > ma.get(bitonicIdx)) return -1;
         
-        int first = agnosticBS(ma, target, st, bitonicIdx-1);
+        int first = agnosticBS(ma, target, st, bitonicIdx-1);//ascending
         //cout<<first<<endl;
         if(first == -1)
-            return agnosticBS(ma, target, bitonicIdx, ed);
+            return agnosticBS(ma, target, bitonicIdx, ed);//descending
         
         return first;
     }
