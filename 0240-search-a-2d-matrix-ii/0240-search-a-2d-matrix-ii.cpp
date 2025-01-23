@@ -1,7 +1,10 @@
 class Solution {
 public:
     bool searchMatrix(vector<vector<int>>& matrix, int key) {
-                	int R = matrix.size();
+    
+    //TC - O(M+N)
+
+    int R = matrix.size();
 	int C = matrix[0].size();
 	
 	int x= 0, y=C-1;
