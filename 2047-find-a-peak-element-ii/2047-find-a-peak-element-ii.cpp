@@ -39,7 +39,7 @@ public:
             int col = max_element(mat, midRow, cols);
             
             int top = ((midRow-1) >= 0) ? mat[midRow-1][col] : -1;  //check for Top Row
-            int bottom = ((midRow+1) <=rows-1) ? mat[midRow+1][col]: -1;    //check for bottom Row
+            int bottom = ((midRow+1) <=botRow) ? mat[midRow+1][col]: -1;    //check for bottom Row
             
            
             //3. if this ele is the one
