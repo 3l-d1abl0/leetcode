@@ -79,10 +79,10 @@ public:
     int method2(vector<vector<int>>& isConnected, int N){
         
         UnionFind uf(N);
-        
+        //Traverse the matrix and 
         for(int i=0; i<N; i++){
             for(int j=0; j<N; j++){
-                
+                //merge if these 2 are connected
                 if(isConnected[i][j]==1)
                     uf.merge(i, j);
             }
@@ -90,7 +90,7 @@ public:
         
         int ctr=0;
         for(int i=0; i<N; i++){
-            
+            //count the Leaders
             if(uf.findParent(i)==i)
                 ctr++;
         }
@@ -104,7 +104,7 @@ public:
         
         int N = isConnected.size();
         
-        //Mrthod1 - DFS - TC: O(V)+O(E)
+        //Mrthod1 - DFS - TC: O(V*V) Since its an adj Matrix
         //return method1(isConnected, N);
         
         //Method2 - UnionFind
