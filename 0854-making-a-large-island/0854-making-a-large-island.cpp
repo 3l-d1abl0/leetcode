@@ -4,6 +4,7 @@ static int speedUp=[](){
     cout.tie(nullptr);
     return 0;
 }();
+
 class DSU{
     
     private:
@@ -76,7 +77,7 @@ public:
             
             for(int y=0; y<N; y++){
                 
-                if(grid[x][y]==0)   continue;
+                if(grid[x][y]==0)   continue; 
                 
                 int d1Node = N*x+y;
                 //cout<<"1d :: "<<d1Node<<endl;
