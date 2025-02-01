@@ -113,8 +113,9 @@ public:
                 //cout<<"1d :: "<<d1Node<<endl;
                 
                 //vector<bool> parent(N*N, false);
-                set<int> parents;
+                unordered_set<int> parents;
                 
+                int sz =1;
                 for(int i=0; i<4; i++){
                     
                     int newX = x+dx[i];
@@ -124,16 +125,15 @@ public:
                             
                             int d1Adj = N*newX+newY;
                             int p = ds.findParent(d1Adj);
-                            parents.insert(p);
+
+                            if(parents.find(p) == parents.end()){
+                                parents.insert(p);
+                                sz += ds.getSize(p);
+                            }
                             
                     }
                 }//for i
                 
-                int sz =1;
-                
-                for(int ele : parents){
-                    sz += ds.getSize(ele);
-                }
                 
                 //get the max size of comp
                 max_sz = max(max_sz, sz);
