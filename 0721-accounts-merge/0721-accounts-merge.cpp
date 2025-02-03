@@ -112,19 +112,21 @@ public:
         */
         
         vector<vector<string>> ans;
-        //patent- to idx in ans vecrtor
+        //patent_id - to idx in the ans vecrtor
         unordered_map<int, int> parToAns;
         for(auto row: mp){
             
+            //get the parent account id for the accound_id
             int parent_account_id = ds.findParent(row.second);
             
-            //does not exist in ans vecrtor
+            //if parent account id does not exist in ans vector, add new
             if(parToAns.find(parent_account_id) == parToAns.end()){
                 ans.push_back({accounts[parent_account_id][0], row.first}); ///{name, email}
-                parToAns[parent_account_id] = ans.size() -1; 
+                parToAns[parent_account_id] = ans.size() -1; //<parent_id, ans_row>
             }else{
+                //parent_id exists in and
                 int ans_idx = parToAns[parent_account_id];
-                ans[ans_idx].push_back(row.first);
+                ans[ans_idx].push_back(row.first);//push the email
             }
         }
         
@@ -132,8 +134,14 @@ public:
         for(auto& row: ans){
             sort(row.begin()+1, row.end());
         }
+        //ElogE
+
+
         
         return ans;
-        
+        /*
+        Time Complexity: O(E⋅α(N)+ElogE)
+        Space Complexity: O(E+N)
+        */
     }
 };
