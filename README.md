@@ -78,6 +78,7 @@ Collection of LeetCode questions to ace the coding interview! - Created using [L
 | ------- |
 | [0547-number-of-provinces](https://github.com/3l-d1abl0/leetcode/tree/master/0547-number-of-provinces) |
 | [0854-making-a-large-island](https://github.com/3l-d1abl0/leetcode/tree/master/0854-making-a-large-island) |
+| [1442-number-of-operations-to-make-network-connected](https://github.com/3l-d1abl0/leetcode/tree/master/1442-number-of-operations-to-make-network-connected) |
 | [2677-cousins-in-binary-tree-ii](https://github.com/3l-d1abl0/leetcode/tree/master/2677-cousins-in-binary-tree-ii) |
 ## Breadth-First Search
 |  |
@@ -85,6 +86,7 @@ Collection of LeetCode questions to ace the coding interview! - Created using [L
 | [0547-number-of-provinces](https://github.com/3l-d1abl0/leetcode/tree/master/0547-number-of-provinces) |
 | [0854-making-a-large-island](https://github.com/3l-d1abl0/leetcode/tree/master/0854-making-a-large-island) |
 | [1036-rotting-oranges](https://github.com/3l-d1abl0/leetcode/tree/master/1036-rotting-oranges) |
+| [1442-number-of-operations-to-make-network-connected](https://github.com/3l-d1abl0/leetcode/tree/master/1442-number-of-operations-to-make-network-connected) |
 | [2677-cousins-in-binary-tree-ii](https://github.com/3l-d1abl0/leetcode/tree/master/2677-cousins-in-binary-tree-ii) |
 ## Binary Tree
 |  |
@@ -95,8 +97,10 @@ Collection of LeetCode questions to ace the coding interview! - Created using [L
 | ------- |
 | [0547-number-of-provinces](https://github.com/3l-d1abl0/leetcode/tree/master/0547-number-of-provinces) |
 | [0854-making-a-large-island](https://github.com/3l-d1abl0/leetcode/tree/master/0854-making-a-large-island) |
+| [1442-number-of-operations-to-make-network-connected](https://github.com/3l-d1abl0/leetcode/tree/master/1442-number-of-operations-to-make-network-connected) |
 ## Graph
 |  |
 | ------- |
 | [0547-number-of-provinces](https://github.com/3l-d1abl0/leetcode/tree/master/0547-number-of-provinces) |
+| [1442-number-of-operations-to-make-network-connected](https://github.com/3l-d1abl0/leetcode/tree/master/1442-number-of-operations-to-make-network-connected) |
 <!---LeetCode Topics End-->
