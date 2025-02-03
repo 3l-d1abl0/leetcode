@@ -86,7 +86,7 @@ public:
                 components++;
         }*/
         
-        cout<<components<<endl;
+        //cout<<components<<endl;
         if(extra_edges>= (components-1))
             return components-1;
         
