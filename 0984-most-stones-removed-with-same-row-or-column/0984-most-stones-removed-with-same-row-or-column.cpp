@@ -155,7 +155,9 @@ public:
         
         /*
             TC: O(n⋅α(n)+maxRow+maxCol).
-            SC: 
+            SC: O(2n)
+
+            11ms
         */
         return method2(stones); //union-find
         
