@@ -58,6 +58,8 @@ public:
     
     int componentSize(){
         int ctr=0;
+
+        //If a parent has size ==1, it means that Row or colum is not utilized, (no stone on that row or column)
         for(int i=0; i<=_size; i++){
             if(parent[i]==i && size[i]>1)
                 ctr++;
@@ -123,7 +125,7 @@ int method2(vector<vector<int>> &stones){
             ds.unionBySize(row[0], maxRow+1+row[1]);
         }
         
-        //cout<<ds.componentSize()<<endl;
+        cout<<ds.componentSize()<<endl;
         return N-ds.componentSize();
     
 }
@@ -143,9 +145,19 @@ public:
                            => N - #compnent
         */
         
-        return method1(stones); ///dfs
+        /*
+            TC: O(n^2)
+            SC: O(n) + O(n)stack
+
+            70ms 
+        */
+        //return method1(stones); ///dfs
         
-        //return method2(stones); //union-find
+        /*
+            TC: O(n⋅α(n)+maxRow+maxCol).
+            SC: 
+        */
+        return method2(stones); //union-find
         
     }
 };
