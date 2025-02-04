@@ -63,6 +63,14 @@ class Solution {
 public:
     int maxNumEdgesToRemove(int n, vector<vector<int>>& edges) {
         /*
+
+        Process each edge and create speerate DSU for both BOb and Alice.
+        At the end of both DSU has 1 component in total , which means both are fully connected
+        in their respective DSU.
+
+        Process the Type3 (both) edge first, that will enable us to eliminate max edges.
+
+
         Type1 : Alice
         Type2 : Bob
         Type3 : Both 
@@ -73,7 +81,7 @@ public:
        sort(edges.begin(), edges.end(), [](vector<int>& e1, vector<int>& e2){
             return e1[0]>e2[0]; //desc
        });
-
+       //ElogE
        /*
        auto compDun = [&](vector<int>& v1, vector<int>& v2) {
             return v1[0] > v2[0];
@@ -134,7 +142,7 @@ public:
         }
 
         
-        cout<<Alice.getSize()<<" "<<Bob.getSize()<<endl;
+        //cout<<Alice.getSize()<<" "<<Bob.getSize()<<endl;
             
         if(Alice.getSize()==1 && Bob.getSize()==1)
             return edges.size() - usedEdge;
