@@ -18,6 +18,7 @@ Collection of LeetCode questions to ace the coding interview! - Created using [L
 | [1036-rotting-oranges](https://github.com/3l-d1abl0/leetcode/tree/master/1036-rotting-oranges) |
 | [1056-capacity-to-ship-packages-within-d-days](https://github.com/3l-d1abl0/leetcode/tree/master/1056-capacity-to-ship-packages-within-d-days) |
 | [1185-find-in-mountain-array](https://github.com/3l-d1abl0/leetcode/tree/master/1185-find-in-mountain-array) |
+| [1396-count-servers-that-communicate](https://github.com/3l-d1abl0/leetcode/tree/master/1396-count-servers-that-communicate) |
 | [1408-find-the-smallest-divisor-given-a-threshold](https://github.com/3l-d1abl0/leetcode/tree/master/1408-find-the-smallest-divisor-given-a-threshold) |
 | [1815-checking-existence-of-edge-length-limited-paths](https://github.com/3l-d1abl0/leetcode/tree/master/1815-checking-existence-of-edge-length-limited-paths) |
 | [2047-find-a-peak-element-ii](https://github.com/3l-d1abl0/leetcode/tree/master/2047-find-a-peak-element-ii) |
@@ -45,6 +46,7 @@ Collection of LeetCode questions to ace the coding interview! - Created using [L
 | [0240-search-a-2d-matrix-ii](https://github.com/3l-d1abl0/leetcode/tree/master/0240-search-a-2d-matrix-ii) |
 | [0854-making-a-large-island](https://github.com/3l-d1abl0/leetcode/tree/master/0854-making-a-large-island) |
 | [1036-rotting-oranges](https://github.com/3l-d1abl0/leetcode/tree/master/1036-rotting-oranges) |
+| [1396-count-servers-that-communicate](https://github.com/3l-d1abl0/leetcode/tree/master/1396-count-servers-that-communicate) |
 | [2047-find-a-peak-element-ii](https://github.com/3l-d1abl0/leetcode/tree/master/2047-find-a-peak-element-ii) |
 ## Divide and Conquer
 |  |
@@ -85,6 +87,7 @@ Collection of LeetCode questions to ace the coding interview! - Created using [L
 | [0721-accounts-merge](https://github.com/3l-d1abl0/leetcode/tree/master/0721-accounts-merge) |
 | [0854-making-a-large-island](https://github.com/3l-d1abl0/leetcode/tree/master/0854-making-a-large-island) |
 | [0984-most-stones-removed-with-same-row-or-column](https://github.com/3l-d1abl0/leetcode/tree/master/0984-most-stones-removed-with-same-row-or-column) |
+| [1396-count-servers-that-communicate](https://github.com/3l-d1abl0/leetcode/tree/master/1396-count-servers-that-communicate) |
 | [1442-number-of-operations-to-make-network-connected](https://github.com/3l-d1abl0/leetcode/tree/master/1442-number-of-operations-to-make-network-connected) |
 | [2677-cousins-in-binary-tree-ii](https://github.com/3l-d1abl0/leetcode/tree/master/2677-cousins-in-binary-tree-ii) |
 ## Breadth-First Search
@@ -95,6 +98,7 @@ Collection of LeetCode questions to ace the coding interview! - Created using [L
 | [0721-accounts-merge](https://github.com/3l-d1abl0/leetcode/tree/master/0721-accounts-merge) |
 | [0854-making-a-large-island](https://github.com/3l-d1abl0/leetcode/tree/master/0854-making-a-large-island) |
 | [1036-rotting-oranges](https://github.com/3l-d1abl0/leetcode/tree/master/1036-rotting-oranges) |
+| [1396-count-servers-that-communicate](https://github.com/3l-d1abl0/leetcode/tree/master/1396-count-servers-that-communicate) |
 | [1442-number-of-operations-to-make-network-connected](https://github.com/3l-d1abl0/leetcode/tree/master/1442-number-of-operations-to-make-network-connected) |
 | [2677-cousins-in-binary-tree-ii](https://github.com/3l-d1abl0/leetcode/tree/master/2677-cousins-in-binary-tree-ii) |
 ## Binary Tree
@@ -109,6 +113,7 @@ Collection of LeetCode questions to ace the coding interview! - Created using [L
 | [0721-accounts-merge](https://github.com/3l-d1abl0/leetcode/tree/master/0721-accounts-merge) |
 | [0854-making-a-large-island](https://github.com/3l-d1abl0/leetcode/tree/master/0854-making-a-large-island) |
 | [0984-most-stones-removed-with-same-row-or-column](https://github.com/3l-d1abl0/leetcode/tree/master/0984-most-stones-removed-with-same-row-or-column) |
+| [1396-count-servers-that-communicate](https://github.com/3l-d1abl0/leetcode/tree/master/1396-count-servers-that-communicate) |
 | [1442-number-of-operations-to-make-network-connected](https://github.com/3l-d1abl0/leetcode/tree/master/1442-number-of-operations-to-make-network-connected) |
 | [1701-remove-max-number-of-edges-to-keep-graph-fully-traversable](https://github.com/3l-d1abl0/leetcode/tree/master/1701-remove-max-number-of-edges-to-keep-graph-fully-traversable) |
 | [1815-checking-existence-of-edge-length-limited-paths](https://github.com/3l-d1abl0/leetcode/tree/master/1815-checking-existence-of-edge-length-limited-paths) |
@@ -134,4 +139,8 @@ Collection of LeetCode questions to ace the coding interview! - Created using [L
 |  |
 | ------- |
 | [1815-checking-existence-of-edge-length-limited-paths](https://github.com/3l-d1abl0/leetcode/tree/master/1815-checking-existence-of-edge-length-limited-paths) |
+## Counting
+|  |
+| ------- |
+| [1396-count-servers-that-communicate](https://github.com/3l-d1abl0/leetcode/tree/master/1396-count-servers-that-communicate) |
 <!---LeetCode Topics End-->
