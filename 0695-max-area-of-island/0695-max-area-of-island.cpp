@@ -1,6 +1,13 @@
 class Solution {
 public:
     int maxAreaOfIsland(vector<vector<int>>& grid) {
+
+        /*
+
+            Time Complexity: O(N×M)
+            Space Complexity: O(N×M)
+        
+        */
         
         int N = grid.size();
         int M = grid[0].size();
