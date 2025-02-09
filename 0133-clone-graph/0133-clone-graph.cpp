@@ -30,35 +30,36 @@ public:
             Node.val is unique for each node.
         */
         //to keep a check if a node has been created
-        vector<Node *> mp(101, nullptr);
+        vector<Node *> nodesMap(101, nullptr);
         
         
-        Node *newNode = clone(node , mp);
+        Node *newNode = clone(node , nodesMap);
             
         
         return newNode;
     }
     
-    Node* clone(Node* node, vector<Node *> &mp) {
+    Node* clone(Node* node, vector<Node *> &nodesMap) {
         
         if(node==nullptr)
             return node;
     
-        if(mp[node->val]!= nullptr)
-            return mp[node->val];
+        //Check if the node have been created
+        if(nodesMap[node->val]!= nullptr)
+            return nodesMap[node->val];
         else{
             
-           Node *newNode = new Node(node->val);
+           Node *cloneNode = new Node(node->val);
             
-            mp[node->val] = newNode;
+            nodesMap[node->val] = cloneNode;
         
             for(Node *ele: node->neighbors){
-                newNode->neighbors.push_back(clone(ele, mp));
+                cloneNode->neighbors.push_back(clone(ele, nodesMap));
             }
         
         
         
-            return newNode;
+            return cloneNode;
             
         }
     
