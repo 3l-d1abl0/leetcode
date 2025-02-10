@@ -30,6 +30,7 @@ public:
         
         int ctr =0;
         
+        //Count the Land which are left untouched with Water
         for(int i=1; i<N-1; i++){
             for(int j=1; j<M-1; j++){
                 
@@ -52,6 +53,7 @@ public:
         if(i<0 || j<0 || i>=grid.size() || j>=grid[0].size() || grid[i][j]==0)
             return;
 
+        //alread a Water
         if(grid[i][j]==0)
             return;
         
