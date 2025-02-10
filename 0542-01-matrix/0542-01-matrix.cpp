@@ -16,6 +16,7 @@ public:
             
             for(int j=0; j<C; j++){
                 
+                //Set all 0 cell distance as Zero ans push it onto a Queue
                 if(mat[i][j] ==0){
                     q.push( {i, j} );
                     ans[i][j] = 0;
@@ -29,29 +30,34 @@ public:
         
         
         while(!q.empty()){
-            
-            pair<int, int> node = q.front();
-            q.pop();
-            
-            int row = node.first;
-            int col = node.second;
-            
-            
-            int dist = node.second;
-            
-            
-            vector<int> xx({-1, 0, 1, 0});
-            vector<int> yy({ 0, +1, 0, -1});
 
-            
-            for(int i=0; i<4; i++){
+            int qSize = q.size();
+
+            for(int i=0; i<qSize; i++){
                 
-                int newRow = row+xx[i];
-                int newCol = col+yy[i];
+                pair<int, int> node = q.front();
+                q.pop();
                 
-                if(0 <= newRow && newRow <R && 0<= newCol && newCol <C && ans[newRow][newCol] ==-1){
-                    q.push({ newRow, newCol });
-                    ans[newRow][newCol] = ans[row][col]+1;
+                int row = node.first;
+                int col = node.second;
+                
+                
+                int dist = node.second;
+                
+                
+                vector<int> xx({-1, 0, 1, 0});
+                vector<int> yy({ 0, +1, 0, -1});
+
+                
+                for(int i=0; i<4; i++){
+                    
+                    int newRow = row+xx[i];
+                    int newCol = col+yy[i];
+                    
+                    if(0 <= newRow && newRow <R && 0<= newCol && newCol <C && ans[newRow][newCol] ==-1){
+                        q.push({ newRow, newCol });
+                        ans[newRow][newCol] = ans[row][col]+1;
+                    }
                 }
             }
         }
