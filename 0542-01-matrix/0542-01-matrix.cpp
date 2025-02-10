@@ -3,13 +3,13 @@ public:
     
     vector<vector<int>> method1(vector<vector<int>>& mat) {
         
-        queue< pair< pair<int, int>, int> > q;
+        queue< pair<int, int> > q;
         
         int R = mat.size();
         int C = mat[0].size();
         
-        vector<vector<int>> ans(R, vector<int>(C, 0));
-        vector<vector<bool>> vis(R, vector<bool>(C, false));
+        vector<vector<int>> ans(R, vector<int>(C, -1));
+        //vector<vector<bool>> vis(R, vector<bool>(C, false));
         
         
         for(int i=0; i<R; i++){
@@ -17,8 +17,8 @@ public:
             for(int j=0; j<C; j++){
                 
                 if(mat[i][j] ==0){
-                    q.push( {{i, j}, 0} );
-                    vis[i][j] = true;
+                    q.push( {i, j} );
+                    ans[i][j] = 0;
                 }
                 
             }//j
@@ -30,11 +30,11 @@ public:
         
         while(!q.empty()){
             
-            pair< pair<int, int>, int> node = q.front();
+            pair<int, int> node = q.front();
             q.pop();
             
-            int row = node.first.first;
-            int col = node.first.second;
+            int row = node.first;
+            int col = node.second;
             
             
             int dist = node.second;
@@ -42,17 +42,16 @@ public:
             
             vector<int> xx({-1, 0, 1, 0});
             vector<int> yy({ 0, +1, 0, -1});
-            
-            ans[row][col] = dist;
+
             
             for(int i=0; i<4; i++){
                 
                 int newRow = row+xx[i];
                 int newCol = col+yy[i];
                 
-                if(0 <= newRow && newRow <R && 0<= newCol && newCol <C && vis[newRow][newCol] ==false){
-                    q.push({ { newRow, newCol }, dist+1});
-                    vis[newRow][newCol] = true;
+                if(0 <= newRow && newRow <R && 0<= newCol && newCol <C && ans[newRow][newCol] ==-1){
+                    q.push({ newRow, newCol });
+                    ans[newRow][newCol] = ans[row][col]+1;
                 }
             }
         }
@@ -138,7 +137,7 @@ public:
         Method2: DP, TC: O(M*N)
         SC: O()
         */
-        return method2(mat);
+        //return method2(mat);
         
     }
 };
