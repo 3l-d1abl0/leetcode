@@ -7,8 +7,8 @@ public:
         /*
         Call1 - queue has all the edge node which is touching 
         Pacific Ocean
-        
-        
+        O1 - pacific Ocean
+        O2 = Atlantic Ocean
         */
         
         int R= heights.size();
@@ -23,7 +23,11 @@ public:
             q.pop();
             
             /*
-                For 2nd round of BFS, check the if the current cell
+                For 1st call - O2 will be atlantic Ocean, all false
+
+                For 2nd round of BFS,
+                O2 will be pacific Ocean, Some True
+                check the if the current cell
                 is visited by other sea
             */
             if(O2[r][c] == true)
@@ -60,12 +64,12 @@ public:
         queue<pair<int, int>> q;
         
         //Look for nodes visited by Pacific Ocean (Reachability)
-        
+        //set the zeroth Columns
         for(int r=0; r<R; r++){
             q.push({r, 0});
             PO[r][0]=true;
         }
-        
+        //set the zeroth Row
         for(int c=1; c<C; c++){
             q.push( {0, c});
             PO[0][c]=true;
@@ -85,7 +89,7 @@ public:
             AO[R-1][c]=true;
         }
         
-        ans = bfs(heights, q, AO, PO);
+        ans = bfs(heights, q, AO, PO);//Order of oceans Changed
         
         return ans;
     }
