@@ -8,9 +8,10 @@ public:
         if (i < 0 || j < 0 || i >= g1.size() || j >= g1[0].size() || g2[i][j] == 0)
             return {0, 0};
         
+        //create count of current node
         pair<int, int> res{g1[i][j], g2[i][j]};
-        g2[i][j] = 0;
-        
+        g2[i][j] = 0;//reset current g2 cell as 0
+
         for (int d = 0; d < 4; ++d) {
             auto [cnt1, cnt2] = dfs(g1, g2, i + dir[d], j + dir[d + 1]);
             res.first += cnt1;
@@ -20,7 +21,11 @@ public:
     }
     
     int countSubIslands(vector<vector<int>>& grid1, vector<vector<int>>& grid2) {
+        /*
+        Time Complexity: O(R×C)
+        Space Complexity: O(R×C)
         
+        */
         int R = grid1.size();
         int C = grid1[0].size(), res = 0;
         
