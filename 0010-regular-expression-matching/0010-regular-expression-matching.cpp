@@ -4,17 +4,17 @@ public:
     bool topDown(int sidx, string &s, int pidx, string &p, vector<vector<int>> &memo){
         
         //both strings finished
-        if(sidx==0 && pidx==0)
+        if(sidx==0 && pidx<=0)
             return true;
         //string finished, patter remains with single character
-        if(sidx==0 && pidx==1)
+        if(sidx==0 && pidx<=1)
             return false;
         
         //string remains, pattern finished
-        if(sidx>0 && pidx==0)
+        if(sidx>0 && pidx<=0)
             return false;
         
-        if(sidx==0 && pidx >0){
+        /*if(sidx==0 && pidx >0){
             //cout<<"-here- "<<pidx<<endl;
             
             //bool status = true;
@@ -27,7 +27,7 @@ public:
                 return false;
             
             return true;
-        }
+        }*/
         
         if(memo[sidx][pidx]!=-1)
             return memo[sidx][pidx];
