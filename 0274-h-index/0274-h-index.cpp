@@ -47,21 +47,40 @@ public:
                 
         }
         
+
+        // citations< #paper ________ citations==#Papers  _______________ citations > #papers
         
         return N==1 ? (citations[0]>0?1:0): ans;
+
+        int l =-1, r= N;
+
+        while(r-l>1){
+            
+            int mid = l+(r-l)/2;
+            int h = N=mid;
+
+            if(citations[mid]>=h){
+                r=mid;//go left
+            }else{
+                l=mid;
+            }
+        }//while
+
+
+        return r;
     }
     
     int hIndex(vector<int>& citations) {
         
-        //Maximize the Papers
+        //Maximize the Papers, with greater citations
         sort(citations.begin(), citations.end());
         
         //Linear - O(n)
-        return method1(citations);
+        //return method1(citations);
         
         
         // Binary Sarch - O(logn)
-        //return method2(citations);
+        return method2(citations);
         
     }
 };
