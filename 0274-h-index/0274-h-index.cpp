@@ -30,7 +30,7 @@ public:
     int method2(vector<int> &citations){
         
         int N = citations.size();
-        int st =0, end = N-1;
+        /*int st =0, end = N-1;
         
         int h, ans =0;
         while(st <= end){
@@ -48,16 +48,16 @@ public:
         }
         
 
-        // citations< #paper ________ citations==#Papers  _______________ citations > #papers
         
         return N==1 ? (citations[0]>0?1:0): ans;
-
+        */
+        // citations< #paper ________ citations==#Papers  _______________ citations > #papers
         int l =-1, r= N;
 
         while(r-l>1){
             
             int mid = l+(r-l)/2;
-            int h = N=mid;
+            int h = N-mid;
 
             if(citations[mid]>=h){
                 r=mid;//go left
@@ -67,7 +67,7 @@ public:
         }//while
 
 
-        return r;
+        return N-r;
     }
     
     int hIndex(vector<int>& citations) {
