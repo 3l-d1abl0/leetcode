@@ -11,7 +11,15 @@ public:
             
             if(citations[i] >= h)
                 continue; //move left
+
+            /*
+                This is the first instance where #papers > citations
+                just an Index before
+                #paper-1 <= citations
             
+            */
+
+            cout<<h<<" -1"<<endl;
             return h-1;
         }
         
@@ -30,7 +38,7 @@ public:
             
             h = N-mid;
             //cout<<h<<" "<<endl;
-            if(citations[mid] >h){
+            if(citations[mid] >= h){
                 end = mid-1;
                 ans = max(ans, h);
             }else{
@@ -45,6 +53,7 @@ public:
     
     int hIndex(vector<int>& citations) {
         
+        //Maximize the Papers
         sort(citations.begin(), citations.end());
         
         //Linear - O(n)
