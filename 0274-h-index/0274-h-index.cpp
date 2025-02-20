@@ -7,7 +7,7 @@ public:
         int h;
         for(int i=N-1; i>=0; i--){
             
-            h = N- i;
+            h = N- i;//number of Papers
             
             if(citations[i] >= h)
                 continue; //move left
@@ -30,7 +30,7 @@ public:
             
             h = N-mid;
             //cout<<h<<" "<<endl;
-            if(citations[mid] >= h){
+            if(citations[mid] >h){
                 end = mid-1;
                 ans = max(ans, h);
             }else{
@@ -48,11 +48,11 @@ public:
         sort(citations.begin(), citations.end());
         
         //Linear - O(n)
-        //return method1(citations);
+        return method1(citations);
         
         
         // Binary Sarch - O(logn)
-        return method2(citations);
+        //return method2(citations);
         
     }
 };
