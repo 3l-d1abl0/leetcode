@@ -89,10 +89,12 @@ Collection of LeetCode questions to ace the coding interview! - Created using [L
 | [0133-clone-graph](https://github.com/3l-d1abl0/leetcode/tree/master/0133-clone-graph) |
 | [0721-accounts-merge](https://github.com/3l-d1abl0/leetcode/tree/master/0721-accounts-merge) |
 | [0984-most-stones-removed-with-same-row-or-column](https://github.com/3l-d1abl0/leetcode/tree/master/0984-most-stones-removed-with-same-row-or-column) |
+| [2461-amount-of-time-for-binary-tree-to-be-infected](https://github.com/3l-d1abl0/leetcode/tree/master/2461-amount-of-time-for-binary-tree-to-be-infected) |
 | [2677-cousins-in-binary-tree-ii](https://github.com/3l-d1abl0/leetcode/tree/master/2677-cousins-in-binary-tree-ii) |
 ## Tree
 |  |
 | ------- |
+| [2461-amount-of-time-for-binary-tree-to-be-infected](https://github.com/3l-d1abl0/leetcode/tree/master/2461-amount-of-time-for-binary-tree-to-be-infected) |
 | [2677-cousins-in-binary-tree-ii](https://github.com/3l-d1abl0/leetcode/tree/master/2677-cousins-in-binary-tree-ii) |
 ## Depth-First Search
 |  |
@@ -109,6 +111,7 @@ Collection of LeetCode questions to ace the coding interview! - Created using [L
 | [1396-count-servers-that-communicate](https://github.com/3l-d1abl0/leetcode/tree/master/1396-count-servers-that-communicate) |
 | [1442-number-of-operations-to-make-network-connected](https://github.com/3l-d1abl0/leetcode/tree/master/1442-number-of-operations-to-make-network-connected) |
 | [2035-count-sub-islands](https://github.com/3l-d1abl0/leetcode/tree/master/2035-count-sub-islands) |
+| [2461-amount-of-time-for-binary-tree-to-be-infected](https://github.com/3l-d1abl0/leetcode/tree/master/2461-amount-of-time-for-binary-tree-to-be-infected) |
 | [2677-cousins-in-binary-tree-ii](https://github.com/3l-d1abl0/leetcode/tree/master/2677-cousins-in-binary-tree-ii) |
 ## Breadth-First Search
 |  |
@@ -126,10 +129,12 @@ Collection of LeetCode questions to ace the coding interview! - Created using [L
 | [1396-count-servers-that-communicate](https://github.com/3l-d1abl0/leetcode/tree/master/1396-count-servers-that-communicate) |
 | [1442-number-of-operations-to-make-network-connected](https://github.com/3l-d1abl0/leetcode/tree/master/1442-number-of-operations-to-make-network-connected) |
 | [2035-count-sub-islands](https://github.com/3l-d1abl0/leetcode/tree/master/2035-count-sub-islands) |
+| [2461-amount-of-time-for-binary-tree-to-be-infected](https://github.com/3l-d1abl0/leetcode/tree/master/2461-amount-of-time-for-binary-tree-to-be-infected) |
 | [2677-cousins-in-binary-tree-ii](https://github.com/3l-d1abl0/leetcode/tree/master/2677-cousins-in-binary-tree-ii) |
 ## Binary Tree
 |  |
 | ------- |
+| [2461-amount-of-time-for-binary-tree-to-be-infected](https://github.com/3l-d1abl0/leetcode/tree/master/2461-amount-of-time-for-binary-tree-to-be-infected) |
 | [2677-cousins-in-binary-tree-ii](https://github.com/3l-d1abl0/leetcode/tree/master/2677-cousins-in-binary-tree-ii) |
 ## Union Find
 |  |
