@@ -94,6 +94,7 @@ Collection of LeetCode questions to ace the coding interview! - Created using [L
 ## Tree
 |  |
 | ------- |
+| [1474-longest-zigzag-path-in-a-binary-tree](https://github.com/3l-d1abl0/leetcode/tree/master/1474-longest-zigzag-path-in-a-binary-tree) |
 | [2461-amount-of-time-for-binary-tree-to-be-infected](https://github.com/3l-d1abl0/leetcode/tree/master/2461-amount-of-time-for-binary-tree-to-be-infected) |
 | [2677-cousins-in-binary-tree-ii](https://github.com/3l-d1abl0/leetcode/tree/master/2677-cousins-in-binary-tree-ii) |
 ## Depth-First Search
@@ -110,6 +111,7 @@ Collection of LeetCode questions to ace the coding interview! - Created using [L
 | [1073-number-of-enclaves](https://github.com/3l-d1abl0/leetcode/tree/master/1073-number-of-enclaves) |
 | [1396-count-servers-that-communicate](https://github.com/3l-d1abl0/leetcode/tree/master/1396-count-servers-that-communicate) |
 | [1442-number-of-operations-to-make-network-connected](https://github.com/3l-d1abl0/leetcode/tree/master/1442-number-of-operations-to-make-network-connected) |
+| [1474-longest-zigzag-path-in-a-binary-tree](https://github.com/3l-d1abl0/leetcode/tree/master/1474-longest-zigzag-path-in-a-binary-tree) |
 | [2035-count-sub-islands](https://github.com/3l-d1abl0/leetcode/tree/master/2035-count-sub-islands) |
 | [2461-amount-of-time-for-binary-tree-to-be-infected](https://github.com/3l-d1abl0/leetcode/tree/master/2461-amount-of-time-for-binary-tree-to-be-infected) |
 | [2677-cousins-in-binary-tree-ii](https://github.com/3l-d1abl0/leetcode/tree/master/2677-cousins-in-binary-tree-ii) |
@@ -134,6 +136,7 @@ Collection of LeetCode questions to ace the coding interview! - Created using [L
 ## Binary Tree
 |  |
 | ------- |
+| [1474-longest-zigzag-path-in-a-binary-tree](https://github.com/3l-d1abl0/leetcode/tree/master/1474-longest-zigzag-path-in-a-binary-tree) |
 | [2461-amount-of-time-for-binary-tree-to-be-infected](https://github.com/3l-d1abl0/leetcode/tree/master/2461-amount-of-time-for-binary-tree-to-be-infected) |
 | [2677-cousins-in-binary-tree-ii](https://github.com/3l-d1abl0/leetcode/tree/master/2677-cousins-in-binary-tree-ii) |
 ## Union Find
@@ -186,6 +189,7 @@ Collection of LeetCode questions to ace the coding interview! - Created using [L
 | ------- |
 | [0010-regular-expression-matching](https://github.com/3l-d1abl0/leetcode/tree/master/0010-regular-expression-matching) |
 | [0542-01-matrix](https://github.com/3l-d1abl0/leetcode/tree/master/0542-01-matrix) |
+| [1474-longest-zigzag-path-in-a-binary-tree](https://github.com/3l-d1abl0/leetcode/tree/master/1474-longest-zigzag-path-in-a-binary-tree) |
 | [2090-number-of-ways-to-arrive-at-destination](https://github.com/3l-d1abl0/leetcode/tree/master/2090-number-of-ways-to-arrive-at-destination) |
 ## Topological Sort
 |  |
