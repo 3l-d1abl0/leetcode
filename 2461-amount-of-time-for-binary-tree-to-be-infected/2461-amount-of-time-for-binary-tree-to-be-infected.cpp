@@ -14,6 +14,18 @@ public:
 
     tuple<int, int, int> solve(TreeNode *root, int start){
 
+        /*
+            IF the current node is the NODE
+                return TRUE, 1, 
+
+            IF a subtree has The NODE,
+            return tre, distance of the NODE, max path/time found so far
+
+            IF subtree does not have the NODE
+                return false, max leaf depth so far , 0
+        
+        */
+
         if(root==NULL)
             return {false, 0, 0};
 
