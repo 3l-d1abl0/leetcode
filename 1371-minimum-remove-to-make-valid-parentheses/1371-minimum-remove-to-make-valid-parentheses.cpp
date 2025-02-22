@@ -23,14 +23,14 @@ public:
                 }else
                     st.push({s[idx], idx});
 
-                cout<<"idx : "<<idx<<endl;
+                //cout<<"idx : "<<idx<<endl;
             }
 
             //ignore if alphabets
         }
 
         int extraBraces = st.size();
-        cout<<"Extra Braces: "<<extraBraces<<endl;
+        //cout<<"Extra Braces: "<<extraBraces<<endl;
         while(!st.empty()){
 
             auto [_, idx] = st.top();
@@ -55,46 +55,41 @@ public:
         return s.substr(0, j);
     }
 
-    string minRemoveToMakeValid(string s) {
+
+    string method2(string s){
         
-
-        //1. Stak - TC: O(N) SC: O(N)
-        return method1(s);
-
         int N = s.size();
-        
         int open =0, close =0;
         
         for(int i=0; i<N; i++){
             
+            //marks the extra closing bracktes )
             if(s[i]=='(')
                 open++;
             else{
                 
                 if(s[i]==')'){
-                    if(open==0) s[i] ='?';
+                    if(open==0) s[i] ='?';  //there is no corresponding opening Bracket
                     else open--;
                 }
             }
             
-            
+            //marlks the extra opening brackets (
             if(s[N-1-i]==')')
                 close++;
             else{
                 
                 if(s[N-1-i]=='('){
-                    if(close==0) s[N-1-i] ='?';
+                    if(close==0) s[N-1-i] ='?'; //there is no corresponding closing Bracket
                     else close--;
                 }
             }
             
             
-            
-            
         }//for
         
         
-        string ans;
+        /*string ans;
         for(char ch:s){
             if(ch=='?')
                 continue;
@@ -103,6 +98,30 @@ public:
         }
         
         
-        return ans;
+        return ans;*/
+
+        int j=0;
+        for(int i=0; i<N; i++){
+
+            if(s[i]=='*')
+                continue;
+
+            s[j]= s[i];
+            j++;
+        }
+
+
+        return s.substr(0, j);
+
+    }
+
+    string minRemoveToMakeValid(string s) {
+        
+
+        //1. Stak - TC: O(N) SC: O(N)
+        return method1(s);
+
+        //2. Method2 - TC: O(N) SC: O(1)
+        return method2(s);
     }
 };
