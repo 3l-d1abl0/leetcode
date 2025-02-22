@@ -20,12 +20,11 @@ public:
 
         int rootEle = preorder[l_pre];
         TreeNode *root = new TreeNode(rootEle);
+        
         if(l_pre+1 > r_pre)
             return root;
             
-        cout<<"currentRoot: "<<rootEle<<" "<<l_pre<<" , "<<r_pre<<endl;
-
-        int rootEleIdx = postMap[rootEle];
+        //cout<<"currentRoot: "<<rootEle<<" "<<l_pre<<" , "<<r_pre<<endl;
 
         //Find the next root of the left Sub tree
         int leftRootIdx = postMap[preorder[l_pre+1]];
