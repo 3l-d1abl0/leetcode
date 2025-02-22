@@ -103,7 +103,7 @@ public:
         int j=0;
         for(int i=0; i<N; i++){
 
-            if(s[i]=='*')
+            if(s[i]=='?')
                 continue;
 
             s[j]= s[i];
@@ -119,7 +119,7 @@ public:
         
 
         //1. Stak - TC: O(N) SC: O(N)
-        return method1(s);
+        //return method1(s);
 
         //2. Method2 - TC: O(N) SC: O(1)
         return method2(s);
