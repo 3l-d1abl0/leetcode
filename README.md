@@ -170,6 +170,7 @@ Collection of LeetCode questions to ace the coding interview! - Created using [L
 | ------- |
 | [0010-regular-expression-matching](https://github.com/3l-d1abl0/leetcode/tree/master/0010-regular-expression-matching) |
 | [0721-accounts-merge](https://github.com/3l-d1abl0/leetcode/tree/master/0721-accounts-merge) |
+| [1371-minimum-remove-to-make-valid-parentheses](https://github.com/3l-d1abl0/leetcode/tree/master/1371-minimum-remove-to-make-valid-parentheses) |
 ## Sorting
 |  |
 | ------- |
@@ -203,4 +204,8 @@ Collection of LeetCode questions to ace the coding interview! - Created using [L
 |  |
 | ------- |
 | [0274-h-index](https://github.com/3l-d1abl0/leetcode/tree/master/0274-h-index) |
+## Stack
+|  |
+| ------- |
+| [1371-minimum-remove-to-make-valid-parentheses](https://github.com/3l-d1abl0/leetcode/tree/master/1371-minimum-remove-to-make-valid-parentheses) |
 <!---LeetCode Topics End-->
