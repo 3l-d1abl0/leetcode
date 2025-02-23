@@ -21,7 +21,7 @@
         //     maxx = INT_MAX;
         // }
     };
-    
+
 class Solution {
         private:
     //Every call returns
@@ -34,20 +34,20 @@ class Solution {
         //postOrder
         MetaData lf = getBst(root->left);
         MetaData rt = getBst(root->right);
-        MetaData dt;
+        
         
         //current node value falls withibn the range
         if(lf.maxx < root->val && root->val < rt.minn){
             
-            dt.sum = lf.sum + rt.sum +root->val;
-            dt.minn = min(root->val, lf.minn);
-            dt.maxx = max(root->val, rt.maxx);
+            int sum = lf.sum + rt.sum +root->val;
+            int minn = min(root->val, lf.minn);
+            int maxx = max(root->val, rt.maxx);
             //cout<<dt.sum<<" "<<dt.minn<<" "<<dt.maxx<<endl;
             
             //Track the max Sum seen So Far
-            maxSum = max(dt.sum, maxSum);
+            maxSum = max(sum, maxSum);
 
-            return dt;
+            return {sum, minn, maxx};
             //cout<<"sum = "<<dt.sum<<" node="<<root->val<<endl;   
         }
         
@@ -60,7 +60,7 @@ public:
     int maxSum = 0;
     int maxSumBST(TreeNode* root) {
         
-        MetaData info = getBst(root);
+        getBst(root);
         
         return maxSum;
     }
