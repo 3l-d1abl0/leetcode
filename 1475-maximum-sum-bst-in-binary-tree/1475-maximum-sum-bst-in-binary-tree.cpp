@@ -1,3 +1,10 @@
+#include "bits/stdc++.h"
+
+//https://leetcode.com/problems/maximum-sum-bst-in-binary-tree/
+
+
+using namespace std;
+
 /**
  * Definition for a binary tree node.
  * struct TreeNode {
@@ -10,35 +17,62 @@
  * };
  */
 class Solution {
-public:
-int ans = 0;
-
-vector<int> solve(TreeNode* root){
-    if(!root)
-    return {INT_MAX, INT_MIN, 0}; 
-
-    int val = root->val;
-    vector<int> left = solve(root -> left);
-    vector<int> right = solve(root -> right);
-
-    if(left.empty() || right.empty()) // IF Not BST
-    return {};
+        private:
     
-    if(val > left[1] && val < right[0]){
-        int sum = val + left[2] + right[2];
-        ans = max(sum, ans);
-
-        int minVal = min(val, left[0]);
-        int maxVal = max(val, right[1]);
+    struct MetaData{
+      bool isBst;  
+      int sum;
+      int min;
+      int max;
+        MetaData(){
+            isBst = true;
+            sum =0;
+            min = INT_MAX;
+            max = INT_MIN;
+        }
+    };
+    
+    MetaData getBst(TreeNode *root, int &maxx){
         
-        return { minVal, maxVal, sum };
+        if(root== NULL) return MetaData ();
+        
+        /*if(root->left == NULL && root->right == NULL){
+            return MetaData {true, root->val<0?0:root->val, root->val, root->val };
+        }*/
+        
+        //postOrder
+        
+        MetaData lf = getBst(root->left, maxx);
+        MetaData rt = getBst(root->right, maxx);
+        
+        MetaData dt;
+        
+        if(lf.isBst == true && rt.isBst == true && lf.max < root->val && root->val < rt.min){
+            
+            dt.sum = lf.sum + rt.sum +root->val;
+            dt.min = min(root->val, lf.min);
+            dt.max = max(root->val, rt.max);
+            
+            //cout<<"sum = "<<dt.sum<<" node="<<root->val<<endl;
+            
+        }else{ //left + node  + right is not a bst
+            
+            dt.isBst = false;
+            dt.sum = max(lf.sum, rt.sum);
+        }
+        
+        //Track the Global Max Sum
+        maxx = max(maxx, dt.sum);
+        return dt;
+        
     }
-
-    return {};  // not a BST
-}
-
+    
+public:
     int maxSumBST(TreeNode* root) {
-        solve(root);
-        return ans;
+        
+        int maxx =0;
+        getBst(root, maxx);
+        
+        return maxx;
     }
 };
