@@ -1,10 +1,3 @@
-#include "bits/stdc++.h"
-
-//https://leetcode.com/problems/maximum-sum-bst-in-binary-tree/
-
-
-using namespace std;
-
 /**
  * Definition for a binary tree node.
  * struct TreeNode {
@@ -16,63 +9,59 @@ using namespace std;
  *     TreeNode(int x, TreeNode *left, TreeNode *right) : val(x), left(left), right(right) {}
  * };
  */
-class Solution {
-        private:
-    
     struct MetaData{
-      bool isBst;  
-      int sum;
-      int min;
-      int max;
-        MetaData(){
-            isBst = true;
-            sum =0;
-            min = INT_MAX;
-            max = INT_MIN;
-        }
+      int sum;  //total sum , if its a valid BST
+      int minn; //left range limit
+      int maxx; //right range limit
+
+        //by default - invalid bst
+        // MetaData(){
+        //     sum = 0;
+        //     minn = INT_MIN;
+        //     maxx = INT_MAX;
+        // }
     };
     
-    MetaData getBst(TreeNode *root, int &maxx){
+class Solution {
+        private:
+    //Every call returns
+    
+    MetaData getBst(TreeNode *root){
         
-        if(root== NULL) return MetaData ();
-        
-        /*if(root->left == NULL && root->right == NULL){
-            return MetaData {true, root->val<0?0:root->val, root->val, root->val };
-        }*/
+        if(root== NULL)//Valid BST
+            return {0, INT_MAX, INT_MIN};
         
         //postOrder
-        
-        MetaData lf = getBst(root->left, maxx);
-        MetaData rt = getBst(root->right, maxx);
-        
+        MetaData lf = getBst(root->left);
+        MetaData rt = getBst(root->right);
         MetaData dt;
         
-        if(lf.isBst == true && rt.isBst == true && lf.max < root->val && root->val < rt.min){
+        //current node value falls withibn the range
+        if(lf.maxx < root->val && root->val < rt.minn){
             
             dt.sum = lf.sum + rt.sum +root->val;
-            dt.min = min(root->val, lf.min);
-            dt.max = max(root->val, rt.max);
+            dt.minn = min(root->val, lf.minn);
+            dt.maxx = max(root->val, rt.maxx);
+            //cout<<dt.sum<<" "<<dt.minn<<" "<<dt.maxx<<endl;
             
-            //cout<<"sum = "<<dt.sum<<" node="<<root->val<<endl;
-            
-        }else{ //left + node  + right is not a bst
-            
-            dt.isBst = false;
-            dt.sum = max(lf.sum, rt.sum);
+            //Track the max Sum seen So Far
+            maxSum = max(dt.sum, maxSum);
+
+            return dt;
+            //cout<<"sum = "<<dt.sum<<" node="<<root->val<<endl;   
         }
         
-        //Track the Global Max Sum
-        maxx = max(maxx, dt.sum);
-        return dt;
+        //IF the current value doesnt fall in range, either any of the subtree is not bst OR, the current val doesnt lie in range
+        return {0, INT_MIN, INT_MAX}; //pass invalid limt + the max size valid bst found so far
         
     }
     
 public:
+    int maxSum = 0;
     int maxSumBST(TreeNode* root) {
         
-        int maxx =0;
-        getBst(root, maxx);
+        MetaData info = getBst(root);
         
-        return maxx;
+        return maxSum;
     }
 };
