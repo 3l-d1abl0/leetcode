@@ -10,62 +10,35 @@
  * };
  */
 class Solution {
-        private:
-    
-    struct MetaData{
-      bool isBst;  
-      int sum;
-      int min;
-      int max;
-        MetaData(){
-            isBst = true;
-            sum =0;
-            min = INT_MAX;
-            max = INT_MIN;
-        }
-    };
-    
-    MetaData getBst(TreeNode *root, int &maxx){
-        
-        if(root== NULL) return MetaData ();
-        
-        /*if(root->left == NULL && root->right == NULL){
-            return MetaData {true, root->val<0?0:root->val, root->val, root->val };
-        }*/
-        
-        //postOrder
-        
-        MetaData lf = getBst(root->left, maxx);
-        MetaData rt = getBst(root->right, maxx);
-        
-        MetaData dt;
-        
-        if(lf.isBst == true && rt.isBst == true && lf.max < root->val && root->val < rt.min){
-            
-            dt.sum = lf.sum + rt.sum +root->val;
-            dt.min = min(root->val, lf.min);
-            dt.max = max(root->val, rt.max);
-            
-            //cout<<"sum = "<<dt.sum<<" node="<<root->val<<endl;
-            
-        }else{ //left + node  + right is not a bst
-            
-            dt.isBst = false;
-            dt.sum = max(lf.sum, rt.sum);//track the max Sum so far in the subtree
-        }
-        
-        
-        maxx = max(maxx, dt.sum);
-        return dt;
-        
-    }
-    
 public:
+int ans = 0;
+
+vector<int> solve(TreeNode* root){
+    if(!root)
+    return {INT_MAX, INT_MIN, 0}; 
+
+    int val = root->val;
+    vector<int> left = solve(root -> left);
+    vector<int> right = solve(root -> right);
+
+    if(left.empty() || right.empty()) // IF Not BST
+    return {};
+    
+    if(val > left[1] && val < right[0]){
+        int sum = val + left[2] + right[2];
+        ans = max(sum, ans);
+
+        int minVal = min(val, left[0]);
+        int maxVal = max(val, right[1]);
+        
+        return { minVal, maxVal, sum };
+    }
+
+    return {};  // not a BST
+}
+
     int maxSumBST(TreeNode* root) {
-        
-        int maxx =0;
-        getBst(root, maxx);
-        
-        return maxx;
+        solve(root);
+        return ans;
     }
 };
