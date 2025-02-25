@@ -197,6 +197,7 @@ Collection of LeetCode questions to ace the coding interview! - Created using [L
 |  |
 | ------- |
 | [0010-regular-expression-matching](https://github.com/3l-d1abl0/leetcode/tree/master/0010-regular-expression-matching) |
+| [0022-generate-parentheses](https://github.com/3l-d1abl0/leetcode/tree/master/0022-generate-parentheses) |
 | [0125-valid-palindrome](https://github.com/3l-d1abl0/leetcode/tree/master/0125-valid-palindrome) |
 | [0227-basic-calculator-ii](https://github.com/3l-d1abl0/leetcode/tree/master/0227-basic-calculator-ii) |
 | [0721-accounts-merge](https://github.com/3l-d1abl0/leetcode/tree/master/0721-accounts-merge) |
@@ -221,6 +222,7 @@ Collection of LeetCode questions to ace the coding interview! - Created using [L
 |  |
 | ------- |
 | [0010-regular-expression-matching](https://github.com/3l-d1abl0/leetcode/tree/master/0010-regular-expression-matching) |
+| [0022-generate-parentheses](https://github.com/3l-d1abl0/leetcode/tree/master/0022-generate-parentheses) |
 | [0542-01-matrix](https://github.com/3l-d1abl0/leetcode/tree/master/0542-01-matrix) |
 | [1474-longest-zigzag-path-in-a-binary-tree](https://github.com/3l-d1abl0/leetcode/tree/master/1474-longest-zigzag-path-in-a-binary-tree) |
 | [1475-maximum-sum-bst-in-binary-tree](https://github.com/3l-d1abl0/leetcode/tree/master/1475-maximum-sum-bst-in-binary-tree) |
@@ -266,4 +268,8 @@ Collection of LeetCode questions to ace the coding interview! - Created using [L
 |  |
 | ------- |
 | [0215-kth-largest-element-in-an-array](https://github.com/3l-d1abl0/leetcode/tree/master/0215-kth-largest-element-in-an-array) |
+## Backtracking
+|  |
+| ------- |
+| [0022-generate-parentheses](https://github.com/3l-d1abl0/leetcode/tree/master/0022-generate-parentheses) |
 <!---LeetCode Topics End-->
