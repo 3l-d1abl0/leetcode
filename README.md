@@ -17,6 +17,7 @@ Collection of LeetCode questions to ace the coding interview! - Created using [L
 | [0240-search-a-2d-matrix-ii](https://github.com/3l-d1abl0/leetcode/tree/master/0240-search-a-2d-matrix-ii) |
 | [0274-h-index](https://github.com/3l-d1abl0/leetcode/tree/master/0274-h-index) |
 | [0275-h-index-ii](https://github.com/3l-d1abl0/leetcode/tree/master/0275-h-index-ii) |
+| [0399-evaluate-division](https://github.com/3l-d1abl0/leetcode/tree/master/0399-evaluate-division) |
 | [0417-pacific-atlantic-water-flow](https://github.com/3l-d1abl0/leetcode/tree/master/0417-pacific-atlantic-water-flow) |
 | [0540-single-element-in-a-sorted-array](https://github.com/3l-d1abl0/leetcode/tree/master/0540-single-element-in-a-sorted-array) |
 | [0542-01-matrix](https://github.com/3l-d1abl0/leetcode/tree/master/0542-01-matrix) |
@@ -123,6 +124,7 @@ Collection of LeetCode questions to ace the coding interview! - Created using [L
 | ------- |
 | [0133-clone-graph](https://github.com/3l-d1abl0/leetcode/tree/master/0133-clone-graph) |
 | [0236-lowest-common-ancestor-of-a-binary-tree](https://github.com/3l-d1abl0/leetcode/tree/master/0236-lowest-common-ancestor-of-a-binary-tree) |
+| [0399-evaluate-division](https://github.com/3l-d1abl0/leetcode/tree/master/0399-evaluate-division) |
 | [0417-pacific-atlantic-water-flow](https://github.com/3l-d1abl0/leetcode/tree/master/0417-pacific-atlantic-water-flow) |
 | [0543-diameter-of-binary-tree](https://github.com/3l-d1abl0/leetcode/tree/master/0543-diameter-of-binary-tree) |
 | [0547-number-of-provinces](https://github.com/3l-d1abl0/leetcode/tree/master/0547-number-of-provinces) |
@@ -144,6 +146,7 @@ Collection of LeetCode questions to ace the coding interview! - Created using [L
 |  |
 | ------- |
 | [0133-clone-graph](https://github.com/3l-d1abl0/leetcode/tree/master/0133-clone-graph) |
+| [0399-evaluate-division](https://github.com/3l-d1abl0/leetcode/tree/master/0399-evaluate-division) |
 | [0417-pacific-atlantic-water-flow](https://github.com/3l-d1abl0/leetcode/tree/master/0417-pacific-atlantic-water-flow) |
 | [0542-01-matrix](https://github.com/3l-d1abl0/leetcode/tree/master/0542-01-matrix) |
 | [0547-number-of-provinces](https://github.com/3l-d1abl0/leetcode/tree/master/0547-number-of-provinces) |
@@ -175,6 +178,7 @@ Collection of LeetCode questions to ace the coding interview! - Created using [L
 ## Union Find
 |  |
 | ------- |
+| [0399-evaluate-division](https://github.com/3l-d1abl0/leetcode/tree/master/0399-evaluate-division) |
 | [0547-number-of-provinces](https://github.com/3l-d1abl0/leetcode/tree/master/0547-number-of-provinces) |
 | [0684-redundant-connection](https://github.com/3l-d1abl0/leetcode/tree/master/0684-redundant-connection) |
 | [0695-max-area-of-island](https://github.com/3l-d1abl0/leetcode/tree/master/0695-max-area-of-island) |
@@ -191,6 +195,7 @@ Collection of LeetCode questions to ace the coding interview! - Created using [L
 |  |
 | ------- |
 | [0133-clone-graph](https://github.com/3l-d1abl0/leetcode/tree/master/0133-clone-graph) |
+| [0399-evaluate-division](https://github.com/3l-d1abl0/leetcode/tree/master/0399-evaluate-division) |
 | [0547-number-of-provinces](https://github.com/3l-d1abl0/leetcode/tree/master/0547-number-of-provinces) |
 | [0684-redundant-connection](https://github.com/3l-d1abl0/leetcode/tree/master/0684-redundant-connection) |
 | [0984-most-stones-removed-with-same-row-or-column](https://github.com/3l-d1abl0/leetcode/tree/master/0984-most-stones-removed-with-same-row-or-column) |
@@ -205,6 +210,7 @@ Collection of LeetCode questions to ace the coding interview! - Created using [L
 | [0022-generate-parentheses](https://github.com/3l-d1abl0/leetcode/tree/master/0022-generate-parentheses) |
 | [0125-valid-palindrome](https://github.com/3l-d1abl0/leetcode/tree/master/0125-valid-palindrome) |
 | [0227-basic-calculator-ii](https://github.com/3l-d1abl0/leetcode/tree/master/0227-basic-calculator-ii) |
+| [0399-evaluate-division](https://github.com/3l-d1abl0/leetcode/tree/master/0399-evaluate-division) |
 | [0721-accounts-merge](https://github.com/3l-d1abl0/leetcode/tree/master/0721-accounts-merge) |
 | [1371-minimum-remove-to-make-valid-parentheses](https://github.com/3l-d1abl0/leetcode/tree/master/1371-minimum-remove-to-make-valid-parentheses) |
 ## Sorting
@@ -240,6 +246,7 @@ Collection of LeetCode questions to ace the coding interview! - Created using [L
 ## Shortest Path
 |  |
 | ------- |
+| [0399-evaluate-division](https://github.com/3l-d1abl0/leetcode/tree/master/0399-evaluate-division) |
 | [2090-number-of-ways-to-arrive-at-destination](https://github.com/3l-d1abl0/leetcode/tree/master/2090-number-of-ways-to-arrive-at-destination) |
 ## Counting Sort
 |  |
