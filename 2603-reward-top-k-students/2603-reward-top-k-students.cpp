@@ -4,26 +4,27 @@ public:
         bool operator()(pair<int,int> const & p1, pair<int,int> const & p2){
              if(p1.first == p2.first) //same scores
                 return p1.second > p2.second; //lower id first
-        
+            
             //higher score first
             return p1.first < p2.first;
         }
     };
 
-    /*static bool compareStudent(const pair<int, int> p1, const pair<int, int> p2)
-    {
+    /*static bool compareStudent(const pair<int, int> p1, const pair<int, int> p2){
         if(p1.first == p2.first) //same scores
-        {
             return p1.second < p2.second; //lower id first
-        }
+        
         //higher score first
         return p1.first > p2.first;
     }*/
+
     vector<int> topStudents(vector<string>& positive_feedback, vector<string>& negative_feedback, vector<string>& report, vector<int>& student_id, int k) {
-        
-        vector<pair<int, int>> pointStudent;
+    
+    
+        //vector<pair<int, int>> pointStudent;
+    
         //min heap for topK
-        //priority_queue<pair<int, int>, vector<pair<int,int>>, compareStudent> pq;
+        priority_queue<pair<int, int>, vector<pair<int,int>>, compareStudent> pq;
         vector<int> topKStudents;
 
         //Create a Map Set of Words
@@ -44,13 +45,13 @@ public:
                 else if(negSet.count(word)) currentScore -= 1;
             }
 
-            //pq.push({currentScore, student_id[i]});
+            pq.push({currentScore, student_id[i]});
             // if(pq.size() > k) pq.pop();
-            pointStudent.push_back({currentScore, student_id[i]});
+            // pointStudent.push_back({currentScore, student_id[i]});
         }
 
         // sort(pointStudent.begin(), pointStudent.end(), compareStudent);
-        priority_queue<pair<int, int>, vector<pair<int,int>>, compareStudent> pq(pointStudent.begin(), pointStudent.end());
+
         int count = 0;
         for(int i=0; i< k && !pq.empty(); i++){
             topKStudents.push_back(pq.top().second);
