@@ -9,8 +9,7 @@ public:
         vector<vector<bool>> visited(R, vector<bool>(C, false));
 
 
-        //priority_queue<tuple<int, int, int, int>, vector<tuple<int, int, int ,int>>, greater<tuple<int, int, int, int>>> pq;
-        vector<tuple<int, int, int ,int>> valid;
+        priority_queue<tuple<int, int, int, int>, vector<tuple<int, int, int ,int>>, greater<tuple<int, int, int, int>>> pq;
 
         vector<vector<int>> dir{{-1, 0}, {1, 0}, {0, 1}, {0, -1}};
 
@@ -25,7 +24,6 @@ public:
             int size = q.size();
             //Loop through all points at a certain distance
             for(int sz=0; sz<size; sz++){
-
                 auto [r, c] = q.front();    q.pop();
 
                 if(visited[r][c] == true)
@@ -42,8 +40,7 @@ public:
                     //within pricing Range
                     if(grid[r][c]>= pricing[0] && grid[r][c]<=pricing[1]){
                         
-                        //pq.push({distance, grid[r][c], r, c});
-                        valid.push_back({distance, grid[r][c], r, c});
+                        pq.push({distance, grid[r][c], r, c});
                     }
                 }
 
@@ -62,19 +59,16 @@ public:
             distance++;
         }//while
 
+        cout<<"Heap: "<<pq.size()<<endl;
         vector<vector<int>> ans;
-        priority_queue<tuple<int, int, int, int>, vector<tuple<int, int, int ,int>>, greater<tuple<int, int, int, int>>> pq(valid.begin(), valid.end());
-        //sort(valid.begin(), valid.end());
         //Top k from heap
         while(!pq.empty() && ans.size() <k){
 
             auto [dist, price, row, col] = pq.top(); pq.pop();
             ans.push_back({row, col});
-        }
 
-        /*for(int i=0; i< min(k, (int)valid.size()); i++){
-            ans.push_back({get<2>(valid[i]), get<3>(valid[i])});
-        }*/
+            
+        }
 
 
         return ans;
