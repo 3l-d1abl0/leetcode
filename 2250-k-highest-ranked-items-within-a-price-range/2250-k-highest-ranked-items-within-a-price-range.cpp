@@ -24,6 +24,7 @@ public:
             int size = q.size();
             //Loop through all points at a certain distance
             for(int sz=0; sz<size; sz++){
+
                 auto [r, c] = q.front();    q.pop();
 
                 if(visited[r][c] == true)
@@ -59,7 +60,6 @@ public:
             distance++;
         }//while
 
-        cout<<"Heap: "<<pq.size()<<endl;
         vector<vector<int>> ans;
         //Top k from heap
         while(!pq.empty() && ans.size() <k){
