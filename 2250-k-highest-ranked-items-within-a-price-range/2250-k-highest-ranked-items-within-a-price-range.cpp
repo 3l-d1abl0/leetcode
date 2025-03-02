@@ -9,7 +9,7 @@ public:
         vector<vector<bool>> visited(R, vector<bool>(C, false));
 
 
-        priority_queue<tuple<int, int, int, int>, vector<tuple<int, int, int ,int>>, greater<tuple<int, int, int, int>>> pq;
+        //priority_queue<tuple<int, int, int, int>, vector<tuple<int, int, int ,int>>, greater<tuple<int, int, int, int>>> pq;
         vector<tuple<int, int, int ,int>> valid;
 
         vector<vector<int>> dir{{-1, 0}, {1, 0}, {0, 1}, {0, -1}};
@@ -63,17 +63,18 @@ public:
         }//while
 
         vector<vector<int>> ans;
-        sort(valid.begin(), valid.end());
+        priority_queue<tuple<int, int, int, int>, vector<tuple<int, int, int ,int>>, greater<tuple<int, int, int, int>>> pq(valid.begin(), valid.end());
+        //sort(valid.begin(), valid.end());
         //Top k from heap
-        /*while(!pq.empty() && ans.size() <k){
+        while(!pq.empty() && ans.size() <k){
 
             auto [dist, price, row, col] = pq.top(); pq.pop();
             ans.push_back({row, col});
-        }*/
-
-        for(int i=0; i< min(k, (int)valid.size()); i++){
-            ans.push_back({get<2>(valid[i]), get<3>(valid[i])});
         }
+
+        /*for(int i=0; i< min(k, (int)valid.size()); i++){
+            ans.push_back({get<2>(valid[i]), get<3>(valid[i])});
+        }*/
 
 
         return ans;
