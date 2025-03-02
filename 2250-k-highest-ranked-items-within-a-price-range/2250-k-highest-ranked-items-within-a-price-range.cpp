@@ -10,6 +10,7 @@ public:
 
 
         priority_queue<tuple<int, int, int, int>, vector<tuple<int, int, int ,int>>, greater<tuple<int, int, int, int>>> pq;
+        vector<tuple<int, int, int ,int>> valid;
 
         vector<vector<int>> dir{{-1, 0}, {1, 0}, {0, 1}, {0, -1}};
 
@@ -41,7 +42,8 @@ public:
                     //within pricing Range
                     if(grid[r][c]>= pricing[0] && grid[r][c]<=pricing[1]){
                         
-                        pq.push({distance, grid[r][c], r, c});
+                        //pq.push({distance, grid[r][c], r, c});
+                        valid.push_back({distance, grid[r][c], r, c});
                     }
                 }
 
@@ -61,13 +63,16 @@ public:
         }//while
 
         vector<vector<int>> ans;
+        sort(valid.begin(), valid.end());
         //Top k from heap
-        while(!pq.empty() && ans.size() <k){
+        /*while(!pq.empty() && ans.size() <k){
 
             auto [dist, price, row, col] = pq.top(); pq.pop();
             ans.push_back({row, col});
+        }*/
 
-            
+        for(int i=0; i< min(k, (int)valid.size()); i++){
+            ans.push_back({get<2>(valid[i]), get<3>(valid[i])});
         }
 
 
