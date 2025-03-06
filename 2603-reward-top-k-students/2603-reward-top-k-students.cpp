@@ -22,8 +22,14 @@ public:
     vector<int> topStudents(vector<string>& positive_feedback, vector<string>& negative_feedback, vector<string>& report, vector<int>& student_id, int k) {
     
     
-        //vector<pair<int, int>> pointStudent;
-    
+        /*
+            Instead of having a Max Heap of size N.
+
+            We have a min Heap of size K, to store the top K Scores.
+            Since it is a min heap, the top element will have
+            the element with least Score, and if scores are equal, the greater id
+        */
+
         //Min heap of Size K
         priority_queue<pair<int, int>, vector<pair<int,int>>, compareStudent> pq;
 
@@ -31,8 +37,7 @@ public:
         unordered_set<string> posSet(positive_feedback.begin(), positive_feedback.end());
         unordered_set<string> negSet(negative_feedback.begin(), negative_feedback.end());
 
-        int numStudents = report.size();
-        for(int i = 0; i < numStudents; i++){
+        for(int i = 0; i < report.size(); i++){
             string studentReport = report[i];
             
             //split report to words
