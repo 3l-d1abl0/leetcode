@@ -3,29 +3,29 @@ public:
     struct compareStudent {
         bool operator()(pair<int,int> const & p1, pair<int,int> const & p2){
              if(p1.first == p2.first) //same scores
-                return p1.second > p2.second; //lower id first
+                return p1.second < p2.second; //greater id first
             
-            //higher score first
-            return p1.first < p2.first;
+            //lower score first
+            return p1.first > p2.first;
         }
     };
 
-    /*static bool compareStudent(const pair<int, int> p1, const pair<int, int> p2){
-        if(p1.first == p2.first) //same scores
-            return p1.second < p2.second; //lower id first
-        
-        //higher score first
-        return p1.first > p2.first;
-    }*/
+    //If the candidate is eligible for topK
+    bool inTopK(pair<int, int> q, pair<int, int> candidate){
+
+            if(q.first == candidate.first)  //score same , rank less
+                return candidate.second < q.second;
+            
+            return candidate.first > q.first;
+    }
 
     vector<int> topStudents(vector<string>& positive_feedback, vector<string>& negative_feedback, vector<string>& report, vector<int>& student_id, int k) {
     
     
         //vector<pair<int, int>> pointStudent;
     
-        //min heap for topK
+        //Min heap of Size K
         priority_queue<pair<int, int>, vector<pair<int,int>>, compareStudent> pq;
-        vector<int> topKStudents;
 
         //Create a Map Set of Words
         unordered_set<string> posSet(positive_feedback.begin(), positive_feedback.end());
@@ -45,25 +45,28 @@ public:
                 else if(negSet.count(word)) currentScore -= 1;
             }
 
-            pq.push({currentScore, student_id[i]});
-            // if(pq.size() > k) pq.pop();
-            // pointStudent.push_back({currentScore, student_id[i]});
-        }
+            
+            if(pq.size()< k)
+                pq.push({currentScore, student_id[i]});
+            else{
 
-        // sort(pointStudent.begin(), pointStudent.end(), compareStudent);
+                if(inTopK(pq.top(), {currentScore, student_id[i]} )){//if the current score eligible for topK score   
+                    pq.pop();
+                    pq.push({currentScore, student_id[i]});
+                }
+
+            }
+
+        }//for
+
 
         int count = 0;
-        for(int i=0; i< k && !pq.empty(); i++){
-            topKStudents.push_back(pq.top().second);
+        vector<int> topKStudents((int)pq.size());
+        while(!pq.empty()){
+            topKStudents[(int)pq.size() -1] = pq.top().second;
             pq.pop();
         }
-        
-        /*for(auto & scoreStudent : pointStudent){
-            topKStudents.push_back(scoreStudent.second);
-            count++;
-            if(count == ansSize) break;
-        }*/
-        
+
         return topKStudents;
     }
 
