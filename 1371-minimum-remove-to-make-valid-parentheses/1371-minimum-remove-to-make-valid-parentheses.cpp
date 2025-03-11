@@ -62,6 +62,11 @@ public:
         
         int N = s.size();
         int open =0, close =0;
+
+        /*
+            0 - N-1   --> will detect closing Brackets
+            N-1 0     --> will detect opening Brackets
+        */
         
         for(int i=0; i<N; i++){
             
@@ -102,18 +107,18 @@ public:
         
         return ans;*/
 
-        int j=0;
+        int idx=0;
         for(int i=0; i<N; i++){
 
             if(s[i]=='?')
                 continue;
 
-            s[j]= s[i];
-            j++;
+            s[idx]= s[i];
+            idx++;
         }
 
 
-        return s.substr(0, j);
+        return s.substr(0, idx);    //[0, idx-1]
 
     }
 
@@ -121,9 +126,9 @@ public:
         
 
         //1. Stak - TC: O(N) SC: O(N) - 13ms
-        return method1(s);
+        //return method1(s);
 
         //2. Method2 - TC: O(N) SC: O(1) - 6ms
-        //return method2(s);
+        return method2(s);
     }
 };
