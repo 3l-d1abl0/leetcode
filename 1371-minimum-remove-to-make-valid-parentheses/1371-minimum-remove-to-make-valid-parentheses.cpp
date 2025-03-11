@@ -27,7 +27,9 @@ public:
             }
 
             //ignore if alphabets
-        }
+        }//for
+
+        //stack will contain all the extra brackets
 
         int extraBraces = st.size();
         //cout<<"Extra Braces: "<<extraBraces<<endl;
@@ -41,18 +43,18 @@ public:
 
         }
 
-        int j=0;
+        int idx=0;
         for(int i=0; i<N; i++){
 
             if(s[i]=='*')
                 continue;
 
-            s[j]= s[i];
-            j++;
+            s[idx]= s[i];
+            idx++;
         }
 
 
-        return s.substr(0, j);
+        return s.substr(0, idx);    //[0, idx-1]
     }
 
 
@@ -118,10 +120,10 @@ public:
     string minRemoveToMakeValid(string s) {
         
 
-        //1. Stak - TC: O(N) SC: O(N)
-        //return method1(s);
+        //1. Stak - TC: O(N) SC: O(N) - 13ms
+        return method1(s);
 
-        //2. Method2 - TC: O(N) SC: O(1)
-        return method2(s);
+        //2. Method2 - TC: O(N) SC: O(1) - 6ms
+        //return method2(s);
     }
 };
