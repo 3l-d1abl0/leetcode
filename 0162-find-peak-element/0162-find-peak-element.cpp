@@ -74,27 +74,6 @@ public:
         return -1;
     }
     
-    int method2(vector<int> &nums){
-
-        int l = -1, r= nums.size();
-
-        while(r-l>2){
-
-                int mid = l+(r-l)/2;
-
-                if(nums[mid-1]<nums[mid] && nums[mid]>nums[mid+1])
-                    return mid;
-                
-                if(nums[mid-1]<nums[mid])
-                    l=mid;
-                else
-                    r=mid;
-        }
-
-        cout<<l<<" "<<r<<endl;
-
-        return r;
-    }
 
     int findPeakElement(vector<int>& nums) {
         
@@ -105,8 +84,5 @@ public:
         //return BSItr(nums, st, ed);
         
         return method1(nums);
-
-        //trying ON ANswers
-        return method2(nums);
     }
 };
