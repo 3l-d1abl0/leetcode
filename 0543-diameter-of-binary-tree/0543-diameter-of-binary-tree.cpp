@@ -21,7 +21,7 @@ public:
         int lf = calcDiameter(root->left, diameter);
         int rt = calcDiameter(root->right, diameter);
         
-        diameter = max(lf+rt+1, diameter);
+        diameter = max(lf+rt, diameter);
         
         
         return max(lf, rt)+1;
@@ -33,6 +33,6 @@ public:
         int diameter =0;
         calcDiameter(root, diameter);
         
-        return diameter-1;
+        return diameter;
     }
 };
