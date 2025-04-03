@@ -64,7 +64,8 @@ class Solution {
     }
     
     int method1(vector<int>& arr, int K) {
-        
+
+            //Make a heap of first K
         	priority_queue<int, vector<int> , greater<int> > minHeap(arr.begin(), arr.begin()+K);
 
             //for(int i=0; i<K; i++){
@@ -90,7 +91,7 @@ public:
             1. Method1: Use Min heap
             TC: O(K) + O((N-K)*logK)
         */
-        //return method1(nums, k);
+        return method1(nums, k);
         
         
         /*
@@ -98,10 +99,10 @@ public:
             Basically hoping the pivot lands on the Kth element
             Best: O(N)
             Avg: O(NlogN)
-            Worst: O(N^2)
+            Worst: O(N^2) quadratic
         */
-        int N = nums.size();
-        return kthLargest(nums, k, 0, N-1);
+        //int N = nums.size();
+        //return kthLargest(nums, k, 0, N-1);
 
 
         //3. Median of Medians
