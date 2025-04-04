@@ -22,6 +22,7 @@ Collection of LeetCode questions to ace the coding interview! - Created using [L
 | [0417-pacific-atlantic-water-flow](https://github.com/3l-d1abl0/leetcode/tree/master/0417-pacific-atlantic-water-flow) |
 | [0540-single-element-in-a-sorted-array](https://github.com/3l-d1abl0/leetcode/tree/master/0540-single-element-in-a-sorted-array) |
 | [0542-01-matrix](https://github.com/3l-d1abl0/leetcode/tree/master/0542-01-matrix) |
+| [0560-subarray-sum-equals-k](https://github.com/3l-d1abl0/leetcode/tree/master/0560-subarray-sum-equals-k) |
 | [0695-max-area-of-island](https://github.com/3l-d1abl0/leetcode/tree/master/0695-max-area-of-island) |
 | [0721-accounts-merge](https://github.com/3l-d1abl0/leetcode/tree/master/0721-accounts-merge) |
 | [0854-making-a-large-island](https://github.com/3l-d1abl0/leetcode/tree/master/0854-making-a-large-island) |
@@ -104,6 +105,7 @@ Collection of LeetCode questions to ace the coding interview! - Created using [L
 | [0106-construct-binary-tree-from-inorder-and-postorder-traversal](https://github.com/3l-d1abl0/leetcode/tree/master/0106-construct-binary-tree-from-inorder-and-postorder-traversal) |
 | [0133-clone-graph](https://github.com/3l-d1abl0/leetcode/tree/master/0133-clone-graph) |
 | [0146-lru-cache](https://github.com/3l-d1abl0/leetcode/tree/master/0146-lru-cache) |
+| [0560-subarray-sum-equals-k](https://github.com/3l-d1abl0/leetcode/tree/master/0560-subarray-sum-equals-k) |
 | [0721-accounts-merge](https://github.com/3l-d1abl0/leetcode/tree/master/0721-accounts-merge) |
 | [0925-construct-binary-tree-from-preorder-and-postorder-traversal](https://github.com/3l-d1abl0/leetcode/tree/master/0925-construct-binary-tree-from-preorder-and-postorder-traversal) |
 | [0984-most-stones-removed-with-same-row-or-column](https://github.com/3l-d1abl0/leetcode/tree/master/0984-most-stones-removed-with-same-row-or-column) |
@@ -310,4 +312,8 @@ Collection of LeetCode questions to ace the coding interview! - Created using [L
 |  |
 | ------- |
 | [1300-critical-connections-in-a-network](https://github.com/3l-d1abl0/leetcode/tree/master/1300-critical-connections-in-a-network) |
+## Prefix Sum
+|  |
+| ------- |
+| [0560-subarray-sum-equals-k](https://github.com/3l-d1abl0/leetcode/tree/master/0560-subarray-sum-equals-k) |
 <!---LeetCode Topics End-->
