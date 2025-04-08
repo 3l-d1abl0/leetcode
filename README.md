@@ -18,6 +18,7 @@ Collection of LeetCode questions to ace the coding interview! - Created using [L
 | [0240-search-a-2d-matrix-ii](https://github.com/3l-d1abl0/leetcode/tree/master/0240-search-a-2d-matrix-ii) |
 | [0274-h-index](https://github.com/3l-d1abl0/leetcode/tree/master/0274-h-index) |
 | [0275-h-index-ii](https://github.com/3l-d1abl0/leetcode/tree/master/0275-h-index-ii) |
+| [0315-count-of-smaller-numbers-after-self](https://github.com/3l-d1abl0/leetcode/tree/master/0315-count-of-smaller-numbers-after-self) |
 | [0399-evaluate-division](https://github.com/3l-d1abl0/leetcode/tree/master/0399-evaluate-division) |
 | [0417-pacific-atlantic-water-flow](https://github.com/3l-d1abl0/leetcode/tree/master/0417-pacific-atlantic-water-flow) |
 | [0540-single-element-in-a-sorted-array](https://github.com/3l-d1abl0/leetcode/tree/master/0540-single-element-in-a-sorted-array) |
@@ -47,6 +48,7 @@ Collection of LeetCode questions to ace the coding interview! - Created using [L
 | [0162-find-peak-element](https://github.com/3l-d1abl0/leetcode/tree/master/0162-find-peak-element) |
 | [0240-search-a-2d-matrix-ii](https://github.com/3l-d1abl0/leetcode/tree/master/0240-search-a-2d-matrix-ii) |
 | [0275-h-index-ii](https://github.com/3l-d1abl0/leetcode/tree/master/0275-h-index-ii) |
+| [0315-count-of-smaller-numbers-after-self](https://github.com/3l-d1abl0/leetcode/tree/master/0315-count-of-smaller-numbers-after-self) |
 | [0540-single-element-in-a-sorted-array](https://github.com/3l-d1abl0/leetcode/tree/master/0540-single-element-in-a-sorted-array) |
 | [1056-capacity-to-ship-packages-within-d-days](https://github.com/3l-d1abl0/leetcode/tree/master/1056-capacity-to-ship-packages-within-d-days) |
 | [1185-find-in-mountain-array](https://github.com/3l-d1abl0/leetcode/tree/master/1185-find-in-mountain-array) |
@@ -78,6 +80,7 @@ Collection of LeetCode questions to ace the coding interview! - Created using [L
 | [0106-construct-binary-tree-from-inorder-and-postorder-traversal](https://github.com/3l-d1abl0/leetcode/tree/master/0106-construct-binary-tree-from-inorder-and-postorder-traversal) |
 | [0215-kth-largest-element-in-an-array](https://github.com/3l-d1abl0/leetcode/tree/master/0215-kth-largest-element-in-an-array) |
 | [0240-search-a-2d-matrix-ii](https://github.com/3l-d1abl0/leetcode/tree/master/0240-search-a-2d-matrix-ii) |
+| [0315-count-of-smaller-numbers-after-self](https://github.com/3l-d1abl0/leetcode/tree/master/0315-count-of-smaller-numbers-after-self) |
 | [0925-construct-binary-tree-from-preorder-and-postorder-traversal](https://github.com/3l-d1abl0/leetcode/tree/master/0925-construct-binary-tree-from-preorder-and-postorder-traversal) |
 ## Math
 |  |
@@ -316,4 +319,20 @@ Collection of LeetCode questions to ace the coding interview! - Created using [L
 |  |
 | ------- |
 | [0560-subarray-sum-equals-k](https://github.com/3l-d1abl0/leetcode/tree/master/0560-subarray-sum-equals-k) |
+## Binary Indexed Tree
+|  |
+| ------- |
+| [0315-count-of-smaller-numbers-after-self](https://github.com/3l-d1abl0/leetcode/tree/master/0315-count-of-smaller-numbers-after-self) |
+## Segment Tree
+|  |
+| ------- |
+| [0315-count-of-smaller-numbers-after-self](https://github.com/3l-d1abl0/leetcode/tree/master/0315-count-of-smaller-numbers-after-self) |
+## Merge Sort
+|  |
+| ------- |
+| [0315-count-of-smaller-numbers-after-self](https://github.com/3l-d1abl0/leetcode/tree/master/0315-count-of-smaller-numbers-after-self) |
+## Ordered Set
+|  |
+| ------- |
+| [0315-count-of-smaller-numbers-after-self](https://github.com/3l-d1abl0/leetcode/tree/master/0315-count-of-smaller-numbers-after-self) |
 <!---LeetCode Topics End-->
