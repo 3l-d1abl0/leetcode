@@ -38,11 +38,12 @@ public:
         
         for(int i=N-1; i>=0; i--){
             
+            //binary - search - log(n)
             int idx= lower_bound(table.begin(), table.end(), nums[i]) - table.begin();
             ans[i] = idx;
-            
+            //insert - linear - n
             table.insert(table.begin()+idx, nums[i]);
-        }
+        }// O(N+log(N))
         
         
         return ans;
@@ -75,12 +76,12 @@ public:
     
     vector<int> countSmaller(vector<int>& nums) {
         
-        //Binary Search + array resize - O(N*(longN+ N)) TLE
-        return method1(nums);
+        //Binary Search + array resize - O(N*(longN+ N)) 1699 ms
+        //return method1(nums);
         
         
         //Fenwick Tree
-        //return method2(nums);
+        return method2(nums);
         
     }
 };
