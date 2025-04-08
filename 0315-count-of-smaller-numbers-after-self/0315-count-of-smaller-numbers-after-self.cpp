@@ -75,12 +75,12 @@ public:
     
     vector<int> countSmaller(vector<int>& nums) {
         
-        //Binary Search - O(N*(longN+ N)) TLE
-        //return method1(nums);
+        //Binary Search + array resize - O(N*(longN+ N)) TLE
+        return method1(nums);
         
         
         //Fenwick Tree
-        return method2(nums);
+        //return method2(nums);
         
     }
 };
