@@ -1,6 +1,6 @@
 class Solution {
 public:
-    
+        //#include<set>    
         set<char> symbols {'+','-','*','/'};
 
     
@@ -30,7 +30,10 @@ public:
     }
     
     pair<int, int> solve(string &s, int idx){
-        
+        /*
+            The number is always preceded by a Sign,
+            by default we start with +
+        */
         int N = s.size(), num =0;
         char sign = '+';
         
@@ -42,12 +45,12 @@ public:
             
             char symbol = s[i];
             
-            if(symbol>=48 && symbol<=57){
+            if(symbol>=48 && symbol<=57){//number
                 num = (num*10) + (symbol-'0');
             }else if(symbols.find(symbol)!=symbols.end()){
-                //new symbol encountered, process the number, symbol so far
+                //new symbol encountered, process (the symbol, the number ) so far
                 processSymbol(sign, num, st);
-                sign = symbol;
+                sign = symbol;//capture the new symbol
                 num =0;
             }else if(symbol=='('){
                 pair<int,int> pp = solve(s, i+1);
@@ -64,6 +67,7 @@ public:
                 
                 //cout<<sum<<" "<<i<<endl;
                 return {sum, i};
+                //i is the postion of closing bracket whenere the current expression ends
             }
             
             
@@ -74,7 +78,7 @@ public:
         processSymbol(sign, num, st);
         //cout<<sign<<num<<" sz:"<<st.top()<<endl;
         while(!st.empty()){
-            //cout<<"T: "<<st.top()<<endl;
+            cout<<"T: "<<st.top()<<endl;
             sum+=st.top();
             st.pop();
         }
@@ -88,12 +92,18 @@ public:
     int calculate(string s) {
         
         /*
+            ASCII
+            0-9 -> 48_57
+            A-Z -> 65_90
+            a-z -> 97_122
+
             solve() -> solves the (experssion)
             1st solve() call, calculates exp + (exp) +exp
         
         */
         
         pair<int, int> pp = solve(s, 0);
+        ////second is the postion of closing bracket whenere the current expression ends
         
         cout<<pp.first<<" "<<pp.second<<endl;
         
