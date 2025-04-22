@@ -40,7 +40,7 @@ public:
         vector<vector<int>> ans;
         for(auto [edge, point, height]: points){
 
-            cout<<edge<<" "<<point<<" "<<height<<endl;
+            //cout<<edge<<" "<<point<<" "<<height<<endl;
             if(edge =='s'){
                 if(height > *pq.begin())    //new Heights
                     ans.push_back({point, height});
