@@ -2,7 +2,7 @@ class Solution {
 public:
     vector<vector<int>> getSkyline(vector<vector<int>>& buildings) {
         
-        /*
+        /*  TC: O(NlogN) 22ms
             1. start, end at same point --> start gets prefrence
             2. start, start at same point --> greater val gets prefrence
             3. end, end at same point --> smaller get prefrence
@@ -16,7 +16,7 @@ public:
             points.push_back(make_tuple('e', b[1], b[2]));
         }
 
-        //sort the edges by the rules
+        //sort the edges by the rules- NlogN
         sort(points.begin(), points.end(), [](const tuple<char, int, int> &a, const tuple<char, int, int> &b){
                 
                 if(get<0>(a) == get<0>(b) && get<0>(a)=='s' && get<1>(a)==get<1>(b))//both start at same Point
@@ -38,7 +38,7 @@ public:
 
         int currentMaxHeight = 0;
         vector<vector<int>> ans;
-        for(auto [edge, point, height]: points){
+        for(auto [edge, point, height]: points){    //NlogN
 
             //cout<<edge<<" "<<point<<" "<<height<<endl;
             if(edge =='s'){
