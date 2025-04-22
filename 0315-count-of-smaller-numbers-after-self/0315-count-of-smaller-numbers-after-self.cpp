@@ -26,54 +26,6 @@ class Fenwick{
     
 };
 
-class Solution {
-public:
-    
-    vector<int> method1(vector<int> &nums){
-        
-        int N = nums.size();
-        vector<int> table;
-        vector<int> ans(N, 0);
-        
-        
-        for(int i=N-1; i>=0; i--){
-            
-            //binary - search - log(n)
-            int idx= lower_bound(table.begin(), table.end(), nums[i]) - table.begin();
-            ans[i] = idx;
-            //insert - linear - n
-            table.insert(table.begin()+idx, nums[i]);
-        }// O(N+log(N))
-        
-        
-        return ans;
-        
-    }
-    
-    vector<int> method2(vector<int> &nums){
-        
-        int offset = 1*1e4+2;//10002
-        Fenwick *BIT = new Fenwick(2*offset);
-        
-        
-        int N = nums.size();
-        vector<int> ans(N, 0);
-        
-        BIT->update(offset+ nums[N-1], 1);
-        
-        for(int i=N-2; i>=0; i--){
-            
-            ans[i] = BIT->sum(offset+nums[i]-1);    //(0, num-1)
-            
-            BIT->update(offset+nums[i], 1);
-        }
-        
-        
-        return ans;
-        
-    }
-    
-
     class SegmentTree{
 
         int n;  //range size [0 - n-1]
@@ -152,6 +104,53 @@ public:
 
     };
 
+class Solution {
+public:
+    
+    vector<int> method1(vector<int> &nums){
+        
+        int N = nums.size();
+        vector<int> table;
+        vector<int> ans(N, 0);
+        
+        
+        for(int i=N-1; i>=0; i--){
+            
+            //binary - search - log(n)
+            int idx= lower_bound(table.begin(), table.end(), nums[i]) - table.begin();
+            ans[i] = idx;
+            //insert - linear - n
+            table.insert(table.begin()+idx, nums[i]);
+        }// O(N+log(N))
+        
+        
+        return ans;
+        
+    }
+    
+    vector<int> method2(vector<int> &nums){
+        
+        int offset = 1*1e4+2;//10002
+        Fenwick *BIT = new Fenwick(2*offset);
+        
+        
+        int N = nums.size();
+        vector<int> ans(N, 0);
+        
+        BIT->update(offset+ nums[N-1], 1);
+        
+        for(int i=N-2; i>=0; i--){
+            
+            ans[i] = BIT->sum(offset+nums[i]-1);    //(0, num-1)
+            
+            BIT->update(offset+nums[i], 1);
+        }
+        
+        
+        return ans;
+        
+    }
+
 
     vector<int> method3(vector<int> & nums){
         //[-10^4 , 10^4]
@@ -185,11 +184,43 @@ public:
         //return method1(nums);
         
         
-        //2. Fenwick Tree
-        return method2(nums);
+        //2. Fenwick Tree - TC : O(N*2logN) - 32ms
+        //return method2(nums);
 
-        //3. Segement Tree - TC: O(N* 2logN)
-        //return method3(nums);
+        //3. Segement Tree - TC: O(N* 2logN) - 121ms
+        return method3(nums);
+
+        /*
+            Practical Differences
+            Fenwick Tree is generally faster and simpler to implement for point updates and prefix sum queries. It uses less memory and has less overhead due to being array-based and having minimal recursion.
+
+            Segment Tree is more flexible:
+
+            It handles a wider range of queries (e.g., min/max/gcd).
+
+            More suitable for range updates, lazy propagation, or non-prefix queries.
+
+            \U0001f9e0 Intuition in This Context
+            Both method2() and method3() are doing essentially the same thing:
+
+            Iterating from the right of the array.
+
+            For each number:
+
+            Count how many smaller elements are to its right using a prefix sum (sum() in Fenwick or query(0, val-1) in Segment Tree).
+
+            Then add the current number to the structure using update().
+
+            So, asymptotically they are equal: 
+            O(NlogN).
+
+            However, in practice:
+
+            ✅ method2() (Fenwick Tree) will likely be faster, due to lower constants and no recursion.
+
+            \U0001f4e6 method3() (Segment Tree) provides more generality if you want to extend to range updates or more complex queries later.
+                    
+        */
         
     }
 };
