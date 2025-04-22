@@ -186,10 +186,10 @@ public:
         
         
         //2. Fenwick Tree
-        //return method2(nums);
+        return method2(nums);
 
-        //3. Segement Tree
-        return method3(nums);
+        //3. Segement Tree - TC: O(N* 2logN)
+        //return method3(nums);
         
     }
 };
