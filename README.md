@@ -115,6 +115,7 @@ Collection of LeetCode questions to ace the coding interview! - Created using [L
 | [0925-construct-binary-tree-from-preorder-and-postorder-traversal](https://github.com/3l-d1abl0/leetcode/tree/master/0925-construct-binary-tree-from-preorder-and-postorder-traversal) |
 | [0984-most-stones-removed-with-same-row-or-column](https://github.com/3l-d1abl0/leetcode/tree/master/0984-most-stones-removed-with-same-row-or-column) |
 | [1029-vertical-order-traversal-of-a-binary-tree](https://github.com/3l-d1abl0/leetcode/tree/master/1029-vertical-order-traversal-of-a-binary-tree) |
+| [2161-stock-price-fluctuation](https://github.com/3l-d1abl0/leetcode/tree/master/2161-stock-price-fluctuation) |
 | [2461-amount-of-time-for-binary-tree-to-be-infected](https://github.com/3l-d1abl0/leetcode/tree/master/2461-amount-of-time-for-binary-tree-to-be-infected) |
 | [2603-reward-top-k-students](https://github.com/3l-d1abl0/leetcode/tree/master/2603-reward-top-k-students) |
 | [2677-cousins-in-binary-tree-ii](https://github.com/3l-d1abl0/leetcode/tree/master/2677-cousins-in-binary-tree-ii) |
@@ -291,6 +292,7 @@ Collection of LeetCode questions to ace the coding interview! - Created using [L
 |  |
 | ------- |
 | [0146-lru-cache](https://github.com/3l-d1abl0/leetcode/tree/master/0146-lru-cache) |
+| [2161-stock-price-fluctuation](https://github.com/3l-d1abl0/leetcode/tree/master/2161-stock-price-fluctuation) |
 ## Doubly-Linked List
 |  |
 | ------- |
@@ -304,6 +306,7 @@ Collection of LeetCode questions to ace the coding interview! - Created using [L
 | ------- |
 | [0215-kth-largest-element-in-an-array](https://github.com/3l-d1abl0/leetcode/tree/master/0215-kth-largest-element-in-an-array) |
 | [0218-the-skyline-problem](https://github.com/3l-d1abl0/leetcode/tree/master/0218-the-skyline-problem) |
+| [2161-stock-price-fluctuation](https://github.com/3l-d1abl0/leetcode/tree/master/2161-stock-price-fluctuation) |
 | [2250-k-highest-ranked-items-within-a-price-range](https://github.com/3l-d1abl0/leetcode/tree/master/2250-k-highest-ranked-items-within-a-price-range) |
 | [2603-reward-top-k-students](https://github.com/3l-d1abl0/leetcode/tree/master/2603-reward-top-k-students) |
 ## Quickselect
@@ -341,8 +344,13 @@ Collection of LeetCode questions to ace the coding interview! - Created using [L
 | ------- |
 | [0218-the-skyline-problem](https://github.com/3l-d1abl0/leetcode/tree/master/0218-the-skyline-problem) |
 | [0315-count-of-smaller-numbers-after-self](https://github.com/3l-d1abl0/leetcode/tree/master/0315-count-of-smaller-numbers-after-self) |
+| [2161-stock-price-fluctuation](https://github.com/3l-d1abl0/leetcode/tree/master/2161-stock-price-fluctuation) |
 ## Line Sweep
 |  |
 | ------- |
 | [0218-the-skyline-problem](https://github.com/3l-d1abl0/leetcode/tree/master/0218-the-skyline-problem) |
+## Data Stream
+|  |
+| ------- |
+| [2161-stock-price-fluctuation](https://github.com/3l-d1abl0/leetcode/tree/master/2161-stock-price-fluctuation) |
 <!---LeetCode Topics End-->
