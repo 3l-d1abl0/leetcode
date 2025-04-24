@@ -4,16 +4,15 @@ class RangeFreqQuery
 
 public:
 
-        vector<vector<int>> num;
+        unordered_map<int, vector<int>> mp;
     
     /*int N;
     unordered_map<int, int> *seg;*/
     RangeFreqQuery(vector<int> &arr){
         //method0 - Array of Freq
         //method1 - for every number keep a array of indices it appear in
-        num.resize(10001, vector<int>());
         for(int i=0; i<arr.size(); i++)
-            num[arr[i]].push_back(i);  //capture the index it appears in
+            mp[arr[i]].push_back(i);  //capture the index it appears in
 
         /*N = arr.size();
         seg = new unordered_map<int, int>[4 * N];
@@ -79,7 +78,9 @@ public:
     int query(int left, int right, int value){
         //ub : >, lb : >=
         //method1
-        return upper_bound(num[value].begin(), num[value].end(), right) - lower_bound(num[value].begin(), num[value].end(), left);
+        cout<<upper_bound(mp[value].begin(), mp[value].end(), right) - mp[value].begin()<<endl;
+        cout<<lower_bound(mp[value].begin(), mp[value].end(), left) - mp[value].begin()<<endl;
+        return upper_bound(mp[value].begin(), mp[value].end(), right) - lower_bound(mp[value].begin(), mp[value].end(), left);
         //return querySeg(0, 0, N - 1, left, right, value);
     }
 };
