@@ -1,26 +1,46 @@
 class StockPrice {
+
+        pair<int, int> curr; //timestamp, price
+        unordered_map<int, int> mapping;    //timesamp -> price
+        multiset<int> orderedPrices; //asc
+
 public:
-    public:
-    map<int, int> rec;
-    multiset<int> count;
+    StockPrice() {
+        
 
-    void update(int t, int p) {
-        if (rec.find(t) != rec.end())
-            count.erase(count.find(rec[t]));
-        rec[t] = p;
-        count.insert(p);
     }
+    
+    void update(int timestamp, int price) {
+        
+        cout<<"Update:: "<<timestamp<<" -> "<<price<<endl;
 
+        if(mapping.find(timestamp) != mapping.end()){
+            auto it = orderedPrices.find(mapping[timestamp]);
+            if(it!=orderedPrices.end())
+                orderedPrices.erase(it);
+        }
+
+        mapping[timestamp] = price;
+        orderedPrices.insert(price);
+
+        cout<<timestamp<<", "<<price<<" v/s "<<curr.first<<","<<curr.second<<endl;
+        if(timestamp>= curr.first)
+            curr = {timestamp, price};
+        //else if(timestamp == curr.first)
+        //    curr = {timestamp, max(price, curr.second)};
+    }
+    
     int current() {
-        return rec.rbegin()->second;
+        cout<<"current: "<<this->curr.second<<endl;
+        return this->curr.second;
     }
-
+    
     int maximum() {
-        return *count.rbegin();
+        return *(orderedPrices.rbegin());
     }
-
+    
     int minimum() {
-        return *count.begin();
+        return *orderedPrices.begin();
     }
 };
 
