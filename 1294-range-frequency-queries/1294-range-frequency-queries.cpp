@@ -78,8 +78,8 @@ public:
     int query(int left, int right, int value){
         //ub : >, lb : >=
         //method1
-        cout<<upper_bound(mp[value].begin(), mp[value].end(), right) - mp[value].begin()<<endl;
-        cout<<lower_bound(mp[value].begin(), mp[value].end(), left) - mp[value].begin()<<endl;
+        //cout<<upper_bound(mp[value].begin(), mp[value].end(), right) - mp[value].begin()<<endl;
+        //cout<<lower_bound(mp[value].begin(), mp[value].end(), left) - mp[value].begin()<<endl;
         return upper_bound(mp[value].begin(), mp[value].end(), right) - lower_bound(mp[value].begin(), mp[value].end(), left);
         //return querySeg(0, 0, N - 1, left, right, value);
     }
