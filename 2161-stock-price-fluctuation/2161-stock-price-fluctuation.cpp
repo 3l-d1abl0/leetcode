@@ -12,7 +12,7 @@ public:
     
     void update(int timestamp, int price) {
         
-        cout<<"Update:: "<<timestamp<<" -> "<<price<<endl;
+        //cout<<"Update:: "<<timestamp<<" -> "<<price<<endl;
 
         if(mapping.find(timestamp) != mapping.end()){
             auto it = orderedPrices.find(mapping[timestamp]);
@@ -23,15 +23,14 @@ public:
         mapping[timestamp] = price;
         orderedPrices.insert(price);
 
-        cout<<timestamp<<", "<<price<<" v/s "<<curr.first<<","<<curr.second<<endl;
+        //cout<<timestamp<<", "<<price<<" v/s "<<curr.first<<","<<curr.second<<endl;
         if(timestamp>= curr.first)
             curr = {timestamp, price};
-        //else if(timestamp == curr.first)
-        //    curr = {timestamp, max(price, curr.second)};
+
     }
     
     int current() {
-        cout<<"current: "<<this->curr.second<<endl;
+        //cout<<"current: "<<this->curr.second<<endl;
         return this->curr.second;
     }
     
