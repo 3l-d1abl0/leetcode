@@ -33,6 +33,7 @@ Collection of LeetCode questions to ace the coding interview! - Created using [L
 | [1056-capacity-to-ship-packages-within-d-days](https://github.com/3l-d1abl0/leetcode/tree/master/1056-capacity-to-ship-packages-within-d-days) |
 | [1073-number-of-enclaves](https://github.com/3l-d1abl0/leetcode/tree/master/1073-number-of-enclaves) |
 | [1185-find-in-mountain-array](https://github.com/3l-d1abl0/leetcode/tree/master/1185-find-in-mountain-array) |
+| [1294-range-frequency-queries](https://github.com/3l-d1abl0/leetcode/tree/master/1294-range-frequency-queries) |
 | [1396-count-servers-that-communicate](https://github.com/3l-d1abl0/leetcode/tree/master/1396-count-servers-that-communicate) |
 | [1408-find-the-smallest-divisor-given-a-threshold](https://github.com/3l-d1abl0/leetcode/tree/master/1408-find-the-smallest-divisor-given-a-threshold) |
 | [1815-checking-existence-of-edge-length-limited-paths](https://github.com/3l-d1abl0/leetcode/tree/master/1815-checking-existence-of-edge-length-limited-paths) |
@@ -53,6 +54,7 @@ Collection of LeetCode questions to ace the coding interview! - Created using [L
 | [0540-single-element-in-a-sorted-array](https://github.com/3l-d1abl0/leetcode/tree/master/0540-single-element-in-a-sorted-array) |
 | [1056-capacity-to-ship-packages-within-d-days](https://github.com/3l-d1abl0/leetcode/tree/master/1056-capacity-to-ship-packages-within-d-days) |
 | [1185-find-in-mountain-array](https://github.com/3l-d1abl0/leetcode/tree/master/1185-find-in-mountain-array) |
+| [1294-range-frequency-queries](https://github.com/3l-d1abl0/leetcode/tree/master/1294-range-frequency-queries) |
 | [1408-find-the-smallest-divisor-given-a-threshold](https://github.com/3l-d1abl0/leetcode/tree/master/1408-find-the-smallest-divisor-given-a-threshold) |
 | [2047-find-a-peak-element-ii](https://github.com/3l-d1abl0/leetcode/tree/master/2047-find-a-peak-element-ii) |
 ## Interactive
@@ -115,6 +117,7 @@ Collection of LeetCode questions to ace the coding interview! - Created using [L
 | [0925-construct-binary-tree-from-preorder-and-postorder-traversal](https://github.com/3l-d1abl0/leetcode/tree/master/0925-construct-binary-tree-from-preorder-and-postorder-traversal) |
 | [0984-most-stones-removed-with-same-row-or-column](https://github.com/3l-d1abl0/leetcode/tree/master/0984-most-stones-removed-with-same-row-or-column) |
 | [1029-vertical-order-traversal-of-a-binary-tree](https://github.com/3l-d1abl0/leetcode/tree/master/1029-vertical-order-traversal-of-a-binary-tree) |
+| [1294-range-frequency-queries](https://github.com/3l-d1abl0/leetcode/tree/master/1294-range-frequency-queries) |
 | [2161-stock-price-fluctuation](https://github.com/3l-d1abl0/leetcode/tree/master/2161-stock-price-fluctuation) |
 | [2461-amount-of-time-for-binary-tree-to-be-infected](https://github.com/3l-d1abl0/leetcode/tree/master/2461-amount-of-time-for-binary-tree-to-be-infected) |
 | [2603-reward-top-k-students](https://github.com/3l-d1abl0/leetcode/tree/master/2603-reward-top-k-students) |
@@ -292,6 +295,7 @@ Collection of LeetCode questions to ace the coding interview! - Created using [L
 |  |
 | ------- |
 | [0146-lru-cache](https://github.com/3l-d1abl0/leetcode/tree/master/0146-lru-cache) |
+| [1294-range-frequency-queries](https://github.com/3l-d1abl0/leetcode/tree/master/1294-range-frequency-queries) |
 | [2161-stock-price-fluctuation](https://github.com/3l-d1abl0/leetcode/tree/master/2161-stock-price-fluctuation) |
 ## Doubly-Linked List
 |  |
@@ -335,6 +339,7 @@ Collection of LeetCode questions to ace the coding interview! - Created using [L
 | ------- |
 | [0218-the-skyline-problem](https://github.com/3l-d1abl0/leetcode/tree/master/0218-the-skyline-problem) |
 | [0315-count-of-smaller-numbers-after-self](https://github.com/3l-d1abl0/leetcode/tree/master/0315-count-of-smaller-numbers-after-self) |
+| [1294-range-frequency-queries](https://github.com/3l-d1abl0/leetcode/tree/master/1294-range-frequency-queries) |
 ## Merge Sort
 |  |
 | ------- |
