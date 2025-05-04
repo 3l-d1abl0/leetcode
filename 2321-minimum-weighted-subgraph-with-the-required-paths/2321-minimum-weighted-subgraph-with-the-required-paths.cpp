@@ -1,48 +1,71 @@
-// Single Dijkstra
-// Time: O(ElogN)
-// Space: O(N)
-
 class Solution {
-    using GraphT = std::vector<std::vector<std::pair<int, int>>>;
 public:
-    long long minimumWeight(int n, vector<vector<int>>& edges, int src1, int src2, int dest) {
-        static const long long MAX = 1e10 + 1;
-        GraphT graph(n);
-        for(const auto &e: edges){
-            graph[e[0]].emplace_back(e[1], e[2]);
+
+    void dijkstra(int src, vector<long long> &distNode, vector<vector<pair<int, int>>> &adj){
+
+        priority_queue<tuple<long long , int>, vector<tuple<long long, int>>, greater<tuple<long long, int>>> pq;//minHeap
+        
+        distNode[src] =0;
+        pq.push({0, src});
+
+
+        while(!pq.empty()){
+
+            auto [dist, node] = pq.top(); pq.pop();
+
+            for(auto [to, w] :adj[node]){
+
+                if(distNode[to] >  distNode[node]+w){
+                    distNode[to] =  distNode[node]+w;
+                    pq.push({distNode[to], to});
+                }
+
+            }//for
+
+        }//while
+
+
+        // for(int val: distNode)
+        //     cout<<val<<" ";
+
+        // cout<<endl;
+
+
+    }//void
+
+    long long threeDijkstra(int n, vector<vector<int>>& edges, int src1, int src2, int dest){
+
+        vector<vector<pair<int, int>>> adj(n), revAdj(n);
+        for(auto &edge: edges){
+            adj[edge[0]].push_back({edge[1], edge[2]});
+            revAdj[edge[1]].push_back({edge[0], edge[2]});
         }
+
+        vector<long long> distA(n, 1e10);
+        vector<long long> distB(n, 1e10);
+        vector<long long> distD(n, 1e10);
+
+        //distA[src1]=distB[src2]=distD[dest]=0;
+
+        dijkstra(src1, distA, adj);
+        dijkstra(src2, distB, adj);
+        dijkstra(dest, distD, revAdj);
+
+        long long ans = LLONG_MAX;
+        for(int i=0; i<n; i++){
+            if(distA[i]== 1e10 || distB[i] == 1e10 || distD[i] == 1e10)
+                continue;
+
+            ans = min(ans, distA[i]+distB[i]+distD[i]);
+        }
+
+        return (ans ==LLONG_MAX)?-1:ans;
+    }
+
+    long long minimumWeight(int n, vector<vector<int>>& edges, int src1, int src2, int dest) {
         
-        const auto simultaneous_dijkstra = [&](){
-            std::vector<std::vector<long long>> min_dist(3, std::vector<long long>(n, MAX));
-            std::priority_queue<tuple<long long, int, int>> pq;
-            pq.emplace(0, 0, src1);
-            pq.emplace(0, 1, src2);
-            while(!pq.empty()){
-                const auto [dist, type, node] = pq.top();
-                pq.pop();
-                if(min_dist[type][node] != MAX){  // already visited
-                    continue;
-                }
-                min_dist[type][node] = -dist;
-                if(type <= 1){ // type 1 or type 2
-                    if(min_dist[1 - type][node] != MAX){ // make itself a type-3 node
-                        pq.emplace(-min_dist[0][node] - min_dist[1][node], 2, node);
-                    } 
-                    for(const auto &[next_node, edge]: graph[node]){
-                        pq.emplace(dist - edge, type, next_node);
-                    }
-                } else{ // type 3
-                    if(node == dest){
-                        return -dist;
-                    }
-                    for(const auto &[next_node, edge]: graph[node]){
-                        pq.emplace(dist - edge, 2, next_node);
-                    }
-                }
-            }
-            return -1ll;
-        };
-        
-        return simultaneous_dijkstra();
+
+        //method1 - 3 dijkstras Call
+        return threeDijkstra(n, edges, src1, src2, dest);
     }
 };
