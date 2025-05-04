@@ -228,6 +228,7 @@ Collection of LeetCode questions to ace the coding interview! - Created using [L
 | [1701-remove-max-number-of-edges-to-keep-graph-fully-traversable](https://github.com/3l-d1abl0/leetcode/tree/master/1701-remove-max-number-of-edges-to-keep-graph-fully-traversable) |
 | [1815-checking-existence-of-edge-length-limited-paths](https://github.com/3l-d1abl0/leetcode/tree/master/1815-checking-existence-of-edge-length-limited-paths) |
 | [2090-number-of-ways-to-arrive-at-destination](https://github.com/3l-d1abl0/leetcode/tree/master/2090-number-of-ways-to-arrive-at-destination) |
+| [2321-minimum-weighted-subgraph-with-the-required-paths](https://github.com/3l-d1abl0/leetcode/tree/master/2321-minimum-weighted-subgraph-with-the-required-paths) |
 ## String
 |  |
 | ------- |
@@ -283,6 +284,7 @@ Collection of LeetCode questions to ace the coding interview! - Created using [L
 | ------- |
 | [0399-evaluate-division](https://github.com/3l-d1abl0/leetcode/tree/master/0399-evaluate-division) |
 | [2090-number-of-ways-to-arrive-at-destination](https://github.com/3l-d1abl0/leetcode/tree/master/2090-number-of-ways-to-arrive-at-destination) |
+| [2321-minimum-weighted-subgraph-with-the-required-paths](https://github.com/3l-d1abl0/leetcode/tree/master/2321-minimum-weighted-subgraph-with-the-required-paths) |
 ## Counting Sort
 |  |
 | ------- |
