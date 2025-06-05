@@ -21,6 +21,7 @@ Collection of LeetCode questions to ace the coding interview! - Created using [L
 | [0274-h-index](https://github.com/3l-d1abl0/leetcode/tree/master/0274-h-index) |
 | [0275-h-index-ii](https://github.com/3l-d1abl0/leetcode/tree/master/0275-h-index-ii) |
 | [0315-count-of-smaller-numbers-after-self](https://github.com/3l-d1abl0/leetcode/tree/master/0315-count-of-smaller-numbers-after-self) |
+| [0380-insert-delete-getrandom-o1](https://github.com/3l-d1abl0/leetcode/tree/master/0380-insert-delete-getrandom-o1) |
 | [0399-evaluate-division](https://github.com/3l-d1abl0/leetcode/tree/master/0399-evaluate-division) |
 | [0417-pacific-atlantic-water-flow](https://github.com/3l-d1abl0/leetcode/tree/master/0417-pacific-atlantic-water-flow) |
 | [0540-single-element-in-a-sorted-array](https://github.com/3l-d1abl0/leetcode/tree/master/0540-single-element-in-a-sorted-array) |
@@ -96,6 +97,7 @@ Collection of LeetCode questions to ace the coding interview! - Created using [L
 | [0050-powx-n](https://github.com/3l-d1abl0/leetcode/tree/master/0050-powx-n) |
 | [0204-count-primes](https://github.com/3l-d1abl0/leetcode/tree/master/0204-count-primes) |
 | [0227-basic-calculator-ii](https://github.com/3l-d1abl0/leetcode/tree/master/0227-basic-calculator-ii) |
+| [0380-insert-delete-getrandom-o1](https://github.com/3l-d1abl0/leetcode/tree/master/0380-insert-delete-getrandom-o1) |
 ## Recursion
 |  |
 | ------- |
@@ -117,6 +119,7 @@ Collection of LeetCode questions to ace the coding interview! - Created using [L
 | [0133-clone-graph](https://github.com/3l-d1abl0/leetcode/tree/master/0133-clone-graph) |
 | [0146-lru-cache](https://github.com/3l-d1abl0/leetcode/tree/master/0146-lru-cache) |
 | [0242-valid-anagram](https://github.com/3l-d1abl0/leetcode/tree/master/0242-valid-anagram) |
+| [0380-insert-delete-getrandom-o1](https://github.com/3l-d1abl0/leetcode/tree/master/0380-insert-delete-getrandom-o1) |
 | [0560-subarray-sum-equals-k](https://github.com/3l-d1abl0/leetcode/tree/master/0560-subarray-sum-equals-k) |
 | [0721-accounts-merge](https://github.com/3l-d1abl0/leetcode/tree/master/0721-accounts-merge) |
 | [0925-construct-binary-tree-from-preorder-and-postorder-traversal](https://github.com/3l-d1abl0/leetcode/tree/master/0925-construct-binary-tree-from-preorder-and-postorder-traversal) |
@@ -308,6 +311,7 @@ Collection of LeetCode questions to ace the coding interview! - Created using [L
 |  |
 | ------- |
 | [0146-lru-cache](https://github.com/3l-d1abl0/leetcode/tree/master/0146-lru-cache) |
+| [0380-insert-delete-getrandom-o1](https://github.com/3l-d1abl0/leetcode/tree/master/0380-insert-delete-getrandom-o1) |
 | [1294-range-frequency-queries](https://github.com/3l-d1abl0/leetcode/tree/master/1294-range-frequency-queries) |
 | [2161-stock-price-fluctuation](https://github.com/3l-d1abl0/leetcode/tree/master/2161-stock-price-fluctuation) |
 ## Doubly-Linked List
@@ -376,4 +380,8 @@ Collection of LeetCode questions to ace the coding interview! - Created using [L
 |  |
 | ------- |
 | [1908-recyclable-and-low-fat-products](https://github.com/3l-d1abl0/leetcode/tree/master/1908-recyclable-and-low-fat-products) |
+## Randomized
+|  |
+| ------- |
+| [0380-insert-delete-getrandom-o1](https://github.com/3l-d1abl0/leetcode/tree/master/0380-insert-delete-getrandom-o1) |
 <!---LeetCode Topics End-->
