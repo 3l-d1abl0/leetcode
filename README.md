@@ -44,6 +44,7 @@ Collection of LeetCode questions to ace the coding interview! - Created using [L
 | [2047-find-a-peak-element-ii](https://github.com/3l-d1abl0/leetcode/tree/master/2047-find-a-peak-element-ii) |
 | [2250-k-highest-ranked-items-within-a-price-range](https://github.com/3l-d1abl0/leetcode/tree/master/2250-k-highest-ranked-items-within-a-price-range) |
 | [2603-reward-top-k-students](https://github.com/3l-d1abl0/leetcode/tree/master/2603-reward-top-k-students) |
+| [3356-shortest-uncommon-substring-in-an-array](https://github.com/3l-d1abl0/leetcode/tree/master/3356-shortest-uncommon-substring-in-an-array) |
 ## Binary Search
 |  |
 | ------- |
@@ -130,6 +131,7 @@ Collection of LeetCode questions to ace the coding interview! - Created using [L
 | [2461-amount-of-time-for-binary-tree-to-be-infected](https://github.com/3l-d1abl0/leetcode/tree/master/2461-amount-of-time-for-binary-tree-to-be-infected) |
 | [2603-reward-top-k-students](https://github.com/3l-d1abl0/leetcode/tree/master/2603-reward-top-k-students) |
 | [2677-cousins-in-binary-tree-ii](https://github.com/3l-d1abl0/leetcode/tree/master/2677-cousins-in-binary-tree-ii) |
+| [3356-shortest-uncommon-substring-in-an-array](https://github.com/3l-d1abl0/leetcode/tree/master/3356-shortest-uncommon-substring-in-an-array) |
 ## Tree
 |  |
 | ------- |
@@ -251,6 +253,7 @@ Collection of LeetCode questions to ace the coding interview! - Created using [L
 | [1371-minimum-remove-to-make-valid-parentheses](https://github.com/3l-d1abl0/leetcode/tree/master/1371-minimum-remove-to-make-valid-parentheses) |
 | [1894-merge-strings-alternately](https://github.com/3l-d1abl0/leetcode/tree/master/1894-merge-strings-alternately) |
 | [2603-reward-top-k-students](https://github.com/3l-d1abl0/leetcode/tree/master/2603-reward-top-k-students) |
+| [3356-shortest-uncommon-substring-in-an-array](https://github.com/3l-d1abl0/leetcode/tree/master/3356-shortest-uncommon-substring-in-an-array) |
 ## Sorting
 |  |
 | ------- |
@@ -384,4 +387,8 @@ Collection of LeetCode questions to ace the coding interview! - Created using [L
 |  |
 | ------- |
 | [0380-insert-delete-getrandom-o1](https://github.com/3l-d1abl0/leetcode/tree/master/0380-insert-delete-getrandom-o1) |
+## Trie
+|  |
+| ------- |
+| [3356-shortest-uncommon-substring-in-an-array](https://github.com/3l-d1abl0/leetcode/tree/master/3356-shortest-uncommon-substring-in-an-array) |
 <!---LeetCode Topics End-->
