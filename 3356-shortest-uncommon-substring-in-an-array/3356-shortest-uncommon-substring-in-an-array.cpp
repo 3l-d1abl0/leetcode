@@ -1,59 +1,73 @@
 class Solution {
 public:
-    struct Trie {
-        Trie *child[26];
-        int index;
-        Trie()
-        {
-            for(int i=0;i<26;i++)
-               child[i]=NULL; 
-            index=-1; // Not assigned
-        }
-    };
-    Trie *root;
-    void insert(int start,int index, string &s)
-    {
-        Trie *t=root;
-        for(int i=start;i<s.size();i++)
-        {
-            if(t->child[s[i]-'a']==NULL)
-                t->child[s[i]-'a']=new Trie();
-            t=t->child[s[i]-'a'];
-            if(t->index==-1 || t->index==index)
-                t->index=index;   
-            else
-                t->index=-2;   // Belongs to multiple strings 
+    void build(string str, int idx, unordered_map<string, pair<bool, int>> &mp){
+
+        int N = str.size();
+        for(int i=0; i<N; i++){
+            for(int j=i; j<N; j++){
+                string subs = str.substr(i, j-i+1);
+                
+                if(mp.find(subs) == mp.end() || mp[subs].second==idx)
+                    mp[subs] = {true, idx};
+                else
+                    mp[subs] = {false, -1};
+            }
         }
     }
-    vector<string>res;
-    bool compare(string &a, string &b)
-    {
-        if(b=="")
-           return true;
-        if(a.size()!=b.size())
-           return a.size()<b.size();
-        return a<b;      
+
+    static bool customCompare(const std::string &a, const std::string &b) {
+        if (a.length() != b.length())
+            return a.length() < b.length(); // sort by length
+        return a < b; // if lengths are equal, sort lexicographically
     }
-    void dfs(Trie *node, string curr)
-    {
-        if(node==NULL)
-           return;
-        if(node->index>=0 && compare(curr, res[node->index]))
-            res[node->index]=curr;
-        for(char i='a';i<='z';i++)
-            dfs(node->child[i-'a'],curr+i);
-    }
-    vector<string> shortestSubstrings(vector<string>& arr) 
-    {
-        root=new Trie();
-        int n=arr.size();
-        res.resize(n,"");
-        for(int index=0;index<n;index++)
-        {
-            for(int i=0;i<arr[index].size();i++)
-               insert(i, index, arr[index]);
+
+    vector<string> method1(vector<string>& arr) {
+        //string => valid/invalid , idx
+        unordered_map<string, pair<bool, int>> mp;
+        int N = arr.size();
+        for(int i=0; i<N; i++){
+            build(arr[i], i, mp);
+        }//for
+
+        //gather the subs
+        vector<string> ans(N, "");
+        vector<vector<string>> temp(N);
+        for(auto kv: mp){
+
+            if(kv.second.first == false)
+                continue;
+
+            temp[kv.second.second].push_back(kv.first);
+
         }
-        dfs(root,"");
-        return res;
+
+        for(int i=0; i<N; i++){
+            if(temp[i].size() == 0)
+                continue;
+            else if (temp[i].size()==1)
+                ans[i]= temp[i][0];
+            else{
+                sort(temp[i].begin(), temp[i].end(), customCompare);
+                ans[i]= temp[i][0];
+            }
+        }//for
+
+
+        return ans;
     }
+
+    vector<string> method2(vector<string>& arr) {
+        return {};
+    }
+
+    vector<string> shortestSubstrings(vector<string>& arr) {
+
+        //Method1 : generate substring, keep in Hash
+        return method1(arr);
+
+        //Methiod2 : Trie, mark substring index + dfs to collect
+        //return method2(arr);
+              
+    }
+
 };
