@@ -75,5 +75,7 @@ public:
 
 
         return totalGroups == 1e9 ? -1: totalGroups;
+
+        //O(N + uniqueSize∗Minfreq)
     }
 };
