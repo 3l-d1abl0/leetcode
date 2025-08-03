@@ -38,6 +38,7 @@ Collection of LeetCode questions to ace the coding interview! - Created using [L
 | [1073-number-of-enclaves](https://github.com/3l-d1abl0/leetcode/tree/master/1073-number-of-enclaves) |
 | [1185-find-in-mountain-array](https://github.com/3l-d1abl0/leetcode/tree/master/1185-find-in-mountain-array) |
 | [1294-range-frequency-queries](https://github.com/3l-d1abl0/leetcode/tree/master/1294-range-frequency-queries) |
+| [1324-where-will-the-ball-fall](https://github.com/3l-d1abl0/leetcode/tree/master/1324-where-will-the-ball-fall) |
 | [1396-count-servers-that-communicate](https://github.com/3l-d1abl0/leetcode/tree/master/1396-count-servers-that-communicate) |
 | [1408-find-the-smallest-divisor-given-a-threshold](https://github.com/3l-d1abl0/leetcode/tree/master/1408-find-the-smallest-divisor-given-a-threshold) |
 | [1815-checking-existence-of-edge-length-limited-paths](https://github.com/3l-d1abl0/leetcode/tree/master/1815-checking-existence-of-edge-length-limited-paths) |
@@ -80,6 +81,7 @@ Collection of LeetCode questions to ace the coding interview! - Created using [L
 | [0854-making-a-large-island](https://github.com/3l-d1abl0/leetcode/tree/master/0854-making-a-large-island) |
 | [1036-rotting-oranges](https://github.com/3l-d1abl0/leetcode/tree/master/1036-rotting-oranges) |
 | [1073-number-of-enclaves](https://github.com/3l-d1abl0/leetcode/tree/master/1073-number-of-enclaves) |
+| [1324-where-will-the-ball-fall](https://github.com/3l-d1abl0/leetcode/tree/master/1324-where-will-the-ball-fall) |
 | [1396-count-servers-that-communicate](https://github.com/3l-d1abl0/leetcode/tree/master/1396-count-servers-that-communicate) |
 | [2035-count-sub-islands](https://github.com/3l-d1abl0/leetcode/tree/master/2035-count-sub-islands) |
 | [2047-find-a-peak-element-ii](https://github.com/3l-d1abl0/leetcode/tree/master/2047-find-a-peak-element-ii) |
@@ -404,4 +406,8 @@ Collection of LeetCode questions to ace the coding interview! - Created using [L
 |  |
 | ------- |
 | [3166-minimum-number-of-groups-to-create-a-valid-assignment](https://github.com/3l-d1abl0/leetcode/tree/master/3166-minimum-number-of-groups-to-create-a-valid-assignment) |
+## Simulation
+|  |
+| ------- |
+| [1324-where-will-the-ball-fall](https://github.com/3l-d1abl0/leetcode/tree/master/1324-where-will-the-ball-fall) |
 <!---LeetCode Topics End-->
