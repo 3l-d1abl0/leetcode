@@ -7,7 +7,7 @@ public:
            
             int col = i, next;
             for (int row = 0; row < R; ++row) {
-                cout<<row<<" "<<col<<endl;
+                //cout<<row<<" "<<col<<endl;
                 next = col + grid[row][col];
 
                 if (next < 0 || next >= C || grid[row][next] != grid[row][col]) {
@@ -18,7 +18,7 @@ public:
                 col = next;
             }
 
-            cout<<"================="<<endl;
+           // cout<<"================="<<endl;
             res.push_back(col);
         }
         return res;
