@@ -254,6 +254,7 @@ Collection of LeetCode questions to ace the coding interview! - Created using [L
 | [0227-basic-calculator-ii](https://github.com/3l-d1abl0/leetcode/tree/master/0227-basic-calculator-ii) |
 | [0242-valid-anagram](https://github.com/3l-d1abl0/leetcode/tree/master/0242-valid-anagram) |
 | [0399-evaluate-division](https://github.com/3l-d1abl0/leetcode/tree/master/0399-evaluate-division) |
+| [0678-valid-parenthesis-string](https://github.com/3l-d1abl0/leetcode/tree/master/0678-valid-parenthesis-string) |
 | [0721-accounts-merge](https://github.com/3l-d1abl0/leetcode/tree/master/0721-accounts-merge) |
 | [1371-minimum-remove-to-make-valid-parentheses](https://github.com/3l-d1abl0/leetcode/tree/master/1371-minimum-remove-to-make-valid-parentheses) |
 | [1894-merge-strings-alternately](https://github.com/3l-d1abl0/leetcode/tree/master/1894-merge-strings-alternately) |
@@ -290,6 +291,7 @@ Collection of LeetCode questions to ace the coding interview! - Created using [L
 | [0022-generate-parentheses](https://github.com/3l-d1abl0/leetcode/tree/master/0022-generate-parentheses) |
 | [0121-best-time-to-buy-and-sell-stock](https://github.com/3l-d1abl0/leetcode/tree/master/0121-best-time-to-buy-and-sell-stock) |
 | [0542-01-matrix](https://github.com/3l-d1abl0/leetcode/tree/master/0542-01-matrix) |
+| [0678-valid-parenthesis-string](https://github.com/3l-d1abl0/leetcode/tree/master/0678-valid-parenthesis-string) |
 | [1474-longest-zigzag-path-in-a-binary-tree](https://github.com/3l-d1abl0/leetcode/tree/master/1474-longest-zigzag-path-in-a-binary-tree) |
 | [1475-maximum-sum-bst-in-binary-tree](https://github.com/3l-d1abl0/leetcode/tree/master/1475-maximum-sum-bst-in-binary-tree) |
 | [2090-number-of-ways-to-arrive-at-destination](https://github.com/3l-d1abl0/leetcode/tree/master/2090-number-of-ways-to-arrive-at-destination) |
@@ -311,6 +313,7 @@ Collection of LeetCode questions to ace the coding interview! - Created using [L
 |  |
 | ------- |
 | [0227-basic-calculator-ii](https://github.com/3l-d1abl0/leetcode/tree/master/0227-basic-calculator-ii) |
+| [0678-valid-parenthesis-string](https://github.com/3l-d1abl0/leetcode/tree/master/0678-valid-parenthesis-string) |
 | [1371-minimum-remove-to-make-valid-parentheses](https://github.com/3l-d1abl0/leetcode/tree/master/1371-minimum-remove-to-make-valid-parentheses) |
 ## Linked List
 |  |
@@ -405,6 +408,7 @@ Collection of LeetCode questions to ace the coding interview! - Created using [L
 ## Greedy
 |  |
 | ------- |
+| [0678-valid-parenthesis-string](https://github.com/3l-d1abl0/leetcode/tree/master/0678-valid-parenthesis-string) |
 | [3166-minimum-number-of-groups-to-create-a-valid-assignment](https://github.com/3l-d1abl0/leetcode/tree/master/3166-minimum-number-of-groups-to-create-a-valid-assignment) |
 ## Simulation
 |  |
