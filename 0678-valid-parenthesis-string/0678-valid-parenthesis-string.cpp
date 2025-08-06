@@ -1,9 +1,18 @@
 // Recursive Solution
 class Solution {
-    bool ex(int idx, int openingBracket, string &s, vector<vector<int>> &memo){
+
+    bool recur(int idx, int openingBracket, string &s, vector<vector<int>> &memo){
+        /*
+            //Going right to left
+            ) - opens a potential match
+            ( - closes a potential match
+
+            When the brackets are balanced,
+            there is no point processing ( (closing brackets)
+            because it will always result in False
+        */
         
-        
-        if(idx==s.size())
+        if(idx==-1)
             return (openingBracket==0);
 
 
@@ -11,21 +20,23 @@ class Solution {
             return memo[idx][openingBracket];
 
         bool ans=false;
+
         if(s[idx]=='*'){
             
-            ans|=ex(idx+1,openingBracket+1,s, memo); // Add '('
+            ans|= recur(idx-1,openingBracket+1,s, memo); // Add ')'
             
-            if(openingBracket)  //If the balance is 0 zero, no point bringting it to negative
-                ans|=ex(idx+1,openingBracket-1,s, memo); // Add ')'
+            if(openingBracket)  //If the balance is 0 zero, no point bringting it to negative (
+                ans|= recur(idx-1,openingBracket-1,s, memo); // Add ')'
             
-            ans|=ex(idx+1,openingBracket,s, memo); //Add Nothing
-        }else{
-            if(s[idx]=='('){
-                ans=ex(idx+1,openingBracket+1,s, memo);
-            }else{
+            ans|= recur(idx-1,openingBracket,s, memo); //Add Nothing
 
+        }else{
+
+            if(s[idx]=='('){
                 if(openingBracket)  //If the balance is 0 zero, no point bringting it to negative
-                    ans=ex(idx+1,openingBracket-1,s, memo);
+                    ans= recur(idx-1,openingBracket-1,s, memo);
+            }else{
+                    ans= recur(idx-1,openingBracket+1,s, memo);
             }
         }
 
@@ -39,6 +50,6 @@ public:
         int N = s.size();
         vector<vector<int>> memo(N, vector<int>(N, -1));
         
-        return ex(0,0,s, memo);
+        return recur(N-1,0,s, memo);
     }
 };
