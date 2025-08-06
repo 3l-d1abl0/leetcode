@@ -47,9 +47,9 @@ class Solution {
 public:
     bool checkValidString(string s) {
 
+        //1. Memoization  + recursion
         int N = s.size();
         vector<vector<int>> memo(N, vector<int>(N, -1));
-        
         return recur(N-1,0,s, memo);
     }
 };
