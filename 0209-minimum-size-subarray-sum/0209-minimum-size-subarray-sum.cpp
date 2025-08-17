@@ -54,10 +54,6 @@ public:
         for(int i=1; i<=N; i++)
             prefixSum[i] = prefixSum[i-1]+nums[i-1];
         
-        /*for(int ele: prefixSum)
-            cout<<ele<<" ";
-        cout<<endl;*/
-        
         int minLen = INT_MAX;
         int prefix =0;
         for(int i=0; i<N; i++){
@@ -67,6 +63,10 @@ public:
                 prefixsum[i]-prefixsum[j-1] >= k  //i-j+1
                 prefixsum[i]-k  >= prefixsum[j-1]
                 find (greatest) num which is lesser than eq to prefixsum[i]-k
+                
+                k=7
+                currentPrefix= 10
+                look for : 10-7 = 3 prefix Sum
             */
             if(prefix>=k){
                 //cout<<"i = "<<i<<" p ="<<prefixSum[i+1]<<" val= "<<prefix-k<<endl;
@@ -86,10 +86,11 @@ public:
     
     int minSubArrayLen(int target, vector<int>& nums) {
              
+        // all positive numbners
         
-        return twoPointer(target, nums);    //O(N)
+        //return twoPointer(target, nums);    //O(N)
         
-        //return binarySearch(target, nums);  //O(NlogN)
+        return binarySearch(target, nums);  //O(NlogN)
         
     }
 };
