@@ -31,7 +31,7 @@ public:
                 currLen = rt-lf+1;
             }
             
-            
+            //number of replacble chars <= k
             maxx = max(maxx, rt-lf+1);
         }//for
         
@@ -52,6 +52,7 @@ public:
             //some char with max Frequency
             maxFreq = max(maxFreq, mp[s[rt]]);
             
+            //char can be replaced = size - maxFreq
             int replaceLen = (rt-lf+1)-maxFreq;
             if(replaceLen > k){ //cant replace as > k, hence make window small
                 mp[s[lf]]--;
@@ -76,11 +77,13 @@ public:
         
         /*  TC: O(26.N)
           SC: O(N)
+          9ms
           */
         //return method1(s, k);
         
         /*  TC: O(N)
             SC: O(N)
+            5ms
         */
         return method2(s, k);
         
