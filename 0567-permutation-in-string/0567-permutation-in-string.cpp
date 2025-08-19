@@ -169,13 +169,13 @@ public:
         /*s1 ="ab";
         s2="baeidooo";*/
         
-        //return method1(s1, s2);   //O(M*N)
+        return method1(s1, s2);   //O(M*N)  //7ms
         
-        //return method2(s1, s2);
+        //return method2(s1, s2); //0ms
         
         
         //TC: O(N+M) SC: O(M) where M is the len of pattern
-        return method3(s1, s2);
+        //return method3(s1, s2); //2ms
         
     }
 };
