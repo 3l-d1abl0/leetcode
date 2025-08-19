@@ -138,6 +138,7 @@ public:
                     freqMatch++;
             }
             
+            //Try to shrink the window once the rt pointr has passed the pattern size
             if(rt>=pat.size()){
                 
                 char outChar = st[lf];
