@@ -78,10 +78,9 @@ public:
     string method2(string &str, string &pattern){
         
         /*to calculate freq of each char,
-        
-        character exhaused in current window
-        if +ive - count that can be added in current window
-        if -iv - count exceeded, in excess
+
+        map value +ive : window has deficit
+        map value -ive : window has excess 
         */
         unordered_map<char, int> map;
         
@@ -98,34 +97,41 @@ public:
             //Process In coming
             char inChar = str[rt];
             if(map.find(inChar) != map.end()){
-                
-                if(map[inChar] > 0 ){   //can be added
-                    matched++;
-                }
-                
-                //1 exhausted
+
+                //1 used by windows
                 map[inChar]--;
+
+                if(map[inChar]==0)
+                    matched++;
+
+                //cout<<rt<<" found: "<<inChar<<" "<<map[inChar]<<" matched: "<<matched<<endl;
             }
             
-            
-            //If the characters are found in the current window, try to shrink it
-            while(lf<=rt && matched== pattern.size()){
+            //cout<<lf<<" "<<rt<<" "<<matched<<endl;
+            //If the all characters are found in the current window, try to shrink it
+            while(lf<=rt && matched== map.size()){
                 
                 if(minLen> rt-lf+1){
                     minLen = rt-lf+1;
                     pos = lf;
+
+                    //cout<<pos<<": "<<str.substr(pos, minLen)<<endl;
                 }
                 
+                //Process the outgoing elements
                 char outChar = str[lf];
                 if(map.find(outChar)!=map.end()){
                     
+
+                    if(map[outChar]==0) //freq count will be positive now
+                        matched--;
+
                     map[outChar]++;
                     
-                    if(map[outChar]>0)
-                        matched--;
                 }
                 
                 lf++;
+
             }//while
             
         }//for
@@ -155,7 +161,7 @@ public:
         TC: O(M+N) SC: O(M)
         M- pattern len
         
-        24ms 10.8MB
+        12ms 10.8MB
         */
         return method2(s, t);
     }
