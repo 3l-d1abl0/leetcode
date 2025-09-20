@@ -1,7 +1,6 @@
 class Solution {
 public:
-
-        int lengthOfLongestSubstring(string s) {
+    int lengthOfLongestSubstring(string s) {
         
         
         unordered_map<char, int> mp;
@@ -24,15 +23,14 @@ public:
                 l_idx = max(l_idx, old_idx+1);
             }
             
-            //add the current char to window
-            mp[s[r_idx]] = r_idx;
             max_len = max(max_len, r_idx-l_idx+1);
             //cout<<l_idx<<" "<<r_idx<<" "<<max_len<<endl;
+            //Update the current Idx
+            mp[s[r_idx]] = r_idx;
             
         }
         
         
         return max_len;
     }
-
 };
