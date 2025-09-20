@@ -114,6 +114,56 @@ public:
         return count ==26;
     }
     
+        bool method3(string &pat, string &st){
+        
+        unordered_map<char, int> mp;
+        int freqMatch = 0;
+        
+        //freq map of pattern
+        for(char ch: pat){
+            mp[ch]++;
+        }
+        
+        int lf=0;
+        for(int rt=0; rt<st.size(); rt++){
+            
+            
+            char inChar = st[rt];
+            
+            //If incoming it exists in the Pattern
+            if(mp.find(inChar)!=mp.end()){
+                mp[inChar]--;
+                if(mp[inChar]==0)
+                    freqMatch++;
+            }
+            
+            //Try to shrink the window once the rt pointr has passed the pattern size
+            if(rt>=pat.size()){
+                
+                char outChar = st[lf];
+                
+                ////If outgoing it exists in the Pattern
+                if(mp.find(outChar) !=mp.end()){
+                    //character matches the freq of the pattern
+                    if(mp[outChar]==0)
+                        freqMatch--;
+                    mp[outChar]++;
+                }
+                
+                lf++;
+            }
+        
+            //cout<<lf<<" "<<rt<<" "<<freqMatch<<endl;
+            
+            if(freqMatch == mp.size())
+                return true;
+        
+        }//for
+        
+        
+        return false;
+    }
+
     bool checkInclusion(string s1, string s2) {
         
         /*s1 ="ab";
@@ -121,7 +171,9 @@ public:
         
         //return method1(s1, s2);   //O(M*N)
         
-        return method2(s1, s2);
+        //return method2(s1, s2);
+
+        return method3(s1, s2);
         
         
     }
