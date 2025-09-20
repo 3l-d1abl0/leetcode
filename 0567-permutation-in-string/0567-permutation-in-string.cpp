@@ -171,9 +171,9 @@ public:
         
         //return method1(s1, s2);   //O(M*N)
         
-        //return method2(s1, s2);
+        return method2(s1, s2);   //O(N+M)
 
-        return method3(s1, s2);
+        //return method3(s1, s2);     //O(N+M)
         
         
     }
