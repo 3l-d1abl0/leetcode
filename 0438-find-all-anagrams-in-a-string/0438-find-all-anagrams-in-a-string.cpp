@@ -205,6 +205,7 @@ public:
                 char outChar = str[lf];
                 if(map.find(outChar) != map.end()){
                     
+                    //check if the count was matching
                     if(map[outChar]==0){
                         freqCount--;
                     }
