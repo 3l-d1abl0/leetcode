@@ -65,9 +65,10 @@ public:
         int N = s1.size();
         int M = s2.size();
         
+        //IF pattern has more length than string
         if(N>M) return false;
         
-        //first N charcters
+        //first N charcters - length of pattern
         for(int i=0; i<N; i++){
             m1[s1[i]-'a']++;
             m2[s2[i]-'a']++;
@@ -118,9 +119,9 @@ public:
         /*s1 ="ab";
         s2="baeidooo";*/
         
-        return method1(s1, s2);   //O(M*N)
+        //return method1(s1, s2);   //O(M*N)
         
-        //return method2(s1, s2);
+        return method2(s1, s2);
         
         
     }
