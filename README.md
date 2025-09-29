@@ -48,6 +48,7 @@ Collection of LeetCode questions to ace the coding interview! - Created using [L
 | [2035-count-sub-islands](https://github.com/3l-d1abl0/leetcode/tree/master/2035-count-sub-islands) |
 | [2047-find-a-peak-element-ii](https://github.com/3l-d1abl0/leetcode/tree/master/2047-find-a-peak-element-ii) |
 | [2250-k-highest-ranked-items-within-a-price-range](https://github.com/3l-d1abl0/leetcode/tree/master/2250-k-highest-ranked-items-within-a-price-range) |
+| [2552-maximum-sum-of-distinct-subarrays-with-length-k](https://github.com/3l-d1abl0/leetcode/tree/master/2552-maximum-sum-of-distinct-subarrays-with-length-k) |
 | [2603-reward-top-k-students](https://github.com/3l-d1abl0/leetcode/tree/master/2603-reward-top-k-students) |
 | [3166-minimum-number-of-groups-to-create-a-valid-assignment](https://github.com/3l-d1abl0/leetcode/tree/master/3166-minimum-number-of-groups-to-create-a-valid-assignment) |
 | [3356-shortest-uncommon-substring-in-an-array](https://github.com/3l-d1abl0/leetcode/tree/master/3356-shortest-uncommon-substring-in-an-array) |
@@ -145,6 +146,7 @@ Collection of LeetCode questions to ace the coding interview! - Created using [L
 | [1294-range-frequency-queries](https://github.com/3l-d1abl0/leetcode/tree/master/1294-range-frequency-queries) |
 | [2161-stock-price-fluctuation](https://github.com/3l-d1abl0/leetcode/tree/master/2161-stock-price-fluctuation) |
 | [2461-amount-of-time-for-binary-tree-to-be-infected](https://github.com/3l-d1abl0/leetcode/tree/master/2461-amount-of-time-for-binary-tree-to-be-infected) |
+| [2552-maximum-sum-of-distinct-subarrays-with-length-k](https://github.com/3l-d1abl0/leetcode/tree/master/2552-maximum-sum-of-distinct-subarrays-with-length-k) |
 | [2603-reward-top-k-students](https://github.com/3l-d1abl0/leetcode/tree/master/2603-reward-top-k-students) |
 | [2677-cousins-in-binary-tree-ii](https://github.com/3l-d1abl0/leetcode/tree/master/2677-cousins-in-binary-tree-ii) |
 | [3166-minimum-number-of-groups-to-create-a-valid-assignment](https://github.com/3l-d1abl0/leetcode/tree/master/3166-minimum-number-of-groups-to-create-a-valid-assignment) |
@@ -447,4 +449,5 @@ Collection of LeetCode questions to ace the coding interview! - Created using [L
 | [0567-permutation-in-string](https://github.com/3l-d1abl0/leetcode/tree/master/0567-permutation-in-string) |
 | [0940-fruit-into-baskets](https://github.com/3l-d1abl0/leetcode/tree/master/0940-fruit-into-baskets) |
 | [1046-max-consecutive-ones-iii](https://github.com/3l-d1abl0/leetcode/tree/master/1046-max-consecutive-ones-iii) |
+| [2552-maximum-sum-of-distinct-subarrays-with-length-k](https://github.com/3l-d1abl0/leetcode/tree/master/2552-maximum-sum-of-distinct-subarrays-with-length-k) |
 <!---LeetCode Topics End-->
