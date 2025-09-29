@@ -10,33 +10,45 @@ public:
         for (string word : words) counts[word]++;
 
         int N = s.length();
-        int wordsCount = words.size();
-        int len = words[0].length();
+        int wordsCount = counts.size();
+        int wordLen = words[0].length();
 
         vector<int> indexes;
         // Traverse through each possible starting point within the first 'len' characters
-        /*because i=len .. N has already been covered y i=0 loop
+        /*because i=len .. N would already be covered by the nested for loop
         */
-        for (int i = 0; i < len; i++) {
+        for (int i = 0; i < wordLen; i++) {
             unordered_map<string, int> seen;
             int lf = i, count = 0;
 
-            for (int rt = i; rt <= N - len; rt += len) {
+            /*
+            Keep increasing the window if the next word matches,
+            other wise skip the word and start a new Window 
+            */
+            for (int rt = i; rt <= N - wordLen; rt += wordLen) {
                 
                 //Get the Word
-                string word = s.substr(rt, len);
+                string word = s.substr(rt, wordLen);
                 // Check if the word is valid (exists in counts)
                 if (counts.find(word) != counts.end()) {
                     seen[word]++;
-                    count++;
+
+                    if(seen[word] == counts[word])
+                        count++;
 
                     // If seen word exceeds the count, shift the window, Shrink from the Left
                     while (seen[word] > counts[word]) {
-                        string leftWord = s.substr(lf, len);
+                        string leftWord = s.substr(lf, wordLen);
+
+                        if(seen[leftWord] == counts[leftWord])
+                            count--;
+
                         seen[leftWord]--;
-                        lf += len;
-                        count--;
+                        lf += wordLen;
+                        //cout<<"lf= "<<lf<<" count="<<count<<endl;
                     }
+
+                    //cout<<"C= "<<count<<" w="<<word<<" "<<seen[word]<<endl;
 
                     // If all words matched, add the starting index
                     if (count == wordsCount) {
@@ -47,7 +59,7 @@ public:
                     // Reset the window if an invalid word is encountered
                     seen.clear();
                     count = 0;
-                    lf = rt + len;  //rt will be rt+len in the next hop
+                    lf = rt + wordLen;  //rt will be rt+len in the next hop
                 }
             }
         }
