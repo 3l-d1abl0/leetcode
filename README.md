@@ -109,11 +109,13 @@ Collection of LeetCode questions to ace the coding interview! - Created using [L
 | [0204-count-primes](https://github.com/3l-d1abl0/leetcode/tree/master/0204-count-primes) |
 | [0227-basic-calculator-ii](https://github.com/3l-d1abl0/leetcode/tree/master/0227-basic-calculator-ii) |
 | [0380-insert-delete-getrandom-o1](https://github.com/3l-d1abl0/leetcode/tree/master/0380-insert-delete-getrandom-o1) |
+| [2050-count-good-numbers](https://github.com/3l-d1abl0/leetcode/tree/master/2050-count-good-numbers) |
 ## Recursion
 |  |
 | ------- |
 | [0010-regular-expression-matching](https://github.com/3l-d1abl0/leetcode/tree/master/0010-regular-expression-matching) |
 | [0050-powx-n](https://github.com/3l-d1abl0/leetcode/tree/master/0050-powx-n) |
+| [2050-count-good-numbers](https://github.com/3l-d1abl0/leetcode/tree/master/2050-count-good-numbers) |
 ## Enumeration
 |  |
 | ------- |
