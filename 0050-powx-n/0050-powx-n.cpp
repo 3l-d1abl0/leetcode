@@ -2,7 +2,7 @@ class Solution {
 public:
     
     double exponentModRecur(double A, long int B){
-        // Base cases
+        // Base cases - A^B
         if (A == 0) return 0;
         if (B == 0)	return 1;
 
@@ -80,11 +80,11 @@ public:
         */
 
         //1. Recursive
-        //return method1(x, n);
+        return method1(x, n);
 
 
         //2. Iterative
-        return method2(x, n);
+        //return method2(x, n);
 
     }
 };
