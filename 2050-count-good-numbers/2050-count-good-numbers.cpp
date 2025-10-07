@@ -41,5 +41,8 @@ public:
         return (1LL * pow(5, evenPos, MOD) * pow(4, oddPos, MOD) )%MOD;
         
         //return ans%MOD;
+
+
+        //O(logN)
     }
 };
