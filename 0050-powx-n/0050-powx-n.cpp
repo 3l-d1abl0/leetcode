@@ -16,18 +16,29 @@ public:
         return y;
     }
     
+    double method1(double x, int n){
+
+        long N;
+        if(n < 0) {    
+            N = n*-1L;
+             return 1/exponentModRecur(x, N);
+        } 
+        
+        return exponentModRecur(x, n);
+
+    }
     
     double method2(double A, long int B){
 
-        /*
+        /*  A^B
             x^11
             1 0 1 1
-            x^8  x^4  x^2   x^1
+            1.x^8  0.x^4  1.x^2   1.x^1
 
             result = x^8 . x^2 . x^1 = x^11
         */
-
         if (A == 0) return 0; 
+        if (B == 0)	return 1;
 
         if(B < 0) {
             B = B*-1L;
@@ -42,7 +53,6 @@ public:
         // Update x if it is more than or// equal to p
         //x = x % p; 
 
-        // In case x is divisible by p;
         if (A == 0) return 0; 
 
         while (B > 0){
@@ -60,17 +70,6 @@ public:
     }
 
 
-    double method1(double x, int n){
-
-        long N;
-        if(n < 0) {    
-            N = n*-1L;
-             return 1/exponentModRecur(x, N);
-        } 
-        
-        return exponentModRecur(x, n);
-
-    }
     
     double myPow(double x, int n) {
 
@@ -80,11 +79,11 @@ public:
         */
 
         //1. Recursive
-        return method1(x, n);
+        //return method1(x, n);
 
 
         //2. Iterative
-        //return method2(x, n);
+        return method2(x, n);
 
     }
 };
