@@ -6,7 +6,7 @@ public:
         int N = arr.size();
         
         
-        for(int counter=0; counter<= (1<<N); counter++){
+        for(int counter=0; counter< (1<<N); counter++){
             vector<int> subset;
             for(int j=0; j<N; j++){
 
@@ -16,7 +16,7 @@ public:
 
             ans.push_back(subset);
         }
-        ans.pop_back();
+        //ans.pop_back();
     } 
     
     void usingRecursion(int idx, vector<int> &arr, vector<int> &set, vector<vector<int>> &ans){
@@ -78,8 +78,8 @@ public:
         vector<vector<int>> ans;
         
         //Method1
-        //usingBits(nums, ans);
-        //return ans;
+        usingBits(nums, ans);
+        return ans;
         
         //Method2
         //vector<int> set;
@@ -87,8 +87,9 @@ public:
         //return ans;
         
         //Method3
-        vector<int> set;
-        usingIteration(0, nums, set, ans);
+        // vector<int> set;
+        // usingIteration(0, nums, set, ans);
+
         return ans;
     }
 };
