@@ -8,6 +8,7 @@ Collection of LeetCode questions to ace the coding interview! - Created using [L
 | ------- |
 | [0015-3sum](https://github.com/3l-d1abl0/leetcode/tree/master/0015-3sum) |
 | [0074-search-a-2d-matrix](https://github.com/3l-d1abl0/leetcode/tree/master/0074-search-a-2d-matrix) |
+| [0078-subsets](https://github.com/3l-d1abl0/leetcode/tree/master/0078-subsets) |
 | [0081-search-in-rotated-sorted-array-ii](https://github.com/3l-d1abl0/leetcode/tree/master/0081-search-in-rotated-sorted-array-ii) |
 | [0105-construct-binary-tree-from-preorder-and-inorder-traversal](https://github.com/3l-d1abl0/leetcode/tree/master/0105-construct-binary-tree-from-preorder-and-inorder-traversal) |
 | [0106-construct-binary-tree-from-inorder-and-postorder-traversal](https://github.com/3l-d1abl0/leetcode/tree/master/0106-construct-binary-tree-from-inorder-and-postorder-traversal) |
@@ -378,6 +379,7 @@ Collection of LeetCode questions to ace the coding interview! - Created using [L
 |  |
 | ------- |
 | [0022-generate-parentheses](https://github.com/3l-d1abl0/leetcode/tree/master/0022-generate-parentheses) |
+| [0078-subsets](https://github.com/3l-d1abl0/leetcode/tree/master/0078-subsets) |
 ## Biconnected Component
 |  |
 | ------- |
@@ -459,6 +461,7 @@ Collection of LeetCode questions to ace the coding interview! - Created using [L
 ## Bit Manipulation
 |  |
 | ------- |
+| [0078-subsets](https://github.com/3l-d1abl0/leetcode/tree/master/0078-subsets) |
 | [0187-repeated-dna-sequences](https://github.com/3l-d1abl0/leetcode/tree/master/0187-repeated-dna-sequences) |
 ## Rolling Hash
 |  |
