@@ -286,6 +286,7 @@ Collection of LeetCode questions to ace the coding interview! - Created using [L
 | [1894-merge-strings-alternately](https://github.com/3l-d1abl0/leetcode/tree/master/1894-merge-strings-alternately) |
 | [2603-reward-top-k-students](https://github.com/3l-d1abl0/leetcode/tree/master/2603-reward-top-k-students) |
 | [3356-shortest-uncommon-substring-in-an-array](https://github.com/3l-d1abl0/leetcode/tree/master/3356-shortest-uncommon-substring-in-an-array) |
+| [3453-generate-binary-strings-without-adjacent-zeros](https://github.com/3l-d1abl0/leetcode/tree/master/3453-generate-binary-strings-without-adjacent-zeros) |
 ## Sorting
 |  |
 | ------- |
@@ -380,6 +381,7 @@ Collection of LeetCode questions to ace the coding interview! - Created using [L
 | ------- |
 | [0022-generate-parentheses](https://github.com/3l-d1abl0/leetcode/tree/master/0022-generate-parentheses) |
 | [0078-subsets](https://github.com/3l-d1abl0/leetcode/tree/master/0078-subsets) |
+| [3453-generate-binary-strings-without-adjacent-zeros](https://github.com/3l-d1abl0/leetcode/tree/master/3453-generate-binary-strings-without-adjacent-zeros) |
 ## Biconnected Component
 |  |
 | ------- |
@@ -463,6 +465,7 @@ Collection of LeetCode questions to ace the coding interview! - Created using [L
 | ------- |
 | [0078-subsets](https://github.com/3l-d1abl0/leetcode/tree/master/0078-subsets) |
 | [0187-repeated-dna-sequences](https://github.com/3l-d1abl0/leetcode/tree/master/0187-repeated-dna-sequences) |
+| [3453-generate-binary-strings-without-adjacent-zeros](https://github.com/3l-d1abl0/leetcode/tree/master/3453-generate-binary-strings-without-adjacent-zeros) |
 ## Rolling Hash
 |  |
 | ------- |
