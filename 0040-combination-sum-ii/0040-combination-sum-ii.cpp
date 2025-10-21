@@ -92,11 +92,11 @@ public:
     vector<vector<int>> combinationSum2(vector<int>& candidates, int target) {
         
         //1. Include + Exclude
-        //return method1(candidates, target);
+        return method1(candidates, target);
         
 
         //2. Recursion + Backtracking
-        return method2(candidates, target);
+        //return method2(candidates, target);
         
     }
 };
