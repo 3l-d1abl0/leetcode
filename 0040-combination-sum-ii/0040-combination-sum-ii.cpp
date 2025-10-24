@@ -92,11 +92,19 @@ public:
     vector<vector<int>> combinationSum2(vector<int>& candidates, int target) {
         
         //1. Include + Exclude
-        return method1(candidates, target);
+        /*
+            TC: O(2^N×N)
+            SC: O(N×2^N) total (including output),O(N) auxiliary (stack + comb)
+        */
+        //return method1(candidates, target);
         
 
         //2. Recursion + Backtracking
-        //return method2(candidates, target);
+        /*
+            TC: O(N×2^N)
+            SC: O(N×2^N) total,O(N) auxiliary
+        */
+        return method2(candidates, target);
         
     }
 };
