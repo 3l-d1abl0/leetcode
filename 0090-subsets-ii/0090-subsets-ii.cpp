@@ -84,7 +84,7 @@ public:
         recur(idx+1, nums, sub, ans);
     }
 
-    vector<vector<int>> method3(vector<int> &nums){
+    vector<vector<int>> method2(vector<int> &nums){
 
         vector<vector<int>> ans;
         vector<int> sub;
@@ -100,16 +100,15 @@ public:
     vector<vector<int>> subsetsWithDup(vector<int> &nums){
 
 
-
-        //Method3 - Recursion - Include+Exclude
-
-        return method3(nums);
-        
         //Method1 - bitset
-        //return bitwisePowerSet(nums);
+        return bitwisePowerSet(nums);
+
+        //Method2 - Recursion - Include+Exclude
+        //return method2(nums);
         
         
-        //Method 2 - Iteration
+        
+        //Method 3 - Iteration
         sort(nums.begin(), nums.end());
         vector<vector<int>> res;
         vector<int> ans;
