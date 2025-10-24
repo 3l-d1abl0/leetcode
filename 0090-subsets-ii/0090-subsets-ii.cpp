@@ -64,8 +64,46 @@ public:
         return res;
     }
     
-    vector<vector<int>> subsetsWithDup(vector<int> &nums)
-    {
+
+    void recur(int idx, vector<int> &nums,  vector<int> &sub, vector<vector<int>> &ans){
+
+        if(idx == nums.size()){
+            ans.push_back(sub);
+            return;
+        }
+
+
+        sub.push_back(nums[idx]);
+        recur(idx+1, nums,  sub, ans);
+        sub.pop_back();
+
+
+        while(idx+1<nums.size() && nums[idx] == nums[idx+1])
+            idx++;
+
+        recur(idx+1, nums, sub, ans);
+    }
+
+    vector<vector<int>> method3(vector<int> &nums){
+
+        vector<vector<int>> ans;
+        vector<int> sub;
+
+        sort(nums.begin(), nums.end());
+        recur(0, nums,  sub, ans);
+
+        return ans;
+    }
+
+
+
+    vector<vector<int>> subsetsWithDup(vector<int> &nums){
+
+
+
+        //Method3 - Recursion - Include+Exclude
+
+        return method3(nums);
         
         //Method1 - bitset
         //return bitwisePowerSet(nums);
