@@ -87,10 +87,10 @@ public:
     vector<vector<int>> combinationSum3(int k, int n) {
         
         //1. Include+Exclude
-        //return method1(k,n);
+        return method1(k,n);
         
         //2. Recursion + Backtraking
-        return method2(k, n);
+        //return method2(k, n);
         
     }
 };
