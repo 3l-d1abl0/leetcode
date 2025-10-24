@@ -3,35 +3,38 @@ public:
     
     vector<string> letterCombinationBFS(unordered_map<char, string> &map, string digit){
 
-	int n = digit.length();
+        int n = digit.length();
 
-	vector<string> list;
-	queue<string> q;
+        vector<string> list;
+        queue<string> q;
 
-	q.push("");
+        q.push("");
 
 
-	while(!q.empty()){
+        while(!q.empty()){
 
-		string str = q.front();	q.pop();
+            string str = q.front();	q.pop();
 
-		if(str.length() == n){
-			list.push_back(str);
-            continue;
+            if(str.length() == n){
+                list.push_back(str);
+                continue;
+            }
+
+            //If str length is 0, we look for the first digit, i.e. index 0
+            char nextDigit = digit[str.length()];
+
+            for(int i=0; i<map[nextDigit].length(); i++){
+
+            //cout<<str+map[digit[str.length()]][i]<<endl;
+
+                q.push(str+map[nextDigit][i]);
+            }
+
         }
 
-		for(int i=0; i<map[digit[str.length()]].length(); i++){
+        return list;
 
-		 //cout<<str+map[digit[str.length()]][i]<<endl;
-
-			q.push(str+map[digit[str.length()]][i]);
-		}
-
-	}
-
-	return list;
-
-}
+    }
     
     void backtrack(string combination, string next_digits, string phone_map[], vector<string>& output) {
         if (next_digits.empty()) {
@@ -59,7 +62,7 @@ public:
         
         
         //Method1 Recursion
-        return method1(digits);
+        //return method1(digits);
      
         //method2
         unordered_map<char, string> map =
