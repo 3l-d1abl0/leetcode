@@ -89,7 +89,7 @@ public:
             if(palinCheck(str)){
                 
                 //cout<<str<<" "<<mask<<" "<<str.size()<<endl;
-                palins.insert({mask, str.size()});
+                palins.insert({mask, str.size()});// bits, size
             }
         }//for mask
         
@@ -100,7 +100,7 @@ public:
             for(auto p2: palins){
                     
                 //cout<<p1.first<<" "<<p2.first<<endl;
-                if( (p1.first & p2.first) ==0 )
+                if( (p1.first & p2.first) ==0 ) //disjoint
                     res = max(res, p1.second*p2.second);
             }
         }
