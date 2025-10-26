@@ -35,13 +35,13 @@ public:
         
         
         //Base
-        if(idx>= s.size()){
+        if(idx== s.size()){
             
-                if(palinCheck(s1) && palinCheck(s2)){
-                    
+            if(palinCheck(s1) && palinCheck(s2))
                     return s1.size() * s2.size();
-                }
-                return 0;
+            
+            
+            return 0;
         }
         
         
@@ -114,7 +114,12 @@ public:
         
         
         //1. Recursion
-        //return method1(s);
+        /*
+            TC = O(3^N . N)
+            SC = O(N) + O(N)
+            587ms 9MB
+        */
+        return method1(s);
         
         /*2. Bitmasking
             2^N (N + N) + M.M
@@ -122,7 +127,11 @@ public:
             M <= 2^N
 
             TC = 2^N(2N) + 4^N  (Worst Case)
+
+            SC = O(2^N)
+
+            75ms - 10.5MB
         */
-        return method2(s);
+        //return method2(s);
     }
 };
