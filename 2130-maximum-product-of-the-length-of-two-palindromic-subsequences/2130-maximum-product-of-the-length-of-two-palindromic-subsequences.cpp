@@ -114,7 +114,7 @@ public:
         
         
         //1. Recursion
-        return method1(s);
+        //return method1(s);
         
         /*2. Bitmasking
             2^N (N + N) + M.M
@@ -123,6 +123,6 @@ public:
 
             TC = 2^N(2N) + 4^N  (Worst Case)
         */
-        //return method2(s);
+        return method2(s);
     }
 };
