@@ -278,6 +278,7 @@ Collection of LeetCode questions to ace the coding interview! - Created using [L
 | [0022-generate-parentheses](https://github.com/3l-d1abl0/leetcode/tree/master/0022-generate-parentheses) |
 | [0030-substring-with-concatenation-of-all-words](https://github.com/3l-d1abl0/leetcode/tree/master/0030-substring-with-concatenation-of-all-words) |
 | [0076-minimum-window-substring](https://github.com/3l-d1abl0/leetcode/tree/master/0076-minimum-window-substring) |
+| [0093-restore-ip-addresses](https://github.com/3l-d1abl0/leetcode/tree/master/0093-restore-ip-addresses) |
 | [0125-valid-palindrome](https://github.com/3l-d1abl0/leetcode/tree/master/0125-valid-palindrome) |
 | [0187-repeated-dna-sequences](https://github.com/3l-d1abl0/leetcode/tree/master/0187-repeated-dna-sequences) |
 | [0227-basic-calculator-ii](https://github.com/3l-d1abl0/leetcode/tree/master/0227-basic-calculator-ii) |
@@ -393,6 +394,7 @@ Collection of LeetCode questions to ace the coding interview! - Created using [L
 | [0040-combination-sum-ii](https://github.com/3l-d1abl0/leetcode/tree/master/0040-combination-sum-ii) |
 | [0078-subsets](https://github.com/3l-d1abl0/leetcode/tree/master/0078-subsets) |
 | [0090-subsets-ii](https://github.com/3l-d1abl0/leetcode/tree/master/0090-subsets-ii) |
+| [0093-restore-ip-addresses](https://github.com/3l-d1abl0/leetcode/tree/master/0093-restore-ip-addresses) |
 | [0216-combination-sum-iii](https://github.com/3l-d1abl0/leetcode/tree/master/0216-combination-sum-iii) |
 | [2130-maximum-product-of-the-length-of-two-palindromic-subsequences](https://github.com/3l-d1abl0/leetcode/tree/master/2130-maximum-product-of-the-length-of-two-palindromic-subsequences) |
 | [3453-generate-binary-strings-without-adjacent-zeros](https://github.com/3l-d1abl0/leetcode/tree/master/3453-generate-binary-strings-without-adjacent-zeros) |
