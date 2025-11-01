@@ -22,17 +22,19 @@ public:
         
         for(int i=idx; i<s.size(); i++){
         
-            //If idx - i is a plaindrone, recur for rest of the length
+            //If idx - i is a plaindrone,
+            //We have found one Partition,
             if(palindrome(s,idx, i)){
                 
                 //push [i-idx] to list
                 combi.push_back(s.substr(idx, i - idx + 1));
+                //now find partitions from rest of the String
                 recur(i+1, s, ans, combi);
                 combi.pop_back();
                 
             }
             
-        }
+        }//Otherwise just rry to increase the length of the current partition.
 
             
     }
