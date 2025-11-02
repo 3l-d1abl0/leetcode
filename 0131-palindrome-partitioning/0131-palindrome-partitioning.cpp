@@ -44,7 +44,7 @@ public:
         vector<vector<string>> ans;
         vector<string> combi;
         
-        //1. Method - recursion
+        
         recur(0, s, ans, combi);
         
         return ans;
