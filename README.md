@@ -11,6 +11,7 @@ Collection of LeetCode questions to ace the coding interview! - Created using [L
 | [0040-combination-sum-ii](https://github.com/3l-d1abl0/leetcode/tree/master/0040-combination-sum-ii) |
 | [0074-search-a-2d-matrix](https://github.com/3l-d1abl0/leetcode/tree/master/0074-search-a-2d-matrix) |
 | [0078-subsets](https://github.com/3l-d1abl0/leetcode/tree/master/0078-subsets) |
+| [0079-word-search](https://github.com/3l-d1abl0/leetcode/tree/master/0079-word-search) |
 | [0081-search-in-rotated-sorted-array-ii](https://github.com/3l-d1abl0/leetcode/tree/master/0081-search-in-rotated-sorted-array-ii) |
 | [0090-subsets-ii](https://github.com/3l-d1abl0/leetcode/tree/master/0090-subsets-ii) |
 | [0105-construct-binary-tree-from-preorder-and-inorder-traversal](https://github.com/3l-d1abl0/leetcode/tree/master/0105-construct-binary-tree-from-preorder-and-inorder-traversal) |
@@ -84,6 +85,7 @@ Collection of LeetCode questions to ace the coding interview! - Created using [L
 |  |
 | ------- |
 | [0074-search-a-2d-matrix](https://github.com/3l-d1abl0/leetcode/tree/master/0074-search-a-2d-matrix) |
+| [0079-word-search](https://github.com/3l-d1abl0/leetcode/tree/master/0079-word-search) |
 | [0240-search-a-2d-matrix-ii](https://github.com/3l-d1abl0/leetcode/tree/master/0240-search-a-2d-matrix-ii) |
 | [0417-pacific-atlantic-water-flow](https://github.com/3l-d1abl0/leetcode/tree/master/0417-pacific-atlantic-water-flow) |
 | [0542-01-matrix](https://github.com/3l-d1abl0/leetcode/tree/master/0542-01-matrix) |
@@ -177,6 +179,7 @@ Collection of LeetCode questions to ace the coding interview! - Created using [L
 ## Depth-First Search
 |  |
 | ------- |
+| [0079-word-search](https://github.com/3l-d1abl0/leetcode/tree/master/0079-word-search) |
 | [0133-clone-graph](https://github.com/3l-d1abl0/leetcode/tree/master/0133-clone-graph) |
 | [0199-binary-tree-right-side-view](https://github.com/3l-d1abl0/leetcode/tree/master/0199-binary-tree-right-side-view) |
 | [0236-lowest-common-ancestor-of-a-binary-tree](https://github.com/3l-d1abl0/leetcode/tree/master/0236-lowest-common-ancestor-of-a-binary-tree) |
@@ -278,6 +281,7 @@ Collection of LeetCode questions to ace the coding interview! - Created using [L
 | [0022-generate-parentheses](https://github.com/3l-d1abl0/leetcode/tree/master/0022-generate-parentheses) |
 | [0030-substring-with-concatenation-of-all-words](https://github.com/3l-d1abl0/leetcode/tree/master/0030-substring-with-concatenation-of-all-words) |
 | [0076-minimum-window-substring](https://github.com/3l-d1abl0/leetcode/tree/master/0076-minimum-window-substring) |
+| [0079-word-search](https://github.com/3l-d1abl0/leetcode/tree/master/0079-word-search) |
 | [0093-restore-ip-addresses](https://github.com/3l-d1abl0/leetcode/tree/master/0093-restore-ip-addresses) |
 | [0125-valid-palindrome](https://github.com/3l-d1abl0/leetcode/tree/master/0125-valid-palindrome) |
 | [0131-palindrome-partitioning](https://github.com/3l-d1abl0/leetcode/tree/master/0131-palindrome-partitioning) |
@@ -395,6 +399,7 @@ Collection of LeetCode questions to ace the coding interview! - Created using [L
 | [0039-combination-sum](https://github.com/3l-d1abl0/leetcode/tree/master/0039-combination-sum) |
 | [0040-combination-sum-ii](https://github.com/3l-d1abl0/leetcode/tree/master/0040-combination-sum-ii) |
 | [0078-subsets](https://github.com/3l-d1abl0/leetcode/tree/master/0078-subsets) |
+| [0079-word-search](https://github.com/3l-d1abl0/leetcode/tree/master/0079-word-search) |
 | [0090-subsets-ii](https://github.com/3l-d1abl0/leetcode/tree/master/0090-subsets-ii) |
 | [0093-restore-ip-addresses](https://github.com/3l-d1abl0/leetcode/tree/master/0093-restore-ip-addresses) |
 | [0131-palindrome-partitioning](https://github.com/3l-d1abl0/leetcode/tree/master/0131-palindrome-partitioning) |
