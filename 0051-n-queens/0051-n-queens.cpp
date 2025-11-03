@@ -98,7 +98,25 @@ public:
         //printBoard(board);
         NQueens(board, 0, ans, rowCheck, bottomleft, upperLeft);
         
+        /*
+            T(n) = n( T(n-1) + O(1) )
+
+                 = n( n-1(T(n-2) +O(1)) ) + O(n)
+
+                 = n( n-1(T(n-2) ) +O(n-1) ) + O(n)
+
+                 = n( n-1(T(n-2) ) ) +n.O(n-1) + O(n)
+
+                 = n( n-1(T(n-2) ) ) +n.O(n-1) + O(n)
+
+                 = n.n-1.n-2.n-3.n-4.....1
+
+
+
+                 ~ O(N!)
         
+        */
+
         return ans;
     }
 };
