@@ -89,7 +89,7 @@ public:
         
         vector<bool> rowCheck(N, false);
         vector<bool> bottomleft(N, false);
-        vector<bool> upperLeft(N, false);
+        vector<bool> upperLeft(2*N-1, false);
         
         vector<vector<string>> ans;
         
